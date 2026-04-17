@@ -1,52 +1,137 @@
 import Link from 'next/link'
-import { BookOpen } from 'lucide-react'
-import { ThemeToggle } from './ThemeToggle'
+import { Fragment } from 'react'
+import { HeaderActions } from './HeaderActions'
+
+export interface Crumb {
+  label: string
+  href?: string
+}
 
 interface HeaderProps {
   backHref?: string
   backLabel?: string
   title?: string
+  crumbs?: Crumb[]
   rightSlot?: React.ReactNode
 }
 
-export function Header({ backHref, backLabel, title, rightSlot }: HeaderProps) {
-  return (
-    <header className="sticky top-0 z-50 bg-[var(--background)] border-b border-[var(--border)]">
-      <div className="max-w-5xl mx-auto px-4 h-12 flex items-center justify-between gap-4">
-        {/* Left: back link or brand */}
-        <div className="flex items-center gap-3 min-w-0">
-          {backHref ? (
-            <Link
-              href={backHref}
-              className="flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-            >
-              <span>←</span>
-              <span>{backLabel ?? 'Back'}</span>
-            </Link>
-          ) : (
-            <Link href="/" className="flex items-center gap-2 font-semibold text-[var(--foreground)]">
-              <BookOpen size={18} className="text-accent" />
-              <span>Study Hall</span>
-            </Link>
-          )}
-        </div>
+function buildCrumbs(props: Readonly<HeaderProps>): Crumb[] {
+  if (props.crumbs) return props.crumbs
+  if (props.backHref) {
+    const trail: Crumb[] = [{ label: props.backLabel ?? 'Back', href: props.backHref }]
+    if (props.title) trail.push({ label: props.title })
+    return trail
+  }
+  if (props.title) return [{ label: props.title }]
+  return []
+}
 
-        {/* Center: title */}
-        {title && (
-          <span className="text-sm font-medium text-[var(--foreground)] truncate hidden sm:block">
-            {title}
+export function Header(props: Readonly<HeaderProps>) {
+  const { rightSlot } = props
+  const breadcrumbs = buildCrumbs(props)
+
+  return (
+    <header
+      style={{
+        background: 'var(--surface)',
+        borderBottom: '1px solid var(--border)',
+        height: 56,
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1120,
+          margin: '0 auto',
+          padding: '0 20px',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 14,
+        }}
+      >
+        {/* Logo */}
+        <Link
+          href="/"
+          style={{
+            display: 'flex', alignItems: 'center', gap: 8,
+            textDecoration: 'none', flexShrink: 0,
+          }}
+        >
+          <div
+            style={{
+              width: 26, height: 26,
+              borderRadius: '50%',
+              background: 'var(--accent-bg)',
+              border: '1.5px solid rgba(224,115,85,0.35)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 13,
+            }}
+          >
+            📚
+          </div>
+          <span
+            style={{
+              fontWeight: 800, fontSize: 15,
+              letterSpacing: '-0.3px',
+              color: 'var(--text)',
+            }}
+          >
+            Study Hall
           </span>
+        </Link>
+
+        {/* Breadcrumbs */}
+        {breadcrumbs.length > 0 && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, minWidth: 0 }}>
+            <span style={{ color: 'var(--border2)', fontSize: 16, lineHeight: 1 }}>›</span>
+            {breadcrumbs.map((crumb, i) => {
+              const isLast = i === breadcrumbs.length - 1
+              const key = `${crumb.href ?? ''}-${crumb.label}`
+              return (
+                <Fragment key={key}>
+                  {crumb.href ? (
+                    <Link
+                      href={crumb.href}
+                      style={{
+                        fontSize: 13, fontWeight: 500,
+                        color: 'var(--text-sub)',
+                        textDecoration: 'none',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {crumb.label}
+                    </Link>
+                  ) : (
+                    <span
+                      style={{
+                        fontSize: 13, fontWeight: 600,
+                        color: 'var(--text)',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {crumb.label}
+                    </span>
+                  )}
+                  {!isLast && (
+                    <span style={{ color: 'var(--border2)', fontSize: 16, lineHeight: 1 }}>›</span>
+                  )}
+                </Fragment>
+              )
+            })}
+          </div>
         )}
 
-        {/* Right: slot + theme toggle */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Right */}
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
           {rightSlot}
-          <ThemeToggle />
+          <HeaderActions />
         </div>
       </div>
-
-      {/* Accent underline */}
-      <div className="h-0.5 bg-accent opacity-80" />
     </header>
   )
 }

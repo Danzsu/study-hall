@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 
 const CONTENT_DIR = path.join(process.cwd(), 'content')
 
@@ -115,7 +115,7 @@ export function getNoteContent(subjectSlug: string, lessonSlug: string): { front
 }
 
 function parseFrontmatter(raw: string): Record<string, unknown> {
-  const match = raw.match(/^---\n([\s\S]*?)\n---/)
+  const match = /^---\n([\s\S]*?)\n---/.exec(raw)
   if (!match) return {}
 
   const result: Record<string, unknown> = {}
@@ -128,7 +128,7 @@ function parseFrontmatter(raw: string): Record<string, unknown> {
     const val = line.slice(colonIdx + 1).trim()
     if (val.startsWith('"') && val.endsWith('"')) {
       result[key] = val.slice(1, -1)
-    } else if (!isNaN(Number(val)) && val !== '') {
+    } else if (val !== '' && !Number.isNaN(Number(val))) {
       result[key] = Number(val)
     } else {
       result[key] = val
@@ -142,4 +142,19 @@ export function getSubjectSections(slug: string): string[] {
   const questions = getQuestions(slug)
   const sections = [...new Set(questions.map((q) => q.section))]
   return sections
+}
+
+export interface SectionInfo {
+  name: string
+  total: number
+}
+
+/** Returns each unique section with its question count for a subject */
+export function getSubjectSectionInfos(slug: string): SectionInfo[] {
+  const questions = getQuestions(slug)
+  const map = new Map<string, number>()
+  for (const q of questions) {
+    map.set(q.section, (map.get(q.section) ?? 0) + 1)
+  }
+  return Array.from(map.entries()).map(([name, total]) => ({ name, total }))
 }

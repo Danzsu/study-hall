@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getSubject, getNotesLessons, getNoteContent } from '@/lib/content'
 import { Header } from '@/components/layout/Header'
+import { TabBar } from '@/components/layout/TabBar'
 import { NoteViewer } from '@/components/study/NoteViewer'
 import { NotesSidebar } from '@/components/study/NotesSidebar'
 
@@ -9,7 +10,7 @@ interface Props {
   searchParams: { lesson?: string }
 }
 
-export default function StudyPage({ params, searchParams }: Props) {
+export default function StudyPage({ params, searchParams }: Readonly<Props>) {
   const subject = getSubject(params.slug)
   if (!subject) notFound()
 
@@ -23,30 +24,24 @@ export default function StudyPage({ params, searchParams }: Props) {
   const activeLesson = lessons.find((l) => l.slug === activeLessonSlug)
 
   return (
-    <div className="min-h-screen bg-[var(--background)]">
-      <Header
-        backHref={`/subject/${params.slug}`}
-        backLabel="Back"
-        title={subject.name}
-        rightSlot={
-          <span className="text-xs text-[var(--muted)]">
-            {activeLesson ? `${activeLesson.lesson} / ${lessons.length}` : ''}
-          </span>
-        }
-      />
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
+      <Header crumbs={[
+        { label: 'Tantárgyak', href: '/' },
+        { label: subject.name, href: `/subject/${params.slug}` },
+        { label: activeLesson?.title ?? 'Tanulás' },
+      ]} />
 
-      <div className="max-w-5xl mx-auto px-4 py-6 flex gap-6">
-        {/* Sidebar */}
+      <div style={{ display: 'flex', minHeight: 'calc(100vh - 56px)' }}>
         {lessons.length > 1 && (
           <NotesSidebar
             lessons={lessons}
             activeLessonSlug={activeLessonSlug}
             subjectSlug={params.slug}
+            subjectName={subject.name}
           />
         )}
 
-        {/* Content */}
-        <main className="flex-1 min-w-0">
+        <main style={{ flex: 1, minWidth: 0, paddingBottom: 90 }}>
           {noteData ? (
             <NoteViewer
               content={noteData.content}
@@ -57,15 +52,14 @@ export default function StudyPage({ params, searchParams }: Props) {
               subjectSlug={params.slug}
             />
           ) : (
-            <div className="text-center py-16 text-[var(--muted)]">
-              <p className="text-sm">No notes available yet.</p>
-              <p className="text-xs mt-1">
-                Run the pipeline to generate study notes from your materials.
-              </p>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 8 }}>
+              <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>Még nincsenek jegyzetek ehhez a tantárgyhoz.</p>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>Futtasd a pipeline-t a tartalom generálásához.</p>
             </div>
           )}
         </main>
       </div>
+      <TabBar />
     </div>
   )
 }

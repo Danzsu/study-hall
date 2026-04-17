@@ -19,7 +19,7 @@ interface AIFeedback {
 
 type Phase = 'writing' | 'evaluating' | 'results'
 
-export function WrittenTestClient({ questions, subjectSlug }: Props) {
+export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [phase, setPhase] = useState<Phase>('writing')
   const [feedbacks, setFeedbacks] = useState<Record<string, AIFeedback>>({})
@@ -121,7 +121,7 @@ export function WrittenTestClient({ questions, subjectSlug }: Props) {
                 </div>
 
                 {/* User answer */}
-                <div className="mb-4 p-3 rounded-lg bg-[var(--surface-muted)] border border-[var(--border)]">
+                <div className="mb-4 p-3 rounded-lg bg-[var(--surface2)] border border-[var(--border)]">
                   <p className="text-xs text-[var(--muted)] mb-1 font-medium">Your answer</p>
                   <p className="text-sm text-[var(--foreground)]">{answers[q.id]}</p>
                 </div>
@@ -133,8 +133,8 @@ export function WrittenTestClient({ questions, subjectSlug }: Props) {
                       <CheckCircle size={12} /> What you got right
                     </p>
                     <ul className="space-y-1">
-                      {fb.what_was_correct.map((item, i) => (
-                        <li key={i} className="text-xs text-[var(--foreground)] pl-4 relative before:content-['•'] before:absolute before:left-1 before:text-green-500">
+                      {fb.what_was_correct.map((item) => (
+                        <li key={item} className="text-xs text-[var(--foreground)] pl-4 relative before:content-['•'] before:absolute before:left-1 before:text-green-500">
                           {item}
                         </li>
                       ))}
@@ -149,8 +149,8 @@ export function WrittenTestClient({ questions, subjectSlug }: Props) {
                       <AlertCircle size={12} /> What was missing
                     </p>
                     <ul className="space-y-1">
-                      {fb.what_was_missing.map((item, i) => (
-                        <li key={i} className="text-xs text-[var(--foreground)] pl-4 relative before:content-['⚠'] before:absolute before:left-0 before:text-xs">
+                      {fb.what_was_missing.map((item) => (
+                        <li key={item} className="text-xs text-[var(--foreground)] pl-4 relative before:content-['⚠'] before:absolute before:left-0 before:text-xs">
                           {item}
                         </li>
                       ))}
@@ -216,7 +216,7 @@ export function WrittenTestClient({ questions, subjectSlug }: Props) {
               placeholder="Write your answer here..."
               value={answers[q.id] ?? ''}
               onChange={(e) => setAnswers((prev) => ({ ...prev, [q.id]: e.target.value }))}
-              className="w-full px-3 py-2.5 text-sm bg-[var(--surface-muted)] border border-[var(--border)] rounded-lg outline-none focus:border-accent text-[var(--foreground)] placeholder:text-[var(--muted)] transition-colors resize-none"
+              className="w-full px-3 py-2.5 text-sm bg-[var(--surface2)] border border-[var(--border)] rounded-lg outline-none focus:border-accent text-[var(--foreground)] placeholder:text-[var(--muted)] transition-colors resize-none"
             />
           </div>
         ))}

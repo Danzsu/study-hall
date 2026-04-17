@@ -1,176 +1,144 @@
+/* ── Google Fonts ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Lora:ital,wght@0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* KaTeX CSS */
-@import url('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css');
-
-/* Inter font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
 @layer base {
   :root {
-    --background: #F5F2EE;
-    --foreground: #1A1A1A;
-    --surface: #FFFFFF;
-    --surface-muted: #F9F6F2;
-    --border: #E8E3DC;
-    --muted: #8A8A8A;
-    --accent: #E07355;
-    --accent-hover: #D0644A;
-    --accent-light: #F5E8E4;
+    /* Light theme — matches design LIGHT object */
+    --bg:             #F5F2EE;
+    --surface:        #FFFFFF;
+    --surface2:       #F0ECE6;
+    --text:           #1A1A1A;
+    --text-sub:       #6B6560;
+    --text-muted:     #9B9590;
+    --border:         #E4DDD4;
+    --border2:        #D4CCC2;
+    --sidebar:        #FAFAF8;
+    --sidebar-border: #E4DDD4;
+
+    /* Accent */
+    --accent:    #E07355;
+    --accent-hov:#C85E40;
+    --accent-bg: rgba(224,115,85,0.10);
+    --accent-bg2:rgba(224,115,85,0.18);
+
+    /* Palette */
+    --blue:       #4A7FC1;
+    --blue-bg:    rgba(74,127,193,0.11);
+    --green:      #5A9E72;
+    --green-bg:   rgba(90,158,114,0.11);
+    --gold:       #C49A3C;
+    --gold-bg:    rgba(196,154,60,0.11);
+    --red:        #C0504A;
+    --red-bg:     rgba(192,80,74,0.10);
+    --purple:     #9B6DD9;
+    --purple-bg:  rgba(155,109,217,0.11);
+
+    /* Backward-compat aliases */
+    --background:    var(--bg);
+    --foreground:    var(--text);
+    --surface-muted: var(--surface2);
+    --muted:         var(--text-muted);
+    --accent-hover:  var(--accent-hov);
+    --accent-light:  var(--accent-bg);
   }
 
   .dark {
-    --background: #1A1A1A;
-    --foreground: #F0EDE8;
-    --surface: #242424;
-    --surface-muted: #2E2E2E;
-    --border: #333333;
-    --muted: #6B6B6B;
-    --accent: #E07355;
-    --accent-hover: #F0855F;
-    --accent-light: #3A2520;
+    /* Dark theme — matches design DARK object */
+    --bg:             #141414;
+    --surface:        #1E1E1E;
+    --surface2:       #252525;
+    --text:           #F0EDE8;
+    --text-sub:       #9B9590;
+    --text-muted:     #6B6560;
+    --border:         #2E2E2E;
+    --border2:        #3A3A3A;
+    --sidebar:        #191919;
+    --sidebar-border: #2A2A2A;
+
+    --accent:    #E07355;
+    --accent-hov:#C85E40;
+    --accent-bg: rgba(224,115,85,0.10);
+    --accent-bg2:rgba(224,115,85,0.18);
+
+    --background:    var(--bg);
+    --foreground:    var(--text);
+    --surface-muted: var(--surface2);
+    --muted:         var(--text-muted);
+    --accent-hover:  var(--accent-hov);
+    --accent-light:  var(--accent-bg);
   }
 
-  * {
-    border-color: var(--border);
-  }
+  * { border-color: var(--border); }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: var(--accent-light);
-    color: var(--foreground);
+    background-color: var(--accent-bg2);
+    color: var(--text);
   }
 }
 
+/* ── Component classes ─────────────────────────────────────────────────────── */
 @layer components {
-  /* Card base */
+
+  /* Card */
   .card {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  .card:hover {
-    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.08);
+    border-radius: 14px;
+    transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
   }
 
-  /* Mode card clickable */
+  /* Clickable card */
   .mode-card {
     @apply card cursor-pointer;
   }
   .mode-card:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   }
 
-  /* Subject card */
+  /* Subject card (left accent border) */
   .subject-card {
-    @apply card cursor-pointer border-l-4;
+    @apply card cursor-pointer;
+    border-left-width: 4px;
     border-left-color: var(--accent);
   }
 
-  /* Muted text */
-  .text-muted {
-    color: var(--muted);
+  /* Pill badge */
+  .pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
   }
+  .pill-accent  { background: var(--accent-bg);  color: var(--accent); }
+  .pill-blue    { background: var(--blue-bg);    color: var(--blue);   }
+  .pill-green   { background: var(--green-bg);   color: var(--green);  }
+  .pill-gold    { background: var(--gold-bg);    color: var(--gold);   }
+  .pill-red     { background: var(--red-bg);     color: var(--red);    }
+  .pill-muted   { background: var(--surface2);   color: var(--text-sub); }
 
-  /* Surface backgrounds */
-  .bg-surface {
-    background-color: var(--surface);
-  }
-  .bg-surface-muted {
-    background-color: var(--surface-muted);
-  }
-  .bg-background {
-    background-color: var(--background);
-  }
-  .border-default {
-    border-color: var(--border);
-  }
-  .text-foreground {
-    color: var(--foreground);
-  }
-
-  /* Progress bar */
-  .progress-bar {
-    height: 2px;
-    background-color: var(--border);
-    width: 100%;
-  }
-  .progress-fill {
-    height: 100%;
-    background-color: var(--accent);
-    transition: width 0.3s ease;
-  }
-
-  /* Answer option card */
-  .answer-option {
-    @apply card cursor-pointer p-4 flex items-start gap-3;
-    transition: all 0.15s ease;
-  }
-  .answer-option:hover {
-    border-color: var(--accent);
-    background-color: var(--accent-light);
-  }
-  .answer-option.selected {
-    border-color: var(--accent);
-    background-color: var(--accent-light);
-  }
-  .answer-option.correct {
-    border-color: #22c55e;
-    background-color: #f0fdf4;
-  }
-  .dark .answer-option.correct {
-    background-color: #052e16;
-  }
-  .answer-option.incorrect {
-    border-color: #ef4444;
-    background-color: #fef2f2;
-  }
-  .dark .answer-option.incorrect {
-    background-color: #2d0a0a;
-  }
-
-  /* Flashcard */
-  .flashcard-container {
-    perspective: 1000px;
-  }
-  .flashcard-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-  }
-  .flashcard-inner.flipped {
-    transform: rotateY(180deg);
-  }
-  .flashcard-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 0.75rem;
-  }
-  .flashcard-back {
-    transform: rotateY(180deg);
-  }
-
-  /* Chip / Badge */
+  /* Chip */
   .chip {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-    background-color: var(--surface-muted);
-    color: var(--foreground);
+    background-color: var(--surface2);
+    color: var(--text-sub);
     border: 1px solid var(--border);
   }
   .chip.active {
@@ -178,14 +146,182 @@
     color: white;
     border-color: var(--accent);
   }
+
+  /* Icon button (32×32 rounded pill) */
+  .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    cursor: pointer;
+    color: var(--text-sub);
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  .icon-btn:hover { background: var(--border); }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 5px;
+    background-color: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background-color: var(--accent);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  /* Answer option */
+  .answer-option {
+    @apply card cursor-pointer flex items-center gap-3;
+    padding: 14px 18px;
+    border-width: 1.5px;
+    transition: all 0.15s ease;
+  }
+  .answer-option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background-color: var(--accent-bg);
+  }
+  .answer-option.selected  { border-color: var(--accent); background-color: var(--accent-bg); }
+  .answer-option.correct   { border-color: var(--green);  background-color: var(--green-bg);  }
+  .answer-option.incorrect { border-color: var(--red);    background-color: var(--red-bg);    }
+
+  /* Flashcard */
+  .flashcard-container { perspective: 1000px; }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .flashcard-inner.flipped { transform: rotateY(180deg); }
+  .flashcard-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 14px;
+  }
+  .flashcard-back { transform: rotateY(180deg); }
+
+  /* Section label */
+  .section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
 }
 
+/* ── Utilities ─────────────────────────────────────────────────────────────── */
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.2s ease-out;
-  }
+  .animate-fade-in { animation: fadeIn 0.2s ease-out; }
+  .animate-fade-up { animation: fadeUp 0.4s ease both; }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
+  .font-serif { font-family: 'Lora', Georgia, serif; }
+  .font-mono  { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* Callout variants */
+  .callout {
+    border-radius: 0 10px 10px 0;
+    border-left-width: 4px;
+    padding: 16px 20px;
+    margin: 28px 0;
+    display: flex;
+    gap: 14px;
+  }
+  .callout-blue   { border-color: var(--blue);   background: var(--blue-bg); }
+  .callout-gold   { border-color: var(--gold);   background: var(--gold-bg); }
+  .callout-green  { border-color: var(--green);  background: var(--green-bg); }
+  .callout-accent { border-color: var(--accent); background: var(--accent-bg); }
+
+  /* MDX note content typography */
+  .note-content h1, .note-content h2, .note-content h3 {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--text);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 2em 0 0.6em;
+  }
+  .note-content h1 { font-size: 22px; }
+  .note-content h2 { font-size: 18px; }
+  .note-content h3 { font-size: 16px; }
+  .note-content p  { margin: 0.75em 0; color: var(--text); }
+  .note-content ul, .note-content ol { padding-left: 1.4em; margin: 0.75em 0; }
+  .note-content li { margin: 0.3em 0; color: var(--text); }
+  .note-content strong { font-weight: 700; color: var(--text); }
+  .note-content em { font-style: italic; }
+  .note-content code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+  .note-content pre {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 1em 0;
+  }
+  .note-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+  }
+  .note-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    margin: 1em 0;
+    color: var(--text-sub);
+  }
+  .note-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 14px;
+  }
+  .note-content th, .note-content td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .note-content th {
+    background: var(--surface2);
+    font-weight: 700;
+    color: var(--text);
+  }
+  .note-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2em 0;
+  }
+  .note-content a { color: var(--accent); text-decoration: underline; }
 }

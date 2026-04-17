@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation'
 import { getSubject, getQuestions } from '@/lib/content'
 import { Header } from '@/components/layout/Header'
+import { TabBar } from '@/components/layout/TabBar'
 import { WrongAnswersClient } from '@/components/study/WrongAnswersClient'
 
 interface Props { params: { slug: string } }
 
-export default function WrongAnswersPage({ params }: Props) {
+export default function WrongAnswersPage({ params }: Readonly<Props>) {
   const subject = getSubject(params.slug)
   if (!subject) notFound()
 
@@ -14,9 +15,14 @@ export default function WrongAnswersPage({ params }: Props) {
   )
 
   return (
-    <div className="min-h-screen bg-[var(--background)]">
-      <Header backHref={`/subject/${params.slug}`} backLabel="Back" title={subject.name} />
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', paddingBottom: 90 }}>
+      <Header crumbs={[
+        { label: 'Tantárgyak', href: '/' },
+        { label: subject.name, href: `/subject/${params.slug}` },
+        { label: 'Hibás válaszok' },
+      ]} />
       <WrongAnswersClient allQuestions={allQuestions} subjectSlug={params.slug} />
+      <TabBar />
     </div>
   )
 }
