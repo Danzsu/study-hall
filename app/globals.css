@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KaTeX CSS */
+@import url('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css');
+
+/* Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: #F5F2EE;
+    --foreground: #1A1A1A;
+    --surface: #FFFFFF;
+    --surface-muted: #F9F6F2;
+    --border: #E8E3DC;
+    --muted: #8A8A8A;
+    --accent: #E07355;
+    --accent-hover: #D0644A;
+    --accent-light: #F5E8E4;
+  }
+
+  .dark {
+    --background: #1A1A1A;
+    --foreground: #F0EDE8;
+    --surface: #242424;
+    --surface-muted: #2E2E2E;
+    --border: #333333;
+    --muted: #6B6B6B;
+    --accent: #E07355;
+    --accent-hover: #F0855F;
+    --accent-light: #3A2520;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--accent-light);
+    color: var(--foreground);
+  }
+}
+
+@layer components {
+  /* Card base */
+  .card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover {
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.08);
+  }
+
+  /* Mode card clickable */
+  .mode-card {
+    @apply card cursor-pointer;
+  }
+  .mode-card:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Subject card */
+  .subject-card {
+    @apply card cursor-pointer border-l-4;
+    border-left-color: var(--accent);
+  }
+
+  /* Muted text */
+  .text-muted {
+    color: var(--muted);
+  }
+
+  /* Surface backgrounds */
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  .bg-surface-muted {
+    background-color: var(--surface-muted);
+  }
+  .bg-background {
+    background-color: var(--background);
+  }
+  .border-default {
+    border-color: var(--border);
+  }
+  .text-foreground {
+    color: var(--foreground);
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 2px;
+    background-color: var(--border);
+    width: 100%;
+  }
+  .progress-fill {
+    height: 100%;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  /* Answer option card */
+  .answer-option {
+    @apply card cursor-pointer p-4 flex items-start gap-3;
+    transition: all 0.15s ease;
+  }
+  .answer-option:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-light);
+  }
+  .answer-option.selected {
+    border-color: var(--accent);
+    background-color: var(--accent-light);
+  }
+  .answer-option.correct {
+    border-color: #22c55e;
+    background-color: #f0fdf4;
+  }
+  .dark .answer-option.correct {
+    background-color: #052e16;
+  }
+  .answer-option.incorrect {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+  }
+  .dark .answer-option.incorrect {
+    background-color: #2d0a0a;
+  }
+
+  /* Flashcard */
+  .flashcard-container {
+    perspective: 1000px;
+  }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .flashcard-inner.flipped {
+    transform: rotateY(180deg);
+  }
+  .flashcard-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 0.75rem;
+  }
+  .flashcard-back {
+    transform: rotateY(180deg);
+  }
+
+  /* Chip / Badge */
+  .chip {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background-color: var(--surface-muted);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+  }
+  .chip.active {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

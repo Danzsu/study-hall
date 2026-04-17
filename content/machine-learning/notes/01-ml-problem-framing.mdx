@@ -1,0 +1,87 @@
+---
+title: ML Problem Framing
+lesson: 1
+section: ML Problem Framing
+sources:
+  - type: pdf
+    title: Google PMLE Study Guide
+    year: 2024
+  - type: book
+    title: Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow
+    author: Aurélien Géron
+    chapter: Chapter 1-2
+---
+
+## What is Machine Learning?
+
+Machine learning is the practice of using algorithms to parse data, learn from it, and make decisions or predictions. Instead of hand-coding rules, the algorithm learns patterns from examples.
+
+**Three main types:**
+- **Supervised learning** — labeled training data, predict output for new inputs
+- **Unsupervised learning** — unlabeled data, find hidden structure
+- **Reinforcement learning** — agent learns by interacting with an environment
+
+---
+
+## Bias-Variance Tradeoff
+
+Every ML model faces the fundamental tension between two sources of error:
+
+$$\text{Total Error} = \text{Bias}^2 + \text{Variance} + \epsilon$$
+
+where $\epsilon$ is irreducible noise inherent in the data.
+
+**Bias** — error from overly simplistic assumptions.
+A high-bias model *underfits*: it fails to capture the true patterns.
+
+**Variance** — error from sensitivity to small fluctuations in training data.
+A high-variance model *overfits*: it memorizes noise instead of learning patterns.
+
+### The Tradeoff
+
+As model complexity increases:
+- Bias **decreases** (model learns more patterns)
+- Variance **increases** (model becomes overly sensitive to training specifics)
+
+The optimal model minimizes total error — sitting at the "sweet spot" between underfitting and overfitting.
+
+**Techniques to manage the tradeoff:**
+- Regularization (L1, L2, Dropout)
+- Cross-validation
+- Ensemble methods (Random Forest, Gradient Boosting)
+- More training data
+
+---
+
+## Choosing the Right Approach
+
+When given a problem, ask:
+
+1. **Do I have labeled data?** → Supervised learning
+2. **How much labeled data?** → Less data → simpler model or transfer learning
+3. **Custom categories?** → AutoML or custom model (NOT NLP API classifyText)
+4. **Need interpretability?** → Linear models, Decision Trees
+5. **Need max accuracy?** → Deep learning (requires more data + compute)
+
+### Example Decision
+
+*"Categorize 50,000 support tickets into 15 custom categories"*
+
+→ Has labeled data ✓  
+→ Custom categories (not generic taxonomy) ✓  
+→ **Best choice: AutoML Natural Language** (lowest effort, handles custom classes)
+
+*Why not NLP API classifyText?* It uses a fixed taxonomy of 700+ categories that won't match custom business categories.
+
+---
+
+## PII and Data Privacy
+
+When a feature changes from non-PII to PII due to regulation:
+
+1. **Going forward**: Encrypt or hash the feature in all new data pipelines
+2. **Retroactively**: De-identify or delete PII values in storage
+3. **Models**: Retrain or retire models trained on exposed PII data
+4. **Governance**: Update documentation, access controls, and run a data audit
+
+> Remember: Even if individual records seem harmless, combinations of features can re-identify individuals (quasi-identifiers).

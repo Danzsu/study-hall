@@ -1,0 +1,38 @@
+[
+  {
+    "id": "g1",
+    "term": "Bias",
+    "definition": "Error from overly simplistic assumptions in a learning algorithm. High bias causes underfitting — the model fails to capture patterns in the training data.",
+    "category": "ML Concepts"
+  },
+  {
+    "id": "g2",
+    "term": "Variance",
+    "definition": "Error from excessive sensitivity to small fluctuations in the training set. High variance causes overfitting — the model memorizes noise instead of learning general patterns.",
+    "category": "ML Concepts"
+  },
+  {
+    "id": "g3",
+    "term": "Dropout",
+    "definition": "Regularization technique that randomly sets a fraction of neural network neurons to zero during training, preventing co-adaptation and overfitting.",
+    "category": "ML Concepts"
+  },
+  {
+    "id": "g4",
+    "term": "tf.function",
+    "definition": "TensorFlow decorator that converts Python functions to TensorFlow graphs, enabling faster execution by avoiding Python overhead and enabling optimizations.",
+    "category": "TF Ecosystem"
+  },
+  {
+    "id": "g5",
+    "term": "TFRecord",
+    "definition": "TensorFlow's binary storage format that bundles serialized tf.train.Example protos. Enables efficient shuffling, compression, and parallel reads for large datasets.",
+    "category": "TF Ecosystem"
+  },
+  {
+    "id": "g6",
+    "term": "AutoML Natural Language",
+    "definition": "Google Cloud service for custom text classification, entity extraction, and sentiment analysis with labeled data. Lowest-effort option for custom NLP tasks.",
+    "category": "GCP Core"
+  }
+]

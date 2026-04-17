@@ -1,0 +1,115 @@
+---
+title: Solution Architecture & TensorFlow
+lesson: 2
+section: Solution Architecture
+sources:
+  - type: pdf
+    title: Google PMLE Study Guide
+    year: 2024
+  - type: book
+    title: Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow
+    author: Aurélien Géron
+    chapter: Chapter 12-13
+---
+
+## TensorFlow Execution Modes
+
+TensorFlow supports two execution modes:
+
+### Eager Execution (default in TF2)
+Operations run immediately as Python code executes — intuitive, easy to debug.
+
+```python
+import tensorflow as tf
+x = tf.constant([1, 2, 3])
+print(x + 1)  # Runs immediately: [2, 3, 4]
+```
+
+**Drawback:** Slower in production — Python overhead, no graph optimizations.
+
+### Graph Execution
+Operations are compiled into a static computation graph before execution.
+
+```python
+@tf.function  # Converts to graph
+def add_one(x):
+    return x + 1
+```
+
+**Advantages:** Faster inference, portable (SavedModel), parallelizable.
+
+### When to Use Which
+
+| Mode | Use Case |
+|---|---|
+| Eager | Development, debugging, research |
+| Graph (`tf.function`) | Production, deployment, performance |
+
+> **PMLE tip:** Never deploy in eager mode in production — always use `tf.function` or TF Serving with SavedModel format.
+
+---
+
+## tf.data Pipeline
+
+The `tf.data` API builds scalable input pipelines for efficient data loading.
+
+### Key operations:
+
+$$\text{Pipeline} = \text{Load} \rightarrow \text{Map} \rightarrow \text{Batch} \rightarrow \text{Prefetch}$$
+
+**prefetch()** — the most important optimization:
+```python
+dataset = tf.data.Dataset.from_tensor_slices(paths)
+dataset = dataset.map(load_and_preprocess)  # Parallel processing
+dataset = dataset.batch(32)
+dataset = dataset.prefetch(tf.data.AUTOTUNE)  # Async pre-loading
+```
+
+`prefetch()` schedules future batch production while the GPU processes the current batch, eliminating idle time.
+
+### Storage Formats Comparison
+
+| Format | Pros | Cons |
+|---|---|---|
+| Raw images + prefetch | Simple, no preprocessing | Higher runtime decode cost |
+| TFRecords | Fast sequential reads, compressed, shuffleable | Extra preprocessing step |
+
+Both are Google-recommended. Choose based on:
+- **TFRecords**: large datasets, need efficient shuffling
+- **Raw + prefetch**: simpler workflow, smaller datasets
+
+---
+
+## Model Regularization Techniques
+
+| Technique | How it works | Best for |
+|---|---|---|
+| **L1 (Lasso)** | Penalizes sum of absolute weights → sparse weights | Feature selection |
+| **L2 (Ridge)** | Penalizes sum of squared weights → small weights | General regularization |
+| **Dropout** | Randomly zeros out neurons during training | Deep neural networks |
+| **Batch Norm** | Normalizes layer inputs → stabilizes training | Deep networks, faster convergence |
+| **Early Stopping** | Stop when validation loss stops improving | All neural networks |
+
+### Loss Functions with Regularization
+
+$$L_{\text{regularized}} = L_{\text{task}} + \lambda \cdot R(\theta)$$
+
+where $\lambda$ is the regularization strength and $R(\theta)$ is the regularization term:
+- L1: $R(\theta) = \|\theta\|_1 = \sum_i |\theta_i|$
+- L2: $R(\theta) = \|\theta\|_2^2 = \sum_i \theta_i^2$
+
+---
+
+## Overfitting vs Underfitting
+
+**Overfitting signals:**
+- Low training loss, high validation loss
+- Model performs well on training data, poorly on new data
+
+**Solutions:** Add regularization, reduce model complexity, get more data, use dropout
+
+**Underfitting signals:**
+- Both training and validation loss are high
+- Model hasn't learned meaningful patterns
+
+**Solutions:** Increase model complexity, train longer, reduce regularization, better features

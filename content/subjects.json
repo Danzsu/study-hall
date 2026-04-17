@@ -1,0 +1,13 @@
+[
+  {
+    "slug": "machine-learning",
+    "name": "Machine Learning",
+    "description": "ML alapok, algoritmusok és Tensorflow — PMLE vizsga előkészítő",
+    "color": "#E07355",
+    "icon": "brain",
+    "questionCount": 8,
+    "lessonCount": 2,
+    "flashcardCount": 4,
+    "glossaryCount": 6
+  }
+]
