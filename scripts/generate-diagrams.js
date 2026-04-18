@@ -12,6 +12,7 @@
 const fs = require('fs')
 const path = require('path')
 require('./load-env')
+const { callWithProviderLimit } = require('./llm-rate-limit')
 const { Groq } = require('groq-sdk')
 
 const CONTENT_ROOT = path.join(__dirname, '..', 'content')
@@ -81,13 +82,13 @@ VISSZA JSON formátumban:
 
 Csak a JSON-t add vissza, magyarázat nélkül.`
 
-  const completion = await groq.chat.completions.create({
+  const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.6,
     max_tokens: 4000,
     response_format: { type: 'json_object' },
-  })
+  }))
 
   try {
     const json = completion.choices[0]?.message?.content || '{}'

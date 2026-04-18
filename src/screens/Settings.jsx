@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Moon, Sun, ChevronRight, Download, Trash2, Check, Volume2, Clock, BookOpen } from 'lucide-react'
 import { useTheme, useStore, store, navigate } from '../store'
 import { C } from '../theme'
+import { playSound, setSoundsEnabled, soundsEnabled } from '../sounds'
 
 const SEMESTERS = [
   '1st semester','2nd semester','3rd semester','4th semester',
@@ -194,8 +195,10 @@ export default function Settings() {
   const [semester, setSemester]         = useState('5th semester')
   const [subjects, setSubjects]         = useState([])
   const [subjectsOpen, setSubjectsOpen] = useState(false)
+  const [soundOn, setSoundOn]           = useState(true)
 
   useEffect(() => {
+    setSoundOn(soundsEnabled())
     const stored = loadStoredSettings()
     setSemester(stored.semester)
     fetch('/api/subjects')
@@ -219,6 +222,12 @@ export default function Settings() {
   const handleSubjectsChange = (newSubs) => {
     setSubjects(newSubs)
     patchStored({ subjects: newSubs.map(s => ({ id: s.id, active: s.active, level: s.level })) })
+  }
+
+  const handleSoundToggle = (enabled) => {
+    setSoundOn(enabled)
+    setSoundsEnabled(enabled)
+    if (enabled) playSound('correct')
   }
 
   const handleExport = () => {
@@ -288,9 +297,9 @@ export default function Settings() {
         <Card t={t}>
           <Row icon={Clock} iconColor={C.accent} label="Pomodoro timer" sub="Focus & break session timer" onClick={() => navigate('/pomodoro')} t={t}/>
           <Divider t={t}/>
-          <Row icon={Volume2} iconColor={C.purple} label="Sound effects" sub="Audio feedback on correct answers"
-            right={<Toggle checked={false} onChange={() => {}} color={C.purple}/>}
-            onClick={() => {}} t={t}
+          <Row icon={Volume2} iconColor={C.purple} label="Sound effects" sub="Quiz feedback and Pomodoro chimes"
+            right={<Toggle checked={soundOn} onChange={handleSoundToggle} color={C.purple}/>}
+            onClick={() => handleSoundToggle(!soundOn)} t={t}
           />
         </Card>
 

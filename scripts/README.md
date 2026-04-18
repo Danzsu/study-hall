@@ -221,6 +221,68 @@ sources:
 ]
 ```
 
+## Advanced notes pipeline
+
+The notes generator now uses structure-aware document chunking instead of plain character slicing.
+
+What it tracks:
+- heading and paragraph boundaries
+- larger semantic chunks
+- overlap from previous context
+- visual candidates such as figures, diagrams, tables, equations, code, and architecture blocks
+- artifact metadata for later diagram/image generation
+
+Artifact output:
+
+```bash
+content/<slug>/notes/artifacts/<lesson>.json
+```
+
+Note generation profile:
+
+```bash
+$env:NOTE_LANGUAGE="hu"       # primary language
+$env:NOTE_LANGUAGE="en"       # secondary language
+$env:NOTE_DEPTH="exam-prep notes"
+```
+
+Remote note generation order:
+- Groq `llama-3.3-70b-versatile`
+- OpenRouter `google/gemma-4-26b-a4b-it:free`
+- OpenRouter `google/gemma-4-31b-it:free`
+- OpenRouter `nvidia/nemotron-3-super-120b-a12b:free`
+- local fallback if remote generation fails
+
+The notes prompt follows the `university-note-crafter` direction:
+- source-grounded university notes
+- Hungarian and English support
+- LaTeX-first math
+- figure/table/equation placeholders when extraction is not available
+- explicit anti-slop humanizer pass
+- References & Credits section
+
+## Free-tier rate limit guard
+
+All CLI LLM calls go through a shared provider-aware rate limiter.
+
+Conservative defaults:
+- `GROQ_REQUEST_DELAY_MS=70000`
+- `OPENROUTER_REQUEST_DELAY_MS=30000`
+- `LLM_MAX_RETRIES=2`
+- `LLM_RETRY_SAFETY_MS=5000`
+
+The guard also respects `retry-after` on 429 responses when the provider sends it.
+
+You can tune the delays per run:
+
+```bash
+$env:GROQ_REQUEST_DELAY_MS="70000"
+$env:OPENROUTER_REQUEST_DELAY_MS="30000"
+node scripts/generate-all.js it_biztonsag
+```
+
+For free tiers, keep the defaults unless you have checked the current provider dashboard limits.
+
 ## 🆘 Support
 
 Ha problémád van, nyiss egy issue-t a GitHubon vagy ellenőrizd a `DEBUG=1` környezeti változóval a részletes hibákat:

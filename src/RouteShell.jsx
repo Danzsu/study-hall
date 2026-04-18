@@ -20,6 +20,7 @@ function makeCrumbs(route, slug, label) {
     '/review': 'Review',
     '/wrong-answers': 'Mistakes',
     '/glossary': 'Glossary',
+    '/search': 'Search',
     '/exam': 'Exam',
   }[route]
   return leaf && subject

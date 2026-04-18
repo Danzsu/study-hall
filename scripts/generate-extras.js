@@ -14,6 +14,7 @@ const fs = require('fs')
 const path = require('path')
 require('./load-env')
 const { buildFallbackFlashcards, buildFallbackGlossary } = require('./local-generators')
+const { callWithProviderLimit } = require('./llm-rate-limit')
 const { Groq } = require('groq-sdk')
 
 // ── KONFIGURÁCIÓ ──────────────────────────────────────────────────────────────
@@ -122,13 +123,13 @@ KÉSZÍTS FLASHCARDOKAT AZ ALÁBBI SZABÁLYOK SZERINT:
 
 VISSZA: Csak a tiszta JSON tömböt.`
 
-  const completion = await groq.chat.completions.create({
+  const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.6,
     max_tokens: 3000,
     response_format: { type: 'json_object' },
-  })
+  }))
 
   try {
     const json = completion.choices[0]?.message?.content || '{}'
@@ -176,13 +177,13 @@ KÉSZÍTS GLOSSZÁRIUMOT AZ ALÁBBI SZABÁLYOK SZERINT:
 
 VISSZA: Csak a tiszta JSON tömböt.`
 
-  const completion = await groq.chat.completions.create({
+  const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.5,
     max_tokens: 4000,
     response_format: { type: 'json_object' },
-  })
+  }))
 
   try {
     const json = completion.choices[0]?.message?.content || '{}'
@@ -292,8 +293,7 @@ async function main() {
       allGlossary = allGlossary.concat(glossaryWithSection)
       console.log(`   ✅ ${glossaryWithSection.length} glossary entry`)
 
-      // Rate limit
-      await new Promise(r => setTimeout(r, 1000))
+      // Provider-aware rate limiting is handled by llm-rate-limit.js.
     }
   }
 

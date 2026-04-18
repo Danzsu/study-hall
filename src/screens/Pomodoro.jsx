@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { Settings, RotateCcw, Coffee, BookOpen, Plus, Minus } from 'lucide-react'
 import { useTheme, store } from '../store'
 import { C } from '../theme'
+import { playSound } from '../sounds'
 
 function pad(n) { return String(n).padStart(2, '0') }
 function fmt(s) { return `${pad(Math.floor(s / 60))}:${pad(s % 60)}` }
@@ -169,13 +170,16 @@ export default function Pomodoro() {
           clearInterval(intervalRef.current)
           if (phase === 'focus') {
             if (round + 1 >= totalRounds) {
+              playSound('pomodoroBlockFinished')
               setRunning(false); setDone(true)
               store.set({ pomodoro: { ...store.get().pomodoro, completedPomodoros: store.get().pomodoro.completedPomodoros + 1 } })
               return 0
             }
+            playSound('pomodoroTimeUp')
             setPhase('break'); setRunning(false)
             return breakMins * 60
           } else {
+            playSound('pomodoroTimeUp')
             setPhase('focus'); setRound(r => r + 1); setRunning(false)
             return focusMins * 60
           }
@@ -191,9 +195,11 @@ export default function Pomodoro() {
   const skipPhase = () => {
     clearInterval(intervalRef.current); setRunning(false)
     if (phase === 'focus') {
-      if (round + 1 >= totalRounds) { setDone(true); return }
+      if (round + 1 >= totalRounds) { playSound('pomodoroBlockFinished'); setDone(true); return }
+      playSound('pomodoroTimeUp')
       setPhase('break'); setTimeLeft(breakMins * 60)
     } else {
+      playSound('pomodoroTimeUp')
       setPhase('focus'); setRound(r => r + 1); setTimeLeft(focusMins * 60)
     }
   }

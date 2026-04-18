@@ -12,7 +12,10 @@ const fs = require('fs')
 const path = require('path')
 require('./load-env')
 const { extractPdfText } = require('./pdf-text')
+const { chunkDocument } = require('./document-chunker')
 const { buildActiveRecall, buildFallbackNote } = require('./local-generators')
+const { buildNotePrompt, getNoteDepth, getNoteLanguage } = require('./note-prompts')
+const { callWithProviderLimit } = require('./llm-rate-limit')
 const mammoth = require('mammoth')
 const { Groq } = require('groq-sdk')
 
@@ -21,6 +24,11 @@ const STORAGE_ROOT = path.join(__dirname, '..', 'storage', 'subjects')
 const CONTENT_ROOT = path.join(__dirname, '..', 'content')
 
 const GROQ_MODEL = 'llama-3.3-70b-versatile'
+const OPENROUTER_MODELS = [
+  'google/gemma-4-26b-a4b-it:free',
+  'google/gemma-4-31b-it:free',
+  'nvidia/nemotron-3-super-120b-a12b:free',
+]
 
 // ── HELPER FÜGGVÉNYEK ─────────────────────────────────────────────────────────
 
@@ -87,8 +95,17 @@ function chunkText(text, maxChunkSize = 3800, overlap = 400) {
 /**
  * Groq API hívás notes generálására
  */
-async function generateNotesWithGroq(groq, sourceText, subjectName, sectionName) {
-  const prompt = `Te egy tapasztalt egyetemi tanár vagy, aki tanulási segédanyagot készít hallgatóknak.
+async function generateNotesWithGroq(groq, sourceText, subjectName, sectionName, options = {}) {
+  const prompt = buildNotePrompt({
+    sourceText,
+    subjectName,
+    sectionName,
+    chunkIndex: options.chunkIndex ?? 0,
+    chunkCount: options.chunkCount ?? 1,
+    language: options.language ?? 'hu',
+    depth: options.depth ?? 'exam-prep notes',
+  })
+  /* Legacy prompt removed; see scripts/note-prompts.js.
 
 TÁRGY: ${subjectName}
 FEJEZET/CÍM: ${sectionName}
@@ -126,16 +143,57 @@ sources:
     year: 2025
 ---
 
-VISSZA: Csak a tiszta MDX tartalmat (frontmatter-rel együtt), magyarázat nélkül.`
+*/
 
-  const completion = await groq.chat.completions.create({
+  const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.7,
-    max_tokens: 4000,
-  })
+    max_tokens: 6000,
+  }))
 
   return completion.choices[0]?.message?.content || ''
+}
+
+async function generateNotesWithOpenRouter(apiKey, sourceText, subjectName, sectionName, options = {}) {
+  const prompt = buildNotePrompt({
+    sourceText,
+    subjectName,
+    sectionName,
+    chunkIndex: options.chunkIndex ?? 0,
+    chunkCount: options.chunkCount ?? 1,
+    language: options.language ?? 'hu',
+    depth: options.depth ?? 'exam-prep notes',
+  })
+
+  const errors = []
+  for (const model of OPENROUTER_MODELS) {
+    try {
+      const res = await callWithProviderLimit('openrouter', () => fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'http://localhost:3000',
+          'X-Title': 'Study Hall Content Pipeline',
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.35,
+          max_tokens: 6000,
+        }),
+      }))
+
+      if (!res.ok) throw new Error(`${res.status}: ${await res.text()}`)
+      const data = await res.json()
+      return data.choices?.[0]?.message?.content || ''
+    } catch (err) {
+      errors.push(`${model}: ${err.message || err}`)
+    }
+  }
+
+  throw new Error(`OpenRouter note generation failed: ${errors.slice(-2).join(' | ')}`)
 }
 
 /**
@@ -162,13 +220,13 @@ A kérdések legyenek:
 - A legfontosabb koncepciókra fókuszáljanak
 - Gyakorlatiasak (ne csak definíciók)`
 
-  const completion = await groq.chat.completions.create({
+  const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.5,
     max_tokens: 800,
     response_format: { type: 'json_object' },
-  })
+  }))
 
   try {
     const json = completion.choices[0]?.message?.content || '{}'
@@ -191,15 +249,21 @@ async function main() {
   }
 
   const apiKey = process.env.GROQ_API_KEY
+  const openRouterApiKey = process.env.OPENROUTER_API_KEY
   const forceLocalFallback = process.env.LOCAL_CONTENT_FALLBACK === '1'
   const groq = apiKey && !forceLocalFallback ? new Groq({ apiKey }) : null
-  let useLocalFallback = !groq
+  const canUseOpenRouter = !!openRouterApiKey && !forceLocalFallback
+  let useLocalFallback = !groq && !canUseOpenRouter
   if (useLocalFallback) {
     console.log('Using local fallback note generation.')
   }
+  const noteLanguage = getNoteLanguage()
+  const noteDepth = getNoteDepth()
+  console.log(`Note profile: language=${noteLanguage}, depth=${noteDepth}`)
 
   const sourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'lesson_sources')
   const outputDir = path.join(CONTENT_ROOT, subjectSlug, 'notes')
+  const artifactsDir = path.join(CONTENT_ROOT, subjectSlug, 'notes', 'artifacts')
 
   // Forrásfájlok listázása
   const pdfFiles = listSourceFiles(sourceDir, ['.pdf'])
@@ -222,6 +286,8 @@ async function main() {
   }
 
   // Meta információk a subjecthez
+  fs.mkdirSync(artifactsDir, { recursive: true })
+
   const metaPath = path.join(CONTENT_ROOT, subjectSlug, 'meta.json')
   const meta = {
     slug: subjectSlug,
@@ -262,7 +328,7 @@ async function main() {
     console.log(`   📝 Szöveg hossza: ${rawText.length} karakter`)
 
     // Chunkokra darabolás
-    const chunks = chunkText(rawText)
+    const chunks = chunkDocument(rawText, { sourceTitle: fileName })
     console.log(`   📦 Chunkok száma: ${chunks.length}`)
 
     // Section név generálása (fájlnévből vagy első chunkból)
@@ -278,6 +344,20 @@ async function main() {
 
     const lessonSlug = `${String(lessonCounter + 1).padStart(2, '0')}-${path.basename(file, fileExt).toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-')}`
     const outputPath = path.join(outputDir, `${lessonSlug}.mdx`)
+    const artifactPath = path.join(artifactsDir, `${lessonSlug}.json`)
+    fs.writeFileSync(artifactPath, JSON.stringify({
+      sourceFile: fileName,
+      lessonSlug,
+      sectionName,
+      language: noteLanguage,
+      depth: noteDepth,
+      chunks: chunks.map(chunk => ({
+        index: chunk.index,
+        chars: chunk.chars,
+        headings: chunk.headings,
+        visualCandidates: chunk.visualCandidates,
+      })),
+    }, null, 2), 'utf-8')
 
     // Notes generálása chunkonként (ha több chunk van)
     if (fs.existsSync(outputPath)) {
@@ -314,14 +394,40 @@ async function main() {
 
       let chunkNotes
       try {
-        chunkNotes = await generateNotesWithGroq(
-          groq,
-          chunks[i],
-          meta.name,
-          sectionName + (chunks.length > 1 ? ` (${i + 1}/${chunks.length})` : '')
-        )
+        const noteOptions = {
+          chunkIndex: i,
+          chunkCount: chunks.length,
+          language: noteLanguage,
+          depth: noteDepth,
+        }
+        const chunkSectionName = sectionName + (chunks.length > 1 ? ` (${i + 1}/${chunks.length})` : '')
+
+        if (groq) {
+          try {
+            chunkNotes = await generateNotesWithGroq(
+              groq,
+              chunks[i].promptText,
+              meta.name,
+              chunkSectionName,
+              noteOptions
+            )
+          } catch (err) {
+            if (!canUseOpenRouter) throw err
+            console.log(`   Groq note generation failed (${err.status || err.code || err.message}); trying OpenRouter.`)
+          }
+        }
+
+        if (!chunkNotes && canUseOpenRouter) {
+          chunkNotes = await generateNotesWithOpenRouter(
+            openRouterApiKey,
+            chunks[i].promptText,
+            meta.name,
+            chunkSectionName,
+            noteOptions
+          )
+        }
       } catch (err) {
-        console.log(`   Groq note generation failed (${err.status || err.code || err.message}); switching to local fallback.`)
+        console.log(`   Remote note generation failed (${err.status || err.code || err.message}); switching to local fallback.`)
         useLocalFallback = true
         fullNotes = buildFallbackNote(rawText, meta.name, sectionName, lessonCounter + 1, fileName)
         break
@@ -335,9 +441,7 @@ async function main() {
       }
 
       // Rate limit elkerülése
-      if (i < chunks.length - 1) {
-        await new Promise(r => setTimeout(r, 1500))
-      }
+      // Provider-aware rate limiting is handled by llm-rate-limit.js.
     }
 
     // Aktív Recall kérdések generálása

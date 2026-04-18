@@ -10,7 +10,6 @@ let storeState = {
   density: 'comfortable',
   accent: 'coral',
   pomodoro: { mode: 'focus', secondsLeft: 25 * 60, running: false, completedPomodoros: 0 },
-  route_history: ['/home'],
 }
 const listeners = new Set()
 
@@ -73,7 +72,7 @@ export function routeHref(path, params = {}) {
     '/settings': '/settings',
     '/onboarding': '/onboarding',
     '/pomodoro': '/pomodoro',
-    '/search': id ? `/review/${encodeURIComponent(id)}` : '/',
+    '/search': id ? `/search/${encodeURIComponent(id)}` : '/',
   }
 
   if (map[cleanPath]) return map[cleanPath]

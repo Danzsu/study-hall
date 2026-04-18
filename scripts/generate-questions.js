@@ -13,6 +13,7 @@ const path = require('path')
 require('./load-env')
 const { extractPdfText } = require('./pdf-text')
 const { buildFallbackQuestions } = require('./local-generators')
+const { callWithProviderLimit } = require('./llm-rate-limit')
 const mammoth = require('mammoth')
 const { Groq } = require('groq-sdk')
 
@@ -145,13 +146,13 @@ KÉSZÍTS KÉRDÉSEKET AZ ALÁBBI SZABÁLYOK SZERINT:
 
 VISSZA: Csak a tiszta JSON tömböt, magyarázat nélkül.`
 
-  const completion = await groq.chat.completions.create({
+  const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.7,
     max_tokens: 4000,
     response_format: { type: 'json_object' },
-  })
+  }))
 
   try {
     const json = completion.choices[0]?.message?.content || '{}'
@@ -288,10 +289,7 @@ async function main() {
 
       console.log(`   ✅ ${cleaned.length} kérdés hozzáadva`)
 
-      // Rate limit
-      if (i < chunks.length - 1) {
-        await new Promise(r => setTimeout(r, 1500))
-      }
+      // Provider-aware rate limiting is handled by llm-rate-limit.js.
     }
   }
 

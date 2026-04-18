@@ -167,6 +167,7 @@ export default function Written({ subjectId }) {
             missing: data.what_was_missing ?? [],
           },
         }))
+        setLoading(false)
         return
       }
     } catch { /* fall through to local eval */ }

@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
+import { playSound } from '../sounds'
 
 const LABELS = ['A', 'B', 'C', 'D']
 
@@ -376,6 +377,7 @@ export default function WrongAnswers({ subjectId }) {
     const correct = q.type === 'multi'
       ? sameSet(selected, q.correctMultiple ?? [])
       : selected === q.correct
+    playSound(correct ? 'correct' : 'wrong')
     setResults(r => [...r, correct ? 'correct' : 'wrong'])
   }
 
