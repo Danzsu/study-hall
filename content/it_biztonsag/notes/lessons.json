@@ -1,0 +1,164 @@
+[
+  {
+    "slug": "01-00-introitsec-bme-2026-hu",
+    "title": "00 IntroITsec BME 2026 hu",
+    "section": "00 IntroITsec BME 2026 hu",
+    "lesson": 1,
+    "time": "47 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "02-01-crypto-history-bme-2026-hu",
+    "title": "01 Crypto History BME 2026 hu",
+    "section": "01 Crypto History BME 2026 hu",
+    "lesson": 2,
+    "time": "44 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "03-02-crypto-primitives-bme-2026-hu",
+    "title": "02 Crypto Primitives BME 2026 hu",
+    "section": "02 Crypto Primitives BME 2026 hu",
+    "lesson": 3,
+    "time": "47 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "04-03-crypto-applications-bme-2026-hu",
+    "title": "03 Crypto Applications BME 2026 hu",
+    "section": "03 Crypto Applications BME 2026 hu",
+    "lesson": 4,
+    "time": "41 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "05-04-sw-sdl",
+    "title": "04 SW SDL",
+    "section": "04 SW SDL",
+    "lesson": 5,
+    "time": "38 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "06-05-sw-implementationerrors-hu",
+    "title": "05 SW ImplementationErrors HU",
+    "section": "05 SW ImplementationErrors HU",
+    "lesson": 6,
+    "time": "38 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "07-06-sw-web-hu",
+    "title": "06 SW Web HU",
+    "section": "06 SW Web HU",
+    "lesson": 7,
+    "time": "41 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "08-08-sw-testing-hu",
+    "title": "08 SW Testing HU",
+    "section": "08 SW Testing HU",
+    "lesson": 8,
+    "time": "29 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "09-09-aaa-hu",
+    "title": "09 AAA HU",
+    "section": "09 AAA HU",
+    "lesson": 9,
+    "time": "50 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "10-10-malware-hu",
+    "title": "10 Malware HU",
+    "section": "10 Malware HU",
+    "lesson": 10,
+    "time": "38 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "11-it-biztons-g-jegyzet-bevezet-s-az-it-biztons-gba-bme-villamosm-rn-ki-s-informatikai-kar",
+    "title": "IT biztonság jegyzet_ Bevezetés az IT Biztonságba _ BME Villamosmérnöki és Informatikai Kar",
+    "section": "IT biztonság jegyzet_ Bevezetés az IT Biztonságba _ BME Villamosmérnöki és Informatikai Kar",
+    "lesson": 11,
+    "time": "86 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "12-it-biztons-g-jegyzet-biztons-gi-tesztel-s-bme-villamosm-rn-ki-s-informatikai-kar",
+    "title": "IT biztonság jegyzet_ Biztonsági tesztelés _ BME Villamosmérnöki és Informatikai Kar",
+    "section": "IT biztonság jegyzet_ Biztonsági tesztelés _ BME Villamosmérnöki és Informatikai Kar",
+    "lesson": 12,
+    "time": "35 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "13-control-questions-kidolgozva2025",
+    "title": "Control Questions kidolgozva2025",
+    "section": "Control Questions kidolgozva2025",
+    "lesson": 13,
+    "time": "74 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "14-it-bizt-k-rd-sek-help-",
+    "title": "IT bizt kérdések (HELP)",
+    "section": "IT bizt kérdések (HELP)",
+    "lesson": 14,
+    "time": "32 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "15-it-biztons-g-2023",
+    "title": "IT biztonság 2023",
+    "section": "IT biztonság 2023",
+    "lesson": 15,
+    "time": "77 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "16-itbizt-k-rd-sek-help-el-ad-s-di-kkal",
+    "title": "ITbizt kérdések (HELP) - előadás diákkal",
+    "section": "ITbizt kérdések (HELP) - előadás diákkal",
+    "lesson": 16,
+    "time": "32 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "17-itsec-dia-kerdesek-kidolgozva",
+    "title": "ITSEC Dia Kerdesek Kidolgozva",
+    "section": "ITSEC Dia Kerdesek Kidolgozva",
+    "lesson": 17,
+    "time": "65 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "18-zh-ut-ni-kontroll-k-rd-sek",
+    "title": "ZH utáni kontroll kérdések",
+    "section": "ZH utáni kontroll kérdések",
+    "lesson": 18,
+    "time": "35 min",
+    "sources": [],
+    "activeRecall": []
+  }
+]

@@ -1,30 +1,30 @@
 [
   {
-    "id": "fc1",
-    "question": "Feature changed from non-PII to PII due to regulation. What to do?",
-    "answer": "Encrypt/hash going forward + retroactively process historical data",
-    "explanation": "Encrypt/hash future data, retroactively de-identify historical data, update pipelines.",
-    "tags": ["Privacy", "Data Engineering"]
+    "id": "f1",
+    "front": "Feature changed from non-PII to PII due to regulation. What to do?",
+    "back": "Encrypt/hash going forward + retroactively process historical data",
+    "section": "General",
+    "type": "definition"
   },
   {
-    "id": "fc2",
-    "question": "What does tf.data.Dataset.prefetch() do?",
-    "answer": "Schedules future data production asynchronously to reduce idle GPU/CPU time",
-    "explanation": "Prefetch allows the next batch to be prepared while the current one is being processed, hiding I/O latency.",
-    "tags": ["TF Ecosystem", "Performance"]
+    "id": "f2",
+    "front": "What does tf.data.Dataset.prefetch() do?",
+    "back": "Schedules future data production asynchronously to reduce idle GPU/CPU time",
+    "section": "General",
+    "type": "definition"
   },
   {
-    "id": "fc3",
-    "question": "What is the bias-variance tradeoff?",
-    "answer": "High bias = underfitting (simple model), High variance = overfitting (complex model). Optimal model minimizes both.",
-    "explanation": "Total error = bias² + variance + irreducible noise. Regularization, ensembles, and cross-validation help find the sweet spot.",
-    "tags": ["ML Concepts", "Theory"]
+    "id": "f3",
+    "front": "What is the bias-variance tradeoff?",
+    "back": "High bias = underfitting (simple model), High variance = overfitting (complex model). Optimal model minimizes both.",
+    "section": "General",
+    "type": "definition"
   },
   {
-    "id": "fc4",
-    "question": "Which has LEAST effort for custom text classification with 50k labeled samples?",
-    "answer": "AutoML Natural Language",
-    "explanation": "AutoML handles feature engineering, model architecture, and hyperparameter tuning automatically. NLP API classifyText only supports fixed taxonomy, not custom categories.",
-    "tags": ["ML Problem Framing", "GCP"]
+    "id": "f4",
+    "front": "Which has LEAST effort for custom text classification with 50k labeled samples?",
+    "back": "AutoML Natural Language",
+    "section": "General",
+    "type": "definition"
   }
 ]

@@ -1,0 +1,747 @@
+[
+  {
+    "id": "q1",
+    "type": "mcq",
+    "section": "IT biztonsag ZH 2018",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) ROP fogalma?",
+    "options": [
+      "A(z) IT biztonsag ZH 2018 temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Melyik múvelet hajtódik végre iOS bootolása során első lépésként?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q2",
+    "type": "multi",
+    "section": "IT biztonsag ZH 2018",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonsag ZH 2018 tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "ROP",
+      "ASLR",
+      "CVE",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q3",
+    "type": "written",
+    "section": "IT biztonsag ZH 2018",
+    "difficulty": "medium",
+    "question": "Fogalmazd meg roviden, miert fontos a(z) IT biztonsag ZH 2018 az IT biztonsagban!",
+    "options": [],
+    "explanation": "",
+    "idealAnswer": "Melyik múvelet hajtódik végre iOS bootolása során első lépésként?",
+    "keywords": [
+      "ROP",
+      "ASLR",
+      "CVE",
+      "NOP"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "multi",
+    "section": "IT biztonsag ZH 2021",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonsag ZH 2021 tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "ROP",
+      "DEP",
+      "ASLR",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q5",
+    "type": "mcq",
+    "section": "IT biztonsag ZH kerdesek 2020",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) SQL fogalma?",
+    "options": [
+      "A(z) IT biztonsag ZH kerdesek 2020 temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Kulcskimerítéses támadás esetén mennyi a lehetőségek száma, ha a kulcs K bites?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q6",
+    "type": "multi",
+    "section": "IT biztonsag ZH kerdesek 2020",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonsag ZH kerdesek 2020 tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "SQL",
+      "DMZ",
+      "MAC",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q7",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (1/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) VLAN fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (1/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "IT biztonság 2023 Összpontszám 166/166 Mi alapján nem tud szűrni egy egyszerű csomagszűrő?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q8",
+    "type": "multi",
+    "section": "IT biztonság 2023 (1/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (1/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "VLAN",
+      "HTTP",
+      "TCP",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q9",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (2/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) URL fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (2/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Protokoll hiba Gyenge kulcsmenedzsment Side channel támadási lehetőség az implementáció ellen A használt kriptográai primitív feltörése Az alábbiak közül mire vonatkozik a Same Origin Policy?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q10",
+    "type": "multi",
+    "section": "IT biztonság 2023 (2/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (2/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "URL",
+      "NEM",
+      "HAMIS",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q11",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (3/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) GOOGLE fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (3/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "1/1 Az, hogy a hash számolásának idejét mesterségesen megnöveljük Azt, hogy a jelszó hash véletlen hosszú lehet.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q12",
+    "type": "multi",
+    "section": "IT biztonság 2023 (3/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (3/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "GOOGLE",
+      "CHROME",
+      "HTTPS",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q13",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (4/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) DAC fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (4/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "1/1 A szoftver biztonsága ne a tervek titkosságától függjön Minimalizálni kell a megosztott mechanizmusok számát.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q14",
+    "type": "multi",
+    "section": "IT biztonság 2023 (4/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (4/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "DAC",
+      "CLR",
+      "EZT",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q15",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (5/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) NEM fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (5/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "vonatkozóan, ha tudjuk azt is, hogy csak az Examinees csoportnak tagja?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q16",
+    "type": "multi",
+    "section": "IT biztonság 2023 (5/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (5/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "NEM",
+      "AES",
+      "FIPS",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q17",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (6/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) XSS fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (6/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "A jelszón egy megfelelően választott egyirányú függvényt alkalmazunk, majd a függvény értékét tároljuk.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q18",
+    "type": "multi",
+    "section": "IT biztonság 2023 (6/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (6/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "XSS",
+      "CSP",
+      "HTTP",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q19",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (7/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) CBC fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (7/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Néhány alkalmazásban hasznos lehet ha a szolgáltató rendezni tudja a titkosított adatokat pl.: a felhasználó rendezetten szeretné látni az eredményeket Amikor az adatot eltávolítjuk a felhőből a felhasználó biztos lehet benne, hogy minden másolata is törlődött.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q20",
+    "type": "multi",
+    "section": "IT biztonság 2023 (7/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (7/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "CBC",
+      "RSA",
+      "MAC",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q21",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (8/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) MAC fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (8/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "kimerítő kulcskereséses támadás átlagos komplexitása k bites 1/1 kulcs esetén?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q22",
+    "type": "multi",
+    "section": "IT biztonság 2023 (8/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (8/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "MAC",
+      "DAC",
+      "XSS",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q23",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (9/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) TLS fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (9/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "128 bit 256 bit Melyik protokollt használjuk weboldalak biztonságos elérésére?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q24",
+    "type": "multi",
+    "section": "IT biztonság 2023 (9/11)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) IT biztonság 2023 (9/11) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "TLS",
+      "SSH",
+      "BME",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q25",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (10/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) RSA fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (10/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "a számítógép saját háttértárolójának sebezhetősége olyan sebezhetőségek, amelyek csak a potenciális támadók számára ismertek online levelező sebezhetőség olyan sebezhetőségek, amelyek véletlen keletkeznek, senki számára nem ismert Milyen kemény matematikai problémát jelent az RSA-rendszer?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q26",
+    "type": "mcq",
+    "section": "IT biztonság 2023 (11/11)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) Ellenőrizhető számítás fogalma?",
+    "options": [
+      "A(z) IT biztonság 2023 (11/11) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "1/1 Néhány alkalmazásban hasznos lehet ha a szolgáltató rendezni tudja a titkosított adatokat pl.: a felhasználó rendezetten szeretné látni az eredményeket Amikor a számítás kiszervezett, a felhasználó biztos lehet benne, hogy a szolgáltató valóban elvégezte a kért feladatot.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q27",
+    "type": "mcq",
+    "section": "ZH utáni kontroll kérdések (1/5)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) NOTE fogalma?",
+    "options": [
+      "A(z) ZH utáni kontroll kérdések (1/5) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Beadtam ChatGPT-nek a pdfeket és a kérdéseket, majd javítottam, de azért persze saját felelősségre NOTE: Privacy diákban nincsenek control kérdések, az az anyag így nem szerepel Economics of Security ▸ What is the attacker’s advantage?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q28",
+    "type": "multi",
+    "section": "ZH utáni kontroll kérdések (1/5)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) ZH utáni kontroll kérdések (1/5) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "NOTE",
+      "ATM",
+      "USA",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q29",
+    "type": "written",
+    "section": "ZH utáni kontroll kérdések (1/5)",
+    "difficulty": "medium",
+    "question": "Fogalmazd meg roviden, miert fontos a(z) ZH utáni kontroll kérdések (1/5) az IT biztonsagban!",
+    "options": [],
+    "explanation": "",
+    "idealAnswer": "Beadtam ChatGPT-nek a pdfeket és a kérdéseket, majd javítottam, de azért persze saját felelősségre NOTE: Privacy diákban nincsenek control kérdések, az az anyag így nem szerepel Economics of Security ▸ What is the attacker’s advantage?",
+    "keywords": [
+      "NOTE",
+      "ATM",
+      "USA",
+      "ISO"
+    ]
+  },
+  {
+    "id": "q30",
+    "type": "mcq",
+    "section": "ZH utáni kontroll kérdések (2/5)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) USD fogalma?",
+    "options": [
+      "A(z) ZH utáni kontroll kérdések (2/5) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "ták a szoftver valódi biztonságát információs aszimmetria , az eset gyorsan ex ante szabályozáshoz EO 14028 vezetett.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q31",
+    "type": "mcq",
+    "section": "ZH utáni kontroll kérdések (3/5)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) HDD fogalma?",
+    "options": [
+      "A(z) ZH utáni kontroll kérdések (3/5) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "fferential backup – utolsó teljes mentés óta történt változások Incremental backup – az előző mentés óta történt változások Encrypted / compressed backup – biztonságosabb, kisebb helyigény Golden image – standardizált, gyári visszaállítási pont ▪ What is the 3-2-1 rule in backuping?",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q32",
+    "type": "mcq",
+    "section": "ZH utáni kontroll kérdések (4/5)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) CAM fogalma?",
+    "options": [
+      "A(z) ZH utáni kontroll kérdések (4/5) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "elációban, hogy egyedi logokból támadási minták legyenek felismerhetők, riasztás, elemzés, audit, riportolás terén, támogatják az incidensválasz és forensic folyamatokat.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q33",
+    "type": "mcq",
+    "section": "ZH utáni kontroll kérdések (5/5)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) TTL fogalma?",
+    "options": [
+      "A(z) ZH utáni kontroll kérdések (5/5) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Time‑To‑Live másodpercben : megadja, mennyi ideig cache‑elheti a resolver a rekordot lejárás frissítés előtt, általában 1-2 nap.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q34",
+    "type": "multi",
+    "section": "2025 ZH (1/4)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) 2025 ZH (1/4) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "RSA",
+      "CVE",
+      "DEP",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q35",
+    "type": "written",
+    "section": "2025 ZH (1/4)",
+    "difficulty": "medium",
+    "question": "Fogalmazd meg roviden, miert fontos a(z) 2025 ZH (1/4) az IT biztonsagban!",
+    "options": [],
+    "explanation": "",
+    "idealAnswer": "Mely állítások igazak az evasion támadásokra gépi modellek ellen?",
+    "keywords": [
+      "RSA",
+      "CVE",
+      "DEP",
+      "MMU"
+    ]
+  },
+  {
+    "id": "q36",
+    "type": "mcq",
+    "section": "2025 ZH (2/4)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) KDF fogalma?",
+    "options": [
+      "A(z) 2025 ZH (2/4) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "ódelemzésből származó kódfüggőségek vagy hívási gráfok 3.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q37",
+    "type": "multi",
+    "section": "2025 ZH (2/4)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) 2025 ZH (2/4) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "KDF",
+      "NEM",
+      "IDS",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q38",
+    "type": "mcq",
+    "section": "2025 ZH (3/4)",
+    "difficulty": "easy",
+    "question": "Mihez kapcsolodik leginkabb a(z) SDL fogalma?",
+    "options": [
+      "A(z) 2025 ZH (3/4) temakor egyik fontos fogalmahoz",
+      "Kizarolag felhasznaloi felulet tervezeshez",
+      "Csak adatbazis indexeleshez",
+      "Nem kapcsolodik informaciobiztonsaghoz"
+    ],
+    "correct": 0,
+    "explanation": "Előnye, hogy a kezdő fejlesztők is gyorsan és hatékonyan bevonhatók a folyamatba.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q39",
+    "type": "multi",
+    "section": "2025 ZH (3/4)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) 2025 ZH (3/4) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "SDL",
+      "AES",
+      "RSA",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  },
+  {
+    "id": "q40",
+    "type": "multi",
+    "section": "2025 ZH (4/4)",
+    "difficulty": "medium",
+    "question": "Mely elemek tartozhatnak a(z) 2025 ZH (4/4) tanulasakor ellenorizendo pontok koze?",
+    "options": [
+      "XSS",
+      "CIA",
+      "Milyen tulajdonságok igazak",
+      "A biztonsagi kovetelmenyek figyelmen kivul hagyasa"
+    ],
+    "correctMultiple": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "A helyes valaszok a forrasanyagbol kinyert kulcsfogalmakra es kapcsolodo biztonsagi szempontokra epulnek.",
+    "idealAnswer": "",
+    "keywords": []
+  }
+]

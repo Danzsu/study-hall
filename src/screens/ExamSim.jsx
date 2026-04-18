@@ -265,7 +265,7 @@ function Configurator({ rawQuestions, onStart, t }) {
         <div style={{ background: C.purpleBg, border: `1px solid ${C.purple}35`, borderRadius: 10, padding: '11px 14px', marginBottom: 24, display: 'flex', gap: 10 }}>
           <Sparkles size={14} style={{ color: C.purple, flexShrink: 0, marginTop: 1 }}/>
           <p style={{ fontSize: 12, color: t.textSub, lineHeight: 1.6 }}>
-            Written answers are keyword-evaluated after submission. You'll see feedback once the exam ends.
+            Written answers are keyword-evaluated after submission. You&apos;ll see feedback once the exam ends.
           </p>
         </div>
       )}

@@ -1,0 +1,454 @@
+---
+title: "00 IntroITsec BME 2026 hu (1/9)"
+lesson: 1
+section: "00 IntroITsec BME 2026 hu (1/9)"
+sources:
+  - type: "pdf"
+    title: "It_biztonsag - 00 IntroITsec BME 2026 hu (1/9)"
+    year: 2025
+---
+
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban, hiszen a technológia fejlődésével együtt nő a **kiberfenyegetések** száma is. Az IT biztonság célja, hogy megvédje az **informatikai rendszereket** és az azokban tárolt **információkat** a jogosulatlan hozzáféréstől, módosítástól és megsemmisítéstől.
+
+## Bevezetés az IT biztonságba
+Az IT biztonság alapfogalmait és összefüggéseit meg kell érteni ahhoz, hogy hatékonyan tudjunk védekezni a kiberfenyegetések ellen. A **biztonsági mechanizmusok** bevezetése és a **sebezhetőségek** megszüntetése kulcsfontosságú a rendszer biztonságának garantálásában.
+
+### IT biztonsági alapfogalmak
+- **Hozzáférés-ellenőrzés** (access control): a rendszer erőforrásaihoz és szolgáltatásaihoz való hozzáférések ellenőrzése
+- **Hitelesítés** (authentication): egy entitás állítólagos identitásának ellenőrzése
+- **Számonkérhetőség** (accountability): a rendszer erőforrásaihoz és szolgáltatásaihoz való hozzáférések naplózása
+- **Rendelkezésre állás** (availability) és **integritás** (integrity): a rendszer erőforrásainak és szolgáltatásainak rendelkezésre állása és jogosulatlan módosításának megakadályozása
+
+> Az IT biztonság nem csupán a technológiai megoldásokról szól, hanem az emberi tényezőkről és a folyamatos felügyeletéről is.
+
+## Információbiztonsági követelmények
+A **bizalmasság** (confidentiality), **integritás** (integrity) és **rendelkezésre állás** (availability) a három alapvető információbiztonsági követelmény. Ezeket a követelményeket a **CIA triád** néven is ismerjük.
+
+## Az IT biztonság általános célja
+Az IT biztonság általános célja a rendszer folyamatos **nem-kompromittált állapotban** tartása a **támadások megelőzésével**, **észlelésével** és **válaszlépések megtételével**.
+
+```markdown
+# IT biztonsági alapfogalmak
+- Hozzáférés-ellenőrzés
+- Hitelesítés
+- Számonkérhetőség
+- Rendelkezésre állás és integritás
+```
+
+$$
+\text{IT biztonság} = \text{Hozzáférés-ellenőrzés} + \text{Hitelesítés} + \text{Számonkérhetőség} + \text{Rendelkezésre állás} + \text{Integritás}
+$$
+
+Az IT biztonság fontosságát nem szabad alábecsülni, hiszen a **kiberfenyegetések** folyamatosan nőnek és egyre változatosabbak. A megfelelő **biztonsági mechanizmusok** bevezetése és a **sebezhetőségek** megszüntetése kulcsfontosságú a rendszer biztonságának garantálásában.
+Az **IT biztonság** általános célja a rendszer folyamatos, nem kompromittált állapotban tartása. Ez a **prevention**, **detection and reaction**, valamint a **biztonsági incidensek hatékony kezelése** révén érhető el.
+
+## Bevezetés az IT biztonságba
+
+Az IT biztonság általános célja a rendszer folyamatos nem-kompromittált állapotban tartása. Ennek érdekében fontos a **támadások megelőzése**, a **támadások gyors észlelése és válaszlépések megtétele**, valamint a **biztonsági incidensek hatékony kezelése**.
+
+### Támadások
+
+A **támadás** az a folyamat vagy tevékenység, mely során a támadó kompromittálja a támadott rendszert, annak **sebezhetőségeit** kihasználva. A támadás általában egy **komplex folyamat** vagy **tevékenység**, amelynek ismerete elengedhetetlen a **támadás megakadályozását** célzó **biztonsági mechanizmusok** tervezéséhez.
+
+> A támadások megelőzése és észlelése érdekében fontos, hogy ismerjük a **támadó** **jellemzőit**, mint például a **motivációt**, a **képességeket** és az **erőforrásokat**.
+
+## Támadó jellemzői
+
+A támadó **motivációja** lehet gazdasági, társadalmi vagy politikai. Az **egyéni támadók** motivációja inkább személyes jellegű, mint például a **hírnév** vagy **státusz** elérése, vagy a **bosszú**.
+
+- **Motiváció**: gazdasági, társadalmi, politikai
+- **Képességek**:
+  - Információszerző képesség
+  - Műszaki tudás, szakértelem
+  - Egyéb (megtévesztési képességek, hozzáférési lehetőségek)
+- **Erőforrások**:
+  - Pénz
+  - Egyéb (idő, számítási kapacitás, humán erőforrások)
+
+### Információszerző képesség
+
+A **támadás** sikere nagy mértékben függ attól, hogy mennyi és milyen jellegű **információval** rendelkezik a támadó a megtámadott rendszerről. Az **információszerzés** megelőzheti magát a támadást, és folytatódhat a támadás alatt is.
+
+```markdown
+# Információszerző képesség
+- A rendszer általános felépítése
+- Elérhető szolgáltatásai
+- Hardver és szoftver komponensei
+- Konfigurációja
+- Hálózati topológia
+- Alkalmazott protokollok
+```
+
+## Műszaki tudás, szakértelem
+
+A **támadó** **szakértői tudása** segítségével transzformálja a megszerzett **információt** sikeres **támadássá**. A **műszaki tudás**, **szakértelem** az **információszerzést** is segítheti.
+
+1. Alapvető műszaki és informatikai ismeretek
+2. Ismert **sérülékenységek** és **támadási módszerek**, **eszközök** ismerete
+3. Új **sérülékenységek** felfedezésének, új **támadási módszerek** és **eszközök** kifejlesztésének képessége
+
+$$\text{Műszaki tudás} = \text{információszerzés} + \text{támadási módszerek}$$
+
+## Erőforrások
+
+A **pénzügyi erőforrások** szabadon konvertálhatók **információvá**, **tudássá**, **szakértelemmé**, **emberi erőforrássá**. A **pénz** fontos **erőforrás** a **támadás** szempontjából, de nem az egyetlen.
+
+> A **támadás** megelőzése és észlelése érdekében fontos, hogy ismerjük a **támadó** **erőforrásait**, és hogy **hatékonyan** **kezeljük** a **biztonsági incidenseket**.
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban, hiszen az információk és adatok védelme alapvető a szervezetek és egyének számára. A jelenlegi társadalom egyre inkább **digitális**, ezért a biztonság garantálása elengedhetetlen.
+
+## Bevezetés az IT biztonságba
+Az **IT biztonság** három fő területre osztható:
+- **ismert sérülékenységek és támadási módszerek** ismerete
+- **új sérülékenységek felfedezésének** és **új támadási módszerek** kifejlesztésének képessége
+- **IT biztonsági szakértelem**
+
+## Erőforrások
+Az **erőforrások**, például a **pénz**, fontos szerepet játszanak az **IT biztonság** területén. A **pénzügyi erőforrások** szabadon konvertálhatók **információvá**, **tudássá**, **szakértelemmé** és **emberi erőforrássá**.
+
+> "A pénzügyi erőforrások szabadon konvertálhatók információvá, tudássá, szakértelemmé, emberi erőforrássá..."
+
+Példák az **erőforrások** felhasználására:
+- **Információszerző képesség** növelése:
+  - megvesztegetés
+  - zsarolás
+  - műszaki dokumentációk megvásárlása
+  - kifinomult megtévesztési módszerek (social engineering) támogatása
+- **Műszaki tudás, szakértelem** növelése:
+  - szakértők szerződtetése
+  - saját kompetenciák növelése képzéssel, tréninggel
+- **Speciális támadói képességek** növelése:
+  - zero-day sérülékenységeket kihasználó exploit-ok vásárlása
+  - fejlett kripto-analízis eszközök használata (kódfeltörés, hamisítás)
+  - nagy számítási kapacitás bérlése
+
+## Tipikus támadó profilok
+A **támadók** különböző **profilok** szerint osztályozhatók:
+- **állam által szponzorált támadó szervezet**
+- **kiberbűnözői szervezet**
+- **script kiddie**
+- **hacktivista csoport**
+- **"elégedetlen munkatárs"**
+
+### Állam által szponzorált támadó szervezet
+- **Motiváció**: politikai vagy gazdasági célok elérése
+- **Információgyűjtő képesség**: nagyon fejlett
+- **Műszaki tudás, szakértelem**: nagyon fejlett
+- **Erőforrások**: nagyon gazdag
+
+### Kiberbűnözői szervezet
+- **Motiváció**: gazdasági haszonszerzés
+- **Információgyűjtő képesség**: fejlett
+- **Műszaki tudás, szakértelem**: fejlett
+- **Erőforrások**: gazdag
+
+## Gyengeségek és sérülékenységek
+A **gyengeségek** és **sérülékenységek** a következő területeken fordulhatnak elő:
+- **Műszaki (logikai)**
+- **Fizikai**
+- **Üzemeltetési**
+- **Személyi**
+
+Például, a **műszaki gyengeségek** a következők:
+```python
+# Példa műszaki gyengeségekre
+műszaki_gyengeségek = [
+    "tervezési és implementációs hibák",
+    "interfészekben és protokollokban található hibák"
+]
+```
+A **fizikai gyengeségek** például:
+```python
+# Példa fizikai gyengeségekre
+fizikai_gyengeségek = [
+    "folyosón elhelyezett router",
+    "nem biztonságosan elhelyezett szerverek"
+]
+```
+Az **üzemeltetési gyengeségek** például:
+```python
+# Példa üzemeltetési gyengeségekre
+üzemeltetési_gyengeségek = [
+    "alapértelmezett jelszó megváltoztatása nincs kikényszerítve",
+    "szakértelem hiánya"
+]
+```
+A **személyi gyengeségek** például:
+```python
+# Példa személyi gyengeségekre
+személyi_gyengeségek = [
+    "biztonságtudatosság hiánya",
+    "lefizethetőség, megzsarolhatóság"
+]
+```
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban. Ahogy a technológia fejlődik, új **sebezhetőségek** és **fenyegetések** jelennek meg. Ebben a jegyzetben az **IT biztonság** alapjait fogjuk tanulmányozni.
+
+## Bevezetés az IT biztonságba
+Az **IT biztonság** a számítógépes rendszerek és hálózatok védelmét foglalja magában a nem kívánt hozzáféréstől, adatvesztéstől és egyéb **fenyegetésektől**. A biztonság garantálja, hogy a rendszer és az adatok **integritása**, **bizalmassága** és **rendelkezésre állása** megmaradjon.
+
+### Üzemeltetési és személyi gyengeségek
+- Üzemeltetési gyengeségek: **alapértelmezett jelszó** megváltoztatása nincs kikényszerítve
+- Személyi gyengeségek: **biztonságtudatosság** hiánya, **szakértelem** hiánya, **lefizethetőség**, **megzsarolhatóság**
+
+> Az **IT biztonság** egy folyamatos folyamat, amelyben az új **sebezhetőségek** és **fenyegetések** folyamatosan monitorozásra és kezelésre szorulnak.
+
+## Gyengeségek és fenyegetések
+A **gyengeségek** és **fenyegetések** osztályozhatók:
+- **Üzemeltetési gyengeségek**: a rendszer üzemeltetése során alkalmazott eljárásokban
+- **Személyi gyengeségek**: az üzemeltető személyzetet, alkalmazottakat, szerződéses partnereket érintő gyengeségek
+
+### CWE és CVE
+- **CWE (Common Weakness Enumeration)**: ismert szoftver és hardver gyengeségek átfogó gyűjteménye
+- **CVE (Common Vulnerabilities and Exposures)**: a gyengeségek és fenyegetések nyilvános adatbázisa
+
+```bash
+# Példa a CWE és CVE használatára
+cwe_url = "https://cwe.mitre.org/"
+cve_url = "https://www.cve.org/"
+```
+
+## Zero-day sérülékenységek
+A **zero-day sérülékenységek** olyan felfedezett, de be nem jelentett és nyilvánosságra nem hozott **sebezhetőségek**, amelyeket csak a támadók ismernek. Ezek a **sérülékenységek** veszélyesek, mivel a potenciális áldozatok nem tudnak felkészülni az ezeket kihasználó **támadásokra**.
+
+### Célzott támadások
+A **célzott támadások** olyan **támadások**, amelyek speciális, testreszabott **eszközöket** és **behatolási technikákat** használnak. Ezek a **támadások** rejtőzködőek és hosszan tartóak, és általában jól finanszírozott és jól felszerelt **szervezetek** (APT-k) által végrehajtottak.
+
+> A **célzott támadások** az **IT biztonság** egyik legnagyobb kihívása, mivel azok a **támadók** jól szervezettek és jól felszereltek.
+
+## Példa: Stuxnet
+A **Stuxnet** egy **célzott támadás** volt, amely az iráni **urániumdúsító üzem** ellen irányult. A **Stuxnet** egy **kifinomult malware** volt, amely több **0-day exploit**-ot használt, és **hamis digitális aláírás**-t használt a **PLC**-k **átprogramozásához**.
+
+```c
+// Példa a Stuxnet kódjára
+#include <stdio.h>
+#include <stdint.h>
+
+int main() {
+    // PLC átprogramozása
+    uint16_t plc_address = 0x1234;
+    uint16_t plc_value = 0x5678;
+    // ...
+    return 0;
+}
+```
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban, hiszen a technológia fejlődésével együtt nő az **információvédelem** iránti igény. A **biztonsági mechanizmusok** célja, hogy megvédjék az **információs rendszereket** és az **adatokat** a **fenyegetésekkel** szemben.
+
+## Bevezetés az IT biztonságba
+Az IT biztonság alapja, hogy **azonosítsuk a fenyegetéseket**, **becsüljük meg a kockázatokat** és **vezessük be a szükséges biztonsági mechanizmusokat**. A **kockázat alapú megközelítés** azt jelenti, hogy **priorizáljuk a fenyegetéseket** és **koncentráljunk a legnagyobb kockázatúakra**.
+
+### Biztonsági mechanizmusok fajtái
+- **Műszaki (logikai)**: a hosztokon és a hálózatokban használt biztonsági mechanizmusok
+- **Fizikai**: fizikai védelmet biztosító mechanizmusok
+- **Üzemeltetési**: a rendszer üzemeltetésével és a személyzet menedzsmentjével kapcsolatos szabályzatok és eljárásrendek
+- **Személyi**: a személyzet biztonságtudatosságának, megbízhatóságának, lojalitásának növelését célzó mechanizmusok
+
+> Az IT biztonság egy folyamatos **kockázat-menedzsment** probléma, amelynek célja, hogy **minimalizáljuk a kockázatokat** és **megvédjük az információs rendszereket**.
+
+### Kockázat-menedzsment kérdései
+1. Mik az **értékeink (assets)**?
+2. Milyen **potenciális támadások** érhetik értékeinket?
+3. Kik azok a **valószínűsíthető támadók**, akikkel szembe kell néznünk?
+4. Mekkora a **várható veszteség**, ha értékeinket sikeresen megtámadják?
+5. Mik a **rendszer ismert és potenciális sebezhetőségei**?
+
+```markdown
+Kockázat-becslés példa:
+| Loss | Attacks on assets | Attacker | Likelihood | Risk |
+| --- | --- | --- | --- | --- |
+| Az ügyfél-adatbázis ellen | DoS támadást hajtanak végre | Script kiddie | Very low | Low |
+| ... | ... | ... | ... | ... |
+```
+
+A **kockázat-becslés** során figyelembe kell venni a **támadó motivációját**, **szándékát** és **lehetőségeit**. A **veszteség- és valószínűség-becslés** segít abban, hogy **kockázat-számítási mátrixot** hozzunk létre.
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban, hiszen a technológia fejlődésével együtt nő a **kiberfenyegetések** száma is. A biztonság garantálása érdekében fontos, hogy megértsük a **veszteség- és valószínűség-becslést**, valamint a **kockázat-számítási mátrixot**.
+
+## Szándékos vs. véletlen fenyegetések
+A **szándékos támadások** és a **véletlen hibák** képezik a két fő csoportot, amelyek az IT rendszerek biztonságát veszélyeztetik. Míg a szándékos támadások mögött egy **támadó** szándéka áll, addig a véletlen hibák **természeti katasztrófák** vagy **szerkezeti hibák** miatt következhetnek be.
+
+> "A biztonság olyan, mint egy lánc: a leggyengébb láncszemnél szakad el."
+
+## A "leggyengébb láncszem" probléma
+Az **informatikai rendszerek** összetettek és sok **komponensből** állnak, amelyek mindegyike potenciális **gyenge pontot** képezhet. A **biztonsági mérnökök** feladata, hogy minden komponenst jól védjenek, míg a **támadóknak** elég egyetlen **gyenge komponenst** találniuk, amelyen keresztül be tudnak hatolni.
+
+## Biztonság vs. más tervezési kritériumok
+A **biztonsági mechanizmusok** szinte mindig növelik a **költségeket** és **csökkentik a teljesítményt**. Emellett a **felhasználók** több **feature-t** és **funkciót** akarnak, amelyek növelik a **komplexitást**, ami viszont a **biztonság** legnagyobb ellensége.
+
+## Etikai kérdések az IT biztonságban
+Az **etikai kérdések** az IT biztonságban fontos szerepet játszanak. A **szándékos kibertámadások** végrehajtása és a **támadók** közvetlen támogatása egyértelműen **etikátlan**. Azonban vannak **kérdéses területek**, mint például az **"etikus" hackelés** vagy a **sebezhetőség információk nyilvánosságra hozása**, amelyekről nem mindig könnyű egyértelműen dönteni.
+
+```python
+# Példa kód a biztonsági mechanizmusokra
+import hashlib
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+password = "jelszo"
+hashed_password = hash_password(password)
+print(hashed_password)
+```
+
+$$
+\text{Kockázat} = \text{Valószínűség} \times \text{Impact}
+$$
+
+- **Valószínűség**: A fenyegetés megvalósulásának valószínűsége
+- **Impact**: A fenyegetés hatása az IT rendszerre
+
+A kockázat-számítási mátrix segít a **kockázatok** azonosításában és **prioritizálásában**, hogy a legfontosabb **biztonsági mechanizmusokat** ki lehessen alakítani.
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban. Ahogy egyre több információ kerül az internetre, és a technológia fejlődése miatt egyre több veszély leselkedik az adatokra és a rendszerekre. Ez a jegyzet az **IT biztonság** alapjait tárgyalja, beleértve a **szürke zóna** fogalmát és a **kérdéses területeket**.
+
+## Bevezetés az IT biztonságba
+
+Az **IT biztonság** olyan terület, amely a számítógépes rendszerek és hálózatok védelmét foglalja magában. A **szürke zóna** olyan terület, ahol a **jogszabályok** és a **etikai szabályok** nem egyértelműek. A **kérdéses területek** közé tartozik az **"etikus" hackelés**, a **sebezhetőség információk nyilvánosságra hozása**, a **programok, protokollok visszafejtése**, a **"jószándékú" vírus, féreg, trójai**, a **C&C milking**, az **állami szervezetek kiberműveleteibe való beavatkozás** és a **malware minták megosztása "kutatási" célokra**.
+
+### Etikus hackelés
+
+Az **etikus hackelés** olyan tevékenység, amelynek célja a támadók előtt felfedezni az ismeretlen **sebezhetőségeket**. Ez a tevékenység mindig **szerződés** alapján történik, amely meghatározza a **hatókört** és a **feltételeket**. Az **etikus hackelés** nem azonos a **hacker tevékenységgel**, amely **szerződés nélkül** történik.
+
+> Az **etikus hackelés** olyan tevékenység, amelynek célja a támadók előtt felfedezni az ismeretlen **sebezhetőségeket**, és ezzel segíteni a **szervezeteknek** a **biztonságuk** javításában.
+
+### Sebezhetőség információk nyilvánosságra hozása
+
+A **sebezhetőség információk nyilvánosságra hozása** olyan tevékenység, amelynek célja a **sebezhetőségek** felfedezése és a **nyilvánosságra hozatala**. Ez a tevékenység **felelőségteljes** módon történik, azaz a **sebezhetőségeket** általában csak **felfedezésük** után **bizonyos idő** elteltével **hozzák nyilvánosságra**.
+
+```python
+# Példa a sebezhetőség információk nyilvánosságra hozatalára
+def disclose_vulnerability(vulnerability):
+    # Felfedezés dátuma
+    discovery_date = datetime.now()
+    # Nyilvánosságra hozatal dátuma
+    disclosure_date = discovery_date + timedelta(days=30)
+    # Nyilvánosságra hozatal
+    print(f"Sebezhetőség nyilvánosságra hozatala: {vulnerability}")
+```
+
+### Jószándékú vírus, féreg, trójai
+
+A **"jószándékú" vírus, féreg, trójai** olyan **malware**, amelynek célja a **rendszerek** védelme. Példa erre a **Hajime**, amely egy **beágyazott IoT-eszközöket** megfertőző **kártevő szoftver**, amely **nem tartalmaz rosszindulatú funkciót**.
+
+> A **"jószándékú" vírus, féreg, trójai** olyan **malware**, amelynek célja a **rendszerek** védelme, de **kérdéses**, hogy **erkölcsileg igazolható**-e az ilyen tevékenység.
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban, hiszen a technológia fejlődésével együtt nő a **kiberfenyegetések** száma is. A biztonságos információs rendszerek kialakítása és működtetése érdekében fontos, hogy az **informatikus szakemberek** átгondolják munkájuk **szélesebb körű hatásait**.
+
+## Bevezetés az IT biztonságba
+Az **IT biztonság** olyan **problémákkal** foglalkozik, mint a **támadások**, **sérülékenységek** és **kockázatok**. A **támadók** lehetnek **szándékos** vagy **véletlen** szereplők, akik **információkat** szereznek meg vagy **rendszerhiba** okoznak. A **kockázat-menedzsment** fontos része az **IT biztonságnak**, amelynek célja a **fenyegetések** azonosítása, **kockázat-becslés** és **kockázat-kezelés**.
+
+### Fontos fogalmak
+- **Bizalmasság**: az információk **titkossága**
+- **Integritás**: az információk **helyessége** és **teljessége**
+- **Rendelkezésre állás**: az információk **hozzáférhetősége**
+- **Hitelesítés**: az **azonosítás** és **jogosultság** ellenőrzése
+- **Hozzáférés-vezérlés**: az **engedélyezés** és **korlátozás** szabályozása
+- **Számonkérhetőség**: a **felelősség** és **nyomonkövethetőség** biztosítása
+
+> Az **IT biztonság** egy folyamatos **folyamat**, amelynek célja a **biztonságos** és **megbízható** információs rendszerek működtetése.
+
+## Támadók és sérülékenységek
+A **támadók** **különböző típusai** léteznek, mint például a **script kiddie**, **hacktivista csoport**, **kiberbűnözői csoport** és **állami titkos szolgálat**. A **sérülékenységek** **különböző típusai** is léteznek, mint például a **technikai sebezhetőségek** és **humán sebezhetőségek**.
+
+```python
+# Példa kód a hitelesítéshez
+import hashlib
+
+def hitelesites(felhasznalonev, jelszo):
+    # Hash-elés a jelszóhoz
+    jelszo_hash = hashlib.sha256(jelszo.encode()).hexdigest()
+    # Hitelesítés
+    if felhasznalonev == "admin" and jelszo_hash == "123456":
+        return True
+    else:
+        return False
+```
+
+## Kockázat-menedzsment
+A **kockázat-menedzsment** fontos része az **IT biztonságnak**, amelynek célja a **fenyegetések** azonosítása, **kockázat-becslés** és **kockázat-kezelés**. A **kockázat-becslés** során **különböző tényezőket** kell figyelembe venni, mint például a **fenyegetés valószínűsége** és **következménye**.
+
+$$
+P(A) = \frac{\text{Sikeres támadások száma}}{\text{Összes támadás száma}}
+$$
+
+A **kockázat-kezelés** során **különböző stratégiákat** kell alkalmazni, mint például a **megelőzés**, **észlelés** és **reakció**.
+Az **IT biztonság** egyre fontosabb szerepet játszik a modern társadalomban, hiszen a technológiai fejlődésnek köszönhetően egyre több információ kerül online térbe. Ennek megfelelően a **biztonsági kihívások** is növekednek. Ebben a fejezetben bepillantunk az IT biztonság alapjaiba.
+
+## Bevezetés az IT biztonságba
+Az IT biztonság célja a **sérülékenységek** azonosítása és a **biztonsági incidensek** megelőzése. Ehhez szükséges a **technikai** és **humán** tényezők figyelembevitele.
+
+### Sérülékenységek és ellenintézkedések
+- Milyen típusú **gyengeségek** léteznek az IT rendszerekben?
+- Mi az oka a **technikai sebezhetőségek** létezésének?
+- Hogyan működik a **sebezhetőségi információk felelősségteljes közzététele**?
+
+> "A biztonság nem egy termék, hanem egy folyamat. Ahhoz, hogy valami biztonságos legyen, folyamatosan figyelnünk kell a fenyegetéseket és a sérülékenységeket."
+
+## Célzott támadások és Stuxnet
+- Mik a **célzott támadás** jellemzői?
+- Mi az a **Stuxnet**, és miért fontos?
+
+### Zero-day sebezhetőségek
+- Mik azok a **zero-day sebezhetőségek**?
+- Miért **veszélyesek** a zero-day sebezhetőségek?
+
+## Etika az informatikai biztonságban
+- Miért **fontos az etika** az informatikai biztonságban?
+- Soroljon fel néhány példát az informatikai biztonságban felmerülő **potenciális etikai problémákra**!
+
+```python
+# Példa kód a sebezhetőségek azonosítására
+def azonositas(sebezhetosegek):
+    for seb in sebezhetosegek:
+        print(f"Sérülékenység: {seb['nev']}, Leírás: {seb['leiras']}")
+```
+
+$$
+\text{Biztonság} = \frac{\text{Védelem}}{\text{Fenyegetés}}
+$$
+
+Ahogy láthatjuk, az IT biztonság egy összetett téma, amelyben a **technikai** és **humán** tényezők egyaránt fontos szerepet játszanak. A **sérülékenységek** azonosítása és a **biztonsági incidensek** megelőzése érdekében folyamatosan figyelnünk kell a fenyegetéseket és a sérülékenységeket.
+
+---
+
+## 🧠 Active Recall
+
+<details>
+<summary>Önellenőrző kérdések (kattints a kibontáshoz)</summary>
+
+### Kérdés 1
+**Mi az IT biztonság célja?**
+
+<details>
+<summary>Válasz</summary>
+Az IT biztonság célja, hogy megvédje az informatikai rendszereket és az azokban tárolt információkat a jogosulatlan hozzáféréstől, módosítástól és megsemmisítéstől.
+</details>
+
+### Kérdés 2
+**Mik az alapvető információbiztonsági követelmények?**
+
+<details>
+<summary>Válasz</summary>
+A bizalmasság (confidentiality), integritás (integrity) és rendelkezésre állás (availability), amelyeket a CIA triád néven is ismerjük.
+</details>
+
+### Kérdés 3
+**Miért fontos a hozzáférés-ellenőrzés az IT biztonságban?**
+
+<details>
+<summary>Válasz</summary>
+A hozzáférés-ellenőrzés fontos, mert ellenőrzi a rendszer erőforrásaihoz és szolgáltatásaihoz való hozzáféréseket, megakadályozva a jogosulatlan hozzáférést.
+</details>
+
+### Kérdés 4
+**Hogyan érhető el az IT biztonság általános célja?**
+
+<details>
+<summary>Válasz</summary>
+Az IT biztonság általános célja a támadások megelőzésével, észlelésével és válaszlépések megtételével érhető el.
+</details>
+
+### Kérdés 5
+**Mi a számonkérhetőség szerepe az IT biztonságban?**
+
+<details>
+<summary>Válasz</summary>
+A számonkérhetőség a rendszer erőforrásaihoz és szolgáltatásaihoz való hozzáférések naplózását jelenti, ami segít a felelősség megállapításában.
+</details>
+
+</details>

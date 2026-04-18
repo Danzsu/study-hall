@@ -230,7 +230,7 @@ export default function Pomodoro() {
               {totalRounds} rounds · {focusMins * totalRounds} minutes of focus
             </p>
             <p style={{ color: t.textMuted, fontSize: 13, marginBottom: 36 }}>
-              That's {focusMins * totalRounds} minutes you can't un-learn.
+              That&apos;s {focusMins * totalRounds} minutes you can&apos;t un-learn.
             </p>
             <button onClick={doReset} style={{ background: C.accent, color: '#fff', border: 'none', borderRadius: 12, padding: '13px 32px', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", display: 'inline-flex', alignItems: 'center', gap: 8 }}
               onMouseEnter={e => e.currentTarget.style.background = C.accentHov}

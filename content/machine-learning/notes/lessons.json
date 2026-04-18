@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "01-ml-problem-framing",
+    "title": "01-ml-problem-framing",
+    "section": "General",
+    "lesson": 1,
+    "time": "10 min",
+    "sources": [],
+    "activeRecall": []
+  },
+  {
+    "slug": "02-solution-architecture",
+    "title": "02-solution-architecture",
+    "section": "General",
+    "lesson": 2,
+    "time": "10 min",
+    "sources": [],
+    "activeRecall": []
+  }
+]

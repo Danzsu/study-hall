@@ -1,0 +1,3330 @@
+[
+  {
+    "id": "g1",
+    "term": "Az IT biztonság",
+    "definition": "A(z) Bevezetés az IT biztonságba reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az IT biztonságba",
+    "section": "Bevezetés az IT biztonságba",
+    "aliases": []
+  },
+  {
+    "id": "g2",
+    "term": "Hozzáférés-ellenőrzés access control",
+    "definition": "A(z) IT biztonsági alapfogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "IT biztonsági alapfogalmak",
+    "section": "IT biztonsági alapfogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g3",
+    "term": "Hitelesítés authentication",
+    "definition": "A(z) IT biztonsági alapfogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "IT biztonsági alapfogalmak",
+    "section": "IT biztonsági alapfogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g4",
+    "term": "Számonkérhetőség accountability",
+    "definition": "A(z) IT biztonsági alapfogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "IT biztonsági alapfogalmak",
+    "section": "IT biztonsági alapfogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g5",
+    "term": "Rendelkezésre állás availability",
+    "definition": "A(z) IT biztonsági alapfogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "IT biztonsági alapfogalmak",
+    "section": "IT biztonsági alapfogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g6",
+    "term": "CIA",
+    "definition": "A(z) Információbiztonsági követelmények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Információbiztonsági követelmények",
+    "section": "Információbiztonsági követelmények",
+    "aliases": []
+  },
+  {
+    "id": "g7",
+    "term": "Ezeket a követelményeket",
+    "definition": "A(z) Információbiztonsági követelmények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Információbiztonsági követelmények",
+    "section": "Információbiztonsági követelmények",
+    "aliases": []
+  },
+  {
+    "id": "g8",
+    "term": "CIA triád néven",
+    "definition": "A(z) Információbiztonsági követelmények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Információbiztonsági követelmények",
+    "section": "Információbiztonsági követelmények",
+    "aliases": []
+  },
+  {
+    "id": "g9",
+    "term": "IT biztonság",
+    "definition": "A(z) Az IT biztonság általános célja reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az IT biztonság általános célja",
+    "section": "Az IT biztonság általános célja",
+    "aliases": []
+  },
+  {
+    "id": "g10",
+    "term": "Hozzáférés-ellenőrzés",
+    "definition": "A(z) Az IT biztonság általános célja reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az IT biztonság általános célja",
+    "section": "Az IT biztonság általános célja",
+    "aliases": []
+  },
+  {
+    "id": "g11",
+    "term": "Hitelesítés",
+    "definition": "A(z) Az IT biztonság általános célja reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az IT biztonság általános célja",
+    "section": "Az IT biztonság általános célja",
+    "aliases": []
+  },
+  {
+    "id": "g12",
+    "term": "Számonkérhetőség",
+    "definition": "A(z) Az IT biztonság általános célja reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az IT biztonság általános célja",
+    "section": "Az IT biztonság általános célja",
+    "aliases": []
+  },
+  {
+    "id": "g13",
+    "term": "Ennek érdekében fontos",
+    "definition": "A(z) Bevezetés az IT biztonságba reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az IT biztonságba",
+    "section": "Bevezetés az IT biztonságba",
+    "aliases": []
+  },
+  {
+    "id": "g14",
+    "term": "Az egyéni támadók",
+    "definition": "A(z) Támadó jellemzői reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Támadó jellemzői",
+    "section": "Támadó jellemzői",
+    "aliases": []
+  },
+  {
+    "id": "g15",
+    "term": "Motiváció",
+    "definition": "A(z) Támadó jellemzői reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Támadó jellemzői",
+    "section": "Támadó jellemzői",
+    "aliases": []
+  },
+  {
+    "id": "g16",
+    "term": "Képességek",
+    "definition": "A(z) Támadó jellemzői reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Támadó jellemzői",
+    "section": "Támadó jellemzői",
+    "aliases": []
+  },
+  {
+    "id": "g17",
+    "term": "Információszerző képesség -",
+    "definition": "A(z) Támadó jellemzői reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Támadó jellemzői",
+    "section": "Támadó jellemzői",
+    "aliases": []
+  },
+  {
+    "id": "g18",
+    "term": "Műszaki tudás",
+    "definition": "A(z) Támadó jellemzői reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Támadó jellemzői",
+    "section": "Támadó jellemzői",
+    "aliases": []
+  },
+  {
+    "id": "g19",
+    "term": "Az információszerzés megelőzheti",
+    "definition": "A(z) Információszerző képesség reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Információszerző képesség",
+    "section": "Információszerző képesség",
+    "aliases": []
+  },
+  {
+    "id": "g20",
+    "term": "Alapvető műszaki és",
+    "definition": "A(z) Műszaki tudás, szakértelem reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Műszaki tudás, szakértelem",
+    "section": "Műszaki tudás, szakértelem",
+    "aliases": []
+  },
+  {
+    "id": "g21",
+    "term": "Ismert sérülékenységek és",
+    "definition": "A(z) Műszaki tudás, szakértelem reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Műszaki tudás, szakértelem",
+    "section": "Műszaki tudás, szakértelem",
+    "aliases": []
+  },
+  {
+    "id": "g22",
+    "term": "IT biztonsági szakértelem",
+    "definition": "A(z) Bevezetés az IT biztonságba reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az IT biztonságba",
+    "section": "Bevezetés az IT biztonságba",
+    "aliases": []
+  },
+  {
+    "id": "g23",
+    "term": "Az erőforrások",
+    "definition": "A(z) Erőforrások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Erőforrások",
+    "section": "Erőforrások",
+    "aliases": []
+  },
+  {
+    "id": "g24",
+    "term": "IT biztonság területén",
+    "definition": "A(z) Erőforrások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Erőforrások",
+    "section": "Erőforrások",
+    "aliases": []
+  },
+  {
+    "id": "g25",
+    "term": "Példák az erőforrások",
+    "definition": "A(z) Erőforrások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Erőforrások",
+    "section": "Erőforrások",
+    "aliases": []
+  },
+  {
+    "id": "g26",
+    "term": "Információszerző képesség növelése",
+    "definition": "A(z) Erőforrások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Erőforrások",
+    "section": "Erőforrások",
+    "aliases": []
+  },
+  {
+    "id": "g27",
+    "term": "Információgyűjtő képesség",
+    "definition": "A(z) Állam által szponzorált támadó szervezet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Állam által szponzorált támadó szervezet",
+    "section": "Állam által szponzorált támadó szervezet",
+    "aliases": []
+  },
+  {
+    "id": "g28",
+    "term": "Erőforrások",
+    "definition": "A(z) Állam által szponzorált támadó szervezet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Állam által szponzorált támadó szervezet",
+    "section": "Állam által szponzorált támadó szervezet",
+    "aliases": []
+  },
+  {
+    "id": "g29",
+    "term": "Műszaki logikai -",
+    "definition": "A(z) Gyengeségek és sérülékenységek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyengeségek és sérülékenységek",
+    "section": "Gyengeségek és sérülékenységek",
+    "aliases": []
+  },
+  {
+    "id": "g30",
+    "term": "Fizikai - Üzemeltetési",
+    "definition": "A(z) Gyengeségek és sérülékenységek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyengeségek és sérülékenységek",
+    "section": "Gyengeségek és sérülékenységek",
+    "aliases": []
+  },
+  {
+    "id": "g31",
+    "term": "Személyi Például",
+    "definition": "A(z) Gyengeségek és sérülékenységek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyengeségek és sérülékenységek",
+    "section": "Gyengeségek és sérülékenységek",
+    "aliases": []
+  },
+  {
+    "id": "g32",
+    "term": "Az üzemeltetési gyengeségek",
+    "definition": "A(z) Gyengeségek és sérülékenységek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyengeségek és sérülékenységek",
+    "section": "Gyengeségek és sérülékenységek",
+    "aliases": []
+  },
+  {
+    "id": "g33",
+    "term": "Személyi gyengeségek",
+    "definition": "A(z) Üzemeltetési és személyi gyengeségek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Üzemeltetési és személyi gyengeségek",
+    "section": "Üzemeltetési és személyi gyengeségek",
+    "aliases": []
+  },
+  {
+    "id": "g34",
+    "term": "CWE",
+    "definition": "A(z) CWE és CVE reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CWE és CVE",
+    "section": "CWE és CVE",
+    "aliases": []
+  },
+  {
+    "id": "g35",
+    "term": "CVE",
+    "definition": "A(z) CWE és CVE reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CWE és CVE",
+    "section": "CWE és CVE",
+    "aliases": []
+  },
+  {
+    "id": "g36",
+    "term": "CWE Common Weakness",
+    "definition": "A(z) CWE és CVE reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CWE és CVE",
+    "section": "CWE és CVE",
+    "aliases": []
+  },
+  {
+    "id": "g37",
+    "term": "Enumeration",
+    "definition": "A(z) CWE és CVE reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CWE és CVE",
+    "section": "CWE és CVE",
+    "aliases": []
+  },
+  {
+    "id": "g38",
+    "term": "CVE Common Vulnerabilities",
+    "definition": "A(z) CWE és CVE reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CWE és CVE",
+    "section": "CWE és CVE",
+    "aliases": []
+  },
+  {
+    "id": "g39",
+    "term": "Ezek a sérülékenységek",
+    "definition": "A(z) Zero-day sérülékenységek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Zero-day sérülékenységek",
+    "section": "Zero-day sérülékenységek",
+    "aliases": []
+  },
+  {
+    "id": "g40",
+    "term": "APT",
+    "definition": "A(z) Célzott támadások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások",
+    "section": "Célzott támadások",
+    "aliases": []
+  },
+  {
+    "id": "g41",
+    "term": "Ezek a támadások",
+    "definition": "A(z) Célzott támadások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások",
+    "section": "Célzott támadások",
+    "aliases": []
+  },
+  {
+    "id": "g42",
+    "term": "APT-k által végrehajtottak",
+    "definition": "A(z) Célzott támadások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások",
+    "section": "Célzott támadások",
+    "aliases": []
+  },
+  {
+    "id": "g43",
+    "term": "IT biztonság egyik",
+    "definition": "A(z) Célzott támadások reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások",
+    "section": "Célzott támadások",
+    "aliases": []
+  },
+  {
+    "id": "g44",
+    "term": "PLC",
+    "definition": "A(z) Példa: Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: Stuxnet",
+    "section": "Példa: Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g45",
+    "term": "Stuxnet egy célzott",
+    "definition": "A(z) Példa: Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: Stuxnet",
+    "section": "Példa: Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g46",
+    "term": "Stuxnet egy kifinomult",
+    "definition": "A(z) Példa: Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: Stuxnet",
+    "section": "Példa: Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g47",
+    "term": "PLC -k átprogramozásához",
+    "definition": "A(z) Példa: Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: Stuxnet",
+    "section": "Példa: Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g48",
+    "term": "Műszaki logikai",
+    "definition": "A(z) Biztonsági mechanizmusok fajtái reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Biztonsági mechanizmusok fajtái",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "aliases": []
+  },
+  {
+    "id": "g49",
+    "term": "Fizikai",
+    "definition": "A(z) Biztonsági mechanizmusok fajtái reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Biztonsági mechanizmusok fajtái",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "aliases": []
+  },
+  {
+    "id": "g50",
+    "term": "Személyi",
+    "definition": "A(z) Biztonsági mechanizmusok fajtái reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Biztonsági mechanizmusok fajtái",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "aliases": []
+  },
+  {
+    "id": "g51",
+    "term": "Mik az értékeink",
+    "definition": "A(z) Kockázat-menedzsment kérdései reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment kérdései",
+    "section": "Kockázat-menedzsment kérdései",
+    "aliases": []
+  },
+  {
+    "id": "g52",
+    "term": "Milyen potenciális támadások",
+    "definition": "A(z) Kockázat-menedzsment kérdései reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment kérdései",
+    "section": "Kockázat-menedzsment kérdései",
+    "aliases": []
+  },
+  {
+    "id": "g53",
+    "term": "Kik azok a",
+    "definition": "A(z) Kockázat-menedzsment kérdései reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment kérdései",
+    "section": "Kockázat-menedzsment kérdései",
+    "aliases": []
+  },
+  {
+    "id": "g54",
+    "term": "Mekkora a várható",
+    "definition": "A(z) Kockázat-menedzsment kérdései reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment kérdései",
+    "section": "Kockázat-menedzsment kérdései",
+    "aliases": []
+  },
+  {
+    "id": "g55",
+    "term": "Mik a rendszer",
+    "definition": "A(z) Kockázat-menedzsment kérdései reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment kérdései",
+    "section": "Kockázat-menedzsment kérdései",
+    "aliases": []
+  },
+  {
+    "id": "g56",
+    "term": "IT rendszerek biztonságát",
+    "definition": "A(z) Szándékos vs. véletlen fenyegetések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Szándékos vs. véletlen fenyegetések",
+    "section": "Szándékos vs. véletlen fenyegetések",
+    "aliases": []
+  },
+  {
+    "id": "g57",
+    "term": "Míg a szándékos",
+    "definition": "A(z) Szándékos vs. véletlen fenyegetések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Szándékos vs. véletlen fenyegetések",
+    "section": "Szándékos vs. véletlen fenyegetések",
+    "aliases": []
+  },
+  {
+    "id": "g58",
+    "term": "Az informatikai rendszerek",
+    "definition": "A(z) A \"leggyengébb láncszem\" probléma reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A \"leggyengébb láncszem\" probléma",
+    "section": "A \"leggyengébb láncszem\" probléma",
+    "aliases": []
+  },
+  {
+    "id": "g59",
+    "term": "Emellett a felhasználók",
+    "definition": "A(z) Biztonság vs. más tervezési kritériumok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Biztonság vs. más tervezési kritériumok",
+    "section": "Biztonság vs. más tervezési kritériumok",
+    "aliases": []
+  },
+  {
+    "id": "g60",
+    "term": "Az etikai kérdések",
+    "definition": "A(z) Etikai kérdések az IT biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikai kérdések az IT biztonságban",
+    "section": "Etikai kérdések az IT biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g61",
+    "term": "IT biztonságban fontos",
+    "definition": "A(z) Etikai kérdések az IT biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikai kérdések az IT biztonságban",
+    "section": "Etikai kérdések az IT biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g62",
+    "term": "Azonban vannak kérdéses",
+    "definition": "A(z) Etikai kérdések az IT biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikai kérdések az IT biztonságban",
+    "section": "Etikai kérdések az IT biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g63",
+    "term": "Kockázat",
+    "definition": "A(z) Etikai kérdések az IT biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikai kérdések az IT biztonságban",
+    "section": "Etikai kérdések az IT biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g64",
+    "term": "Valószínűség",
+    "definition": "A(z) Etikai kérdések az IT biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikai kérdések az IT biztonságban",
+    "section": "Etikai kérdések az IT biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g65",
+    "term": "Az etikus hackelés",
+    "definition": "A(z) Etikus hackelés reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikus hackelés",
+    "section": "Etikus hackelés",
+    "aliases": []
+  },
+  {
+    "id": "g66",
+    "term": "Ez a tevékenység",
+    "definition": "A(z) Etikus hackelés reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etikus hackelés",
+    "section": "Etikus hackelés",
+    "aliases": []
+  },
+  {
+    "id": "g67",
+    "term": "Példa erre a",
+    "definition": "A(z) Jószándékú vírus, féreg, trójai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Jószándékú vírus, féreg, trójai",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "aliases": []
+  },
+  {
+    "id": "g68",
+    "term": "Hajime",
+    "definition": "A(z) Jószándékú vírus, féreg, trójai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Jószándékú vírus, féreg, trójai",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "aliases": []
+  },
+  {
+    "id": "g69",
+    "term": "IoT-eszközöket megfertőző kártevő",
+    "definition": "A(z) Jószándékú vírus, féreg, trójai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Jószándékú vírus, féreg, trójai",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "aliases": []
+  },
+  {
+    "id": "g70",
+    "term": "IT biztonságnak",
+    "definition": "A(z) Bevezetés az IT biztonságba reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az IT biztonságba",
+    "section": "Bevezetés az IT biztonságba",
+    "aliases": []
+  },
+  {
+    "id": "g71",
+    "term": "Bizalmasság",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g72",
+    "term": "Integritás",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g73",
+    "term": "Rendelkezésre állás",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g74",
+    "term": "Hozzáférés-vezérlés",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g75",
+    "term": "Sikeres támadások száma",
+    "definition": "A(z) Kockázat-menedzsment reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment",
+    "section": "Kockázat-menedzsment",
+    "aliases": []
+  },
+  {
+    "id": "g76",
+    "term": "Ennek megfelelően a",
+    "definition": "A(z) Kockázat-menedzsment reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment",
+    "section": "Kockázat-menedzsment",
+    "aliases": []
+  },
+  {
+    "id": "g77",
+    "term": "Ebben a fejezetben",
+    "definition": "A(z) Kockázat-menedzsment reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kockázat-menedzsment",
+    "section": "Kockázat-menedzsment",
+    "aliases": []
+  },
+  {
+    "id": "g78",
+    "term": "Ehhez szükséges a",
+    "definition": "A(z) Bevezetés az IT biztonságba reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az IT biztonságba",
+    "section": "Bevezetés az IT biztonságba",
+    "aliases": []
+  },
+  {
+    "id": "g79",
+    "term": "Milyen típusú gyengeségek",
+    "definition": "A(z) Sérülékenységek és ellenintézkedések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Sérülékenységek és ellenintézkedések",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "aliases": []
+  },
+  {
+    "id": "g80",
+    "term": "IT rendszerekben",
+    "definition": "A(z) Sérülékenységek és ellenintézkedések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Sérülékenységek és ellenintézkedések",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "aliases": []
+  },
+  {
+    "id": "g81",
+    "term": "Mi az oka",
+    "definition": "A(z) Sérülékenységek és ellenintézkedések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Sérülékenységek és ellenintézkedések",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "aliases": []
+  },
+  {
+    "id": "g82",
+    "term": "Hogyan működik a",
+    "definition": "A(z) Sérülékenységek és ellenintézkedések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Sérülékenységek és ellenintézkedések",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "aliases": []
+  },
+  {
+    "id": "g83",
+    "term": "Ahhoz",
+    "definition": "A(z) Sérülékenységek és ellenintézkedések reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Sérülékenységek és ellenintézkedések",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "aliases": []
+  },
+  {
+    "id": "g84",
+    "term": "Mik a célzott",
+    "definition": "A(z) Célzott támadások és Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások és Stuxnet",
+    "section": "Célzott támadások és Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g85",
+    "term": "Mi az a",
+    "definition": "A(z) Célzott támadások és Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások és Stuxnet",
+    "section": "Célzott támadások és Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g86",
+    "term": "Stuxnet",
+    "definition": "A(z) Célzott támadások és Stuxnet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Célzott támadások és Stuxnet",
+    "section": "Célzott támadások és Stuxnet",
+    "aliases": []
+  },
+  {
+    "id": "g87",
+    "term": "Mik azok a",
+    "definition": "A(z) Zero-day sebezhetőségek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Zero-day sebezhetőségek",
+    "section": "Zero-day sebezhetőségek",
+    "aliases": []
+  },
+  {
+    "id": "g88",
+    "term": "Miért veszélyesek a",
+    "definition": "A(z) Zero-day sebezhetőségek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Zero-day sebezhetőségek",
+    "section": "Zero-day sebezhetőségek",
+    "aliases": []
+  },
+  {
+    "id": "g89",
+    "term": "Miért fontos az",
+    "definition": "A(z) Etika az informatikai biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etika az informatikai biztonságban",
+    "section": "Etika az informatikai biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g90",
+    "term": "Soroljon fel néhány",
+    "definition": "A(z) Etika az informatikai biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etika az informatikai biztonságban",
+    "section": "Etika az informatikai biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g91",
+    "term": "Biztonság",
+    "definition": "A(z) Etika az informatikai biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etika az informatikai biztonságban",
+    "section": "Etika az informatikai biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g92",
+    "term": "Védelem",
+    "definition": "A(z) Etika az informatikai biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etika az informatikai biztonságban",
+    "section": "Etika az informatikai biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g93",
+    "term": "Fenyegetés",
+    "definition": "A(z) Etika az informatikai biztonságban reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Etika az informatikai biztonságban",
+    "section": "Etika az informatikai biztonságban",
+    "aliases": []
+  },
+  {
+    "id": "g94",
+    "term": "Mi az IT",
+    "definition": "A(z) Kérdés 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 1",
+    "section": "Kérdés 1",
+    "aliases": []
+  },
+  {
+    "id": "g95",
+    "term": "Válasz Az IT",
+    "definition": "A(z) Kérdés 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 1",
+    "section": "Kérdés 1",
+    "aliases": []
+  },
+  {
+    "id": "g96",
+    "term": "Mik az alapvető",
+    "definition": "A(z) Kérdés 2 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 2",
+    "section": "Kérdés 2",
+    "aliases": []
+  },
+  {
+    "id": "g97",
+    "term": "Válasz A bizalmasság",
+    "definition": "A(z) Kérdés 2 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 2",
+    "section": "Kérdés 2",
+    "aliases": []
+  },
+  {
+    "id": "g98",
+    "term": "Miért fontos a",
+    "definition": "A(z) Kérdés 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 3",
+    "section": "Kérdés 3",
+    "aliases": []
+  },
+  {
+    "id": "g99",
+    "term": "IT biztonságban",
+    "definition": "A(z) Kérdés 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 3",
+    "section": "Kérdés 3",
+    "aliases": []
+  },
+  {
+    "id": "g100",
+    "term": "Válasz A hozzáférés-ellenőrzés",
+    "definition": "A(z) Kérdés 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 3",
+    "section": "Kérdés 3",
+    "aliases": []
+  },
+  {
+    "id": "g101",
+    "term": "Hogyan érhető el",
+    "definition": "A(z) Kérdés 4 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 4",
+    "section": "Kérdés 4",
+    "aliases": []
+  },
+  {
+    "id": "g102",
+    "term": "IT biztonság általános",
+    "definition": "A(z) Kérdés 4 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 4",
+    "section": "Kérdés 4",
+    "aliases": []
+  },
+  {
+    "id": "g103",
+    "term": "Mi a számonkérhetőség",
+    "definition": "A(z) Kérdés 5 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 5",
+    "section": "Kérdés 5",
+    "aliases": []
+  },
+  {
+    "id": "g104",
+    "term": "Válasz A számonkérhetőség",
+    "definition": "A(z) Kérdés 5 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 5",
+    "section": "Kérdés 5",
+    "aliases": []
+  },
+  {
+    "id": "g105",
+    "term": "API",
+    "definition": "A(z) Bevezetés a kriptográfiába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a kriptográfiába",
+    "section": "Bevezetés a kriptográfiába",
+    "aliases": []
+  },
+  {
+    "id": "g106",
+    "term": "JCE",
+    "definition": "A(z) Bevezetés a kriptográfiába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a kriptográfiába",
+    "section": "Bevezetés a kriptográfiába",
+    "aliases": []
+  },
+  {
+    "id": "g107",
+    "term": "API-kon keresztül",
+    "definition": "A(z) Bevezetés a kriptográfiába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a kriptográfiába",
+    "section": "Bevezetés a kriptográfiába",
+    "aliases": []
+  },
+  {
+    "id": "g108",
+    "term": "OpenSSL",
+    "definition": "A(z) Bevezetés a kriptográfiába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a kriptográfiába",
+    "section": "Bevezetés a kriptográfiába",
+    "aliases": []
+  },
+  {
+    "id": "g109",
+    "term": "NaCl",
+    "definition": "A(z) Bevezetés a kriptográfiába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a kriptográfiába",
+    "section": "Bevezetés a kriptográfiába",
+    "aliases": []
+  },
+  {
+    "id": "g110",
+    "term": "Ha jól van",
+    "definition": "A(z) A kriptográfia története reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia története",
+    "section": "A kriptográfia története",
+    "aliases": []
+  },
+  {
+    "id": "g111",
+    "term": "Szkütale",
+    "definition": "A(z) Történelmi rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Történelmi rejtjelezők",
+    "section": "Történelmi rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g112",
+    "term": "Caesar-rejtjelező",
+    "definition": "A(z) Történelmi rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Történelmi rejtjelezők",
+    "section": "Történelmi rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g113",
+    "term": "Caesar-rejtjelező egy egyszerű",
+    "definition": "A(z) Példa: Caesar-rejtjelező reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: Caesar-rejtjelező",
+    "section": "Példa: Caesar-rejtjelező",
+    "aliases": []
+  },
+  {
+    "id": "g114",
+    "term": "IT rendszerek biztonságában",
+    "definition": "A(z) Példa: Caesar-rejtjelező reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: Caesar-rejtjelező",
+    "section": "Példa: Caesar-rejtjelező",
+    "aliases": []
+  },
+  {
+    "id": "g115",
+    "term": "Caesar-rejtjelező egyik legismertebb",
+    "definition": "A(z) A kriptográfia történelme reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia történelme",
+    "section": "A kriptográfia történelme",
+    "aliases": []
+  },
+  {
+    "id": "g116",
+    "term": "Caesar-rejtjelező alapelve",
+    "definition": "A(z) A kriptográfia történelme reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia történelme",
+    "section": "A kriptográfia történelme",
+    "aliases": []
+  },
+  {
+    "id": "g117",
+    "term": "Kódolás",
+    "definition": "A(z) A kriptográfia alapfogalmai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia alapfogalmai",
+    "section": "A kriptográfia alapfogalmai",
+    "aliases": []
+  },
+  {
+    "id": "g118",
+    "term": "Dekódolás",
+    "definition": "A(z) A kriptográfia alapfogalmai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia alapfogalmai",
+    "section": "A kriptográfia alapfogalmai",
+    "aliases": []
+  },
+  {
+    "id": "g119",
+    "term": "Kulcs",
+    "definition": "A(z) A kriptográfia alapfogalmai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia alapfogalmai",
+    "section": "A kriptográfia alapfogalmai",
+    "aliases": []
+  },
+  {
+    "id": "g120",
+    "term": "Titkosított üzenet",
+    "definition": "A(z) A kriptográfia alapfogalmai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia alapfogalmai",
+    "section": "A kriptográfia alapfogalmai",
+    "aliases": []
+  },
+  {
+    "id": "g121",
+    "term": "Ahol",
+    "definition": "A(z) A kriptográfia jövője reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia jövője",
+    "section": "A kriptográfia jövője",
+    "aliases": []
+  },
+  {
+    "id": "g122",
+    "term": "Minél hosszabb a",
+    "definition": "A(z) A kriptográfia jövője reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia jövője",
+    "section": "A kriptográfia jövője",
+    "aliases": []
+  },
+  {
+    "id": "g123",
+    "term": "Az egyik legismertebb",
+    "definition": "A(z) A kriptográfia jövője reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia jövője",
+    "section": "A kriptográfia jövője",
+    "aliases": []
+  },
+  {
+    "id": "g124",
+    "term": "Enigma gép",
+    "definition": "A(z) A kriptográfia jövője reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia jövője",
+    "section": "A kriptográfia jövője",
+    "aliases": []
+  },
+  {
+    "id": "g125",
+    "term": "Ez a gép",
+    "definition": "A(z) A kriptográfia jövője reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia jövője",
+    "section": "A kriptográfia jövője",
+    "aliases": []
+  },
+  {
+    "id": "g126",
+    "term": "Az Enigma egy",
+    "definition": "A(z) Bevezetés az Enigmába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az Enigmába",
+    "section": "Bevezetés az Enigmába",
+    "aliases": []
+  },
+  {
+    "id": "g127",
+    "term": "Az Enigma gép",
+    "definition": "A(z) Bevezetés az Enigmába reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés az Enigmába",
+    "section": "Bevezetés az Enigmába",
+    "aliases": []
+  },
+  {
+    "id": "g128",
+    "term": "Billentyűzet",
+    "definition": "A(z) Az Enigma fő komponensei reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma fő komponensei",
+    "section": "Az Enigma fő komponensei",
+    "aliases": []
+  },
+  {
+    "id": "g129",
+    "term": "Lámpa-panel",
+    "definition": "A(z) Az Enigma fő komponensei reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma fő komponensei",
+    "section": "Az Enigma fő komponensei",
+    "aliases": []
+  },
+  {
+    "id": "g130",
+    "term": "Plugboard",
+    "definition": "A(z) Az Enigma fő komponensei reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma fő komponensei",
+    "section": "Az Enigma fő komponensei",
+    "aliases": []
+  },
+  {
+    "id": "g131",
+    "term": "Keverő egység rotorok",
+    "definition": "A(z) Az Enigma fő komponensei reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma fő komponensei",
+    "section": "Az Enigma fő komponensei",
+    "aliases": []
+  },
+  {
+    "id": "g132",
+    "term": "Az Enigma kulcstere",
+    "definition": "A(z) Az Enigma kulcstere reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma kulcstere",
+    "section": "Az Enigma kulcstere",
+    "aliases": []
+  },
+  {
+    "id": "g133",
+    "term": "GWCJZ",
+    "definition": "A(z) Dekódolás reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Dekódolás",
+    "section": "Dekódolás",
+    "aliases": []
+  },
+  {
+    "id": "g134",
+    "term": "YLFZL",
+    "definition": "A(z) Dekódolás reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Dekódolás",
+    "section": "Dekódolás",
+    "aliases": []
+  },
+  {
+    "id": "g135",
+    "term": "Próbáld ki",
+    "definition": "A(z) Dekódolás reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Dekódolás",
+    "section": "Dekódolás",
+    "aliases": []
+  },
+  {
+    "id": "g136",
+    "term": "Dekódold ezt a",
+    "definition": "A(z) Dekódolás reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Dekódolás",
+    "section": "Dekódolás",
+    "aliases": []
+  },
+  {
+    "id": "g137",
+    "term": "GWCJZ YLFZL",
+    "definition": "A(z) Dekódolás reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Dekódolás",
+    "section": "Dekódolás",
+    "aliases": []
+  },
+  {
+    "id": "g138",
+    "term": "Az üzenetkulcsot a",
+    "definition": "A(z) Az Enigma gép működése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma gép működése",
+    "section": "Az Enigma gép működése",
+    "aliases": []
+  },
+  {
+    "id": "g139",
+    "term": "QWE",
+    "definition": "A(z) Az Enigma feltörése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörése",
+    "section": "Az Enigma feltörése",
+    "aliases": []
+  },
+  {
+    "id": "g140",
+    "term": "BNM",
+    "definition": "A(z) Az Enigma feltörése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörése",
+    "section": "Az Enigma feltörése",
+    "aliases": []
+  },
+  {
+    "id": "g141",
+    "term": "Bomba nevű gépet",
+    "definition": "A(z) Az Enigma feltörése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörése",
+    "section": "Az Enigma feltörése",
+    "aliases": []
+  },
+  {
+    "id": "g142",
+    "term": "Bomba gép működési",
+    "definition": "A(z) Az Enigma feltörése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörése",
+    "section": "Az Enigma feltörése",
+    "aliases": []
+  },
+  {
+    "id": "g143",
+    "term": "Marian Rejewski játszott",
+    "definition": "A(z) Az Enigma feltörése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörése",
+    "section": "Az Enigma feltörése",
+    "aliases": []
+  },
+  {
+    "id": "g144",
+    "term": "Az Enigma feltörése",
+    "definition": "A(z) Az Enigma feltörésének történelmi jelentősége reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörésének történelmi jelentősége",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "aliases": []
+  },
+  {
+    "id": "g145",
+    "term": "There are two",
+    "definition": "A(z) Az Enigma feltörésének történelmi jelentősége reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörésének történelmi jelentősége",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "aliases": []
+  },
+  {
+    "id": "g146",
+    "term": "Bruce Schneier Az",
+    "definition": "A(z) Az Enigma feltörésének történelmi jelentősége reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörésének történelmi jelentősége",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "aliases": []
+  },
+  {
+    "id": "g147",
+    "term": "Enigma gép titkosítási",
+    "definition": "A(z) Az Enigma feltörésének történelmi jelentősége reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az Enigma feltörésének történelmi jelentősége",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "aliases": []
+  },
+  {
+    "id": "g148",
+    "term": "Az első kriptográfiai",
+    "definition": "A(z) A kriptográfia kezdeti évei reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia kezdeti évei",
+    "section": "A kriptográfia kezdeti évei",
+    "aliases": []
+  },
+  {
+    "id": "g149",
+    "term": "Claude E",
+    "definition": "A(z) A modern kriptográfia születése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A modern kriptográfia születése",
+    "section": "A modern kriptográfia születése",
+    "aliases": []
+  },
+  {
+    "id": "g150",
+    "term": "Shannon nevéhez fűződik",
+    "definition": "A(z) A modern kriptográfia születése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A modern kriptográfia születése",
+    "section": "A modern kriptográfia születése",
+    "aliases": []
+  },
+  {
+    "id": "g151",
+    "term": "Shannon 1949-ben megfogalmazta",
+    "definition": "A(z) A modern kriptográfia születése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A modern kriptográfia születése",
+    "section": "A modern kriptográfia születése",
+    "aliases": []
+  },
+  {
+    "id": "g152",
+    "term": "Ekkor kezdődött el",
+    "definition": "A(z) A modern kriptográfia születése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A modern kriptográfia születése",
+    "section": "A modern kriptográfia születése",
+    "aliases": []
+  },
+  {
+    "id": "g153",
+    "term": "De ha a",
+    "definition": "A(z) A modern kriptográfia születése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A modern kriptográfia születése",
+    "section": "A modern kriptográfia születése",
+    "aliases": []
+  },
+  {
+    "id": "g154",
+    "term": "DES",
+    "definition": "A(z) Fontosabb mérföldkövek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontosabb mérföldkövek",
+    "section": "Fontosabb mérföldkövek",
+    "aliases": []
+  },
+  {
+    "id": "g155",
+    "term": "PGP",
+    "definition": "A(z) Fontosabb mérföldkövek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontosabb mérföldkövek",
+    "section": "Fontosabb mérföldkövek",
+    "aliases": []
+  },
+  {
+    "id": "g156",
+    "term": "Rejtjelezés információ-elméleti megközelítése",
+    "definition": "A(z) Fontosabb mérföldkövek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontosabb mérföldkövek",
+    "section": "Fontosabb mérföldkövek",
+    "aliases": []
+  },
+  {
+    "id": "g157",
+    "term": "Data Encryption Standard",
+    "definition": "A(z) Fontosabb mérföldkövek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontosabb mérföldkövek",
+    "section": "Fontosabb mérföldkövek",
+    "aliases": []
+  },
+  {
+    "id": "g158",
+    "term": "DES 1970-es évek",
+    "definition": "A(z) Fontosabb mérföldkövek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontosabb mérföldkövek",
+    "section": "Fontosabb mérföldkövek",
+    "aliases": []
+  },
+  {
+    "id": "g159",
+    "term": "IBM",
+    "definition": "A(z) A DES algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A DES algoritmus",
+    "section": "A DES algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g160",
+    "term": "DES Data Encryption",
+    "definition": "A(z) A DES algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A DES algoritmus",
+    "section": "A DES algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g161",
+    "term": "Standard egy szimmetrikus",
+    "definition": "A(z) A DES algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A DES algoritmus",
+    "section": "A DES algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g162",
+    "term": "IBM tervei alapján",
+    "definition": "A(z) A DES algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A DES algoritmus",
+    "section": "A DES algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g163",
+    "term": "RSA",
+    "definition": "A(z) Az RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az RSA algoritmus",
+    "section": "Az RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g164",
+    "term": "Az RSA Rivest-Shamir-Adleman",
+    "definition": "A(z) Az RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az RSA algoritmus",
+    "section": "Az RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g165",
+    "term": "Adi Shamir",
+    "definition": "A(z) Az RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az RSA algoritmus",
+    "section": "Az RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g166",
+    "term": "Ronald Rivest és",
+    "definition": "A(z) Az RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az RSA algoritmus",
+    "section": "Az RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g167",
+    "term": "Leonard Adleman fejlesztett",
+    "definition": "A(z) Az RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Az RSA algoritmus",
+    "section": "Az RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g168",
+    "term": "Ebben a jegyzetben",
+    "definition": "A(z) Összegzés reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Összegzés",
+    "section": "Összegzés",
+    "aliases": []
+  },
+  {
+    "id": "g169",
+    "term": "Az egyik legfontosabb",
+    "definition": "A(z) A kriptográfia történelme reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia történelme",
+    "section": "A kriptográfia történelme",
+    "aliases": []
+  },
+  {
+    "id": "g170",
+    "term": "Phil Zimmermann",
+    "definition": "A(z) A kriptográfia történelme reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia történelme",
+    "section": "A kriptográfia történelme",
+    "aliases": []
+  },
+  {
+    "id": "g171",
+    "term": "PGP Pretty Good",
+    "definition": "A(z) A kriptográfia történelme reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia történelme",
+    "section": "A kriptográfia történelme",
+    "aliases": []
+  },
+  {
+    "id": "g172",
+    "term": "Privacy szoftvert",
+    "definition": "A(z) A kriptográfia történelme reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A kriptográfia történelme",
+    "section": "A kriptográfia történelme",
+    "aliases": []
+  },
+  {
+    "id": "g173",
+    "term": "Az új kriptográfiai",
+    "definition": "A(z) A posztkvantum kriptográfia reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A posztkvantum kriptográfia",
+    "section": "A posztkvantum kriptográfia",
+    "aliases": []
+  },
+  {
+    "id": "g174",
+    "term": "Diffie-Hellman kulcscsere protokoll",
+    "definition": "A(z) Nyilvános kulcsú kriptográfia reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Nyilvános kulcsú kriptográfia",
+    "section": "Nyilvános kulcsú kriptográfia",
+    "aliases": []
+  },
+  {
+    "id": "g175",
+    "term": "Az RSA rejtjelezés",
+    "definition": "A(z) Nyilvános kulcsú kriptográfia reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Nyilvános kulcsú kriptográfia",
+    "section": "Nyilvános kulcsú kriptográfia",
+    "aliases": []
+  },
+  {
+    "id": "g176",
+    "term": "QKD",
+    "definition": "A(z) Kvantum-kriptográfia reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kvantum-kriptográfia",
+    "section": "Kvantum-kriptográfia",
+    "aliases": []
+  },
+  {
+    "id": "g177",
+    "term": "QKD egy olyan",
+    "definition": "A(z) Kvantum-kriptográfia reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kvantum-kriptográfia",
+    "section": "Kvantum-kriptográfia",
+    "aliases": []
+  },
+  {
+    "id": "g178",
+    "term": "BB84 QKD protokoll",
+    "definition": "A(z) Kvantum-kriptográfia reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kvantum-kriptográfia",
+    "section": "Kvantum-kriptográfia",
+    "aliases": []
+  },
+  {
+    "id": "g179",
+    "term": "Mi a kriptográfia",
+    "definition": "A(z) Kérdés 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 1",
+    "section": "Kérdés 1",
+    "aliases": []
+  },
+  {
+    "id": "g180",
+    "term": "Válasz A kriptográfia",
+    "definition": "A(z) Kérdés 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 1",
+    "section": "Kérdés 1",
+    "aliases": []
+  },
+  {
+    "id": "g181",
+    "term": "Milyen típusú rejtjelezést",
+    "definition": "A(z) Kérdés 2 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 2",
+    "section": "Kérdés 2",
+    "aliases": []
+  },
+  {
+    "id": "g182",
+    "term": "Válasz Helyettesítéses rejtjelezést",
+    "definition": "A(z) Kérdés 2 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 2",
+    "section": "Kérdés 2",
+    "aliases": []
+  },
+  {
+    "id": "g183",
+    "term": "Milyen fontos szempontokat",
+    "definition": "A(z) Kérdés 4 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 4",
+    "section": "Kérdés 4",
+    "aliases": []
+  },
+  {
+    "id": "g184",
+    "term": "Válasz A kriptográfiai",
+    "definition": "A(z) Kérdés 4 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 4",
+    "section": "Kérdés 4",
+    "aliases": []
+  },
+  {
+    "id": "g185",
+    "term": "Ezek a primitívek",
+    "definition": "A(z) Bevezető reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezető",
+    "section": "Bevezető",
+    "aliases": []
+  },
+  {
+    "id": "g186",
+    "term": "MAC",
+    "definition": "A(z) Kriptográfiai alapalgoritmusok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai alapalgoritmusok",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "aliases": []
+  },
+  {
+    "id": "g187",
+    "term": "KEM",
+    "definition": "A(z) Kriptográfiai alapalgoritmusok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai alapalgoritmusok",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "aliases": []
+  },
+  {
+    "id": "g188",
+    "term": "KDF",
+    "definition": "A(z) Kriptográfiai alapalgoritmusok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai alapalgoritmusok",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "aliases": []
+  },
+  {
+    "id": "g189",
+    "term": "PRNG",
+    "definition": "A(z) Kriptográfiai alapalgoritmusok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai alapalgoritmusok",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "aliases": []
+  },
+  {
+    "id": "g190",
+    "term": "MAC-függvények ahol MAC",
+    "definition": "A(z) Kriptográfiai alapalgoritmusok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai alapalgoritmusok",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "aliases": []
+  },
+  {
+    "id": "g191",
+    "term": "Az adatok tárolásához",
+    "definition": "A(z) Adat-reprezentáció reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Adat-reprezentáció",
+    "section": "Adat-reprezentáció",
+    "aliases": []
+  },
+  {
+    "id": "g192",
+    "term": "Plaintext",
+    "definition": "A(z) Titkosítási sémák reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Titkosítási sémák",
+    "section": "Titkosítási sémák",
+    "aliases": []
+  },
+  {
+    "id": "g193",
+    "term": "Titkosítás",
+    "definition": "A(z) Titkosítási sémák reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Titkosítási sémák",
+    "section": "Titkosítási sémák",
+    "aliases": []
+  },
+  {
+    "id": "g194",
+    "term": "Ciphertext",
+    "definition": "A(z) Titkosítási sémák reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Titkosítási sémák",
+    "section": "Titkosítási sémák",
+    "aliases": []
+  },
+  {
+    "id": "g195",
+    "term": "AES",
+    "definition": "A(z) Szimmetrikus kulcsú rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Szimmetrikus kulcsú rejtjelezők",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g196",
+    "term": "Például az AES",
+    "definition": "A(z) Szimmetrikus kulcsú rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Szimmetrikus kulcsú rejtjelezők",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g197",
+    "term": "Advanced Encryption Standard",
+    "definition": "A(z) Szimmetrikus kulcsú rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Szimmetrikus kulcsú rejtjelezők",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g198",
+    "term": "Az aszimmetrikus kulcsú",
+    "definition": "A(z) Aszimmetrikus kulcsú rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Aszimmetrikus kulcsú rejtjelezők",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g199",
+    "term": "Például az RSA",
+    "definition": "A(z) Aszimmetrikus kulcsú rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Aszimmetrikus kulcsú rejtjelezők",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g200",
+    "term": "Rivest-Shamir-Adleman egy széles",
+    "definition": "A(z) Aszimmetrikus kulcsú rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Aszimmetrikus kulcsú rejtjelezők",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g201",
+    "term": "XOR",
+    "definition": "A(z) Kulcsfolyam-rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kulcsfolyam-rejtjelezők",
+    "section": "Kulcsfolyam-rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g202",
+    "term": "XOR művelettel kombinálnak",
+    "definition": "A(z) Kulcsfolyam-rejtjelezők reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kulcsfolyam-rejtjelezők",
+    "section": "Kulcsfolyam-rejtjelezők",
+    "aliases": []
+  },
+  {
+    "id": "g203",
+    "term": "XOR Exclusive OR",
+    "definition": "A(z) XOR művelet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "XOR művelet",
+    "section": "XOR művelet",
+    "aliases": []
+  },
+  {
+    "id": "g204",
+    "term": "XOR művelet asszociatív",
+    "definition": "A(z) XOR művelet reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "XOR művelet",
+    "section": "XOR művelet",
+    "aliases": []
+  },
+  {
+    "id": "g205",
+    "term": "Lavina-hatás avalanche effect",
+    "definition": "A(z) Blokkrejtjelezők tulajdonságai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezők tulajdonságai",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "aliases": []
+  },
+  {
+    "id": "g206",
+    "term": "Megjósolhatatlanság",
+    "definition": "A(z) Blokkrejtjelezők tulajdonságai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezők tulajdonságai",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "aliases": []
+  },
+  {
+    "id": "g207",
+    "term": "MAC-függvények",
+    "definition": "A(z) Blokkrejtjelezők tulajdonságai reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezők tulajdonságai",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "aliases": []
+  },
+  {
+    "id": "g208",
+    "term": "Ez a módszer",
+    "definition": "A(z) Bevezető reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezető",
+    "section": "Bevezető",
+    "aliases": []
+  },
+  {
+    "id": "g209",
+    "term": "ECB",
+    "definition": "A(z) Blokkrejtjelezési módok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezési módok",
+    "section": "Blokkrejtjelezési módok",
+    "aliases": []
+  },
+  {
+    "id": "g210",
+    "term": "CBC",
+    "definition": "A(z) Blokkrejtjelezési módok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezési módok",
+    "section": "Blokkrejtjelezési módok",
+    "aliases": []
+  },
+  {
+    "id": "g211",
+    "term": "CFB",
+    "definition": "A(z) Blokkrejtjelezési módok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezési módok",
+    "section": "Blokkrejtjelezési módok",
+    "aliases": []
+  },
+  {
+    "id": "g212",
+    "term": "OFB",
+    "definition": "A(z) Blokkrejtjelezési módok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezési módok",
+    "section": "Blokkrejtjelezési módok",
+    "aliases": []
+  },
+  {
+    "id": "g213",
+    "term": "CTR",
+    "definition": "A(z) Blokkrejtjelezési módok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Blokkrejtjelezési módok",
+    "section": "Blokkrejtjelezési módok",
+    "aliases": []
+  },
+  {
+    "id": "g214",
+    "term": "CTR Counter mód",
+    "definition": "A(z) CTR mód reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CTR mód",
+    "section": "CTR mód",
+    "aliases": []
+  },
+  {
+    "id": "g215",
+    "term": "CTR mód gyors",
+    "definition": "A(z) CTR mód reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "CTR mód",
+    "section": "CTR mód",
+    "aliases": []
+  },
+  {
+    "id": "g216",
+    "term": "Az aszimmetrikus titkosítás",
+    "definition": "A(z) Aszimmetrikus titkosítás reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Aszimmetrikus titkosítás",
+    "section": "Aszimmetrikus titkosítás",
+    "aliases": []
+  },
+  {
+    "id": "g217",
+    "term": "Az RSA algoritmus",
+    "definition": "A(z) RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "RSA algoritmus",
+    "section": "RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g218",
+    "term": "Kulcspár-generálás",
+    "definition": "A(z) RSA algoritmus reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "RSA algoritmus",
+    "section": "RSA algoritmus",
+    "aliases": []
+  },
+  {
+    "id": "g219",
+    "term": "Gyenge ütközés-ellenállóság weak",
+    "definition": "A(z) Kriptográfiai Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai Hash-függvények",
+    "section": "Kriptográfiai Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g220",
+    "term": "Erős ütközés-ellenállóság strong",
+    "definition": "A(z) Kriptográfiai Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai Hash-függvények",
+    "section": "Kriptográfiai Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g221",
+    "term": "SHA256 egy kriptográfiai",
+    "definition": "A(z) Példa: SHA256 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: SHA256",
+    "section": "Példa: SHA256",
+    "aliases": []
+  },
+  {
+    "id": "g222",
+    "term": "SHA256-t széles körben",
+    "definition": "A(z) Példa: SHA256 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: SHA256",
+    "section": "Példa: SHA256",
+    "aliases": []
+  },
+  {
+    "id": "g223",
+    "term": "Ez a tulajdonság",
+    "definition": "A(z) További Tulajdonságok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "További Tulajdonságok",
+    "section": "További Tulajdonságok",
+    "aliases": []
+  },
+  {
+    "id": "g224",
+    "term": "MAC-függvények Message Authentication",
+    "definition": "A(z) MAC-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "MAC-függvények",
+    "section": "MAC-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g225",
+    "term": "Code olyan függvények",
+    "definition": "A(z) MAC-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "MAC-függvények",
+    "section": "MAC-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g226",
+    "term": "MAC-függvények biztosítják az",
+    "definition": "A(z) MAC-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "MAC-függvények",
+    "section": "MAC-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g227",
+    "term": "HMAC",
+    "definition": "A(z) Példa: HMAC reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: HMAC",
+    "section": "Példa: HMAC",
+    "aliases": []
+  },
+  {
+    "id": "g228",
+    "term": "Az HMAC Keyed-Hash",
+    "definition": "A(z) Példa: HMAC reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: HMAC",
+    "section": "Példa: HMAC",
+    "aliases": []
+  },
+  {
+    "id": "g229",
+    "term": "Message Authentication Code",
+    "definition": "A(z) Példa: HMAC reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: HMAC",
+    "section": "Példa: HMAC",
+    "aliases": []
+  },
+  {
+    "id": "g230",
+    "term": "MAC-függvény",
+    "definition": "A(z) Példa: HMAC reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példa: HMAC",
+    "section": "Példa: HMAC",
+    "aliases": []
+  },
+  {
+    "id": "g231",
+    "term": "Játssz kicsit az",
+    "definition": "A(z) Gyakorlat reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyakorlat",
+    "section": "Gyakorlat",
+    "aliases": []
+  },
+  {
+    "id": "g232",
+    "term": "Notebooks",
+    "definition": "A(z) Gyakorlat reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyakorlat",
+    "section": "Gyakorlat",
+    "aliases": []
+  },
+  {
+    "id": "g233",
+    "term": "RSA folderben található",
+    "definition": "A(z) Gyakorlat reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Gyakorlat",
+    "section": "Gyakorlat",
+    "aliases": []
+  },
+  {
+    "id": "g234",
+    "term": "Determinisztikus",
+    "definition": "A(z) Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hash-függvények",
+    "section": "Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g235",
+    "term": "Egyirányú",
+    "definition": "A(z) Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hash-függvények",
+    "section": "Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g236",
+    "term": "Példa hash-függvényre",
+    "definition": "A(z) Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hash-függvények",
+    "section": "Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g237",
+    "term": "Hibrid rejtjelezés",
+    "definition": "A(z) Hibrid rejtjelezés reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hibrid rejtjelezés",
+    "section": "Hibrid rejtjelezés",
+    "aliases": []
+  },
+  {
+    "id": "g238",
+    "term": "Szimmetrikus kulcsú rejtjelezés",
+    "definition": "A(z) Hibrid rejtjelezés reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hibrid rejtjelezés",
+    "section": "Hibrid rejtjelezés",
+    "aliases": []
+  },
+  {
+    "id": "g239",
+    "term": "Aszimmetrikus kulcsú rejtjelezés",
+    "definition": "A(z) Hibrid rejtjelezés reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hibrid rejtjelezés",
+    "section": "Hibrid rejtjelezés",
+    "aliases": []
+  },
+  {
+    "id": "g240",
+    "term": "Ez a folyamat",
+    "definition": "A(z) Bevezetés a kulcs-származtatásba reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a kulcs-származtatásba",
+    "section": "Bevezetés a kulcs-származtatásba",
+    "aliases": []
+  },
+  {
+    "id": "g241",
+    "term": "Erős titokból történő",
+    "definition": "A(z) Kulcs-származtatás fajtái reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kulcs-származtatás fajtái",
+    "section": "Kulcs-származtatás fajtái",
+    "aliases": []
+  },
+  {
+    "id": "g242",
+    "term": "Gyenge titokból történő",
+    "definition": "A(z) Kulcs-származtatás fajtái reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kulcs-származtatás fajtái",
+    "section": "Kulcs-származtatás fajtái",
+    "aliases": []
+  },
+  {
+    "id": "g243",
+    "term": "HKDF",
+    "definition": "A(z) Példák kulcs-származtatásra reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példák kulcs-származtatásra",
+    "section": "Példák kulcs-származtatásra",
+    "aliases": []
+  },
+  {
+    "id": "g244",
+    "term": "HKDF HMAC-alapú KDF",
+    "definition": "A(z) Példák kulcs-származtatásra reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példák kulcs-származtatásra",
+    "section": "Példák kulcs-származtatásra",
+    "aliases": []
+  },
+  {
+    "id": "g245",
+    "term": "PBKDF2",
+    "definition": "A(z) Példák kulcs-származtatásra reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Példák kulcs-származtatásra",
+    "section": "Példák kulcs-származtatásra",
+    "aliases": []
+  },
+  {
+    "id": "g246",
+    "term": "Ezek a számok",
+    "definition": "A(z) Véletlenszám-generátorok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Véletlenszám-generátorok",
+    "section": "Véletlenszám-generátorok",
+    "aliases": []
+  },
+  {
+    "id": "g247",
+    "term": "Valódi véletlenszámok",
+    "definition": "A(z) Valódi vs. álvéletlen számok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Valódi vs. álvéletlen számok",
+    "section": "Valódi vs. álvéletlen számok",
+    "aliases": []
+  },
+  {
+    "id": "g248",
+    "term": "PRNG nem valódi",
+    "definition": "A(z) Bevezetés a PRNG-kbe reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a PRNG-kbe",
+    "section": "Bevezetés a PRNG-kbe",
+    "aliases": []
+  },
+  {
+    "id": "g249",
+    "term": "Ha megfelelően vannak",
+    "definition": "A(z) Bevezetés a PRNG-kbe reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Bevezetés a PRNG-kbe",
+    "section": "Bevezetés a PRNG-kbe",
+    "aliases": []
+  },
+  {
+    "id": "g250",
+    "term": "PRNG-k belső állapotot",
+    "definition": "A(z) A PRNG-k működése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A PRNG-k működése",
+    "section": "A PRNG-k működése",
+    "aliases": []
+  },
+  {
+    "id": "g251",
+    "term": "Minden kimenet generálás",
+    "definition": "A(z) A PRNG-k működése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A PRNG-k működése",
+    "section": "A PRNG-k működése",
+    "aliases": []
+  },
+  {
+    "id": "g252",
+    "term": "PRNG-k kulcsfontosságúak a",
+    "definition": "A(z) A PRNG-k működése reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "A PRNG-k működése",
+    "section": "A PRNG-k működése",
+    "aliases": []
+  },
+  {
+    "id": "g253",
+    "term": "Például",
+    "definition": "A(z) Valamennyire megjósolhatatlan források reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Valamennyire megjósolhatatlan források",
+    "section": "Valamennyire megjósolhatatlan források",
+    "aliases": []
+  },
+  {
+    "id": "g254",
+    "term": "SHA",
+    "definition": "A(z) Kriptográfiai primitívek reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kriptográfiai primitívek",
+    "section": "Kriptográfiai primitívek",
+    "aliases": []
+  },
+  {
+    "id": "g255",
+    "term": "Egyirányúság",
+    "definition": "A(z) Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hash-függvények",
+    "section": "Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g256",
+    "term": "Preimage-ellenállás",
+    "definition": "A(z) Hash-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Hash-függvények",
+    "section": "Hash-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g257",
+    "term": "MAC-függvények biztosítják",
+    "definition": "A(z) MAC-függvények reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "MAC-függvények",
+    "section": "MAC-függvények",
+    "aliases": []
+  },
+  {
+    "id": "g258",
+    "term": "Az álvéletlen-generátorok olyan",
+    "definition": "A(z) Álvéletlen-generátorok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Álvéletlen-generátorok",
+    "section": "Álvéletlen-generátorok",
+    "aliases": []
+  },
+  {
+    "id": "g259",
+    "term": "Az álvéletlen-generátorok biztosítják",
+    "definition": "A(z) Álvéletlen-generátorok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Álvéletlen-generátorok",
+    "section": "Álvéletlen-generátorok",
+    "aliases": []
+  },
+  {
+    "id": "g260",
+    "term": "MAC-függvények és a",
+    "definition": "A(z) Álvéletlen-generátorok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Álvéletlen-generátorok",
+    "section": "Álvéletlen-generátorok",
+    "aliases": []
+  },
+  {
+    "id": "g261",
+    "term": "Milyen típusú kriptográfiai",
+    "definition": "A(z) Kérdés 2 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 2",
+    "section": "Kérdés 2",
+    "aliases": []
+  },
+  {
+    "id": "g262",
+    "term": "Mire szolgál a",
+    "definition": "A(z) Kérdés 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 3",
+    "section": "Kérdés 3",
+    "aliases": []
+  },
+  {
+    "id": "g263",
+    "term": "Válasz A titkosítási",
+    "definition": "A(z) Kérdés 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 3",
+    "section": "Kérdés 3",
+    "aliases": []
+  },
+  {
+    "id": "g264",
+    "term": "Milyen típusú titkosítási",
+    "definition": "A(z) Kérdés 4 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 4",
+    "section": "Kérdés 4",
+    "aliases": []
+  },
+  {
+    "id": "g265",
+    "term": "Mi a szerepe",
+    "definition": "A(z) Kérdés 5 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kérdés 5",
+    "section": "Kérdés 5",
+    "aliases": []
+  },
+  {
+    "id": "g266",
+    "term": "LLM",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g267",
+    "term": "BME",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g268",
+    "term": "Ez a jegyzet",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g269",
+    "term": "LLM szolgaltatas eppen",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g270",
+    "term": "Kriptográfia - Néhány",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g271",
+    "term": "VIHIAC07",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g272",
+    "term": "Buttyán Levente CrySyS",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g273",
+    "term": "PKI",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g274",
+    "term": "TLS",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g275",
+    "term": "Tudd a fogalmakat",
+    "definition": "A(z) Vizsgara figyelj reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Vizsgara figyelj",
+    "section": "Vizsgara figyelj",
+    "aliases": []
+  },
+  {
+    "id": "g276",
+    "term": "Keresd az osszefuggest",
+    "definition": "A(z) Vizsgara figyelj reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Vizsgara figyelj",
+    "section": "Vizsgara figyelj",
+    "aliases": []
+  },
+  {
+    "id": "g277",
+    "term": "Gyakorold",
+    "definition": "A(z) Vizsgara figyelj reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Vizsgara figyelj",
+    "section": "Vizsgara figyelj",
+    "aliases": []
+  },
+  {
+    "id": "g278",
+    "term": "Onellenorzo kerdesek",
+    "definition": "A(z) Active Recall reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Active Recall",
+    "section": "Active Recall",
+    "aliases": []
+  },
+  {
+    "id": "g279",
+    "term": "Mi a z",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g280",
+    "term": "Crypto Applications BME",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g281",
+    "term": "Valasz Kriptográfia -",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g282",
+    "term": "Néhány alkalmazás VIHIAC07",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g283",
+    "term": "Mely fogalmakat erdemes",
+    "definition": "A(z) Kerdes 2 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 2",
+    "section": "Kerdes 2",
+    "aliases": []
+  },
+  {
+    "id": "g284",
+    "term": "Milyen gyakorlati kockazat",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g285",
+    "term": "Valasz 2025 április",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g286",
+    "term": "András Gazdag CrySyS",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g287",
+    "term": "SDL",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g288",
+    "term": "Lab",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g289",
+    "term": "NEM",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g290",
+    "term": "OWASP",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g291",
+    "term": "SW SDL lenyege",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g292",
+    "term": "Valasz András Gazdag",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g293",
+    "term": "Valasz WebKit Bugzilla",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g294",
+    "term": "CVE-2025-24162",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g295",
+    "term": "HKUS3Lab and chluo",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g296",
+    "term": "Bevezetés a memóriakezelési",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g297",
+    "term": "Függvényhívási mechanizmusok",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g298",
+    "term": "Stack overflow",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g299",
+    "term": "Védelmi mechanizmusok Implementációs",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g300",
+    "term": "Szoftverbiztonság",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g301",
+    "term": "SQL",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g302",
+    "term": "XSS",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g303",
+    "term": "TOCTOU",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g304",
+    "term": "SW ImplementationErrors HU",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g305",
+    "term": "Valasz h u",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g306",
+    "term": "Valasz",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g307",
+    "term": "Az egyik lehetséges",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g308",
+    "term": "Ezek nagyon ajánlott",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g309",
+    "term": "Tiltsd le a",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g310",
+    "term": "Naplózd a hozzáférés-védelmi",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g311",
+    "term": "Webbiztonság 15 --",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g312",
+    "term": "A02",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g313",
+    "term": "TOP",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g314",
+    "term": "SW Web HU",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g315",
+    "term": "Egy bizonyos biztonsági",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g316",
+    "term": "SAST",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g317",
+    "term": "Hátrány",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g318",
+    "term": "Biztonsági tesztelés 35",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g319",
+    "term": "Code Review",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g320",
+    "term": "TDD",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g321",
+    "term": "BDD",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g322",
+    "term": "ATDD",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g323",
+    "term": "SW Testing HU",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g324",
+    "term": "AAA",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g325",
+    "term": "AAA VIHIAC07",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g326",
+    "term": "PIN",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g327",
+    "term": "SMS",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g328",
+    "term": "MFA",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g329",
+    "term": "AAA HU lenyege",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g330",
+    "term": "Valasz Hitelesítés",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g331",
+    "term": "Alapfogalmak",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g332",
+    "term": "Authentication authentikáció",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g333",
+    "term": "Célja",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g334",
+    "term": "Hálózati Rendszerek és",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g335",
+    "term": "Szolgáltatások Tanszék 1",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g336",
+    "term": "ROSSZINDULAT",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g337",
+    "term": "SZOFTVEREK",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g338",
+    "term": "KIBERBŰNÖZÉS",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g339",
+    "term": "HIT",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g340",
+    "term": "MALWARE",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g341",
+    "term": "ELF",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g342",
+    "term": "PDF",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g343",
+    "term": "Malware HU lenyege",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g344",
+    "term": "Az ilyen rendszereket",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g345",
+    "term": "IT-rendszereknek nevezzük",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g346",
+    "term": "IT rövidítés az",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g347",
+    "term": "Nyugodtan kijelenthetjük",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g348",
+    "term": "IT-rendszerek nélkül",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g349",
+    "term": "NSA",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g350",
+    "term": "TAO",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g351",
+    "term": "IT biztonság jegyzet",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g352",
+    "term": "Bevezetés az IT",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g353",
+    "term": "Biztonságba BME Villamosmérnöki",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g354",
+    "term": "Valasz Nyugodtan kijelenthetjük",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g355",
+    "term": "Ezek a folyamatok",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g356",
+    "term": "LLM-ek bevezetése a",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g357",
+    "term": "LLM-ek által generált",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g358",
+    "term": "Ennek következtében a",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g359",
+    "term": "XML",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g360",
+    "term": "Biztonsági tesztelés BME",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g361",
+    "term": "Villamosmérnöki és Informatikai",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g362",
+    "term": "Valasz A nagy",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g363",
+    "term": "Where on the",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g364",
+    "term": "EBP",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g365",
+    "term": "NOP",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g366",
+    "term": "Local variables are",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g367",
+    "term": "EBP register at",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g368",
+    "term": "GENERÁLT",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g369",
+    "term": "DEP",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g370",
+    "term": "Control Questions kidolgozva2025",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g371",
+    "term": "Valasz Where on",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g372",
+    "term": "Valasz Local variables",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g373",
+    "term": "EBP - offset",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g374",
+    "term": "Ha tudjatok a",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g375",
+    "term": "Ha találtok olyan",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g376",
+    "term": "Az alábbiak közül",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g377",
+    "term": "Side channel támadási",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g378",
+    "term": "Gyenge kulcsmenedzsment Protokoll",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g379",
+    "term": "DEC",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g380",
+    "term": "HELP",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g381",
+    "term": "IT bizt kérdések",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g382",
+    "term": "HELP lenyege a",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g383",
+    "term": "Valasz Ha tudjatok",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g384",
+    "term": "Valasz A használt",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g385",
+    "term": "IT biztonság 2023",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g386",
+    "term": "Mi alapján nem",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g387",
+    "term": "VLAN",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g388",
+    "term": "HTTP",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g389",
+    "term": "TCP",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g390",
+    "term": "Valasz IT biztonság",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g391",
+    "term": "Valasz 1",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g392",
+    "term": "Ha talaltok olyan",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g393",
+    "term": "ITbizt kérdések HELP",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g394",
+    "term": "Rész",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g395",
+    "term": "Milyen problémákkal kell",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g396",
+    "term": "IT Security-nek megbírkózni",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g397",
+    "term": "Támadások megelőzése Támadások",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g398",
+    "term": "Felépülés a biztonsági",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g399",
+    "term": "PÉNZ",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g400",
+    "term": "ITSEC",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g401",
+    "term": "ITSEC Dia Kerdesek",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g402",
+    "term": "Kidolgozva lenyege a",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g403",
+    "term": "Valasz Rész",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g404",
+    "term": "Valasz Támadások megelőzése",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g405",
+    "term": "Támadások felismerése és",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g406",
+    "term": "Ki az a",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  },
+  {
+    "id": "g407",
+    "term": "NOTE",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g408",
+    "term": "Beadtam ChatGPT-nek a",
+    "definition": "A(z) Attekintes reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Attekintes",
+    "section": "Attekintes",
+    "aliases": []
+  },
+  {
+    "id": "g409",
+    "term": "ATM",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g410",
+    "term": "USA",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g411",
+    "term": "Privacy diákban nincsenek",
+    "definition": "A(z) Fo pontok reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fo pontok",
+    "section": "Fo pontok",
+    "aliases": []
+  },
+  {
+    "id": "g412",
+    "term": "ISO",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g413",
+    "term": "GDPR",
+    "definition": "A(z) Fontos fogalmak reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Fontos fogalmak",
+    "section": "Fontos fogalmak",
+    "aliases": []
+  },
+  {
+    "id": "g414",
+    "term": "ZH utáni kontroll",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g415",
+    "term": "Valasz Beadtam ChatGPT-nek",
+    "definition": "A(z) Kerdes 1 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 1",
+    "section": "Kerdes 1",
+    "aliases": []
+  },
+  {
+    "id": "g416",
+    "term": "Valasz Az",
+    "definition": "A(z) Kerdes 3 reszben szereplo fontos fogalom; pontos jelentese a kapcsolodo jegyzetkornyezetbol tanulando.",
+    "category": "Kerdes 3",
+    "section": "Kerdes 3",
+    "aliases": []
+  }
+]

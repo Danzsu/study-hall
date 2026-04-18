@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Check, X, RotateCcw } from 'lucide-react'
-import { useTheme } from '../store'
+import { useTheme, useStore } from '../store'
 import { C } from '../theme'
 
 function shuffle(arr) {
@@ -168,6 +168,8 @@ function ResultOverlay({ result }) {
 
 export default function Flashcard({ subjectId }) {
   const t = useTheme()
+  const s = useStore()
+  const subjectName = s.params.name || null
   const [rawCards, setRawCards] = useState([])
   const [cards, setCards]       = useState([])
   const [idx, setIdx]           = useState(0)
@@ -302,6 +304,12 @@ export default function Flashcard({ subjectId }) {
       `}</style>
 
       <main style={{ maxWidth: 500, margin: '0 auto', padding: '40px 24px 80px' }}>
+        {/* Subject context */}
+        {subjectName && (
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.6px', color: t.textMuted, marginBottom: 16, textAlign: 'center' }}>
+            {subjectName.toUpperCase()} · {cards.length} CARDS
+          </p>
+        )}
         {/* Progress bar */}
         <div style={{ height: 2, background: t.border, borderRadius: 99, marginBottom: 32, overflow: 'hidden' }}>
           <div style={{

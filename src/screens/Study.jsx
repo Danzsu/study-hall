@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
+import katex from 'katex'
 
 // Simple markdown → HTML converter for lesson content
 function mdToHtml(md) {
@@ -37,7 +38,15 @@ function renderContent(raw, t) {
   while (i < lines.length) {
     const line = lines[i]
 
-    if (line.startsWith('# ')) {
+    if (line.startsWith('$$')) {
+      const mathLines = []
+      i++
+      while (i < lines.length && !lines[i].startsWith('$$')) {
+        mathLines.push(lines[i])
+        i++
+      }
+      elements.push(<MathBlock key={i} value={mathLines.join('\n')} t={t} />)
+    } else if (line.startsWith('# ')) {
       elements.push(<h1 key={i} style={{ fontFamily: "'Lora',Georgia,serif", fontSize: 28, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.5px', marginBottom: 12, marginTop: 36, color: t.text }}>{line.slice(2)}</h1>)
     } else if (line.startsWith('## ')) {
       elements.push(<h2 key={i} style={{ fontFamily: "'DM Sans',system-ui", fontSize: 20, fontWeight: 800, letterSpacing: '-0.3px', marginBottom: 12, marginTop: 32, color: t.text }}>{line.slice(3)}</h2>)
@@ -99,8 +108,9 @@ function inlineFormat(text, t) {
     const boldMatch = remaining.match(/\*\*(.+?)\*\*/)
     const italicMatch = remaining.match(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/)
     const codeMatch = remaining.match(/`(.+?)`/)
+    const mathMatch = remaining.match(/\$([^$\n]+?)\$/)
 
-    const candidates = [boldMatch, italicMatch, codeMatch].filter(Boolean)
+    const candidates = [boldMatch, italicMatch, codeMatch, mathMatch].filter(Boolean)
     if (candidates.length === 0) {
       parts.push(<span key={key++}>{remaining}</span>)
       break
@@ -117,13 +127,89 @@ function inlineFormat(text, t) {
     } else if (first === italicMatch) {
       parts.push(<em key={key++}>{first[1]}</em>)
       remaining = remaining.slice(first.index + first[0].length)
-    } else {
+    } else if (first === codeMatch) {
       parts.push(<code key={key++} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 4, padding: '1px 5px', fontSize: '0.9em', fontFamily: "'JetBrains Mono', monospace" }}>{first[1]}</code>)
+      remaining = remaining.slice(first.index + first[0].length)
+    } else {
+      parts.push(<MathInline key={key++} value={first[1]} />)
       remaining = remaining.slice(first.index + first[0].length)
     }
   }
 
   return parts
+}
+
+function MathInline({ value }) {
+  try {
+    return <span dangerouslySetInnerHTML={{ __html: katex.renderToString(value, { throwOnError: false }) }} />
+  } catch {
+    return <code>{value}</code>
+  }
+}
+
+function MathBlock({ value, t }) {
+  try {
+    return (
+      <div style={{ overflowX: 'auto', background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '16px 18px', margin: '24px 0' }}
+        dangerouslySetInnerHTML={{ __html: katex.renderToString(value, { throwOnError: false, displayMode: true }) }}
+      />
+    )
+  } catch {
+    return <pre>{value}</pre>
+  }
+}
+
+function RecallCards({ items, t }) {
+  const [open, setOpen] = useState({})
+  if (!items?.length) return null
+  return (
+    <section style={{ marginTop: 44, paddingTop: 28, borderTop: `1px solid ${t.border}` }}>
+      <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted, marginBottom: 12 }}>ACTIVE RECALL</p>
+      <div style={{ display: 'grid', gap: 10 }}>
+        {items.map((item, idx) => {
+          const active = !!open[idx]
+          return (
+            <button
+              key={idx}
+              onClick={() => setOpen(p => ({ ...p, [idx]: !p[idx] }))}
+              style={{
+                textAlign: 'left',
+                background: active ? `${C.accent}12` : t.surface,
+                border: `1px solid ${active ? C.accent + '50' : t.border}`,
+                borderRadius: 12,
+                padding: '14px 16px',
+                cursor: 'pointer',
+                fontFamily: "'DM Sans', system-ui",
+              }}
+            >
+              <span style={{ fontSize: 11, fontWeight: 800, color: C.accent, letterSpacing: '0.6px' }}>Q{idx + 1}</span>
+              <p style={{ fontSize: 14, fontWeight: 700, color: t.text, marginTop: 5, lineHeight: 1.45 }}>{item.question}</p>
+              {active && <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.65, marginTop: 10, fontFamily: "'Lora', Georgia, serif" }}>{item.answer}</p>}
+            </button>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+function SourcesBlock({ sources, t }) {
+  if (!sources?.length) return null
+  return (
+    <section style={{ marginTop: 36, background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 12, padding: '16px 18px' }}>
+      <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted, marginBottom: 10 }}>SOURCES</p>
+      <div style={{ display: 'grid', gap: 6 }}>
+        {sources.map((src, idx) => (
+          <p key={idx} style={{ fontSize: 12, color: t.textSub, lineHeight: 1.55 }}>
+            <strong style={{ color: t.text }}>{src.title ?? 'Forras'}</strong>
+            {src.author ? ` - ${src.author}` : ''}
+            {src.year ? ` (${src.year})` : ''}
+            {src.type ? ` · ${src.type}` : ''}
+          </p>
+        ))}
+      </div>
+    </section>
+  )
 }
 
 function Sidebar({ lessons, activeSlug, subjectId, sidebarOpen, onClose, t }) {
@@ -212,6 +298,8 @@ export default function Study({ subjectId, lesson: lessonProp }) {
   const [activeSlug, setActiveSlug]   = useState(lessonProp ?? null)
   const [content, setContent]         = useState(null)
   const [frontmatter, setFrontmatter] = useState({})
+  const [activeRecall, setActiveRecall] = useState([])
+  const [sources, setSources] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [loading, setLoading]         = useState(false)
 
@@ -225,6 +313,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
         if (!activeSlug && data.length > 0) setActiveSlug(data[0].slug)
       })
       .catch(() => {})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectId])
 
   // Fetch active lesson content
@@ -236,6 +325,8 @@ export default function Study({ subjectId, lesson: lessonProp }) {
       .then(data => {
         setContent(data.content ?? '')
         setFrontmatter(data.frontmatter ?? {})
+        setActiveRecall(data.activeRecall ?? [])
+        setSources(data.sources ?? data.frontmatter?.sources ?? [])
         setLoading(false)
       })
       .catch(() => setLoading(false))
@@ -326,6 +417,9 @@ export default function Study({ subjectId, lesson: lessonProp }) {
                 <div style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 15.5, lineHeight: 1.8, color: t.text }}>
                   {renderContent(content, t)}
                 </div>
+
+                <RecallCards items={activeRecall} t={t} />
+                <SourcesBlock sources={sources} t={t} />
 
                 {/* Bottom nav */}
                 <div style={{

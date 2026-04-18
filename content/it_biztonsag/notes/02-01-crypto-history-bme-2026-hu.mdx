@@ -1,0 +1,390 @@
+---
+title: "01 Crypto History BME 2026 hu (1/8)"
+lesson: 1
+section: "01 Crypto History BME 2026 hu (1/8)"
+sources:
+  - type: "pdf"
+    title: "It_biztonsag - 01 Crypto History BME 2026 hu (1/8)"
+    year: 2025
+---
+
+A **kriptográfia** az információbiztonsági szolgáltatások megvalósításának algoritmikus módszereit jelenti. Ez magában foglalja a **rejtjelezést** (titkosítást), az **üzenet hitelesítő kód** (MAC) használatát az **integritásvédelem** és **eredet hitelesítés** érdekében, valamint a **digitális aláírás** használatát az **integritásvédelem**, **eredet hitelesítés** és **eredet letagadhatatlanság** biztosítására.
+
+## Bevezetés a kriptográfiába
+A kriptográfia **algoritmikus módszerek** tárháza, amelyek információbiztonsági szolgáltatásokat valósítanak meg. A kriptográfiai algoritmusok **kriptográfiai függvénykönyvtárakban** (crypto library) érhetők el programozók számára, különböző API-kon keresztül, például OpenSSL, NaCl, Java Cryptography Extension (JCE), PyCryptodome.
+
+## A kriptográfia története
+A kriptográfia története az ókortól a 20. század közepéig **katonai és diplomáciai alkalmazások** körében alakult ki. A 20. század második felében a kriptográfia **üzleti alkalmazásokban** is megjelent, például bankoknál és biztosítóknál. A 20. század végétől a kriptográfia **mindennapi életben** is elkezdett megjelenni, bár sokszor a felhasználók nem is tudják, hogy használják.
+
+> "A kriptográfia olyan, mint egy biztonsági ajtó. Ha jól van tervezve és megvalósítva, akkor hatékonyan védi az információkat, de ha rosszul van tervezve vagy megvalósítva, akkor könnyen feltörhető."
+
+## Történelmi rejtjelezők
+A történelem során különböző rejtjelező eszközök és módszerek alakultak ki, például a **Szkütale**, amely ókori mechanikus rejtjelező eszköz volt, vagy a **Caesar-rejtjelező**, amely helyettesítéses rejtjelezést valósított meg.
+
+### Példa: Caesar-rejtjelező
+A Caesar-rejtjelező egy egyszerű helyettesítéses rejtjelező, amely az ábécében 3 pozícióval később található betűvel helyettesíti a nyílt szöveg minden betűjét.
+```python
+def caesar_rejtjelez(es, eltolas):
+    abecé = 'abcdefghijklmnopqrstuvwxyz'
+    rejtjelezett_szöveg = ''
+    for betü in es:
+        if betü.isalpha():
+            pozicio = abecé.index(betü)
+            új_pozicio = (pozicio + eltolas) % len(abecé)
+            rejtjelezett_szöveg += abecé[új_pozicio]
+        else:
+            rejtjelezett_szöveg += betü
+    return rejtjelezett_szöveg
+
+nyílt_szöveg = 'hello'
+rejtjelezett_szöveg = caesar_rejtjelez(nyílt_szöveg, 3)
+print(rejtjelezett_szöveg)  # khoor
+```
+A kriptográfia **fontos szerepet** játszik az információbiztonságban, de **nem mindig** a leggyengébb láncszem az IT rendszerek biztonságában. A kriptográfiai algoritmusok **hatékonyak** lehetnek, de **fontos**, hogy jól legyenek tervezve és megvalósítva.
+A kriptográfia történelmi áttekintése során megismerkedhetünk a titkosítás és a kódolás **alapfogalmaival**. A **kriptográfia** az a tudomány, amely a titkos üzenetek elkészítésével és feltörésével foglalkozik. A **kódolás** és **dekódolás** folyamata kulcsok segítségével történik.
+
+## Bevezetés a kriptográfiába
+A kriptográfia **alapelve**, hogy a **titkosított üzenet** csak a megfelelő **kulccsal** lehet visszafejteni. A **kriptográfiai algoritmusok** célja, hogy a **titkosított üzenet** ne legyen olvasható az **illetéktelenek** számára.
+
+### A kriptográfia történelme
+A kriptográfia **történelme** egészen az ókorig nyúlik vissza. A **Caesar-rejtjelező** egyik legismertebb példa a kriptográfiában. A **Caesar-rejtjelező** **alapelve**, hogy a **szöveg** **betűi** egy **meghatározott számú** **pozicíót** **eltolódnak** a **ábécében**.
+
+> "A kriptográfia az a tudomány, amely a titkos üzenetek elkészítésével és feltörésével foglalkozik."
+
+## A kriptográfia alapfogalmai
+A kriptográfia **alapfogalmai** közé tartozik a **kódolás**, **dekódolás**, **kulcs** és a **titkosított üzenet**. A **kódolás** folyamata során a **szöveg** **titkosított** formába kerül, míg a **dekódolás** folyamata során a **titkosított üzenet** **visszafejtésre** kerül.
+
+- **Kódolás**: a szöveg titkosított formába kerül
+- **Dekódolás**: a titkosított üzenet visszafejtésre kerül
+- **Kulcs**: a kódolás és dekódolás folyamatában használt információ
+- **Titkosított üzenet**: a kódolt szöveg
+
+### A kriptográfiai algoritmusok
+A kriptográfiai **algoritmusok** **célja**, hogy a **titkosított üzenet** **biztonságos** legyen. A **kriptográfiai algoritmusok** **típusai** közé tartozik a **szimmetrikus** és az **aszimmetrikus** kriptográfia.
+
+```python
+def caesar_rejtjelez(es(szoveg, eltolas):
+    # A Caesar-rejtjelező algoritmus megvalósítása
+    uj_szoveg = ""
+    for betu in szoveg:
+        if betu.isalpha():
+            # A betű eltolása a megadott pozícióval
+            uj_betu = chr((ord(betu) - ord('a') + eltolas) % 26 + ord('a'))
+            uj_szoveg += uj_betu
+        else:
+            uj_szoveg += betu
+    return uj_szoveg
+```
+
+## A kriptográfia jövője
+A kriptográfia **jövője** **biztató**, hiszen a **technológia** **fejlődése** **új lehetőségeket** teremt a **kriptográfiában**. A **kriptográfia** **szerepe** a **biztonságos kommunikációban** **fontos** lesz a **jövőben** is.
+
+$$
+P(\text{titkosított üzenet}) = \frac{1}{2^n}
+$$
+
+Ahol $n$ a **kulcs** **hossza**. A **kriptográfiai algoritmusok** **biztonsága** a **kulcs** **hosszától** függ. Minél **hosszabb** a **kulcs**, annál **biztonságosabb** a **kriptográfiai algoritmus**.
+A kriptográfia történelme gazdag és érdekes, tele **titkosítási módszerekkel** és **rejtjelekkel**. Az egyik legismertebb és legfontosabb eszköz a **kriptográfia** történetében az **Enigma** gép. Ez a gép a második világháború alatt játszott fontos szerepet a német hadsereg kommunikációjában.
+
+## Bevezetés az Enigmába
+Az **Enigma** egy **poly-alfabetikus helyettesítést** valósít meg, ami azt jelenti, hogy több kód-ábécét is használ a nyílt betűk helyettesítéséhez. Az Enigma gép **billentyűzettel**, **lámpa-panellel**, **plugboarddal** és **keverő egységgel** (rotorok) rendelkezik.
+
+### Az Enigma fő komponensei
+- **Billentyűzet**: a nyílt és a rejtett szöveg beviteléhez
+- **Lámpa-panel**: egy primitív megjelenítő (display)
+- **Plugboard**: betűpárok elemeinek felcseréléséhez (swapping)
+- **Keverő egység (rotorok)**: a tényleges kódolás/dekódolás megvalósításához
+
+> Az Enigma gép titkosítási eljárása olyan bonyolult, hogy a kód feltörése szinte lehetetlennek tűnt.
+
+## Az Enigma működése
+Az Enigma gép működése a következő:
+- A **rotor** egy pozíciót fordul minden billentyűleütésnél.
+- A **keverő egység** (rotorok) a tényleges kódolás/dekódolás megvalósításához felelős.
+
+```python
+# Egy egyszerű Enigma gép modellje
+class Enigma:
+    def __init__(self, rotorok, plugboard):
+        self.rotorok = rotorok
+        self.plugboard = plugboard
+
+    def kodolas(self, szoveg):
+        # A rotorok és a plugboard alapján kodolja a szöveget
+        kodolt_szoveg = ""
+        for betu in szoveg:
+            # A rotorok és a plugboard alkalmazása
+            kodolt_betu = self.alkalmaz_rotorok(betu)
+            kodolt_betu = self.alkalmaz_plugboard(kodolt_betu)
+            kodolt_szoveg += kodolt_betu
+        return kodolt_szoveg
+
+    def alkalmaz_rotorok(self, betu):
+        # A rotorok alapján kodolja a betüt
+        # ...
+        return kodolt_betu
+
+    def alkalmaz_plugboard(self, betu):
+        # A plugboard alapján kodolja a betüt
+        # ...
+        return kodolt_betu
+```
+
+## Az Enigma kulcstere
+Az **Enigma kulcstere** nagyon nagy, de nem elégséges a biztonsághoz. A kulcstér becsült mérete: $100391791500 \times 6 \times 263 \approx 2^{53}$.
+
+## Dekódolás
+Próbáld ki! Dekódold ezt a rejtett üzenetet: `GWCJZ YLFZL`. Milyen információkra van szükséged a feladat megoldásához? Az Enigma gép kulcsa a gép kezdeti beállítása, amely magában foglalja a **betűpárokat**, a **rotorok sorrendjét** és a **kezdeti pozíciót**.
+
+- A **betűpárok** a plugboard alapján kerülnek meghatározásra.
+- A **rotorok sorrendje** határozza meg a kódolás sorrendjét.
+- A **kezdeti pozíció** határozza meg a rotorok kezdeti állását.
+
+$2^{53}$ lehetőség áll rendelkezésre, de az Enigmát mégis feltörték.
+Az **Enigma** gép titkosítási eljárásának megértése érdekében fontos áttekinteni a történelmi hátteret. A második világháború előtt a lengyelek már foglalkoztak az Enigma feltörésével, és jelentős eredményeket értek el. A gép működési elve a **rotorok** és a **napi beállítás** kombinációja volt.
+
+## Az Enigma gép működése
+A gép használata során minden új üzenethez létrehoztak egy új **üzenetkulcsot**, amely a kezdeti rotorállásokat meghatározó három betűből állt. Az **üzenetkulcsot** a **napi beállítással** titkosították, és elküldték az üzenet előtt.
+
+### Az Enigma feltörése
+A lengyelek **Bomba** nevű gépet építettek, amely automatikusan különböző tippeket próbált ki a **napi kulcsra**. 1933-tól a lengyelek fel tudták törni a titkosított német üzeneteket.
+
+- A **Bomba** gép működési elve az **üzenetkulcs** ismétlődésén alapult.
+- A **lengyel** kriptográfus, **Marian Rejewski** játszott fontos szerepet az Enigma feltörésében.
+- Az **üzenetküldési protokoll** gyengeségei, például a **gyenge kulcsok** használata, segítették a briteket az Enigma feltörésében.
+
+> Az Enigma feltörése során a britek által kihasznált néhány gyengeség:
+> - gyenge kulcsok (más néven „cillies”)
+> - A német Enigma-kezelők néha nagyon gyenge (messze nem véletlenszerű) üzenetkulcsokat használtak (pl. QWE, BNM)
+
+## Az Enigma feltörésének matematikai háttere
+A feltöréshez használt matematikai módszerek között szerepelt a **kriptográfia** és a **kombinatorika**.
+
+```python
+def enigmaRotor(plaintext, rotor):
+    # rotor algoritmus
+    ciphertext = ""
+    for char in plaintext:
+        # karakterek helyettesítése
+        ciphertext += rotor[char]
+    return ciphertext
+
+# példa rotor
+rotor = {
+    'a': 'd',
+    'b': 'e',
+    'c': 'f',
+    # ...
+}
+```
+
+## Az Enigma feltörésének történelmi jelentősége
+Az Enigma feltörése fontos szerepet játszott a második világháborúban, és hozzájárult a szövetségesek győzelméhez.
+
+> "There are two types of encryption: one that will prevent your sister from reading your diary and one that will prevent your government." — Bruce Schneier
+
+Az Enigma gép titkosítási eljárásának megértése és a feltörésének történelmi háttere fontos tapasztalatokat nyújt a **kriptográfia** és a **biztonság** területén.
+A kriptográfia történelme érdekes és gazdag fejleményekben. A **kriptográfia** az információ titkosításának és visszafejtésének tudománya. Ebben a fejezetben a kriptográfia történetét fogjuk áttekinteni, kiemelve a legfontosabb mérföldköveket és **fogalmakat**.
+
+## A kriptográfia kezdeti évei
+A kriptográfia története az ókorig nyúlik vissza. Az első kriptográfiai módszerek a **szubsztiúción** és a **transzpozíció** alapultak. A **szubsztiúció** során a szöveg betűit más betűkkel helyettesítették, míg a **transzpozíció** során a szöveg betűit átrendezték.
+
+## A modern kriptográfia születése
+A modern kriptográfia **Claude E. Shannon** nevéhez fűződik, aki az **információ-elmélet atyja**. Shannon 1949-ben megfogalmazta a **rejtjelezés biztonságának első precíz definícióját**. Ekkor kezdődött el a kriptográfia **matematikai alapokon** nyugvó fejlődése.
+
+> "A kriptográfia olyan, mint a széf, amelybe beletehetjük az értékeinket. De ha a széf kulcsa nem elég erős, akkor az értékeink nem lesznek biztonságban." - Bruce Schneier
+
+## Fontosabb mérföldkövek
+- **Rejtjelezés információ-elméleti megközelítése** (1949)
+- **Data Encryption Standard (DES)** (1970-es évek)
+- **Publikus kulcsú kriptográfia megjelenése** (1976-78)
+- **Kvantum-kriptográfia** (1980-as évek)
+- **Pretty Good Privacy (PGP)** (1990-es évek)
+- **Posztkvantum-kriptográfia** (jelenkor)
+
+## A DES algoritmus
+A **DES** (**Data Encryption Standard**) egy **szimmetrikus kulcsú** blokkrejtjelező algoritmus, amelyet az **IBM** tervei alapján készítettek az 1970-es években. A DES **Feistel-struktúrát** használ, 16 réteggel, 64 bites input/output blokk mérettel és 56 bites kulcsmérettel.
+
+```python
+# DES algoritmus példa
+def des_encrypt(plain_text, key):
+    # Feistel-struktúra
+    for i in range(16):
+        # Rövidített példa, a valós implementáció sokkal bonyolultabb
+        plain_text = plain_text ^ key
+    return plain_text
+```
+
+## Az RSA algoritmus
+Az **RSA** (**Rivest-Shamir-Adleman**) egy **publikus kulcsú** kriptográfiai algoritmus, amelyet **Adi Shamir**, **Ronald Rivest** és **Leonard Adleman** fejlesztett ki. Az RSA algoritmus **biztonsága** a **nagysámok faktorizálásának** nehézségén alapul.
+
+$$
+c \equiv m^e \pmod{n}
+$$
+
+Ahol $c$ a titkosított szöveg, $m$ az eredeti szöveg, $e$ a nyilvános kulcs, $n$ a modulus és $d$ a privát kulcs.
+
+## Összegzés
+A kriptográfia története gazdag és érdekes. A **kriptográfia** ma is fontos szerepet játszik az **információ biztonságában**. A **publikus kulcsú kriptográfia** és a **szimmetrikus kulcsú kriptográfia** együtt biztosítják az **információ titkosítását** és **hitelesítését**.
+A kriptográfia történelme szorosan kapcsolódik a **titkosítás** és a **kódolás** fejlődéséhez. A kriptográfiai rendszerek feltörése és a **nehéz matematikai problémák** megoldása között szoros kapcsolat áll fenn. Ebben a jegyzetben a kriptográfia történelmét és a **kvantum-veszély** hatását vizsgáljuk.
+
+## Bevezetés a kriptográfiába
+A kriptográfia a **titkosítás** és a **kódolás** tudománya. A kriptográfiai rendszerek célja a titkos információk védelme a **hatékony algoritmusok** segítségével. A kriptográfiai rendszerek feltörése és a **nehéz matematikai problémák** megoldása között szoros kapcsolat áll fenn.
+
+> "A kriptográfiai rendszer feltörése legalább annyira nehéz, mint a nehéz matematikai probléma megoldása"
+
+## A kriptográfia történelme
+A kriptográfia történelme gazdag és érdekes. Az egyik legfontosabb személy a kriptográfia történelmében **Phil Zimmermann**, aki 1991-ben létrehozta a **PGP** (Pretty Good Privacy) szoftvert. A PGP szoftver lehetővé tette az **erős kriptográfia** használatát az **átlagemberek** számára is.
+
+- A PGP szoftver használata
+- Az erős kriptográfia fontossága
+- A kriptográfia történelme
+
+## A kvantum-veszély
+A **kvantum-veszély** a kriptográfiai rendszerek feltörésének egyik legnagyobb kihívása. A **kvantum-számítógépek** képesek **hatékonyan** megoldani a **nehéz matematikai problémákat**, amelyek a kriptográfiai rendszerek alapját képezik.
+
+```python
+import math
+
+def faktorizalas(n):
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return i
+    return None
+
+print(faktorizalas(15))  # 3
+```
+
+## A posztkvantum kriptográfia
+A **posztkvantum kriptográfia** olyan új kriptográfiai algoritmusok tervezésével és elemzésével foglalkozik, amelyek **ellenállnak** a **klasszikus** és a **kvantum-támadásoknak**.
+
+- A posztkvantum kriptográfia fontossága
+- A kvantum-veszély hatása a kriptográfiára
+- Az új kriptográfiai algoritmusok fejlesztése
+
+A kriptográfia történelme és a kvantum-veszély hatása egy érdekes és fontos téma. A kriptográfiai rendszerek feltörése és a **nehéz matematikai problémák** megoldása között szoros kapcsolat áll fenn. A **posztkvantum kriptográfia** olyan új kriptográfiai algoritmusok tervezésével és elemzésével foglalkozik, amelyek **ellenállnak** a **klasszikus** és a **kvantum-támadásoknak**.
+A kriptográfia történelme hosszú és változatos, a **titkosítás** és **kódolás** fejlődése során számos fontos mérföldkőhöz érkeztünk. A **kvantum-veszély** felmerülése új kihívásokat állított a kriptográfusok elé, akik most **posztkvantum kriptográfiát** fejlesztenek. 
+
+## Bevezetés a kriptográfiába
+A kriptográfia **titkosítással** és **kódolással** foglalkozik, célja a bizalmas információk védelme. A **klasszikus rejtjelezés** modellje szerint a titkosítás egy **kulcs** segítségével történik, amely a **kulcstér** egyik eleme.
+
+## Kvantum-veszély
+> A kvantum-veszély a klasszikus kriptográfiai módszerek **biztonságának** kompromittálódását jelenti, mivel a **kvantumszámítógépek** képesek **feltörni** a jelenleg használt titkosítási rendszereket.
+
+A **kvantum-veszély** elleni védekezés érdekében a **posztkvantum kriptográfia** fejlesztése folyik, amely **kvantum-támadások** ellen is ellenálló **titkosítási** módszereket biztosít.
+
+## Kvantum-kriptográfia
+A **kvantum-kriptográfia** a **kvantum-fizika** törvényeinek kihasználásával **klasszikus biztonsági** problémákat old meg. A **kvantum-összefonódás** és a **mérés zavaró hatása** segítségével **közös titok** létrehozása válik lehetővé két távoli fél között.
+
+### Példa: BB84 protokoll
+```python
+import random
+
+def bb84_protocol():
+    # Polarizált fotonok generálása
+    photons = [random.choice(['0', '1']) for _ in range(4)]
+
+    # Titok létrehozása
+    secret = ''.join(photons)
+
+    return secret
+
+print(bb84_protocol())
+```
+
+## Összefoglalás
+- A **kriptográfia** **titkosítással** és **kódolással** foglalkozik.
+- A **kvantum-veszély** a **klasszikus kriptográfiai** módszerek **biztonságának** kompromittálódását jelenti.
+- A **posztkvantum kriptográfia** fejlesztése folyik a **kvantum-támadások** elleni védekezés érdekében.
+- A **kvantum-kriptográfia** a **kvantum-fizika** törvényeinek kihasználásával **klasszikus biztonsági** problémákat old meg.
+A kriptográfia története szorosan kapcsolódik a **titkosítás** és a **kódolás** fejlődéséhez. A kriptográfia célja a bizalmas információk védelme, hogy azokat csak azok olvashassák, akiknek szánják. A kriptográfiai módszerek fejlődése során különböző **titkosítási technikákat** fejlesztettek ki, amelyek ma már elengedhetetlenek a modernebb társadalom számára.
+
+## Bevezetés a kriptográfiába
+A kriptográfia alapfogalmai közé tartozik a **kulcs** és a **kulcstér**. A kulcs az a titkos információ, amely szükséges a titkosított üzenet visszafejtéséhez. A kulcstér pedig az összes lehetséges kulcs halmaza.
+
+## Kriptográfiai alapfogalmak
+- A **kimerítő kulcskeresés** egy olyan támadási módszer, amely során a támadó megpróbálja kipróbálni az összes lehetséges kulcsot, hogy megtalálja a helyes kulcsot.
+- A **mono-alfabetikus helyettesítés** egy olyan titkosítási módszer, amelyben az üzenet minden betűjét egy másik betűre cserélik le.
+- A **blokkrejtjelezés** egy olyan titkosítási módszer, amelyben az üzenetet blokkokra osztjuk, és minden blokkot külön titkosítunk.
+
+> A kriptográfiai módszerek fejlődése során fontos szempont, hogy a titkosítási módszerek **biztonságosak** legyenek, azaz ne legyenek **törhetőek**.
+
+## Nyilvános kulcsú kriptográfia
+A **nyilvános kulcsú kriptográfia** egy olyan módszer, amelyben a titkosításhoz használt kulcs **nyilvános**, de a visszafejtéshez használt kulcs **titkos**.
+- A **Diffie-Hellman kulcscsere protokoll** egy olyan protokoll, amely lehetővé teszi két fél számára, hogy **közös titkos kulcsot** hozzanak létre anélkül, hogy bármilyen titkos információt cserélnének.
+- Az **RSA rejtjelezés** egy olyan **nyilvános kulcsú titkosítási** módszer, amely a **moduláris aritmetika** elvein alapul.
+
+## Kvantum-kriptográfia
+A **kvantum-kriptográfia** egy olyan terület, amely a **kvantummechanika** elveit használja a **titkosítás** és a **kódolás** számára.
+- A **kvantum-kulcsszétosztás (QKD)** egy olyan módszer, amely lehetővé teszi két fél számára, hogy **közös titkos kulcsot** hozzanak létre **kvantummechanikai** elvek alapján.
+- A **BB84 QKD protokoll** egy olyan protokoll, amely a **fotonok** **polarizációját** használja a **titkos kulcs** létrehozásához.
+
+```python
+# Példa a Diffie-Hellman kulcscsere protokollra
+def diffie_hellman(p, g, a, b):
+    A = pow(g, a, p)
+    B = pow(g, b, p)
+    k = pow(B, a, p)
+    return k
+
+p = 23  # prímszám
+g = 5   # primitív gyök
+a = 6   # Alice titkos kulcsa
+b = 15  # Bob titkos kulcsa
+
+k = diffie_hellman(p, g, a, b)
+print("Közös titkos kulcs:", k)
+```
+
+$y = g^x \mod p$ 
+
+A kriptográfia fejlődése során fontos szempont, hogy a titkosítási módszerek **biztonságosak** legyenek, azaz ne legyenek **törhetőek**. A **kvantum-kriptográfia** új lehetőségeket nyújt a **titkosítás** és a **kódolás** számára, de fontos, hogy a **biztonság** és a **teljesítmény** közötti **egyensúly** meglegyen.
+
+---
+
+## 🧠 Active Recall
+
+<details>
+<summary>Önellenőrző kérdések (kattints a kibontáshoz)</summary>
+
+### Kérdés 1
+**Mi a kriptográfia alapvető célja?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfia az információbiztonsági szolgáltatások megvalósításának algoritmikus módszereit jelenti, beleértve a rejtjelezést, az üzenet hitelesítő kód használatát és a digitális aláírásokat.
+</details>
+
+### Kérdés 2
+**Milyen típusú rejtjelezést valósít meg a Caesar-rejtjelező?**
+
+<details>
+<summary>Válasz</summary>
+Helyettesítéses rejtjelezést, ahol az ábécében egy adott pozícióval később található betűvel helyettesíti a nyílt szöveg minden betűjét.
+</details>
+
+### Kérdés 3
+**Mi a kriptográfia történelmi háttere?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfia története az ókortól a 20. század közepéig katonai és diplomáciai alkalmazások körében alakult ki, majd később üzleti és mindennapi alkalmazásokban is megjelent.
+</details>
+
+### Kérdés 4
+**Milyen fontos szempontokat kell figyelembe venni a kriptográfiai algoritmusok tervezése és megvalósítása során?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfiai algoritmusoknak hatékonyaknak kell lenniük, jól kell lenniük tervezve és megvalósítva, hogy biztosítsák az információk védelmét.
+</details>
+
+### Kérdés 5
+**Mi a kriptográfia szerepe az információbiztonságban?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfia fontos szerepet játszik az információbiztonságban, de nem mindig a leggyengébb láncszem az IT rendszerek biztonságában.
+</details>
+
+</details>

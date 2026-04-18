@@ -1,0 +1,76 @@
+---
+title: "Control Questions kidolgozva2025"
+lesson: 13
+section: "Control Questions kidolgozva2025"
+sources:
+  - type: "source"
+    title: "Control Questions - kidolgozva2025.docx"
+    year: 2026
+---
+
+## Attekintes
+
+Ez a jegyzet lokalis fallback generatort hasznalva keszult, mert az LLM szolgaltatas eppen nem volt elerheto vagy kvotaba futott. A cel, hogy a tanulasi csomag ilyenkor is teljes legyen, es kesobb ugyanazzal a pipeline-nal ujrageneralhato maradjon.
+
+Where on the stack are function parameters and local variables placed?A stack frame is a memory structure created during a function call to store its local variables, parameters, and return address.
+
+## Fo pontok
+
+- Where on the stack are function parameters and local variables placed?A stack frame is a memory structure created during a function call to store its local variables, parameters, and return address.
+- Local variables are placed below the saved EBP register at EBP - offset .
+- Function parameters are placed above the saved EBP register at EBP + 8, EBP + 12, etc., depending on the calling convention .
+- What is the main idea of stack overflow?Stack overflow occurs when a program writes more data to a buffer on the stack than it can hold, overwriting adjacent memory, including the return address.
+- This allows attackers to hijack the program's control flow and execute arbitrary code.
+- Where can the attacker's code be injected in a stack overflow attack?The attacker's code shellcode can be injected: Into the local buffer itself, often preceded by a NOP sled.
+
+## Fontos fogalmak
+
+- **GENERÁLT**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **EBP**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **NOP**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **XOR**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **DEP**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **ASLR**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **GCC**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **AAA**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **USB**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+- **MFA**: a fejezetben kiemelt fogalom vagy hivatkozasi pont.
+
+## Vizsgara figyelj
+
+- Tudd a fogalmakat sajat szavaiddal definialni.
+- Keresd az osszefuggest a fenyegetes, sebezhetoseg, vedelmi kontroll es kockazat kozott.
+- Gyakorold, hogy egy konkret peldaban felismered-e a helyes biztonsagi dontest.
+
+---
+
+## Active Recall
+
+<details>
+<summary>Onellenorzo kerdesek</summary>
+
+### Kerdes 1
+**Mi a(z) Control Questions kidolgozva2025 lenyege a forrasanyag alapjan?**
+
+<details>
+<summary>Valasz</summary>
+Where on the stack are function parameters and local variables placed?A stack frame is a memory structure created during a function call to store its local variables, parameters, and return address.
+</details>
+
+### Kerdes 2
+**Mely fogalmakat erdemes biztosan felismerni ebben a reszben?**
+
+<details>
+<summary>Valasz</summary>
+GENERÁLT, EBP, NOP, XOR
+</details>
+
+### Kerdes 3
+**Milyen gyakorlati kockazat vagy vedelmi szempont kovetkezik az anyagbol?**
+
+<details>
+<summary>Valasz</summary>
+Local variables are placed below the saved EBP register at EBP - offset .
+</details>
+
+</details>

@@ -4,7 +4,7 @@
 
 **Study Hall** egy személyes tanulást segítő webalkalmazás, amely egyetemi PDF/PPT anyagokból automatikusan generál tanulási segédanyagokat: humanizált notes, quiz, flashcard, glosszárium, és írásbeli tesztek. A cél a hatékony aktív tanulás támogatása egy clean, modern felületen.
 
-A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás lokálisan fut egy Python CLI-vel, deploy Vercelen. Nincs adatbázis, nincs auth, nincs külön szerver — egyszerű, ingyenes, gyors.
+A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás lokálisan fut egy Node.js CLI-vel, deploy Vercelen. Nincs adatbázis, nincs auth, nincs külön szerver — egyszerű, ingyenes, gyors.
 
 ---
 
@@ -12,10 +12,10 @@ A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás
 
 | Réteg | Technológia |
 |---|---|
-| Frontend | Next.js 14 · TypeScript · Tailwind CSS · Lucide React |
+| Frontend | Next.js 14 · **JavaScript** · Inline styles · Lucide React |
 | Tartalom | JSON + MDX fájlok a `content/` mappában (git-ben) |
 | Math render | KaTeX (`rehype-katex` + `remark-math`) |
-| AI pipeline | Python CLI — Groq `llama-3.3-70b-versatile` |
+| AI pipeline | Node.js scripts — Groq `llama-3.3-70b-versatile` |
 | Written Test AI | Groq API via Next.js serverless (`/api/validate-answer`) |
 | Deploy | Vercel (free hobby tier) |
 | Progress | localStorage (streak, wrong answers — nincs DB) |
@@ -29,17 +29,17 @@ A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás
 ## Workflow
 
 ```
-1. PDF/PPT anyag előkészítve
+1. PDF anyag előkészítve
         │
-        │  python pipeline/process.py anyag.pdf --subject targy-neve
+        │  node scripts/generate-notes.js it_biztonsag
         ▼
-2. content/targy-neve/ generálódik:
+2. content/it_biztonsag/ generálódik:
    ├── notes/01-lesson.mdx      (humanizált notes + LaTeX)
-   ├── questions.json           (MCQ + multi + written kérdések)
+   ├── questions.json           (MCQ + írásbeli kérdések)
    ├── flashcards.json          (Q&A kártyapárok)
    └── glossary.json            (kulcsszavak + definíciók)
         │
-        │  git add . && git commit -m "Add targy-neve content" && git push
+        │  git add . && git commit -m "Add it_biztonsag content" && git push
         ▼
 3. Vercel auto-deploy → studyhall.vercel.app frissül
 ```
@@ -57,15 +57,15 @@ A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás
 - Section + Size dropdown szűrők
 - Mode kártyák rácsa:
 
-| Mód | URL | Leírás |
-|---|---|---|
-| 📖 Study | `/study` | MDX notes + LaTeX math + képek + Active Recall |
-| ▶ Quiz | `/quiz` | MCQ + multi-select, scored, auto-advance |
-| ✍ Written Test | `/written` | Kifejtős kérdések, LLM értékel a végén |
-| ↩ Wrong Answers | `/wrong-answers` | localStorage-ból szűrt hibák |
-| 🃏 Flashcards | `/flashcards` | 3D flip, billentyűzet navigáció |
-| 📖 Glossary | `/glossary` | Kereső + kategória chip szűrők |
-| ≡ Review | `/review` | Összes Q+A + magyarázat böngészés |
+| Mód | Leírás |
+|---|---|
+| 📖 Study | MDX notes + LaTeX math + képek + Active Recall |
+| ▶ Quiz | MCQ + multi-select, scored, auto-advance |
+| ✍ Written Test | Kifejtős kérdések, Groq LLM értékel a végén |
+| ↩ Wrong Answers | localStorage-ból szűrt hibák + relatív dátum |
+| 🃏 Flashcards | 3D flip, billentyűzet navigáció |
+| 📖 Glossary | Kereső + kategória chip szűrők |
+| ≡ Review | Összes Q+A + magyarázat böngészés |
 
 ### Written Test részletei
 - Minden kérdésnél textarea a válaszhoz
@@ -79,7 +79,6 @@ A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás
 ### Forrás Disclaimer
 - Minden notes oldal alján automatikus blokk
 - MDX frontmatter `sources` mezőből generálódik
-- "Ez az anyag az alábbi forrásokból készült: ..."
 
 ---
 
@@ -117,22 +116,19 @@ sources:
 [
   {
     "id": "q1",
-    "type": "mcq",
-    "question": "Kérdés szövege",
-    "options": ["A", "B", "C", "D"],
-    "correct": 1,
-    "explanation": "Magyarázat",
     "section": "Section neve",
-    "difficulty": "medium"
+    "q": "Kérdés szövege",
+    "opts": ["A", "B", "C", "D"],
+    "answer": 1,
+    "explain": "Magyarázat"
   },
   {
     "id": "q2",
-    "type": "written",
-    "question": "Kifejtős kérdés",
-    "model_answer": "Minta válasz az LLM számára",
-    "key_points": ["kulcspont1", "kulcspont2"],
     "section": "Section neve",
-    "difficulty": "hard"
+    "q": "Kifejtős kérdés",
+    "ideal": "Minta válasz az LLM számára",
+    "keywords": ["kulcspont1", "kulcspont2"],
+    "type": "written"
   }
 ]
 ```
@@ -150,17 +146,10 @@ sources:
 | Border | `#E8E3DC` | `#333333` |
 | Muted text | `#8A8A8A` | `#6B6B6B` |
 
-Font: Inter · Icons: Lucide React · Math: KaTeX
+Font: DM Sans + Lora · Icons: Lucide React · Math: KaTeX  
+Összes szín a `src/theme.js` `C` objektumból és `useTheme()` hookból.
 
-### Study Page Design (Referenciák alapján)
-
-**Inspirációs oldalak:**
-
-- [MLU-Explain](https://mlu-explain.github.io/) — kiemelés stílus (coral background text-highlight), serif + sans-serif mix, clean academic layout
-- [Anthropic Claude 101](https://anthropic.skilljar.com/claude-101/383389) — bal oldali sidebar leckékkel, "Learning objectives" section, "Estimated time" megjelenítés, clean serif typography, ✓ completion indicators
-- [BME VIK IIT](https://vaitkusm.github.io/genai-inverse-graphics-bme-vik-iit/) — felső sáv navigáció, logoelrendezés
-
-**Study oldal konkrét specifikáció:**
+### Study Page Design
 
 ```text
 ┌──────────────────────────────────────────────────────┐
@@ -170,17 +159,11 @@ Font: Inter · Icons: Lucide React · Math: KaTeX
 │  LESSONS        │  ⏱ Estimated time: 8 min           │
 │                 │                                     │
 │  ML Problem Fr. │  ## Learning Objectives             │
-│  > Solution Ar. │  By the end of this lesson you'll   │
-│    TF Ecosystem │  be able to:                        │
-│                 │  • Explain bias-variance tradeoff   │
-│  7 of 14 (50%)  │  • Choose the right ML approach     │
-│  [███░░░░░]     │  • Handle PII regulation changes    │
-│                 │  ─────────────────────────────────  │
-│                 │  The **bias-variance tradeoff**      │
-│                 │  describes the tension between       │
-│                 │  ╔══════════════════════════════╗   │
-│                 │  ║ Key Takeaway: More complex   ║   │
-│                 │  ║ ≠ always better              ║   │
+│  > Solution Ar. │  ...                                │
+│                 │                                     │
+│  7 of 14 (50%)  │  The **bias-variance tradeoff**     │
+│  [███░░░░░]     │  ╔══════════════════════════════╗   │
+│                 │  ║ Key Takeaway: ...            ║   │
 │                 │  ╚══════════════════════════════╝   │
 │                 │                                     │
 │                 │  [Sources: Google PMLE Guide 2024]  │
@@ -188,100 +171,78 @@ Font: Inter · Icons: Lucide React · Math: KaTeX
 └─────────────────┴────────────────────────────────────┘
 ```
 
-**Implementációs részletek:**
-
-- Sidebar: leckék csoportosítva section szerint, ✓ completion (localStorage), haladásjelző pill
-- Content area: "Estimated time" + "Learning objectives" frontmatter-ből renderelve
-- **MLU-explain highlight**: `==szöveg==` MDX-ben → coral background highlight `<mark>` tag
-- Typography: `prose` class, serif-szerű `font-serif` headings, sans body
-- Key Takeaway callout: `> **Key Takeaway:**` → styled blockquote accent border-rel
-- Képek: MDX `![alt](path)` → lazy load, rounded, max-width, fullscreen click
-- Progress tracker a sidebar alján: "X of Y lessons · Z%"
-
 ---
 
 ## Megvalósítási Fázisok
 
 ### ✅ Fázis 0: Projekt setup (KÉSZ)
-- [x] package.json + tsconfig + tailwind + next config
-- [x] globals.css design tokenekkel
-- [x] .gitignore + .env.local.example
+- [x] Next.js 14 + JavaScript (TS→JS migráció kész)
+- [x] Tailwind → inline styles (`src/screens/`)
+- [x] `src/theme.js` — design token rendszer (C, LIGHT, DARK)
+- [x] `src/store.jsx` — useStore, useTheme, navigate
+- [x] `src/shell.jsx` — TopBar, TabBar, Card, Btn
 
-### 🔄 Fázis 1: Alap layout + homepage (folyamatban)
-- [ ] app/layout.tsx + ThemeProvider
-- [ ] components/layout/Header.tsx
-- [ ] components/layout/ThemeToggle.tsx
-- [ ] app/page.tsx — Study Hall főlap
-- [ ] content/subjects.json + 1 sample subject
+### ✅ Fázis 1: Alap layout + képernyők (KÉSZ)
+- [x] Hash-routing SPA (`src/App.jsx`)
+- [x] TopBar + TabBar navigáció
+- [x] Összes screen alapkiépítve (`src/screens/*.jsx`)
+- [x] `content/machine-learning/` minta tartalom
 
-### Fázis 2: Study módok
-- [ ] app/subject/[slug]/page.tsx — Subject oldal
-- [ ] app/subject/[slug]/quiz/page.tsx
-- [ ] app/subject/[slug]/flashcards/page.tsx
-- [ ] app/subject/[slug]/glossary/page.tsx
-- [ ] app/subject/[slug]/review/page.tsx
-- [ ] app/subject/[slug]/wrong-answers/page.tsx
+### ✅ Fázis 2: AI integráció + localStorage (KÉSZ)
+- [x] `app/api/validate-answer/route.js` — Groq értékelés
+- [x] Written.jsx — éles AI visszajelzés (score %, correct/missing)
+- [x] Quiz.jsx — wrong answer timestamp mentés localStorage-ba
+- [x] WrongAnswers.jsx — relatív dátum megjelenítés
+- [x] Flashcard.jsx — subject neve megjelenik a progress bar felett
 
-### Fázis 3: Written Test + AI
-- [ ] app/subject/[slug]/written/page.tsx
-- [ ] app/api/validate-answer/route.ts (Groq API)
-- [ ] AIFeedback komponens
+### 🔄 Fázis 3: Frontend design finomítás (folyamatban)
+- [ ] Quiz.jsx — expandable kérdés sorok eredmény nézetben (chevron + A/B/C/D badge-ek)
+- [ ] Settings.jsx — profil szekció (avatar, név, email), streak, sign out gomb
+- [ ] ExamSim.jsx — True/False kérdéstípus (`TfQuestion` komponens)
+- [ ] Study.jsx — `Callout` + `H` highlight komponensek, progress pill
+- [ ] Home.jsx — streak banner, subject card grid (2 oszlop)
+- [ ] Onboarding.jsx — 5. lépés (összefoglaló), layout átrendezés
+- [ ] Glossary.jsx — overview dashboard, lista/kártya/quiz mód toggle
 
-### Fázis 4: Notes / Study oldal
-- [ ] app/subject/[slug]/study/page.tsx
-- [ ] MDX setup: next-mdx-remote + rehype-katex + remark-math
-- [ ] Active Recall komponens
-- [ ] Forrás disclaimer komponens
+### ✅ Fázis 4: Backend tartalom pipeline (KÉSZ)
+- [x] `scripts/generate-notes.js` — PDF/DOCX → MDX notes (Groq, `pdf-parse` + `mammoth`)
+- [x] `scripts/generate-questions.js` — test sources → `questions.json` (MCQ + multi + written)
+- [x] `scripts/generate-extras.js` — `flashcards.json` + `glossary.json`
+- [x] `scripts/generate-diagrams.js` — Mermaid diagramok generálása (opcionális)
+- [x] `scripts/generate-all.js` — Egy commandos teljes generálás
+- [x] `lib/content.js` — Tartalomkezelő modul frissítve (lessons.json, active recall)
+- [x] `scripts/README.md` — Használati útmutató
+- [ ] `content/it_biztonsag/` — IT Biztonság tárgy generálása (futtatandó)
+- [ ] `content/subjects.json` — IT Biztonság bejegyzés (automatikus)
 
-### Fázis 5: localStorage + UX
-- [ ] Streak tracking
-- [ ] Wrong Answers gyűjtés (quiz + written)
-- [ ] Quiz progress bar
-- [ ] Keyboard navigation (Flashcard: Space/←/→)
+### Fázis 5: Keresés (nice-to-have)
+- [ ] `src/screens/Search.jsx` — live keresés kérdések/terms/lessons között
+- [ ] TopbarSearch widget (compact pill a TopBar-ban)
+- [ ] `src/App.jsx` — `#search` hash routing
 
-### Fázis 6: Python Pipeline
-- [ ] pipeline/process.py CLI (argparse)
-- [ ] pipeline/agents/ingest.py (PyMuPDF + python-pptx)
-- [ ] pipeline/agents/notes.py (MDX + LaTeX)
-- [ ] pipeline/agents/quiz.py
-- [ ] pipeline/agents/flashcard.py
-- [ ] pipeline/agents/glossary.py
-- [ ] pipeline/requirements.txt
-
-### Fázis 7: Deploy + Finalizálás
-- [ ] Vercel deploy (vercel.json ha kell)
-- [ ] GROQ_API_KEY Vercel env var
-- [ ] README.md frissítés (pipeline használat)
-
-### Fázis 8: Google Drive Sync (v1.5)
-- [ ] sync/sync_drive.py — lokális CLI
-- [ ] Google OAuth2 token (.env.local-ban)
-- [ ] Drive mappa → letölt → pipeline → git push
+### Fázis 6: Deploy + Finalizálás
+- [ ] Vercel deploy
+- [ ] `GROQ_API_KEY` Vercel env var beállítás
+- [ ] README.md — pipeline használati útmutató
 
 ---
 
-## Python Pipeline Használata
+## Node.js Pipeline Tervezett Használata
 
 ```bash
-# Telepítés (egyszer)
-pip install -r pipeline/requirements.txt
+# Notes generálása PDF/DOCX forrásokból
+node scripts/generate-notes.js it_biztonsag
 
-# Teljes feldolgozás
-python pipeline/process.py path/to/file.pdf --subject subject-slug
+# Kérdések generálása test sources-ból
+node scripts/generate-questions.js it_biztonsag
 
-# PPT is működik
-python pipeline/process.py path/to/slides.pptx --subject subject-slug
-
-# Csak egy módot frissít
-python pipeline/process.py file.pdf --subject slug --only quiz
-python pipeline/process.py file.pdf --subject slug --only notes
-python pipeline/process.py file.pdf --subject slug --only flashcards
-
-# Új subject létrehozása
-python pipeline/process.py file.pdf --subject uj-targy --name "Tárgy Neve" --description "Leírás"
+# Flashcard + Glossary generálás
+node scripts/generate-extras.js it_biztonsag
 ```
 
-A pipeline a `content/[subject-slug]/` mappába ír. Utána `git push` → Vercel deploy.
+Forrásanyagok helye: `storage/subjects/{slug}/sources/`  
+Kimenet helye: `content/{slug}/`  
+Utána: `git add . && git commit && git push` → Vercel auto-deploy.
 
 ---
 
@@ -303,4 +264,3 @@ A pipeline a `content/[subject-slug]/` mappába ír. Utána `git push` → Verce
 - SM-2 spaced repetition algoritmus
 - Auth (ha mások is használnák)
 - Diagram generálás (SVG)
-- Notion import

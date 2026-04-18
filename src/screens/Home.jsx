@@ -180,8 +180,15 @@ export default function Home() {
   const t = useTheme()
   const [subjects, setSubjects] = useState([])
   const [open, setOpen] = useState({})
+  const [sessions, setSessions] = useState([])
 
   useEffect(() => {
+    try {
+      setSessions(JSON.parse(localStorage.getItem('recentSessions') ?? '[]'))
+    } catch {
+      setSessions([])
+    }
+
     fetch('/api/subjects')
       .then(r => r.json())
       .then(data => {
@@ -202,7 +209,6 @@ export default function Home() {
   const pctTotal  = totalQ > 0 ? Math.round((totalDone / totalQ) * 100) : 0
   const streak    = subjects.length > 0 ? Math.max(...subjects.map(s => s.streak ?? 0)) : 0
   const avgScore  = subjects.length > 0 ? Math.round(subjects.filter(s => s.avgScore).reduce((a, s) => a + s.avgScore, 0) / (subjects.filter(s => s.avgScore).length || 1)) : 0
-  const sessions  = JSON.parse(localStorage.getItem('recentSessions') ?? '[]')
 
   const circ = 2 * Math.PI * 30
   const dash = (pctTotal / 100) * circ

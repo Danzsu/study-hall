@@ -54,6 +54,9 @@ function AnswerComparison({ userAnswer, result, t }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
           <ScoreBadge grade={result.grade} t={t} />
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.5px', color: t.textMuted }}>YOUR ANSWER</span>
+          {result.scorePct != null && (
+            <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 800, color: borderColor }}>{result.scorePct}%</span>
+          )}
         </div>
         <p style={{ fontSize: 14, lineHeight: 1.7, color: t.text, fontFamily: "'Lora', Georgia, serif" }}>{userAnswer}</p>
       </div>
@@ -65,12 +68,34 @@ function AnswerComparison({ userAnswer, result, t }) {
         </div>
       )}
 
-      <div style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '14px 16px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-        <Sparkles size={16} style={{ color: C.accent, flexShrink: 0, marginTop: 2 }} />
-        <div>
-          <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: C.accent, display: 'block', marginBottom: 5 }}>AI FEEDBACK</span>
-          <p style={{ fontSize: 13.5, lineHeight: 1.65, color: t.textSub }}>{result.feedback}</p>
+      <div style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '14px 16px' }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: result.correct?.length || result.missing?.length ? 12 : 0 }}>
+          <Sparkles size={16} style={{ color: C.accent, flexShrink: 0, marginTop: 2 }} />
+          <div>
+            <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: C.accent, display: 'block', marginBottom: 5 }}>AI EVALUATION</span>
+            <p style={{ fontSize: 13.5, lineHeight: 1.65, color: t.textSub }}>{result.feedback}</p>
+          </div>
         </div>
+        {(result.correct?.length > 0 || result.missing?.length > 0) && (
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', paddingLeft: 28 }}>
+            {result.correct?.length > 0 && (
+              <div style={{ flex: 1, minWidth: 140 }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.6px', color: C.green, marginBottom: 5 }}>✓ CORRECT</p>
+                {result.correct.map((pt, i) => (
+                  <p key={i} style={{ fontSize: 12, color: t.textSub, lineHeight: 1.5, marginBottom: 3 }}>· {pt}</p>
+                ))}
+              </div>
+            )}
+            {result.missing?.length > 0 && (
+              <div style={{ flex: 1, minWidth: 140 }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.6px', color: C.gold, marginBottom: 5 }}>⚠ MISSING</p>
+                {result.missing.map((pt, i) => (
+                  <p key={i} style={{ fontSize: 12, color: t.textSub, lineHeight: 1.5, marginBottom: 3 }}>· {pt}</p>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
@@ -106,14 +131,47 @@ export default function Written({ subjectId }) {
     if (ta) { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px' }
   }, [userAnswer])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!userAnswer.trim() || submitted || !q) return
     setLoading(true)
-    setTimeout(() => {
-      const res = evaluateAnswer(userAnswer, q)
-      setResults(p => ({ ...p, [q.id]: res }))
-      setLoading(false)
-    }, 900)
+    try {
+      const res = await fetch('/api/validate-answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: q.q,
+          model_answer: q.ideal ?? q.explain ?? '',
+          key_points: q.keywords ?? [],
+          user_answer: userAnswer,
+        }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        const pct = data.score_pct ?? 0
+        let grade = 'incomplete'
+        if (pct >= 80) grade = 'correct'
+        else if (pct >= 50) grade = 'partial'
+        else if (pct >= 20) grade = 'incorrect'
+        let score = 1
+        if (pct >= 80) score = 3
+        else if (pct >= 50) score = 2
+        setResults(p => ({
+          ...p,
+          [q.id]: {
+            score,
+            grade,
+            scorePct: pct,
+            feedback: data.feedback_text ?? '',
+            explanation: data.model_answer ?? q.ideal ?? null,
+            correct: data.what_was_correct ?? [],
+            missing: data.what_was_missing ?? [],
+          },
+        }))
+        return
+      }
+    } catch { /* fall through to local eval */ }
+    setResults(p => ({ ...p, [q.id]: evaluateAnswer(userAnswer, q) }))
+    setLoading(false)
   }
 
   const goTo = (i) => setIdx(i)

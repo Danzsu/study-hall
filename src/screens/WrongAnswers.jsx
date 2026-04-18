@@ -2,12 +2,25 @@
 import { useState, useEffect } from 'react'
 import {
   RotateCcw, CheckCircle2, XCircle,
-  AlertTriangle, Zap, BookOpen, ChevronRight,
+  Zap, BookOpen, ChevronRight,
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
 
 const LABELS = ['A', 'B', 'C', 'D']
+
+function sameSet(a = [], b = []) {
+  if (a.length !== b.length) return false
+  return [...a].sort().join(',') === [...b].sort().join(',')
+}
+
+function relativeDate(ts) {
+  const days = Math.floor((Date.now() - ts) / 86400000)
+  if (days === 0) return 'Today'
+  if (days === 1) return 'Yesterday'
+  if (days < 7) return `${days} days ago`
+  return `${Math.floor(days / 7)}w ago`
+}
 
 function AttemptBadge({ attempts }) {
   const color = attempts >= 3 ? C.red : attempts === 2 ? C.gold : C.accent
@@ -23,6 +36,7 @@ function AttemptBadge({ attempts }) {
 }
 
 function PrevHint({ q, t, visible }) {
+  const previous = Array.isArray(q.previousChoice) ? q.previousChoice : [q.previousChoice].filter(v => v !== undefined && v !== null)
   return (
     <div style={{
       display: 'flex', alignItems: 'flex-start', gap: 8,
@@ -34,11 +48,17 @@ function PrevHint({ q, t, visible }) {
       pointerEvents: 'none',
     }}>
       <XCircle size={14} style={{ color: C.red, flexShrink: 0, marginTop: 1 }} />
-      <div>
-        <p style={{ fontSize: 11, fontWeight: 700, color: C.red, marginBottom: 2 }}>Last time you chose</p>
+      <div style={{ flex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, color: C.red }}>Last time you chose</p>
+          {q.previousDate && (
+            <span style={{ fontSize: 10, fontWeight: 600, color: t.textMuted }}>{q.previousDate}</span>
+          )}
+        </div>
         <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.4 }}>
-          <span style={{ fontWeight: 700, color: t.text }}>{LABELS[q.previousChoice]}.</span>{' '}
-          {q.options[q.previousChoice]}
+          {previous.length > 0
+            ? previous.map(i => `${LABELS[i]}. ${q.options[i]}`).join(' | ')
+            : 'Saved as a mistake in the last quiz session.'}
         </p>
       </div>
     </div>
@@ -76,7 +96,11 @@ function Progress({ total, current, results, t }) {
 }
 
 function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit, onNext, phase, t }) {
-  const isCorrect = submitted && selected === q.correct
+  const isMulti = q.type === 'multi'
+  const selectedList = Array.isArray(selected) ? selected : selected == null ? [] : [selected]
+  const correctList = isMulti ? (q.correctMultiple ?? []) : [q.correct]
+  const hasSelection = isMulti ? selectedList.length > 0 : selected !== null
+  const isCorrect = submitted && (isMulti ? sameSet(selectedList, correctList) : selected === q.correct)
   const buttonLabel = !submitted ? 'Submit' : qIdx < total - 1 ? 'Next question →' : 'See results →'
 
   const phaseStyle = {
@@ -113,10 +137,11 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
         {q.options.map((opt, oi) => {
-          const isSelected   = selected === oi
-          const isCorrectOpt = submitted && oi === q.correct
-          const isWrongOpt   = submitted && isSelected && oi !== q.correct
-          const wasPrev      = submitted && oi === q.previousChoice && oi !== q.correct
+          const previousList = Array.isArray(q.previousChoice) ? q.previousChoice : [q.previousChoice]
+          const isSelected   = selectedList.includes(oi)
+          const isCorrectOpt = submitted && correctList.includes(oi)
+          const isWrongOpt   = submitted && isSelected && !correctList.includes(oi)
+          const wasPrev      = submitted && previousList.includes(oi) && !correctList.includes(oi)
 
           let bg, border, labelBg, labelColor
           if (isCorrectOpt) {
@@ -139,15 +164,18 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
           return (
             <button
               key={oi}
-              onClick={() => !submitted && onSelect(oi)}
+              onClick={() => !submitted && onSelect(isMulti
+                ? (isSelected ? selectedList.filter(v => v !== oi) : [...selectedList, oi])
+                : oi
+              )}
               style={{
                 background: bg, border, borderRadius: 12,
                 padding: '14px 16px', display: 'flex', alignItems: 'flex-start', gap: 12,
                 cursor: submitted ? 'default' : 'pointer',
                 textAlign: 'left', width: '100%', transition: 'all 0.15s ease',
               }}
-              onMouseEnter={e => { if (!submitted && selected !== oi) e.currentTarget.style.borderColor = `${C.accent}60` }}
-              onMouseLeave={e => { if (!submitted && selected !== oi) e.currentTarget.style.borderColor = t.border }}
+              onMouseEnter={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = `${C.accent}60` }}
+              onMouseLeave={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = t.border }}
             >
               <span style={{
                 width: 28, height: 28, borderRadius: 7, flexShrink: 0,
@@ -190,19 +218,19 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
       )}
 
       <button
-        disabled={selected === null && !submitted}
+        disabled={!hasSelection && !submitted}
         onClick={submitted ? onNext : onSubmit}
         style={{
           width: '100%', padding: '15px',
-          background: selected !== null || submitted ? C.accent : t.border,
-          color: selected !== null || submitted ? '#fff' : t.textMuted,
+          background: hasSelection || submitted ? C.accent : t.border,
+          color: hasSelection || submitted ? '#fff' : t.textMuted,
           border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700,
-          cursor: selected !== null || submitted ? 'pointer' : 'not-allowed',
+          cursor: hasSelection || submitted ? 'pointer' : 'not-allowed',
           fontFamily: "'DM Sans', system-ui", transition: 'background 0.15s',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         }}
-        onMouseEnter={e => { if (selected !== null || submitted) e.currentTarget.style.background = C.accentHov }}
-        onMouseLeave={e => { if (selected !== null || submitted) e.currentTarget.style.background = C.accent }}
+        onMouseEnter={e => { if (hasSelection || submitted) e.currentTarget.style.background = C.accentHov }}
+        onMouseLeave={e => { if (hasSelection || submitted) e.currentTarget.style.background = C.accent }}
       >
         {buttonLabel}
         {submitted && <ChevronRight size={16} />}
@@ -318,17 +346,20 @@ export default function WrongAnswers({ subjectId }) {
     const wrongIds = JSON.parse(localStorage.getItem(`wrongAnswers:${subjectId}`) || '[]')
     const attempts = JSON.parse(localStorage.getItem(`wrongAttemptsCount:${subjectId}`) || '{}')
 
+    const dates = JSON.parse(localStorage.getItem(`wrongAnswerDates:${subjectId}`) || '{}')
+    const meta = JSON.parse(localStorage.getItem(`wrongAnswerMeta:${subjectId}`) || '{}')
     fetch(`/api/questions/${subjectId}`)
       .then(r => r.json())
       .then(data => {
-        const mcOnly = data.filter(q => q.type === 'mc' && q.options?.length > 0)
+        const mcOnly = data.filter(q => (q.type === 'mc' || q.type === 'mcq' || q.type === 'multi') && q.options?.length > 0)
         const wrong  = wrongIds.length > 0
           ? mcOnly.filter(q => wrongIds.includes(String(q.id)))
           : mcOnly.slice(0, 5)
         const enriched = wrong.map(q => ({
           ...q,
           attempts: attempts[q.id] ?? 1,
-          previousChoice: 0,
+          previousChoice: meta[q.id]?.selected ?? 0,
+          previousDate: (meta[q.id]?.date ?? dates[q.id]) ? relativeDate(meta[q.id]?.date ?? dates[q.id]) : null,
         }))
         setQuestions(enriched)
       })
@@ -339,9 +370,13 @@ export default function WrongAnswers({ subjectId }) {
   const busy = phase !== 'idle'
 
   const handleSubmit = () => {
-    if (selected === null || submitted) return
+    const hasSelection = Array.isArray(selected) ? selected.length > 0 : selected !== null
+    if (!hasSelection || submitted) return
     setSubmitted(true)
-    setResults(r => [...r, selected === q.correct ? 'correct' : 'wrong'])
+    const correct = q.type === 'multi'
+      ? sameSet(selected, q.correctMultiple ?? [])
+      : selected === q.correct
+    setResults(r => [...r, correct ? 'correct' : 'wrong'])
   }
 
   const handleNext = () => {

@@ -9,5 +9,16 @@
     "lessonCount": 2,
     "flashcardCount": 4,
     "glossaryCount": 6
+  },
+  {
+    "slug": "it_biztonsag",
+    "name": "IT Biztonság",
+    "description": "IT biztonság jegyzetek és tanulási anyagok",
+    "color": "#E07355",
+    "icon": "book",
+    "questionCount": 40,
+    "lessonCount": 18,
+    "flashcardCount": 606,
+    "glossaryCount": 416
   }
 ]

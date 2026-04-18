@@ -38,12 +38,50 @@ export function parseHash() {
 }
 
 export function navigate(path, params = {}) {
+  const href = routeHref(path, params)
+  if (typeof window !== 'undefined') window.location.href = href
+}
+
+export function routeHref(path, params = {}) {
+  let cleanPath = path
+  let inlineParams = {}
+
+  if (path.includes('?')) {
+    const [p, query = ''] = path.split('?')
+    cleanPath = p
+    query.split('&').forEach(kv => {
+      if (!kv) return
+      const [k, v = ''] = kv.split('=')
+      inlineParams[decodeURIComponent(k)] = decodeURIComponent(v)
+    })
+  }
+
+  const merged = { ...store.get().params, ...inlineParams, ...params }
+  const id = merged.id || merged.slug || ''
+  const lesson = merged.lesson || ''
+  const map = {
+    '/home': '/',
+    '/subject': id ? `/subject/${encodeURIComponent(id)}` : '/subject',
+    '/study': id ? `/study/${encodeURIComponent(id)}${lesson ? `?lesson=${encodeURIComponent(lesson)}` : ''}` : '/study',
+    '/quiz': id ? `/quiz/${encodeURIComponent(id)}${merged.section ? `?section=${encodeURIComponent(merged.section)}` : ''}` : '/quiz',
+    '/flashcards': id ? `/flashcards/${encodeURIComponent(id)}` : '/flashcards',
+    '/written': id ? `/written/${encodeURIComponent(id)}` : '/written',
+    '/review': id ? `/review/${encodeURIComponent(id)}` : '/review',
+    '/wrong-answers': id ? `/wrong-answers/${encodeURIComponent(id)}` : '/wrong-answers',
+    '/glossary': id ? `/glossary/${encodeURIComponent(id)}` : '/glossary',
+    '/exam': id ? `/exam/${encodeURIComponent(id)}` : '/exam',
+    '/settings': '/settings',
+    '/onboarding': '/onboarding',
+    '/pomodoro': '/pomodoro',
+    '/search': id ? `/review/${encodeURIComponent(id)}` : '/',
+  }
+
+  if (map[cleanPath]) return map[cleanPath]
+
   const query = Object.keys(params)
     .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
     .join('&')
-  if (typeof window !== 'undefined') {
-    location.hash = query ? `${path}?${query}` : path
-  }
+  return query ? `${cleanPath}?${query}` : cleanPath
 }
 
 // ── HOOKS ─────────────────────────────────────────────────────────────────────

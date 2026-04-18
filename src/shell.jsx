@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from 'react'
 import {
   Home, Layers, AlertTriangle, BookOpen,
   Search, Moon, Sun, Settings,
@@ -22,9 +23,48 @@ function iconBtn(t) {
 }
 
 // ── TOP BAR ───────────────────────────────────────────────────────────────────
+function readPreferredSubjectId() {
+  try {
+    const raw = localStorage.getItem('onboardingDone')
+    if (!raw) return ''
+    const data = JSON.parse(raw)
+    if (!Array.isArray(data?.subjects)) return ''
+    const first = data.subjects.find(item => typeof item === 'string' || item?.active !== false)
+    return typeof first === 'string' ? first : first?.id || ''
+  } catch {
+    return ''
+  }
+}
+
+function usePreferredSubjectId(params) {
+  const [fallbackSubjectId, setFallbackSubjectId] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    const onboardedSubject = readPreferredSubjectId()
+
+    if (onboardedSubject) {
+      setFallbackSubjectId(onboardedSubject)
+      return
+    }
+
+    fetch('/api/subjects')
+      .then(r => r.json())
+      .then(data => {
+        if (!cancelled) setFallbackSubjectId(data?.[0]?.id || data?.[0]?.slug || '')
+      })
+      .catch(() => {})
+
+    return () => { cancelled = true }
+  }, [])
+
+  return params?.id || params?.slug || fallbackSubjectId
+}
+
 export function TopBar({ crumbs = [], right }) {
   const t = useTheme()
   const s = useStore()
+  const subjectId = usePreferredSubjectId(s.params)
   const pom = s.pomodoro
   const pomPct = pom.mode === 'focus'
     ? (1 - pom.secondsLeft / (25 * 60))
@@ -41,6 +81,7 @@ export function TopBar({ crumbs = [], right }) {
         onClick={() => navigate('/home')}
         style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
       >
+        <img src="/assets/mascot-plain.png" alt="" style={{ width: 26, height: 26, objectFit: 'contain' }} />
         <span style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-0.3px', color: t.text }}>
           Study Hall
         </span>
@@ -91,7 +132,7 @@ export function TopBar({ crumbs = [], right }) {
             {fmtTime(pom.secondsLeft)}
           </span>
         </button>
-        <button onClick={() => navigate('/search')} style={iconBtn(t)}><Search size={14} /></button>
+        <button onClick={() => navigate('/search', subjectId ? { id: subjectId } : {})} style={iconBtn(t)}><Search size={14} /></button>
         <button onClick={() => store.set({ dark: !s.dark })} style={iconBtn(t)}>
           {s.dark ? <Sun size={14} /> : <Moon size={14} />}
         </button>
@@ -105,6 +146,7 @@ export function TopBar({ crumbs = [], right }) {
 export function TabBar() {
   const t = useTheme()
   const s = useStore()
+  const targetSubjectId = usePreferredSubjectId(s.params)
   const tabs = [
     { path: '/home',         label: 'Home',     Icon: Home },
     { path: '/review',       label: 'Review',   Icon: Layers },
@@ -120,16 +162,18 @@ export function TabBar() {
     }}>
       {tabs.map(({ path, label, Icon }) => {
         const on = s.route === path || s.route.startsWith(path + '/')
+        const disabled = path !== '/home' && !targetSubjectId
         return (
           <button
             key={path}
-            onClick={() => navigate(path)}
+            onClick={() => disabled ? navigate('/home') : navigate(path, targetSubjectId ? { id: targetSubjectId } : {})}
             style={{
               display: 'flex', alignItems: 'center', gap: 7,
               padding: '8px 14px', borderRadius: 99,
-              border: 'none', cursor: 'pointer',
+              border: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
               background: on ? t.accent : 'transparent',
               color: on ? '#fff' : t.textSub,
+              opacity: disabled ? 0.45 : 1,
               fontWeight: 700, fontSize: 12.5, fontFamily: FONT_SANS,
             }}
           >

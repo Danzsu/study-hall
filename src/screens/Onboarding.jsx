@@ -136,8 +136,8 @@ function StepLevel({ level, onSelect, t }) {
   return (
     <div style={{ animation: 'slideIn 0.36s cubic-bezier(0.22,1,0.36,1) both' }}>
       <div style={{ marginBottom: 28 }}>
-        <h2 style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 26, fontWeight: 700, letterSpacing: '-0.4px', marginBottom: 8, color: t.text }}>What's your current level?</h2>
-        <p style={{ fontSize: 14, color: t.textSub }}>We'll adjust question difficulty and pacing to match.</p>
+        <h2 style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 26, fontWeight: 700, letterSpacing: '-0.4px', marginBottom: 8, color: t.text }}>What&apos;s your current level?</h2>
+        <p style={{ fontSize: 14, color: t.textSub }}>We&apos;ll adjust question difficulty and pacing to match.</p>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {LEVELS.map(l => {

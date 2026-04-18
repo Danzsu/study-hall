@@ -2,6 +2,8 @@
   {
     "id": "q1",
     "type": "mcq",
+    "section": "ML Problem Framing",
+    "difficulty": "medium",
     "question": "A retail company wants to automatically categorize customer support tickets into 15 predefined categories. They have 50,000 labeled historical tickets. Which approach requires the LEAST effort while meeting accuracy requirements?",
     "options": [
       "Use AutoML Natural Language for text classification",
@@ -11,12 +13,14 @@
     ],
     "correct": 0,
     "explanation": "AutoML Natural Language is the lowest-effort option for custom classification with labeled data. The NLP API classifyText uses a fixed 700+ category taxonomy that won't match their custom 15 categories.",
-    "section": "ML Problem Framing",
-    "difficulty": "medium"
+    "idealAnswer": "",
+    "keywords": []
   },
   {
     "id": "q2",
     "type": "mcq",
+    "section": "ML Problem Framing",
+    "difficulty": "easy",
     "question": "You are training a deep learning model and notice that training loss keeps decreasing but validation loss starts increasing after epoch 10. What is the most likely problem?",
     "options": [
       "Underfitting — the model is too simple",
@@ -26,12 +30,14 @@
     ],
     "correct": 1,
     "explanation": "When training loss decreases but validation loss increases, this is the classic signature of overfitting. The model is memorizing the training set instead of learning generalizable patterns.",
-    "section": "ML Problem Framing",
-    "difficulty": "easy"
+    "idealAnswer": "",
+    "keywords": []
   },
   {
     "id": "q3",
     "type": "multi",
+    "section": "Solution Architecture",
+    "difficulty": "medium",
     "question": "You work as a junior Data Scientist and you are optimizing a TensorFlow model before deploying it in production. Your colleague advised that it is not advisable to deploy the model in eager mode. What can you do? (pick 3)",
     "options": [
       "Create a new tf.Graph",
@@ -39,14 +45,21 @@
       "Use graphs",
       "Use tf.function decoration function"
     ],
-    "correct": [0, 2, 3],
+    "correct": 0,
+    "correctMultiple": [
+      0,
+      2,
+      3
+    ],
     "explanation": "tf.function converts Python functions to TensorFlow graphs, which are faster. You can also explicitly use tf.Graph or disable eager execution. Option B is not valid TensorFlow syntax.",
-    "section": "Solution Architecture",
-    "difficulty": "medium"
+    "idealAnswer": "",
+    "keywords": []
   },
   {
     "id": "q4",
     "type": "mcq",
+    "section": "ML Problem Framing",
+    "difficulty": "easy",
     "question": "Which regularization technique randomly drops neurons during training to prevent overfitting?",
     "options": [
       "L1 regularization",
@@ -56,12 +69,14 @@
     ],
     "correct": 2,
     "explanation": "Dropout randomly sets a fraction of input units to 0 at each update during training, which helps prevent overfitting by forcing the network to learn redundant representations.",
-    "section": "ML Problem Framing",
-    "difficulty": "easy"
+    "idealAnswer": "",
+    "keywords": []
   },
   {
     "id": "q5",
     "type": "mcq",
+    "section": "Solution Architecture",
+    "difficulty": "medium",
     "question": "The tf.data API builds scalable input pipelines. Which method schedules future data production asynchronously to reduce idle GPU/CPU time?",
     "options": [
       "tf.data.Dataset.cache()",
@@ -71,30 +86,48 @@
     ],
     "correct": 1,
     "explanation": "tf.data.Dataset.prefetch() schedules future data production asynchronously, allowing the next batch to be prepared while the current one is being processed by the model, reducing idle GPU/CPU time.",
-    "section": "Solution Architecture",
-    "difficulty": "medium"
+    "idealAnswer": "",
+    "keywords": []
   },
   {
     "id": "q6",
     "type": "written",
-    "question": "Explain the bias-variance tradeoff in machine learning. How does model complexity affect bias and variance, and what is the impact on generalization?",
-    "model_answer": "The bias-variance tradeoff describes the tension between two sources of error in ML models. Bias is the error from overly simplistic assumptions — a high-bias model underfits, failing to capture patterns in training data. Variance is the error from excessive sensitivity to training data fluctuations — a high-variance model overfits, memorizing noise. As model complexity increases, bias decreases (model learns more patterns) but variance increases (model becomes sensitive to training specifics). The optimal model sits at the sweet spot minimizing total error = bias² + variance + irreducible noise. Regularization, cross-validation, and ensemble methods help manage this tradeoff.",
-    "key_points": ["bias definition", "variance definition", "underfitting vs overfitting", "complexity tradeoff", "total error decomposition"],
     "section": "ML Problem Framing",
-    "difficulty": "hard"
+    "difficulty": "hard",
+    "question": "Explain the bias-variance tradeoff in machine learning. How does model complexity affect bias and variance, and what is the impact on generalization?",
+    "options": [],
+    "explanation": "",
+    "idealAnswer": "The bias-variance tradeoff describes the tension between two sources of error in ML models. Bias is the error from overly simplistic assumptions — a high-bias model underfits, failing to capture patterns in training data. Variance is the error from excessive sensitivity to training data fluctuations — a high-variance model overfits, memorizing noise. As model complexity increases, bias decreases (model learns more patterns) but variance increases (model becomes sensitive to training specifics). The optimal model sits at the sweet spot minimizing total error = bias² + variance + irreducible noise. Regularization, cross-validation, and ensemble methods help manage this tradeoff.",
+    "keywords": [
+      "bias definition",
+      "variance definition",
+      "underfitting vs overfitting",
+      "complexity tradeoff",
+      "total error decomposition"
+    ]
   },
   {
     "id": "q7",
     "type": "written",
-    "question": "A feature in your training dataset was classified as non-PII but new regulations now classify it as PII. Describe the steps you would take to handle this situation.",
-    "model_answer": "Encrypt or hash the feature going forward in all new data ingestion pipelines. Retroactively process historical data: de-identify or delete the PII values in storage. Update all ML pipelines that use this feature — retrain models if the feature is now masked or removed. Update data governance documentation and access controls. Notify relevant stakeholders and conduct a data audit. Consider whether models trained on this data need to be retired or retrained with privacy-preserving techniques.",
-    "key_points": ["encrypt/hash going forward", "retroactive de-identification", "update pipelines", "governance documentation", "model retraining"],
     "section": "ML Problem Framing",
-    "difficulty": "hard"
+    "difficulty": "hard",
+    "question": "A feature in your training dataset was classified as non-PII but new regulations now classify it as PII. Describe the steps you would take to handle this situation.",
+    "options": [],
+    "explanation": "",
+    "idealAnswer": "Encrypt or hash the feature going forward in all new data ingestion pipelines. Retroactively process historical data: de-identify or delete the PII values in storage. Update all ML pipelines that use this feature — retrain models if the feature is now masked or removed. Update data governance documentation and access controls. Notify relevant stakeholders and conduct a data audit. Consider whether models trained on this data need to be retired or retrained with privacy-preserving techniques.",
+    "keywords": [
+      "encrypt/hash going forward",
+      "retroactive de-identification",
+      "update pipelines",
+      "governance documentation",
+      "model retraining"
+    ]
   },
   {
     "id": "q8",
     "type": "mcq",
+    "section": "Solution Architecture",
+    "difficulty": "hard",
     "question": "You need to process a large image dataset for model training. The images cannot fit in memory. Which approach is recommended to minimize I/O latency?",
     "options": [
       "Load all images into memory before training",
@@ -104,7 +137,7 @@
     ],
     "correct": 3,
     "explanation": "Both approaches are valid. Reading raw images with prefetch hides I/O latency. Converting to TFRecords adds a preprocessing step but enables efficient shuffling, compression, and parallel reads. The choice depends on dataset size and read patterns.",
-    "section": "Solution Architecture",
-    "difficulty": "hard"
+    "idealAnswer": "",
+    "keywords": []
   }
 ]

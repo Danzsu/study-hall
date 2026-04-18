@@ -1,8 +1,10 @@
-'use client'
-import dynamic from 'next/dynamic'
-
-const App = dynamic(() => import('@/src/App'), { ssr: false })
+import RouteShell from '@/src/RouteShell'
+import Home from '@/src/screens/Home'
 
 export default function Page() {
-  return <App />
+  return (
+    <RouteShell route="/home">
+      <Home />
+    </RouteShell>
+  )
 }

@@ -1,0 +1,4244 @@
+[
+  {
+    "id": "f1",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság alapfogalmait és összefüggéseit meg kell érteni ahhoz, hogy hatékonyan tudjunk védekezni a kiberfenyegetések ellen.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f2",
+    "front": "Mit jelent vagy mire utal: Az IT biztonság?",
+    "back": "A(z) Bevezetés az IT biztonságba temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "term"
+  },
+  {
+    "id": "f3",
+    "front": "Mi a(z) IT biztonsági alapfogalmak lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "IT biztonsági alapfogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f4",
+    "front": "Mit jelent vagy mire utal: Hozzáférés-ellenőrzés access control?",
+    "back": "A(z) IT biztonsági alapfogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "IT biztonsági alapfogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f5",
+    "front": "Mit jelent vagy mire utal: Hitelesítés authentication?",
+    "back": "A(z) IT biztonsági alapfogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "IT biztonsági alapfogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f6",
+    "front": "Mit jelent vagy mire utal: Számonkérhetőség accountability?",
+    "back": "A(z) IT biztonsági alapfogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "IT biztonsági alapfogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f7",
+    "front": "Mi a(z) Információbiztonsági követelmények lenyege?",
+    "back": "A bizalmasság confidentiality , integritás integrity és rendelkezésre állás availability a három alapvető információbiztonsági követelmény.",
+    "section": "Információbiztonsági követelmények",
+    "type": "qa"
+  },
+  {
+    "id": "f8",
+    "front": "Mit jelent vagy mire utal: CIA?",
+    "back": "A(z) Információbiztonsági követelmények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Információbiztonsági követelmények",
+    "type": "term"
+  },
+  {
+    "id": "f9",
+    "front": "Mit jelent vagy mire utal: Ezeket a követelményeket?",
+    "back": "A(z) Információbiztonsági követelmények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Információbiztonsági követelmények",
+    "type": "term"
+  },
+  {
+    "id": "f10",
+    "front": "Mit jelent vagy mire utal: CIA triád néven?",
+    "back": "A(z) Információbiztonsági követelmények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Információbiztonsági követelmények",
+    "type": "term"
+  },
+  {
+    "id": "f11",
+    "front": "Mi a(z) Az IT biztonság általános célja lenyege?",
+    "back": "Az IT biztonság általános célja a rendszer folyamatos nem-kompromittált állapotban tartása a támadások megelőzésével , észlelésével és válaszlépések megtételével .",
+    "section": "Az IT biztonság általános célja",
+    "type": "qa"
+  },
+  {
+    "id": "f12",
+    "front": "Mit jelent vagy mire utal: Az IT biztonság?",
+    "back": "A(z) Az IT biztonság általános célja temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az IT biztonság általános célja",
+    "type": "term"
+  },
+  {
+    "id": "f13",
+    "front": "Mit jelent vagy mire utal: IT biztonság?",
+    "back": "A(z) Az IT biztonság általános célja temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az IT biztonság általános célja",
+    "type": "term"
+  },
+  {
+    "id": "f14",
+    "front": "Mit jelent vagy mire utal: Hozzáférés-ellenőrzés?",
+    "back": "A(z) Az IT biztonság általános célja temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az IT biztonság általános célja",
+    "type": "term"
+  },
+  {
+    "id": "f15",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság általános célja a rendszer folyamatos nem-kompromittált állapotban tartása.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f16",
+    "front": "Mit jelent vagy mire utal: Ennek érdekében fontos?",
+    "back": "A(z) Bevezetés az IT biztonságba temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "term"
+  },
+  {
+    "id": "f17",
+    "front": "Mi a(z) Támadások lenyege?",
+    "back": "A támadás az a folyamat vagy tevékenység, mely során a támadó kompromittálja a támadott rendszert, annak sebezhetőségeit kihasználva.",
+    "section": "Támadások",
+    "type": "qa"
+  },
+  {
+    "id": "f18",
+    "front": "Mi a(z) Támadó jellemzői lenyege?",
+    "back": "A támadó motivációja lehet gazdasági, társadalmi vagy politikai.",
+    "section": "Támadó jellemzői",
+    "type": "qa"
+  },
+  {
+    "id": "f19",
+    "front": "Mit jelent vagy mire utal: Az egyéni támadók?",
+    "back": "A(z) Támadó jellemzői temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Támadó jellemzői",
+    "type": "term"
+  },
+  {
+    "id": "f20",
+    "front": "Mit jelent vagy mire utal: Motiváció?",
+    "back": "A(z) Támadó jellemzői temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Támadó jellemzői",
+    "type": "term"
+  },
+  {
+    "id": "f21",
+    "front": "Mit jelent vagy mire utal: Képességek?",
+    "back": "A(z) Támadó jellemzői temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Támadó jellemzői",
+    "type": "term"
+  },
+  {
+    "id": "f22",
+    "front": "Mi a(z) Információszerző képesség lenyege?",
+    "back": "A támadás sikere nagy mértékben függ attól, hogy mennyi és milyen jellegű információval rendelkezik a támadó a megtámadott rendszerről.",
+    "section": "Információszerző képesség",
+    "type": "qa"
+  },
+  {
+    "id": "f23",
+    "front": "Mit jelent vagy mire utal: Az információszerzés megelőzheti?",
+    "back": "A(z) Információszerző képesség temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Információszerző képesség",
+    "type": "term"
+  },
+  {
+    "id": "f24",
+    "front": "Mi a(z) Műszaki tudás, szakértelem lenyege?",
+    "back": "A támadó szakértői tudása segítségével transzformálja a megszerzett információt sikeres támadássá .",
+    "section": "Műszaki tudás, szakértelem",
+    "type": "qa"
+  },
+  {
+    "id": "f25",
+    "front": "Mit jelent vagy mire utal: Alapvető műszaki és?",
+    "back": "A(z) Műszaki tudás, szakértelem temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Műszaki tudás, szakértelem",
+    "type": "term"
+  },
+  {
+    "id": "f26",
+    "front": "Mit jelent vagy mire utal: Ismert sérülékenységek és?",
+    "back": "A(z) Műszaki tudás, szakértelem temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Műszaki tudás, szakértelem",
+    "type": "term"
+  },
+  {
+    "id": "f27",
+    "front": "Mit jelent vagy mire utal: Műszaki tudás?",
+    "back": "A(z) Műszaki tudás, szakértelem temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Műszaki tudás, szakértelem",
+    "type": "term"
+  },
+  {
+    "id": "f28",
+    "front": "Mi a(z) Erőforrások lenyege?",
+    "back": "A pénzügyi erőforrások szabadon konvertálhatók információvá , tudássá , szakértelemmé , emberi erőforrássá .",
+    "section": "Erőforrások",
+    "type": "qa"
+  },
+  {
+    "id": "f29",
+    "front": "Mit jelent vagy mire utal: Az IT biztonság?",
+    "back": "A(z) Erőforrások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Erőforrások",
+    "type": "term"
+  },
+  {
+    "id": "f30",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság három fő területre osztható: - ismert sérülékenységek és támadási módszerek ismerete - új sérülékenységek felfedezésének és új támadási módszerek kifejlesztésének képessége - IT biztonsági szakértelem",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f31",
+    "front": "Mit jelent vagy mire utal: IT biztonsági szakértelem?",
+    "back": "A(z) Bevezetés az IT biztonságba temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "term"
+  },
+  {
+    "id": "f32",
+    "front": "Mi a(z) Erőforrások lenyege?",
+    "back": "Az erőforrások , például a pénz , fontos szerepet játszanak az IT biztonság területén.",
+    "section": "Erőforrások",
+    "type": "qa"
+  },
+  {
+    "id": "f33",
+    "front": "Mit jelent vagy mire utal: Az erőforrások?",
+    "back": "A(z) Erőforrások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Erőforrások",
+    "type": "term"
+  },
+  {
+    "id": "f34",
+    "front": "Mit jelent vagy mire utal: IT biztonság területén?",
+    "back": "A(z) Erőforrások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Erőforrások",
+    "type": "term"
+  },
+  {
+    "id": "f35",
+    "front": "Mit jelent vagy mire utal: Példák az erőforrások?",
+    "back": "A(z) Erőforrások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Erőforrások",
+    "type": "term"
+  },
+  {
+    "id": "f36",
+    "front": "Mi a(z) Tipikus támadó profilok lenyege?",
+    "back": "A támadók különböző profilok szerint osztályozhatók: - állam által szponzorált támadó szervezet - kiberbűnözői szervezet - script kiddie - hacktivista csoport - \"elégedetlen munkatárs\"",
+    "section": "Tipikus támadó profilok",
+    "type": "qa"
+  },
+  {
+    "id": "f37",
+    "front": "Mi a(z) Állam által szponzorált támadó szervezet lenyege?",
+    "back": "- Motiváció : politikai vagy gazdasági célok elérése - Információgyűjtő képesség : nagyon fejlett - Műszaki tudás, szakértelem : nagyon fejlett - Erőforrások : nagyon gazdag",
+    "section": "Állam által szponzorált támadó szervezet",
+    "type": "qa"
+  },
+  {
+    "id": "f38",
+    "front": "Mit jelent vagy mire utal: Motiváció?",
+    "back": "A(z) Állam által szponzorált támadó szervezet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Állam által szponzorált támadó szervezet",
+    "type": "term"
+  },
+  {
+    "id": "f39",
+    "front": "Mit jelent vagy mire utal: Információgyűjtő képesség?",
+    "back": "A(z) Állam által szponzorált támadó szervezet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Állam által szponzorált támadó szervezet",
+    "type": "term"
+  },
+  {
+    "id": "f40",
+    "front": "Mit jelent vagy mire utal: Műszaki tudás?",
+    "back": "A(z) Állam által szponzorált támadó szervezet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Állam által szponzorált támadó szervezet",
+    "type": "term"
+  },
+  {
+    "id": "f41",
+    "front": "Mi a(z) Kiberbűnözői szervezet lenyege?",
+    "back": "- Motiváció : gazdasági haszonszerzés - Információgyűjtő képesség : fejlett - Műszaki tudás, szakértelem : fejlett - Erőforrások : gazdag",
+    "section": "Kiberbűnözői szervezet",
+    "type": "qa"
+  },
+  {
+    "id": "f42",
+    "front": "Mit jelent vagy mire utal: Motiváció?",
+    "back": "A(z) Kiberbűnözői szervezet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kiberbűnözői szervezet",
+    "type": "term"
+  },
+  {
+    "id": "f43",
+    "front": "Mit jelent vagy mire utal: Információgyűjtő képesség?",
+    "back": "A(z) Kiberbűnözői szervezet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kiberbűnözői szervezet",
+    "type": "term"
+  },
+  {
+    "id": "f44",
+    "front": "Mit jelent vagy mire utal: Műszaki tudás?",
+    "back": "A(z) Kiberbűnözői szervezet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kiberbűnözői szervezet",
+    "type": "term"
+  },
+  {
+    "id": "f45",
+    "front": "Mi a(z) Gyengeségek és sérülékenységek lenyege?",
+    "back": "Ahogy a technológia fejlődik, új sebezhetőségek és fenyegetések jelennek meg.",
+    "section": "Gyengeségek és sérülékenységek",
+    "type": "qa"
+  },
+  {
+    "id": "f46",
+    "front": "Mit jelent vagy mire utal: Műszaki logikai -?",
+    "back": "A(z) Gyengeségek és sérülékenységek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyengeségek és sérülékenységek",
+    "type": "term"
+  },
+  {
+    "id": "f47",
+    "front": "Mit jelent vagy mire utal: Fizikai - Üzemeltetési?",
+    "back": "A(z) Gyengeségek és sérülékenységek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyengeségek és sérülékenységek",
+    "type": "term"
+  },
+  {
+    "id": "f48",
+    "front": "Mit jelent vagy mire utal: Személyi Például?",
+    "back": "A(z) Gyengeségek és sérülékenységek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyengeségek és sérülékenységek",
+    "type": "term"
+  },
+  {
+    "id": "f49",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság a számítógépes rendszerek és hálózatok védelmét foglalja magában a nem kívánt hozzáféréstől, adatvesztéstől és egyéb fenyegetésektől .",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f50",
+    "front": "Mi a(z) Üzemeltetési és személyi gyengeségek lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Üzemeltetési és személyi gyengeségek",
+    "type": "qa"
+  },
+  {
+    "id": "f51",
+    "front": "Mit jelent vagy mire utal: Személyi gyengeségek?",
+    "back": "A(z) Üzemeltetési és személyi gyengeségek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Üzemeltetési és személyi gyengeségek",
+    "type": "term"
+  },
+  {
+    "id": "f52",
+    "front": "Mit jelent vagy mire utal: Az IT biztonság?",
+    "back": "A(z) Üzemeltetési és személyi gyengeségek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Üzemeltetési és személyi gyengeségek",
+    "type": "term"
+  },
+  {
+    "id": "f53",
+    "front": "Mi a(z) Gyengeségek és fenyegetések lenyege?",
+    "back": "A gyengeségek és fenyegetések osztályozhatók: - Üzemeltetési gyengeségek : a rendszer üzemeltetése során alkalmazott eljárásokban - Személyi gyengeségek : az üzemeltető személyzetet, alkalmazottakat, szerződéses partnereket érintő gyengeségek",
+    "section": "Gyengeségek és fenyegetések",
+    "type": "qa"
+  },
+  {
+    "id": "f54",
+    "front": "Mit jelent vagy mire utal: Személyi gyengeségek?",
+    "back": "A(z) Gyengeségek és fenyegetések temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyengeségek és fenyegetések",
+    "type": "term"
+  },
+  {
+    "id": "f55",
+    "front": "Mi a(z) CWE és CVE lenyege?",
+    "back": "- CWE Common Weakness Enumeration : ismert szoftver és hardver gyengeségek átfogó gyűjteménye - CVE Common Vulnerabilities and Exposures : a gyengeségek és fenyegetések nyilvános adatbázisa",
+    "section": "CWE és CVE",
+    "type": "qa"
+  },
+  {
+    "id": "f56",
+    "front": "Mit jelent vagy mire utal: CWE?",
+    "back": "A(z) CWE és CVE temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "CWE és CVE",
+    "type": "term"
+  },
+  {
+    "id": "f57",
+    "front": "Mit jelent vagy mire utal: CVE?",
+    "back": "A(z) CWE és CVE temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "CWE és CVE",
+    "type": "term"
+  },
+  {
+    "id": "f58",
+    "front": "Mit jelent vagy mire utal: CWE Common Weakness?",
+    "back": "A(z) CWE és CVE temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "CWE és CVE",
+    "type": "term"
+  },
+  {
+    "id": "f59",
+    "front": "Mi a(z) Zero-day sérülékenységek lenyege?",
+    "back": "A zero-day sérülékenységek olyan felfedezett, de be nem jelentett és nyilvánosságra nem hozott sebezhetőségek , amelyeket csak a támadók ismernek.",
+    "section": "Zero-day sérülékenységek",
+    "type": "qa"
+  },
+  {
+    "id": "f60",
+    "front": "Mit jelent vagy mire utal: Ezek a sérülékenységek?",
+    "back": "A(z) Zero-day sérülékenységek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Zero-day sérülékenységek",
+    "type": "term"
+  },
+  {
+    "id": "f61",
+    "front": "Mi a(z) Célzott támadások lenyege?",
+    "back": "A célzott támadások olyan támadások , amelyek speciális, testreszabott eszközöket és behatolási technikákat használnak.",
+    "section": "Célzott támadások",
+    "type": "qa"
+  },
+  {
+    "id": "f62",
+    "front": "Mit jelent vagy mire utal: APT?",
+    "back": "A(z) Célzott támadások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Célzott támadások",
+    "type": "term"
+  },
+  {
+    "id": "f63",
+    "front": "Mit jelent vagy mire utal: Ezek a támadások?",
+    "back": "A(z) Célzott támadások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Célzott támadások",
+    "type": "term"
+  },
+  {
+    "id": "f64",
+    "front": "Mit jelent vagy mire utal: APT-k által végrehajtottak?",
+    "back": "A(z) Célzott támadások temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Célzott támadások",
+    "type": "term"
+  },
+  {
+    "id": "f65",
+    "front": "Mi a(z) Példa: Stuxnet lenyege?",
+    "back": "A Stuxnet egy célzott támadás volt, amely az iráni urániumdúsító üzem ellen irányult.",
+    "section": "Példa: Stuxnet",
+    "type": "qa"
+  },
+  {
+    "id": "f66",
+    "front": "Mit jelent vagy mire utal: PLC?",
+    "back": "A(z) Példa: Stuxnet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: Stuxnet",
+    "type": "term"
+  },
+  {
+    "id": "f67",
+    "front": "Mit jelent vagy mire utal: Stuxnet egy célzott?",
+    "back": "A(z) Példa: Stuxnet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: Stuxnet",
+    "type": "term"
+  },
+  {
+    "id": "f68",
+    "front": "Mit jelent vagy mire utal: Stuxnet egy kifinomult?",
+    "back": "A(z) Példa: Stuxnet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: Stuxnet",
+    "type": "term"
+  },
+  {
+    "id": "f69",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság alapja, hogy azonosítsuk a fenyegetéseket , becsüljük meg a kockázatokat és vezessük be a szükséges biztonsági mechanizmusokat .",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f70",
+    "front": "Mi a(z) Biztonsági mechanizmusok fajtái lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "type": "qa"
+  },
+  {
+    "id": "f71",
+    "front": "Mit jelent vagy mire utal: Műszaki logikai?",
+    "back": "A(z) Biztonsági mechanizmusok fajtái temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "type": "term"
+  },
+  {
+    "id": "f72",
+    "front": "Mit jelent vagy mire utal: Fizikai?",
+    "back": "A(z) Biztonsági mechanizmusok fajtái temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "type": "term"
+  },
+  {
+    "id": "f73",
+    "front": "Mit jelent vagy mire utal: Személyi?",
+    "back": "A(z) Biztonsági mechanizmusok fajtái temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Biztonsági mechanizmusok fajtái",
+    "type": "term"
+  },
+  {
+    "id": "f74",
+    "front": "Mi a(z) Kockázat-menedzsment kérdései lenyege?",
+    "back": "Kik azok a valószínűsíthető támadók , akikkel szembe kell néznünk?",
+    "section": "Kockázat-menedzsment kérdései",
+    "type": "qa"
+  },
+  {
+    "id": "f75",
+    "front": "Mit jelent vagy mire utal: Mik az értékeink?",
+    "back": "A(z) Kockázat-menedzsment kérdései temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kockázat-menedzsment kérdései",
+    "type": "term"
+  },
+  {
+    "id": "f76",
+    "front": "Mit jelent vagy mire utal: Milyen potenciális támadások?",
+    "back": "A(z) Kockázat-menedzsment kérdései temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kockázat-menedzsment kérdései",
+    "type": "term"
+  },
+  {
+    "id": "f77",
+    "front": "Mit jelent vagy mire utal: Kik azok a?",
+    "back": "A(z) Kockázat-menedzsment kérdései temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kockázat-menedzsment kérdései",
+    "type": "term"
+  },
+  {
+    "id": "f78",
+    "front": "Mi a(z) Szándékos vs. véletlen fenyegetések lenyege?",
+    "back": "A szándékos támadások és a véletlen hibák képezik a két fő csoportot, amelyek az IT rendszerek biztonságát veszélyeztetik.",
+    "section": "Szándékos vs. véletlen fenyegetések",
+    "type": "qa"
+  },
+  {
+    "id": "f79",
+    "front": "Mit jelent vagy mire utal: IT rendszerek biztonságát?",
+    "back": "A(z) Szándékos vs. véletlen fenyegetések temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Szándékos vs. véletlen fenyegetések",
+    "type": "term"
+  },
+  {
+    "id": "f80",
+    "front": "Mit jelent vagy mire utal: Míg a szándékos?",
+    "back": "A(z) Szándékos vs. véletlen fenyegetések temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Szándékos vs. véletlen fenyegetések",
+    "type": "term"
+  },
+  {
+    "id": "f81",
+    "front": "Mi a(z) A \"leggyengébb láncszem\" probléma lenyege?",
+    "back": "Az informatikai rendszerek összetettek és sok komponensből állnak, amelyek mindegyike potenciális gyenge pontot képezhet.",
+    "section": "A \"leggyengébb láncszem\" probléma",
+    "type": "qa"
+  },
+  {
+    "id": "f82",
+    "front": "Mit jelent vagy mire utal: Az informatikai rendszerek?",
+    "back": "A(z) A \"leggyengébb láncszem\" probléma temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A \"leggyengébb láncszem\" probléma",
+    "type": "term"
+  },
+  {
+    "id": "f83",
+    "front": "Mi a(z) Biztonság vs. más tervezési kritériumok lenyege?",
+    "back": "A biztonsági mechanizmusok szinte mindig növelik a költségeket és csökkentik a teljesítményt .",
+    "section": "Biztonság vs. más tervezési kritériumok",
+    "type": "qa"
+  },
+  {
+    "id": "f84",
+    "front": "Mit jelent vagy mire utal: Emellett a felhasználók?",
+    "back": "A(z) Biztonság vs. más tervezési kritériumok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Biztonság vs. más tervezési kritériumok",
+    "type": "term"
+  },
+  {
+    "id": "f85",
+    "front": "Mi a(z) Etikai kérdések az IT biztonságban lenyege?",
+    "back": "Az etikai kérdések az IT biztonságban fontos szerepet játszanak.",
+    "section": "Etikai kérdések az IT biztonságban",
+    "type": "qa"
+  },
+  {
+    "id": "f86",
+    "front": "Mit jelent vagy mire utal: Az etikai kérdések?",
+    "back": "A(z) Etikai kérdések az IT biztonságban temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etikai kérdések az IT biztonságban",
+    "type": "term"
+  },
+  {
+    "id": "f87",
+    "front": "Mit jelent vagy mire utal: IT biztonságban fontos?",
+    "back": "A(z) Etikai kérdések az IT biztonságban temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etikai kérdések az IT biztonságban",
+    "type": "term"
+  },
+  {
+    "id": "f88",
+    "front": "Mit jelent vagy mire utal: Azonban vannak kérdéses?",
+    "back": "A(z) Etikai kérdések az IT biztonságban temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etikai kérdések az IT biztonságban",
+    "type": "term"
+  },
+  {
+    "id": "f89",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság olyan terület, amely a számítógépes rendszerek és hálózatok védelmét foglalja magában.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f90",
+    "front": "Mi a(z) Etikus hackelés lenyege?",
+    "back": "Az etikus hackelés olyan tevékenység, amelynek célja a támadók előtt felfedezni az ismeretlen sebezhetőségeket .",
+    "section": "Etikus hackelés",
+    "type": "qa"
+  },
+  {
+    "id": "f91",
+    "front": "Mit jelent vagy mire utal: Az etikus hackelés?",
+    "back": "A(z) Etikus hackelés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etikus hackelés",
+    "type": "term"
+  },
+  {
+    "id": "f92",
+    "front": "Mit jelent vagy mire utal: Ez a tevékenység?",
+    "back": "A(z) Etikus hackelés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etikus hackelés",
+    "type": "term"
+  },
+  {
+    "id": "f93",
+    "front": "Mi a(z) Sebezhetőség információk nyilvánosságra hozása lenyege?",
+    "back": "A sebezhetőség információk nyilvánosságra hozása olyan tevékenység, amelynek célja a sebezhetőségek felfedezése és a nyilvánosságra hozatala .",
+    "section": "Sebezhetőség információk nyilvánosságra hozása",
+    "type": "qa"
+  },
+  {
+    "id": "f94",
+    "front": "Mit jelent vagy mire utal: Ez a tevékenység?",
+    "back": "A(z) Sebezhetőség információk nyilvánosságra hozása temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Sebezhetőség információk nyilvánosságra hozása",
+    "type": "term"
+  },
+  {
+    "id": "f95",
+    "front": "Mi a(z) Jószándékú vírus, féreg, trójai lenyege?",
+    "back": "A \"jószándékú\" vírus, féreg, trójai olyan malware , amelynek célja a rendszerek védelme.",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "type": "qa"
+  },
+  {
+    "id": "f96",
+    "front": "Mit jelent vagy mire utal: Példa erre a?",
+    "back": "A(z) Jószándékú vírus, féreg, trójai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "type": "term"
+  },
+  {
+    "id": "f97",
+    "front": "Mit jelent vagy mire utal: Hajime?",
+    "back": "A(z) Jószándékú vírus, féreg, trójai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "type": "term"
+  },
+  {
+    "id": "f98",
+    "front": "Mit jelent vagy mire utal: IoT-eszközöket megfertőző kártevő?",
+    "back": "A(z) Jószándékú vírus, féreg, trójai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Jószándékú vírus, féreg, trójai",
+    "type": "term"
+  },
+  {
+    "id": "f99",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság olyan problémákkal foglalkozik, mint a támadások , sérülékenységek és kockázatok .",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f100",
+    "front": "Mit jelent vagy mire utal: IT biztonságnak?",
+    "back": "A(z) Bevezetés az IT biztonságba temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "term"
+  },
+  {
+    "id": "f101",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f102",
+    "front": "Mit jelent vagy mire utal: Bizalmasság?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f103",
+    "front": "Mit jelent vagy mire utal: Integritás?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f104",
+    "front": "Mit jelent vagy mire utal: Rendelkezésre állás?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f105",
+    "front": "Mi a(z) Támadók és sérülékenységek lenyege?",
+    "back": "A támadók különböző típusai léteznek, mint például a script kiddie , hacktivista csoport , kiberbűnözői csoport és állami titkos szolgálat .",
+    "section": "Támadók és sérülékenységek",
+    "type": "qa"
+  },
+  {
+    "id": "f106",
+    "front": "Mi a(z) Kockázat-menedzsment lenyege?",
+    "back": "A kockázat-menedzsment fontos része az IT biztonságnak , amelynek célja a fenyegetések azonosítása, kockázat-becslés és kockázat-kezelés .",
+    "section": "Kockázat-menedzsment",
+    "type": "qa"
+  },
+  {
+    "id": "f107",
+    "front": "Mit jelent vagy mire utal: IT biztonságnak?",
+    "back": "A(z) Kockázat-menedzsment temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kockázat-menedzsment",
+    "type": "term"
+  },
+  {
+    "id": "f108",
+    "front": "Mit jelent vagy mire utal: Sikeres támadások száma?",
+    "back": "A(z) Kockázat-menedzsment temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kockázat-menedzsment",
+    "type": "term"
+  },
+  {
+    "id": "f109",
+    "front": "Mit jelent vagy mire utal: Az IT biztonság?",
+    "back": "A(z) Kockázat-menedzsment temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kockázat-menedzsment",
+    "type": "term"
+  },
+  {
+    "id": "f110",
+    "front": "Mi a(z) Bevezetés az IT biztonságba lenyege?",
+    "back": "Az IT biztonság célja a sérülékenységek azonosítása és a biztonsági incidensek megelőzése.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "qa"
+  },
+  {
+    "id": "f111",
+    "front": "Mit jelent vagy mire utal: Ehhez szükséges a?",
+    "back": "A(z) Bevezetés az IT biztonságba temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az IT biztonságba",
+    "type": "term"
+  },
+  {
+    "id": "f112",
+    "front": "Mi a(z) Sérülékenységek és ellenintézkedések lenyege?",
+    "back": "- Milyen típusú gyengeségek léteznek az IT rendszerekben?",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "type": "qa"
+  },
+  {
+    "id": "f113",
+    "front": "Mit jelent vagy mire utal: Milyen típusú gyengeségek?",
+    "back": "A(z) Sérülékenységek és ellenintézkedések temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "type": "term"
+  },
+  {
+    "id": "f114",
+    "front": "Mit jelent vagy mire utal: IT rendszerekben?",
+    "back": "A(z) Sérülékenységek és ellenintézkedések temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "type": "term"
+  },
+  {
+    "id": "f115",
+    "front": "Mit jelent vagy mire utal: Mi az oka?",
+    "back": "A(z) Sérülékenységek és ellenintézkedések temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Sérülékenységek és ellenintézkedések",
+    "type": "term"
+  },
+  {
+    "id": "f116",
+    "front": "Mi a(z) Célzott támadások és Stuxnet lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Célzott támadások és Stuxnet",
+    "type": "qa"
+  },
+  {
+    "id": "f117",
+    "front": "Mit jelent vagy mire utal: Mik a célzott?",
+    "back": "A(z) Célzott támadások és Stuxnet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Célzott támadások és Stuxnet",
+    "type": "term"
+  },
+  {
+    "id": "f118",
+    "front": "Mit jelent vagy mire utal: Mi az a?",
+    "back": "A(z) Célzott támadások és Stuxnet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Célzott támadások és Stuxnet",
+    "type": "term"
+  },
+  {
+    "id": "f119",
+    "front": "Mit jelent vagy mire utal: Stuxnet?",
+    "back": "A(z) Célzott támadások és Stuxnet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Célzott támadások és Stuxnet",
+    "type": "term"
+  },
+  {
+    "id": "f120",
+    "front": "Mi a(z) Zero-day sebezhetőségek lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Zero-day sebezhetőségek",
+    "type": "qa"
+  },
+  {
+    "id": "f121",
+    "front": "Mit jelent vagy mire utal: Mik azok a?",
+    "back": "A(z) Zero-day sebezhetőségek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Zero-day sebezhetőségek",
+    "type": "term"
+  },
+  {
+    "id": "f122",
+    "front": "Mit jelent vagy mire utal: Miért veszélyesek a?",
+    "back": "A(z) Zero-day sebezhetőségek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Zero-day sebezhetőségek",
+    "type": "term"
+  },
+  {
+    "id": "f123",
+    "front": "Mi a(z) Etika az informatikai biztonságban lenyege?",
+    "back": "- Soroljon fel néhány példát az informatikai biztonságban felmerülő potenciális etikai problémákra !",
+    "section": "Etika az informatikai biztonságban",
+    "type": "qa"
+  },
+  {
+    "id": "f124",
+    "front": "Mit jelent vagy mire utal: Miért fontos az?",
+    "back": "A(z) Etika az informatikai biztonságban temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etika az informatikai biztonságban",
+    "type": "term"
+  },
+  {
+    "id": "f125",
+    "front": "Mit jelent vagy mire utal: Soroljon fel néhány?",
+    "back": "A(z) Etika az informatikai biztonságban temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etika az informatikai biztonságban",
+    "type": "term"
+  },
+  {
+    "id": "f126",
+    "front": "Mit jelent vagy mire utal: Biztonság?",
+    "back": "A(z) Etika az informatikai biztonságban temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Etika az informatikai biztonságban",
+    "type": "term"
+  },
+  {
+    "id": "f127",
+    "front": "Mi a(z) 🧠 Active Recall lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "🧠 Active Recall",
+    "type": "qa"
+  },
+  {
+    "id": "f128",
+    "front": "Mi a(z) Kérdés 1 lenyege?",
+    "back": "Válasz Az IT biztonság célja, hogy megvédje az informatikai rendszereket és az azokban tárolt információkat a jogosulatlan hozzáféréstől, módosítástól és megsemmisítéstől.",
+    "section": "Kérdés 1",
+    "type": "qa"
+  },
+  {
+    "id": "f129",
+    "front": "Mit jelent vagy mire utal: Mi az IT?",
+    "back": "A(z) Kérdés 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 1",
+    "type": "term"
+  },
+  {
+    "id": "f130",
+    "front": "Mit jelent vagy mire utal: Válasz Az IT?",
+    "back": "A(z) Kérdés 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 1",
+    "type": "term"
+  },
+  {
+    "id": "f131",
+    "front": "Mi a(z) Kérdés 2 lenyege?",
+    "back": "Válasz A bizalmasság confidentiality , integritás integrity és rendelkezésre állás availability , amelyeket a CIA triád néven is ismerjük.",
+    "section": "Kérdés 2",
+    "type": "qa"
+  },
+  {
+    "id": "f132",
+    "front": "Mit jelent vagy mire utal: CIA?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f133",
+    "front": "Mit jelent vagy mire utal: Mik az alapvető?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f134",
+    "front": "Mit jelent vagy mire utal: Válasz A bizalmasság?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f135",
+    "front": "Mi a(z) Kérdés 3 lenyege?",
+    "back": "Miért fontos a hozzáférés-ellenőrzés az IT biztonságban?",
+    "section": "Kérdés 3",
+    "type": "qa"
+  },
+  {
+    "id": "f136",
+    "front": "Mit jelent vagy mire utal: Miért fontos a?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f137",
+    "front": "Mit jelent vagy mire utal: IT biztonságban?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f138",
+    "front": "Mit jelent vagy mire utal: Válasz A hozzáférés-ellenőrzés?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f139",
+    "front": "Mi a(z) Kérdés 4 lenyege?",
+    "back": "Válasz Az IT biztonság általános célja a támadások megelőzésével, észlelésével és válaszlépések megtételével érhető el.",
+    "section": "Kérdés 4",
+    "type": "qa"
+  },
+  {
+    "id": "f140",
+    "front": "Mit jelent vagy mire utal: Hogyan érhető el?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f141",
+    "front": "Mit jelent vagy mire utal: IT biztonság általános?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f142",
+    "front": "Mit jelent vagy mire utal: Válasz Az IT?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f143",
+    "front": "Mi a(z) Kérdés 5 lenyege?",
+    "back": "Válasz A számonkérhetőség a rendszer erőforrásaihoz és szolgáltatásaihoz való hozzáférések naplózását jelenti, ami segít a felelősség megállapításában.",
+    "section": "Kérdés 5",
+    "type": "qa"
+  },
+  {
+    "id": "f144",
+    "front": "Mit jelent vagy mire utal: Mi a számonkérhetőség?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f145",
+    "front": "Mit jelent vagy mire utal: IT biztonságban?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f146",
+    "front": "Mit jelent vagy mire utal: Válasz A számonkérhetőség?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f147",
+    "front": "Mi a(z) Bevezetés a kriptográfiába lenyege?",
+    "back": "A kriptográfia algoritmikus módszerek tárháza, amelyek információbiztonsági szolgáltatásokat valósítanak meg.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "qa"
+  },
+  {
+    "id": "f148",
+    "front": "Mit jelent vagy mire utal: API?",
+    "back": "A(z) Bevezetés a kriptográfiába temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "term"
+  },
+  {
+    "id": "f149",
+    "front": "Mit jelent vagy mire utal: JCE?",
+    "back": "A(z) Bevezetés a kriptográfiába temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "term"
+  },
+  {
+    "id": "f150",
+    "front": "Mit jelent vagy mire utal: API-kon keresztül?",
+    "back": "A(z) Bevezetés a kriptográfiába temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "term"
+  },
+  {
+    "id": "f151",
+    "front": "Mi a(z) A kriptográfia története lenyege?",
+    "back": "század közepéig katonai és diplomáciai alkalmazások körében alakult ki.",
+    "section": "A kriptográfia története",
+    "type": "qa"
+  },
+  {
+    "id": "f152",
+    "front": "Mit jelent vagy mire utal: Ha jól van?",
+    "back": "A(z) A kriptográfia története temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia története",
+    "type": "term"
+  },
+  {
+    "id": "f153",
+    "front": "Mi a(z) Történelmi rejtjelezők lenyege?",
+    "back": "A történelem során különböző rejtjelező eszközök és módszerek alakultak ki, például a Szkütale , amely ókori mechanikus rejtjelező eszköz volt, vagy a Caesar-rejtjelező , amely helyettesítéses rejtjelezést valósított meg.",
+    "section": "Történelmi rejtjelezők",
+    "type": "qa"
+  },
+  {
+    "id": "f154",
+    "front": "Mit jelent vagy mire utal: Szkütale?",
+    "back": "A(z) Történelmi rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Történelmi rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f155",
+    "front": "Mit jelent vagy mire utal: Caesar-rejtjelező?",
+    "back": "A(z) Történelmi rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Történelmi rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f156",
+    "front": "Mi a(z) Példa: Caesar-rejtjelező lenyege?",
+    "back": "A Caesar-rejtjelező egy egyszerű helyettesítéses rejtjelező, amely az ábécében 3 pozícióval később található betűvel helyettesíti a nyílt szöveg minden betűjét.",
+    "section": "Példa: Caesar-rejtjelező",
+    "type": "qa"
+  },
+  {
+    "id": "f157",
+    "front": "Mit jelent vagy mire utal: Caesar-rejtjelező egy egyszerű?",
+    "back": "A(z) Példa: Caesar-rejtjelező temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: Caesar-rejtjelező",
+    "type": "term"
+  },
+  {
+    "id": "f158",
+    "front": "Mit jelent vagy mire utal: IT rendszerek biztonságában?",
+    "back": "A(z) Példa: Caesar-rejtjelező temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: Caesar-rejtjelező",
+    "type": "term"
+  },
+  {
+    "id": "f159",
+    "front": "Mi a(z) Bevezetés a kriptográfiába lenyege?",
+    "back": "A kriptográfia alapelve , hogy a titkosított üzenet csak a megfelelő kulccsal lehet visszafejteni.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "qa"
+  },
+  {
+    "id": "f160",
+    "front": "Mi a(z) A kriptográfia történelme lenyege?",
+    "back": "A kriptográfia történelme egészen az ókorig nyúlik vissza.",
+    "section": "A kriptográfia történelme",
+    "type": "qa"
+  },
+  {
+    "id": "f161",
+    "front": "Mit jelent vagy mire utal: Caesar-rejtjelező egyik legismertebb?",
+    "back": "A(z) A kriptográfia történelme temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia történelme",
+    "type": "term"
+  },
+  {
+    "id": "f162",
+    "front": "Mit jelent vagy mire utal: Caesar-rejtjelező alapelve?",
+    "back": "A(z) A kriptográfia történelme temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia történelme",
+    "type": "term"
+  },
+  {
+    "id": "f163",
+    "front": "Mi a(z) A kriptográfia alapfogalmai lenyege?",
+    "back": "A kriptográfia alapfogalmai közé tartozik a kódolás , dekódolás , kulcs és a titkosított üzenet .",
+    "section": "A kriptográfia alapfogalmai",
+    "type": "qa"
+  },
+  {
+    "id": "f164",
+    "front": "Mit jelent vagy mire utal: Kódolás?",
+    "back": "A(z) A kriptográfia alapfogalmai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia alapfogalmai",
+    "type": "term"
+  },
+  {
+    "id": "f165",
+    "front": "Mit jelent vagy mire utal: Dekódolás?",
+    "back": "A(z) A kriptográfia alapfogalmai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia alapfogalmai",
+    "type": "term"
+  },
+  {
+    "id": "f166",
+    "front": "Mit jelent vagy mire utal: Kulcs?",
+    "back": "A(z) A kriptográfia alapfogalmai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia alapfogalmai",
+    "type": "term"
+  },
+  {
+    "id": "f167",
+    "front": "Mi a(z) A kriptográfiai algoritmusok lenyege?",
+    "back": "A kriptográfiai algoritmusok célja , hogy a titkosított üzenet biztonságos legyen.",
+    "section": "A kriptográfiai algoritmusok",
+    "type": "qa"
+  },
+  {
+    "id": "f168",
+    "front": "Mi a(z) A kriptográfia jövője lenyege?",
+    "back": "A kriptográfia jövője biztató , hiszen a technológia fejlődése új lehetőségeket teremt a kriptográfiában .",
+    "section": "A kriptográfia jövője",
+    "type": "qa"
+  },
+  {
+    "id": "f169",
+    "front": "Mit jelent vagy mire utal: Ahol?",
+    "back": "A(z) A kriptográfia jövője temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia jövője",
+    "type": "term"
+  },
+  {
+    "id": "f170",
+    "front": "Mit jelent vagy mire utal: Minél hosszabb a?",
+    "back": "A(z) A kriptográfia jövője temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia jövője",
+    "type": "term"
+  },
+  {
+    "id": "f171",
+    "front": "Mit jelent vagy mire utal: Az egyik legismertebb?",
+    "back": "A(z) A kriptográfia jövője temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia jövője",
+    "type": "term"
+  },
+  {
+    "id": "f172",
+    "front": "Mi a(z) Bevezetés az Enigmába lenyege?",
+    "back": "Az Enigma egy poly-alfabetikus helyettesítést valósít meg, ami azt jelenti, hogy több kód-ábécét is használ a nyílt betűk helyettesítéséhez.",
+    "section": "Bevezetés az Enigmába",
+    "type": "qa"
+  },
+  {
+    "id": "f173",
+    "front": "Mit jelent vagy mire utal: Az Enigma egy?",
+    "back": "A(z) Bevezetés az Enigmába temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az Enigmába",
+    "type": "term"
+  },
+  {
+    "id": "f174",
+    "front": "Mit jelent vagy mire utal: Az Enigma gép?",
+    "back": "A(z) Bevezetés az Enigmába temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés az Enigmába",
+    "type": "term"
+  },
+  {
+    "id": "f175",
+    "front": "Mi a(z) Az Enigma fő komponensei lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Az Enigma fő komponensei",
+    "type": "qa"
+  },
+  {
+    "id": "f176",
+    "front": "Mit jelent vagy mire utal: Billentyűzet?",
+    "back": "A(z) Az Enigma fő komponensei temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma fő komponensei",
+    "type": "term"
+  },
+  {
+    "id": "f177",
+    "front": "Mit jelent vagy mire utal: Lámpa-panel?",
+    "back": "A(z) Az Enigma fő komponensei temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma fő komponensei",
+    "type": "term"
+  },
+  {
+    "id": "f178",
+    "front": "Mit jelent vagy mire utal: Plugboard?",
+    "back": "A(z) Az Enigma fő komponensei temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma fő komponensei",
+    "type": "term"
+  },
+  {
+    "id": "f179",
+    "front": "Mi a(z) Az Enigma működése lenyege?",
+    "back": "Az Enigma gép működése a következő: - A rotor egy pozíciót fordul minden billentyűleütésnél.",
+    "section": "Az Enigma működése",
+    "type": "qa"
+  },
+  {
+    "id": "f180",
+    "front": "Mit jelent vagy mire utal: Az Enigma gép?",
+    "back": "A(z) Az Enigma működése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma működése",
+    "type": "term"
+  },
+  {
+    "id": "f181",
+    "front": "Mi a(z) Az Enigma kulcstere lenyege?",
+    "back": "Az Enigma kulcstere nagyon nagy, de nem elégséges a biztonsághoz.",
+    "section": "Az Enigma kulcstere",
+    "type": "qa"
+  },
+  {
+    "id": "f182",
+    "front": "Mit jelent vagy mire utal: Az Enigma kulcstere?",
+    "back": "A(z) Az Enigma kulcstere temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma kulcstere",
+    "type": "term"
+  },
+  {
+    "id": "f183",
+    "front": "Mi a(z) Dekódolás lenyege?",
+    "back": "Milyen információkra van szükséged a feladat megoldásához?",
+    "section": "Dekódolás",
+    "type": "qa"
+  },
+  {
+    "id": "f184",
+    "front": "Mit jelent vagy mire utal: GWCJZ?",
+    "back": "A(z) Dekódolás temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Dekódolás",
+    "type": "term"
+  },
+  {
+    "id": "f185",
+    "front": "Mit jelent vagy mire utal: YLFZL?",
+    "back": "A(z) Dekódolás temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Dekódolás",
+    "type": "term"
+  },
+  {
+    "id": "f186",
+    "front": "Mit jelent vagy mire utal: Próbáld ki?",
+    "back": "A(z) Dekódolás temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Dekódolás",
+    "type": "term"
+  },
+  {
+    "id": "f187",
+    "front": "Mi a(z) Az Enigma gép működése lenyege?",
+    "back": "A gép használata során minden új üzenethez létrehoztak egy új üzenetkulcsot , amely a kezdeti rotorállásokat meghatározó három betűből állt.",
+    "section": "Az Enigma gép működése",
+    "type": "qa"
+  },
+  {
+    "id": "f188",
+    "front": "Mit jelent vagy mire utal: Az üzenetkulcsot a?",
+    "back": "A(z) Az Enigma gép működése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma gép működése",
+    "type": "term"
+  },
+  {
+    "id": "f189",
+    "front": "Mi a(z) Az Enigma feltörése lenyege?",
+    "back": "A lengyelek Bomba nevű gépet építettek, amely automatikusan különböző tippeket próbált ki a napi kulcsra .",
+    "section": "Az Enigma feltörése",
+    "type": "qa"
+  },
+  {
+    "id": "f190",
+    "front": "Mit jelent vagy mire utal: QWE?",
+    "back": "A(z) Az Enigma feltörése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma feltörése",
+    "type": "term"
+  },
+  {
+    "id": "f191",
+    "front": "Mit jelent vagy mire utal: BNM?",
+    "back": "A(z) Az Enigma feltörése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma feltörése",
+    "type": "term"
+  },
+  {
+    "id": "f192",
+    "front": "Mit jelent vagy mire utal: Bomba nevű gépet?",
+    "back": "A(z) Az Enigma feltörése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma feltörése",
+    "type": "term"
+  },
+  {
+    "id": "f193",
+    "front": "Mi a(z) Az Enigma feltörésének matematikai háttere lenyege?",
+    "back": "A feltöréshez használt matematikai módszerek között szerepelt a kriptográfia és a kombinatorika .",
+    "section": "Az Enigma feltörésének matematikai háttere",
+    "type": "qa"
+  },
+  {
+    "id": "f194",
+    "front": "Mi a(z) Az Enigma feltörésének történelmi jelentősége lenyege?",
+    "back": "Az Enigma feltörése fontos szerepet játszott a második világháborúban, és hozzájárult a szövetségesek győzelméhez.",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "type": "qa"
+  },
+  {
+    "id": "f195",
+    "front": "Mit jelent vagy mire utal: Az Enigma feltörése?",
+    "back": "A(z) Az Enigma feltörésének történelmi jelentősége temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "type": "term"
+  },
+  {
+    "id": "f196",
+    "front": "Mit jelent vagy mire utal: There are two?",
+    "back": "A(z) Az Enigma feltörésének történelmi jelentősége temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "type": "term"
+  },
+  {
+    "id": "f197",
+    "front": "Mit jelent vagy mire utal: Bruce Schneier Az?",
+    "back": "A(z) Az Enigma feltörésének történelmi jelentősége temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az Enigma feltörésének történelmi jelentősége",
+    "type": "term"
+  },
+  {
+    "id": "f198",
+    "front": "Mi a(z) A kriptográfia kezdeti évei lenyege?",
+    "back": "Az első kriptográfiai módszerek a szubsztiúción és a transzpozíció alapultak.",
+    "section": "A kriptográfia kezdeti évei",
+    "type": "qa"
+  },
+  {
+    "id": "f199",
+    "front": "Mit jelent vagy mire utal: Az első kriptográfiai?",
+    "back": "A(z) A kriptográfia kezdeti évei temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia kezdeti évei",
+    "type": "term"
+  },
+  {
+    "id": "f200",
+    "front": "Mi a(z) A modern kriptográfia születése lenyege?",
+    "back": "Shannon nevéhez fűződik, aki az információ-elmélet atyja .",
+    "section": "A modern kriptográfia születése",
+    "type": "qa"
+  },
+  {
+    "id": "f201",
+    "front": "Mit jelent vagy mire utal: Claude E?",
+    "back": "A(z) A modern kriptográfia születése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A modern kriptográfia születése",
+    "type": "term"
+  },
+  {
+    "id": "f202",
+    "front": "Mit jelent vagy mire utal: Shannon nevéhez fűződik?",
+    "back": "A(z) A modern kriptográfia születése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A modern kriptográfia születése",
+    "type": "term"
+  },
+  {
+    "id": "f203",
+    "front": "Mit jelent vagy mire utal: Shannon 1949-ben megfogalmazta?",
+    "back": "A(z) A modern kriptográfia születése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A modern kriptográfia születése",
+    "type": "term"
+  },
+  {
+    "id": "f204",
+    "front": "Mi a(z) Fontosabb mérföldkövek lenyege?",
+    "back": "- Rejtjelezés információ-elméleti megközelítése 1949 - Data Encryption Standard DES 1970-es évek - Publikus kulcsú kriptográfia megjelenése 1976-78 - Kvantum-kriptográfia 1980-as évek - Pretty Good Privacy PGP 1990-es évek - Posztkvantum-kriptográfia jelenkor",
+    "section": "Fontosabb mérföldkövek",
+    "type": "qa"
+  },
+  {
+    "id": "f205",
+    "front": "Mit jelent vagy mire utal: DES?",
+    "back": "A(z) Fontosabb mérföldkövek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontosabb mérföldkövek",
+    "type": "term"
+  },
+  {
+    "id": "f206",
+    "front": "Mit jelent vagy mire utal: PGP?",
+    "back": "A(z) Fontosabb mérföldkövek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontosabb mérföldkövek",
+    "type": "term"
+  },
+  {
+    "id": "f207",
+    "front": "Mit jelent vagy mire utal: Rejtjelezés információ-elméleti megközelítése?",
+    "back": "A(z) Fontosabb mérföldkövek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontosabb mérföldkövek",
+    "type": "term"
+  },
+  {
+    "id": "f208",
+    "front": "Mi a(z) A DES algoritmus lenyege?",
+    "back": "A DES Data Encryption Standard egy szimmetrikus kulcsú blokkrejtjelező algoritmus, amelyet az IBM tervei alapján készítettek az 1970-es években.",
+    "section": "A DES algoritmus",
+    "type": "qa"
+  },
+  {
+    "id": "f209",
+    "front": "Mit jelent vagy mire utal: DES?",
+    "back": "A(z) A DES algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A DES algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f210",
+    "front": "Mit jelent vagy mire utal: IBM?",
+    "back": "A(z) A DES algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A DES algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f211",
+    "front": "Mit jelent vagy mire utal: DES Data Encryption?",
+    "back": "A(z) A DES algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A DES algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f212",
+    "front": "Mi a(z) Az RSA algoritmus lenyege?",
+    "back": "Az RSA Rivest-Shamir-Adleman egy publikus kulcsú kriptográfiai algoritmus, amelyet Adi Shamir , Ronald Rivest és Leonard Adleman fejlesztett ki.",
+    "section": "Az RSA algoritmus",
+    "type": "qa"
+  },
+  {
+    "id": "f213",
+    "front": "Mit jelent vagy mire utal: RSA?",
+    "back": "A(z) Az RSA algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az RSA algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f214",
+    "front": "Mit jelent vagy mire utal: Az RSA Rivest-Shamir-Adleman?",
+    "back": "A(z) Az RSA algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az RSA algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f215",
+    "front": "Mit jelent vagy mire utal: Adi Shamir?",
+    "back": "A(z) Az RSA algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Az RSA algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f216",
+    "front": "Mi a(z) Összegzés lenyege?",
+    "back": "A kriptográfia ma is fontos szerepet játszik az információ biztonságában .",
+    "section": "Összegzés",
+    "type": "qa"
+  },
+  {
+    "id": "f217",
+    "front": "Mit jelent vagy mire utal: Ebben a jegyzetben?",
+    "back": "A(z) Összegzés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Összegzés",
+    "type": "term"
+  },
+  {
+    "id": "f218",
+    "front": "Mi a(z) Bevezetés a kriptográfiába lenyege?",
+    "back": "A kriptográfiai rendszerek célja a titkos információk védelme a hatékony algoritmusok segítségével.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "qa"
+  },
+  {
+    "id": "f219",
+    "front": "Mi a(z) A kriptográfia történelme lenyege?",
+    "back": "Az egyik legfontosabb személy a kriptográfia történelmében Phil Zimmermann , aki 1991-ben létrehozta a PGP Pretty Good Privacy szoftvert.",
+    "section": "A kriptográfia történelme",
+    "type": "qa"
+  },
+  {
+    "id": "f220",
+    "front": "Mit jelent vagy mire utal: PGP?",
+    "back": "A(z) A kriptográfia történelme temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia történelme",
+    "type": "term"
+  },
+  {
+    "id": "f221",
+    "front": "Mit jelent vagy mire utal: Az egyik legfontosabb?",
+    "back": "A(z) A kriptográfia történelme temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia történelme",
+    "type": "term"
+  },
+  {
+    "id": "f222",
+    "front": "Mit jelent vagy mire utal: Phil Zimmermann?",
+    "back": "A(z) A kriptográfia történelme temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A kriptográfia történelme",
+    "type": "term"
+  },
+  {
+    "id": "f223",
+    "front": "Mi a(z) A kvantum-veszély lenyege?",
+    "back": "A kvantum-veszély a kriptográfiai rendszerek feltörésének egyik legnagyobb kihívása.",
+    "section": "A kvantum-veszély",
+    "type": "qa"
+  },
+  {
+    "id": "f224",
+    "front": "Mi a(z) A posztkvantum kriptográfia lenyege?",
+    "back": "A posztkvantum kriptográfia olyan új kriptográfiai algoritmusok tervezésével és elemzésével foglalkozik, amelyek ellenállnak a klasszikus és a kvantum-támadásoknak .",
+    "section": "A posztkvantum kriptográfia",
+    "type": "qa"
+  },
+  {
+    "id": "f225",
+    "front": "Mit jelent vagy mire utal: Az új kriptográfiai?",
+    "back": "A(z) A posztkvantum kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A posztkvantum kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f226",
+    "front": "Mi a(z) Bevezetés a kriptográfiába lenyege?",
+    "back": "A kriptográfia titkosítással és kódolással foglalkozik, célja a bizalmas információk védelme.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "qa"
+  },
+  {
+    "id": "f227",
+    "front": "Mi a(z) Kvantum-veszély lenyege?",
+    "back": "A kvantum-veszély a klasszikus kriptográfiai módszerek biztonságának kompromittálódását jelenti, mivel a kvantumszámítógépek képesek feltörni a jelenleg használt titkosítási rendszereket.",
+    "section": "Kvantum-veszély",
+    "type": "qa"
+  },
+  {
+    "id": "f228",
+    "front": "Mi a(z) Kvantum-kriptográfia lenyege?",
+    "back": "A kvantum-kriptográfia a kvantum-fizika törvényeinek kihasználásával klasszikus biztonsági problémákat old meg.",
+    "section": "Kvantum-kriptográfia",
+    "type": "qa"
+  },
+  {
+    "id": "f229",
+    "front": "Mi a(z) Példa: BB84 protokoll lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Példa: BB84 protokoll",
+    "type": "qa"
+  },
+  {
+    "id": "f230",
+    "front": "Mi a(z) Összefoglalás lenyege?",
+    "back": "- A kriptográfia titkosítással és kódolással foglalkozik.",
+    "section": "Összefoglalás",
+    "type": "qa"
+  },
+  {
+    "id": "f231",
+    "front": "Mi a(z) Bevezetés a kriptográfiába lenyege?",
+    "back": "A kriptográfia alapfogalmai közé tartozik a kulcs és a kulcstér .",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "qa"
+  },
+  {
+    "id": "f232",
+    "front": "Mi a(z) Kriptográfiai alapfogalmak lenyege?",
+    "back": "- A kimerítő kulcskeresés egy olyan támadási módszer, amely során a támadó megpróbálja kipróbálni az összes lehetséges kulcsot, hogy megtalálja a helyes kulcsot.",
+    "section": "Kriptográfiai alapfogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f233",
+    "front": "Mi a(z) Nyilvános kulcsú kriptográfia lenyege?",
+    "back": "A nyilvános kulcsú kriptográfia egy olyan módszer, amelyben a titkosításhoz használt kulcs nyilvános , de a visszafejtéshez használt kulcs titkos .",
+    "section": "Nyilvános kulcsú kriptográfia",
+    "type": "qa"
+  },
+  {
+    "id": "f234",
+    "front": "Mit jelent vagy mire utal: RSA?",
+    "back": "A(z) Nyilvános kulcsú kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Nyilvános kulcsú kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f235",
+    "front": "Mit jelent vagy mire utal: Diffie-Hellman kulcscsere protokoll?",
+    "back": "A(z) Nyilvános kulcsú kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Nyilvános kulcsú kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f236",
+    "front": "Mit jelent vagy mire utal: Az RSA rejtjelezés?",
+    "back": "A(z) Nyilvános kulcsú kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Nyilvános kulcsú kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f237",
+    "front": "Mi a(z) Kvantum-kriptográfia lenyege?",
+    "back": "A kvantum-kriptográfia egy olyan terület, amely a kvantummechanika elveit használja a titkosítás és a kódolás számára.",
+    "section": "Kvantum-kriptográfia",
+    "type": "qa"
+  },
+  {
+    "id": "f238",
+    "front": "Mit jelent vagy mire utal: QKD?",
+    "back": "A(z) Kvantum-kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kvantum-kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f239",
+    "front": "Mit jelent vagy mire utal: QKD egy olyan?",
+    "back": "A(z) Kvantum-kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kvantum-kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f240",
+    "front": "Mit jelent vagy mire utal: BB84 QKD protokoll?",
+    "back": "A(z) Kvantum-kriptográfia temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kvantum-kriptográfia",
+    "type": "term"
+  },
+  {
+    "id": "f241",
+    "front": "Mi a(z) Kérdés 1 lenyege?",
+    "back": "Válasz A kriptográfia az információbiztonsági szolgáltatások megvalósításának algoritmikus módszereit jelenti, beleértve a rejtjelezést, az üzenet hitelesítő kód használatát és a digitális aláírásokat.",
+    "section": "Kérdés 1",
+    "type": "qa"
+  },
+  {
+    "id": "f242",
+    "front": "Mit jelent vagy mire utal: Mi a kriptográfia?",
+    "back": "A(z) Kérdés 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 1",
+    "type": "term"
+  },
+  {
+    "id": "f243",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfia?",
+    "back": "A(z) Kérdés 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 1",
+    "type": "term"
+  },
+  {
+    "id": "f244",
+    "front": "Mi a(z) Kérdés 2 lenyege?",
+    "back": "Milyen típusú rejtjelezést valósít meg a Caesar-rejtjelező?",
+    "section": "Kérdés 2",
+    "type": "qa"
+  },
+  {
+    "id": "f245",
+    "front": "Mit jelent vagy mire utal: Milyen típusú rejtjelezést?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f246",
+    "front": "Mit jelent vagy mire utal: Caesar-rejtjelező?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f247",
+    "front": "Mit jelent vagy mire utal: Válasz Helyettesítéses rejtjelezést?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f248",
+    "front": "Mi a(z) Kérdés 3 lenyege?",
+    "back": "század közepéig katonai és diplomáciai alkalmazások körében alakult ki, majd később üzleti és mindennapi alkalmazásokban is megjelent.",
+    "section": "Kérdés 3",
+    "type": "qa"
+  },
+  {
+    "id": "f249",
+    "front": "Mit jelent vagy mire utal: Mi a kriptográfia?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f250",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfia?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f251",
+    "front": "Mi a(z) Kérdés 4 lenyege?",
+    "back": "Milyen fontos szempontokat kell figyelembe venni a kriptográfiai algoritmusok tervezése és megvalósítása során?",
+    "section": "Kérdés 4",
+    "type": "qa"
+  },
+  {
+    "id": "f252",
+    "front": "Mit jelent vagy mire utal: Milyen fontos szempontokat?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f253",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfiai?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f254",
+    "front": "Mi a(z) Kérdés 5 lenyege?",
+    "back": "Válasz A kriptográfia fontos szerepet játszik az információbiztonságban, de nem mindig a leggyengébb láncszem az IT rendszerek biztonságában.",
+    "section": "Kérdés 5",
+    "type": "qa"
+  },
+  {
+    "id": "f255",
+    "front": "Mit jelent vagy mire utal: Mi a kriptográfia?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f256",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfia?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f257",
+    "front": "Mit jelent vagy mire utal: IT rendszerek biztonságában?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f258",
+    "front": "Mi a(z) Bevezető lenyege?",
+    "back": "A kriptográfiai alapalgoritmusok primitívek azok az alapvető, jól meghatározott tulajdonságokkal rendelkező kriptográfiai algoritmusok, amelyeket építőelemként használunk a bonyolultabb kriptográfiai protokollokban vagy nagyobb rendszerekben.",
+    "section": "Bevezető",
+    "type": "qa"
+  },
+  {
+    "id": "f259",
+    "front": "Mit jelent vagy mire utal: Ezek a primitívek?",
+    "back": "A(z) Bevezető temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezető",
+    "type": "term"
+  },
+  {
+    "id": "f260",
+    "front": "Mi a(z) Kriptográfiai alapalgoritmusok lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "type": "qa"
+  },
+  {
+    "id": "f261",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Kriptográfiai alapalgoritmusok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "type": "term"
+  },
+  {
+    "id": "f262",
+    "front": "Mit jelent vagy mire utal: KEM?",
+    "back": "A(z) Kriptográfiai alapalgoritmusok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "type": "term"
+  },
+  {
+    "id": "f263",
+    "front": "Mit jelent vagy mire utal: KDF?",
+    "back": "A(z) Kriptográfiai alapalgoritmusok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai alapalgoritmusok",
+    "type": "term"
+  },
+  {
+    "id": "f264",
+    "front": "Mi a(z) Adat-reprezentáció lenyege?",
+    "back": "Az adatok tárolásához, feldolgozásához és továbbításához szükségünk van az adatok reprezentációjára adat-ábrázolásra a számítógépen belül.",
+    "section": "Adat-reprezentáció",
+    "type": "qa"
+  },
+  {
+    "id": "f265",
+    "front": "Mit jelent vagy mire utal: Az adatok tárolásához?",
+    "back": "A(z) Adat-reprezentáció temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Adat-reprezentáció",
+    "type": "term"
+  },
+  {
+    "id": "f266",
+    "front": "Mi a(z) Titkosítási sémák lenyege?",
+    "back": "A titkosítási sémák rejtjelezők olyan algoritmusok, amelyek az eredeti üzenetet plaintext átalakítják kódolt üzenetté ciphertext .",
+    "section": "Titkosítási sémák",
+    "type": "qa"
+  },
+  {
+    "id": "f267",
+    "front": "Mit jelent vagy mire utal: Plaintext?",
+    "back": "A(z) Titkosítási sémák temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Titkosítási sémák",
+    "type": "term"
+  },
+  {
+    "id": "f268",
+    "front": "Mit jelent vagy mire utal: Titkosítás?",
+    "back": "A(z) Titkosítási sémák temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Titkosítási sémák",
+    "type": "term"
+  },
+  {
+    "id": "f269",
+    "front": "Mit jelent vagy mire utal: Ciphertext?",
+    "back": "A(z) Titkosítási sémák temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Titkosítási sémák",
+    "type": "term"
+  },
+  {
+    "id": "f270",
+    "front": "Mi a(z) Bevezetés a kriptográfiai primitívekbe lenyege?",
+    "back": "A kriptográfiai primitívek közé tartoznak a szimmetrikus kulcsú rejtjelezők , aszimmetrikus kulcsú rejtjelezők , kulcsfolyam-rejtjelezők és blokkrejtjelezők .",
+    "section": "Bevezetés a kriptográfiai primitívekbe",
+    "type": "qa"
+  },
+  {
+    "id": "f271",
+    "front": "Mit jelent vagy mire utal: Ezek a primitívek?",
+    "back": "A(z) Bevezetés a kriptográfiai primitívekbe temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kriptográfiai primitívekbe",
+    "type": "term"
+  },
+  {
+    "id": "f272",
+    "front": "Mi a(z) Szimmetrikus kulcsú rejtjelezők lenyege?",
+    "back": "A szimmetrikus kulcsú rejtjelezők azonos kulcsot használnak a titkosításhoz és a visszafejtéshez.",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "type": "qa"
+  },
+  {
+    "id": "f273",
+    "front": "Mit jelent vagy mire utal: AES?",
+    "back": "A(z) Szimmetrikus kulcsú rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f274",
+    "front": "Mit jelent vagy mire utal: Például az AES?",
+    "back": "A(z) Szimmetrikus kulcsú rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f275",
+    "front": "Mit jelent vagy mire utal: Advanced Encryption Standard?",
+    "back": "A(z) Szimmetrikus kulcsú rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Szimmetrikus kulcsú rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f276",
+    "front": "Mi a(z) Aszimmetrikus kulcsú rejtjelezők lenyege?",
+    "back": "Az aszimmetrikus kulcsú rejtjelezők két különböző kulcsot használnak: egy nyilvános kulcsot a titkosításhoz és egy magánkulcsot a visszafejtéshez.",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "type": "qa"
+  },
+  {
+    "id": "f277",
+    "front": "Mit jelent vagy mire utal: RSA?",
+    "back": "A(z) Aszimmetrikus kulcsú rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f278",
+    "front": "Mit jelent vagy mire utal: Az aszimmetrikus kulcsú?",
+    "back": "A(z) Aszimmetrikus kulcsú rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f279",
+    "front": "Mit jelent vagy mire utal: Például az RSA?",
+    "back": "A(z) Aszimmetrikus kulcsú rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Aszimmetrikus kulcsú rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f280",
+    "front": "Mi a(z) Kulcsfolyam-rejtjelezők lenyege?",
+    "back": "A kulcsfolyam-rejtjelezők álvéletlen bájtsorozatot generálnak, amelyet a titkosítandó adatokkal XOR művelettel kombinálnak.",
+    "section": "Kulcsfolyam-rejtjelezők",
+    "type": "qa"
+  },
+  {
+    "id": "f281",
+    "front": "Mit jelent vagy mire utal: XOR?",
+    "back": "A(z) Kulcsfolyam-rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kulcsfolyam-rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f282",
+    "front": "Mit jelent vagy mire utal: XOR művelettel kombinálnak?",
+    "back": "A(z) Kulcsfolyam-rejtjelezők temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kulcsfolyam-rejtjelezők",
+    "type": "term"
+  },
+  {
+    "id": "f283",
+    "front": "Mi a(z) XOR művelet lenyege?",
+    "back": "A XOR Exclusive OR művelet két bites értéket vesz fel, és akkor ad 1 -et, ha a két bites érték különböző .",
+    "section": "XOR művelet",
+    "type": "qa"
+  },
+  {
+    "id": "f284",
+    "front": "Mit jelent vagy mire utal: XOR?",
+    "back": "A(z) XOR művelet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "XOR művelet",
+    "type": "term"
+  },
+  {
+    "id": "f285",
+    "front": "Mit jelent vagy mire utal: XOR Exclusive OR?",
+    "back": "A(z) XOR művelet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "XOR művelet",
+    "type": "term"
+  },
+  {
+    "id": "f286",
+    "front": "Mit jelent vagy mire utal: XOR művelet asszociatív?",
+    "back": "A(z) XOR művelet temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "XOR művelet",
+    "type": "term"
+  },
+  {
+    "id": "f287",
+    "front": "Mi a(z) Blokkrejtjelezők lenyege?",
+    "back": "A blokkrejtjelezők fix hosszúságú adatblokkokat titkosítanak és visszafejtenek.",
+    "section": "Blokkrejtjelezők",
+    "type": "qa"
+  },
+  {
+    "id": "f288",
+    "front": "Mi a(z) Blokkrejtjelezők tulajdonságai lenyege?",
+    "back": "A blokkrejtjelezők két fontos tulajdonsággal rendelkeznek: Lavina-hatás avalanche effect : ha a bemenet egyetlen bitje megváltozik, akkor a kimenet bitjeinek körülbelül fele megváltozik.",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "type": "qa"
+  },
+  {
+    "id": "f289",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Blokkrejtjelezők tulajdonságai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "type": "term"
+  },
+  {
+    "id": "f290",
+    "front": "Mit jelent vagy mire utal: Lavina-hatás avalanche effect?",
+    "back": "A(z) Blokkrejtjelezők tulajdonságai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "type": "term"
+  },
+  {
+    "id": "f291",
+    "front": "Mit jelent vagy mire utal: Megjósolhatatlanság?",
+    "back": "A(z) Blokkrejtjelezők tulajdonságai temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Blokkrejtjelezők tulajdonságai",
+    "type": "term"
+  },
+  {
+    "id": "f292",
+    "front": "Mi a(z) Bevezető lenyege?",
+    "back": "A blokkrejtjelezők olyan algoritmusok, amelyek az üzenetet kis blokkokra osztják és azokat külön-külön titkosítják.",
+    "section": "Bevezető",
+    "type": "qa"
+  },
+  {
+    "id": "f293",
+    "front": "Mit jelent vagy mire utal: Ez a módszer?",
+    "back": "A(z) Bevezető temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezető",
+    "type": "term"
+  },
+  {
+    "id": "f294",
+    "front": "Mi a(z) Blokkrejtjelezési módok lenyege?",
+    "back": "A blokkrejtjelezők különböző módokban használhatók, ezek közül a leggyakoribbak: - Electronic Codebook ECB mode : Ez a legegyszerűbb mód, amelyben az üzenetet kis blokkokra osztják és azokat külön-külön titkosítják.",
+    "section": "Blokkrejtjelezési módok",
+    "type": "qa"
+  },
+  {
+    "id": "f295",
+    "front": "Mit jelent vagy mire utal: ECB?",
+    "back": "A(z) Blokkrejtjelezési módok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Blokkrejtjelezési módok",
+    "type": "term"
+  },
+  {
+    "id": "f296",
+    "front": "Mit jelent vagy mire utal: CBC?",
+    "back": "A(z) Blokkrejtjelezési módok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Blokkrejtjelezési módok",
+    "type": "term"
+  },
+  {
+    "id": "f297",
+    "front": "Mit jelent vagy mire utal: CFB?",
+    "back": "A(z) Blokkrejtjelezési módok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Blokkrejtjelezési módok",
+    "type": "term"
+  },
+  {
+    "id": "f298",
+    "front": "Mi a(z) Példa a CBC módra lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Példa a CBC módra",
+    "type": "qa"
+  },
+  {
+    "id": "f299",
+    "front": "Mi a(z) Kitöltés lenyege?",
+    "back": "A kitöltés padding szükséges, ha az üzenet hossza nem egész számú többszöröse a blokkrejtjelező blokméretének.",
+    "section": "Kitöltés",
+    "type": "qa"
+  },
+  {
+    "id": "f300",
+    "front": "Mi a(z) Összefoglalás lenyege?",
+    "back": "A blokkrejtjelezők és azok módjai alapvető építőelemek a biztonságos kommunikációhoz.",
+    "section": "Összefoglalás",
+    "type": "qa"
+  },
+  {
+    "id": "f301",
+    "front": "Mit jelent vagy mire utal: Ezek a primitívek?",
+    "back": "A(z) Összefoglalás temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Összefoglalás",
+    "type": "term"
+  },
+  {
+    "id": "f302",
+    "front": "Mi a(z) Bevezetés a kriptográfiába lenyege?",
+    "back": "A kriptográfia a kommunikáció biztonságának tudománya, amely az információ védelmét szolgálja a lehallgatás , hamisítás és megtagadás ellen.",
+    "section": "Bevezetés a kriptográfiába",
+    "type": "qa"
+  },
+  {
+    "id": "f303",
+    "front": "Mi a(z) Szimmetrikus titkosítás lenyege?",
+    "back": "A szimmetrikus titkosítás olyan titkosítási módszer, amelyben a kódoló és dekódoló kulcs azonos .",
+    "section": "Szimmetrikus titkosítás",
+    "type": "qa"
+  },
+  {
+    "id": "f304",
+    "front": "Mi a(z) CTR mód lenyege?",
+    "back": "A CTR Counter mód egy olyan mód, amelyben a kódoló és dekódoló kulcs azonos , és a kódolás és dekódolás folyamata azonos .",
+    "section": "CTR mód",
+    "type": "qa"
+  },
+  {
+    "id": "f305",
+    "front": "Mit jelent vagy mire utal: CTR?",
+    "back": "A(z) CTR mód temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "CTR mód",
+    "type": "term"
+  },
+  {
+    "id": "f306",
+    "front": "Mit jelent vagy mire utal: CTR Counter mód?",
+    "back": "A(z) CTR mód temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "CTR mód",
+    "type": "term"
+  },
+  {
+    "id": "f307",
+    "front": "Mit jelent vagy mire utal: CTR mód gyors?",
+    "back": "A(z) CTR mód temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "CTR mód",
+    "type": "term"
+  },
+  {
+    "id": "f308",
+    "front": "Mi a(z) Aszimmetrikus titkosítás lenyege?",
+    "back": "Az aszimmetrikus titkosítás olyan titkosítási módszer, amelyben a kódoló és dekódoló kulcs különböző .",
+    "section": "Aszimmetrikus titkosítás",
+    "type": "qa"
+  },
+  {
+    "id": "f309",
+    "front": "Mit jelent vagy mire utal: Az aszimmetrikus titkosítás?",
+    "back": "A(z) Aszimmetrikus titkosítás temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Aszimmetrikus titkosítás",
+    "type": "term"
+  },
+  {
+    "id": "f310",
+    "front": "Mi a(z) RSA algoritmus lenyege?",
+    "back": "Az RSA algoritmus egy olyan aszimmetrikus titkosítási algoritmus, amely a prímszámok faktorizálásán alapul.",
+    "section": "RSA algoritmus",
+    "type": "qa"
+  },
+  {
+    "id": "f311",
+    "front": "Mit jelent vagy mire utal: RSA?",
+    "back": "A(z) RSA algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "RSA algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f312",
+    "front": "Mit jelent vagy mire utal: Az RSA algoritmus?",
+    "back": "A(z) RSA algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "RSA algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f313",
+    "front": "Mit jelent vagy mire utal: Kulcspár-generálás?",
+    "back": "A(z) RSA algoritmus temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "RSA algoritmus",
+    "type": "term"
+  },
+  {
+    "id": "f314",
+    "front": "Mi a(z) Hash-függvények lenyege?",
+    "back": "A hash-függvények olyan függvények, amelyek rövidítik az input adatokat .",
+    "section": "Hash-függvények",
+    "type": "qa"
+  },
+  {
+    "id": "f315",
+    "front": "Mi a(z) Bevezetés lenyege?",
+    "back": "A kriptográfiai alapok megértése elengedhetetlen a modern biztonsági rendszerek kifejlesztéséhez.",
+    "section": "Bevezetés",
+    "type": "qa"
+  },
+  {
+    "id": "f316",
+    "front": "Mit jelent vagy mire utal: Ebben a fejezetben?",
+    "back": "A(z) Bevezetés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés",
+    "type": "term"
+  },
+  {
+    "id": "f317",
+    "front": "Mi a(z) Kriptográfiai Hash-függvények lenyege?",
+    "back": "A kriptográfiai hash-függvények olyan függvények, amelyek tetszőleges hosszúságú üzenetet rögzített hosszúságú kimenetbe képeznek le.",
+    "section": "Kriptográfiai Hash-függvények",
+    "type": "qa"
+  },
+  {
+    "id": "f318",
+    "front": "Mit jelent vagy mire utal: Gyenge ütközés-ellenállóság weak?",
+    "back": "A(z) Kriptográfiai Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f319",
+    "front": "Mit jelent vagy mire utal: Erős ütközés-ellenállóság strong?",
+    "back": "A(z) Kriptográfiai Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f320",
+    "front": "Mi a(z) Példa: SHA256 lenyege?",
+    "back": "A SHA256 egy kriptográfiai hash-függvény , amely 256 bites kimenetet eredményez.",
+    "section": "Példa: SHA256",
+    "type": "qa"
+  },
+  {
+    "id": "f321",
+    "front": "Mit jelent vagy mire utal: SHA256 egy kriptográfiai?",
+    "back": "A(z) Példa: SHA256 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: SHA256",
+    "type": "term"
+  },
+  {
+    "id": "f322",
+    "front": "Mit jelent vagy mire utal: SHA256-t széles körben?",
+    "back": "A(z) Példa: SHA256 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: SHA256",
+    "type": "term"
+  },
+  {
+    "id": "f323",
+    "front": "Mi a(z) További Tulajdonságok lenyege?",
+    "back": "A hash-függvények lavina-hatást mutatnak, ami azt jelenti, hogy a bemenet egyetlen bitjének változása a kimeneti bitek körülbelül felének a változását okozza.",
+    "section": "További Tulajdonságok",
+    "type": "qa"
+  },
+  {
+    "id": "f324",
+    "front": "Mit jelent vagy mire utal: Ez a tulajdonság?",
+    "back": "A(z) További Tulajdonságok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "További Tulajdonságok",
+    "type": "term"
+  },
+  {
+    "id": "f325",
+    "front": "Mi a(z) MAC-függvények lenyege?",
+    "back": "A MAC-függvények Message Authentication Code olyan függvények, amelyek egy tetszőleges hosszúságú üzenetet és egy titkos kulcsot egy rögzített hosszúságú kimenetbe képeznek le.",
+    "section": "MAC-függvények",
+    "type": "qa"
+  },
+  {
+    "id": "f326",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) MAC-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "MAC-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f327",
+    "front": "Mit jelent vagy mire utal: MAC-függvények Message Authentication?",
+    "back": "A(z) MAC-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "MAC-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f328",
+    "front": "Mit jelent vagy mire utal: Code olyan függvények?",
+    "back": "A(z) MAC-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "MAC-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f329",
+    "front": "Mi a(z) Példa: HMAC lenyege?",
+    "back": "Az HMAC Keyed-Hash Message Authentication Code egy MAC-függvény, amely egy hash-függvényt használ a MAC-kód létrehozásához.",
+    "section": "Példa: HMAC",
+    "type": "qa"
+  },
+  {
+    "id": "f330",
+    "front": "Mit jelent vagy mire utal: HMAC?",
+    "back": "A(z) Példa: HMAC temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: HMAC",
+    "type": "term"
+  },
+  {
+    "id": "f331",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Példa: HMAC temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: HMAC",
+    "type": "term"
+  },
+  {
+    "id": "f332",
+    "front": "Mit jelent vagy mire utal: Az HMAC Keyed-Hash?",
+    "back": "A(z) Példa: HMAC temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példa: HMAC",
+    "type": "term"
+  },
+  {
+    "id": "f333",
+    "front": "Mi a(z) Gyakorlat lenyege?",
+    "back": "Játssz kicsit az rsa.ipynb iPython notebook-kal, ami a Notebooks/RSA folderben található!",
+    "section": "Gyakorlat",
+    "type": "qa"
+  },
+  {
+    "id": "f334",
+    "front": "Mit jelent vagy mire utal: RSA?",
+    "back": "A(z) Gyakorlat temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyakorlat",
+    "type": "term"
+  },
+  {
+    "id": "f335",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Gyakorlat temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyakorlat",
+    "type": "term"
+  },
+  {
+    "id": "f336",
+    "front": "Mit jelent vagy mire utal: Játssz kicsit az?",
+    "back": "A(z) Gyakorlat temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Gyakorlat",
+    "type": "term"
+  },
+  {
+    "id": "f337",
+    "front": "Mi a(z) Hash-függvények lenyege?",
+    "back": "A hash-függvények olyan függvények, amelyek egy bemeneti adatot egy rögzített hosszúságú kimeneti adattá alakítanak.",
+    "section": "Hash-függvények",
+    "type": "qa"
+  },
+  {
+    "id": "f338",
+    "front": "Mit jelent vagy mire utal: Determinisztikus?",
+    "back": "A(z) Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f339",
+    "front": "Mit jelent vagy mire utal: Egyirányú?",
+    "back": "A(z) Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f340",
+    "front": "Mit jelent vagy mire utal: Példa hash-függvényre?",
+    "back": "A(z) Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f341",
+    "front": "Mi a(z) Digitális aláírások lenyege?",
+    "back": "A digitális aláírások olyan kriptográfiai primitívek, amelyek lehetővé teszik a küldő azonosítását és a küldött adatok hitelesítését.",
+    "section": "Digitális aláírások",
+    "type": "qa"
+  },
+  {
+    "id": "f342",
+    "front": "Mi a(z) Hibrid rejtjelezés lenyege?",
+    "back": "A hibrid rejtjelezés olyan kriptográfiai primitív, amely a szimmetrikus kulcsú és az aszimmetrikus kulcsú rejtjelezést kombinálja.",
+    "section": "Hibrid rejtjelezés",
+    "type": "qa"
+  },
+  {
+    "id": "f343",
+    "front": "Mit jelent vagy mire utal: Hibrid rejtjelezés?",
+    "back": "A(z) Hibrid rejtjelezés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hibrid rejtjelezés",
+    "type": "term"
+  },
+  {
+    "id": "f344",
+    "front": "Mit jelent vagy mire utal: Szimmetrikus kulcsú rejtjelezés?",
+    "back": "A(z) Hibrid rejtjelezés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hibrid rejtjelezés",
+    "type": "term"
+  },
+  {
+    "id": "f345",
+    "front": "Mit jelent vagy mire utal: Aszimmetrikus kulcsú rejtjelezés?",
+    "back": "A(z) Hibrid rejtjelezés temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hibrid rejtjelezés",
+    "type": "term"
+  },
+  {
+    "id": "f346",
+    "front": "Mi a(z) Bevezetés a kulcs-származtatásba lenyege?",
+    "back": "A kulcs-származtatás olyan folyamat, amely közös titokból származtat új kulcsokat .",
+    "section": "Bevezetés a kulcs-származtatásba",
+    "type": "qa"
+  },
+  {
+    "id": "f347",
+    "front": "Mit jelent vagy mire utal: Ez a folyamat?",
+    "back": "A(z) Bevezetés a kulcs-származtatásba temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kulcs-származtatásba",
+    "type": "term"
+  },
+  {
+    "id": "f348",
+    "front": "Mi a(z) Kulcs-származtatás fajtái lenyege?",
+    "back": "- Erős titokból történő kulcs-származtatás: ha a közös titok erős nagy entrópiával rendelkező , akkor az extract-and-expand módszert használjuk.",
+    "section": "Kulcs-származtatás fajtái",
+    "type": "qa"
+  },
+  {
+    "id": "f349",
+    "front": "Mit jelent vagy mire utal: Erős titokból történő?",
+    "back": "A(z) Kulcs-származtatás fajtái temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kulcs-származtatás fajtái",
+    "type": "term"
+  },
+  {
+    "id": "f350",
+    "front": "Mit jelent vagy mire utal: Gyenge titokból történő?",
+    "back": "A(z) Kulcs-származtatás fajtái temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kulcs-származtatás fajtái",
+    "type": "term"
+  },
+  {
+    "id": "f351",
+    "front": "Mi a(z) Példák kulcs-származtatásra lenyege?",
+    "back": "- HKDF HMAC-alapú KDF : egy gyors és biztonságos kulcs-származtatási módszer.",
+    "section": "Példák kulcs-származtatásra",
+    "type": "qa"
+  },
+  {
+    "id": "f352",
+    "front": "Mit jelent vagy mire utal: HKDF?",
+    "back": "A(z) Példák kulcs-származtatásra temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példák kulcs-származtatásra",
+    "type": "term"
+  },
+  {
+    "id": "f353",
+    "front": "Mit jelent vagy mire utal: HMAC?",
+    "back": "A(z) Példák kulcs-származtatásra temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példák kulcs-származtatásra",
+    "type": "term"
+  },
+  {
+    "id": "f354",
+    "front": "Mit jelent vagy mire utal: KDF?",
+    "back": "A(z) Példák kulcs-származtatásra temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Példák kulcs-származtatásra",
+    "type": "term"
+  },
+  {
+    "id": "f355",
+    "front": "Mi a(z) Véletlenszám-generátorok lenyege?",
+    "back": "A véletlenszám-generátorok olyan eszközök, amelyek véletlen számokat generálnak.",
+    "section": "Véletlenszám-generátorok",
+    "type": "qa"
+  },
+  {
+    "id": "f356",
+    "front": "Mit jelent vagy mire utal: Ezek a számok?",
+    "back": "A(z) Véletlenszám-generátorok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Véletlenszám-generátorok",
+    "type": "term"
+  },
+  {
+    "id": "f357",
+    "front": "Mi a(z) Valódi vs. álvéletlen számok lenyege?",
+    "back": "- Valódi véletlenszámok : megjósolhatatlanok , de sokszor nem állnak rendelkezésre megfelelő mennyiségben vagy sebességgel.",
+    "section": "Valódi vs. álvéletlen számok",
+    "type": "qa"
+  },
+  {
+    "id": "f358",
+    "front": "Mit jelent vagy mire utal: Valódi véletlenszámok?",
+    "back": "A(z) Valódi vs. álvéletlen számok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Valódi vs. álvéletlen számok",
+    "type": "term"
+  },
+  {
+    "id": "f359",
+    "front": "Mit jelent vagy mire utal: Ezek a primitívek?",
+    "back": "A(z) Valódi vs. álvéletlen számok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Valódi vs. álvéletlen számok",
+    "type": "term"
+  },
+  {
+    "id": "f360",
+    "front": "Mi a(z) Bevezetés a PRNG-kbe lenyege?",
+    "back": "A pseodoveletlen számgenerátorok PRNG nem valódi véletlen kimenetet állítanak elő, viszont gyorsak, nagy mennyiségű kimenetet képesek generálni rövid idő alatt.",
+    "section": "Bevezetés a PRNG-kbe",
+    "type": "qa"
+  },
+  {
+    "id": "f361",
+    "front": "Mit jelent vagy mire utal: PRNG?",
+    "back": "A(z) Bevezetés a PRNG-kbe temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a PRNG-kbe",
+    "type": "term"
+  },
+  {
+    "id": "f362",
+    "front": "Mit jelent vagy mire utal: PRNG nem valódi?",
+    "back": "A(z) Bevezetés a PRNG-kbe temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a PRNG-kbe",
+    "type": "term"
+  },
+  {
+    "id": "f363",
+    "front": "Mit jelent vagy mire utal: Ha megfelelően vannak?",
+    "back": "A(z) Bevezetés a PRNG-kbe temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a PRNG-kbe",
+    "type": "term"
+  },
+  {
+    "id": "f364",
+    "front": "Mi a(z) A PRNG-k működése lenyege?",
+    "back": "A PRNG-k belső állapotot használnak a kimenet generálásához.",
+    "section": "A PRNG-k működése",
+    "type": "qa"
+  },
+  {
+    "id": "f365",
+    "front": "Mit jelent vagy mire utal: PRNG?",
+    "back": "A(z) A PRNG-k működése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A PRNG-k működése",
+    "type": "term"
+  },
+  {
+    "id": "f366",
+    "front": "Mit jelent vagy mire utal: PRNG-k belső állapotot?",
+    "back": "A(z) A PRNG-k működése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A PRNG-k működése",
+    "type": "term"
+  },
+  {
+    "id": "f367",
+    "front": "Mit jelent vagy mire utal: Minden kimenet generálás?",
+    "back": "A(z) A PRNG-k működése temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "A PRNG-k működése",
+    "type": "term"
+  },
+  {
+    "id": "f368",
+    "front": "Mi a(z) Valamennyire megjósolhatatlan források lenyege?",
+    "back": "A valamennyire megjósolhatatlan források olyan források, amelyek nem teljesen véletlenek, de a támadó nem tudja mindent megfigyelni vagy befolyásolni.",
+    "section": "Valamennyire megjósolhatatlan források",
+    "type": "qa"
+  },
+  {
+    "id": "f369",
+    "front": "Mit jelent vagy mire utal: Például?",
+    "back": "A(z) Valamennyire megjósolhatatlan források temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Valamennyire megjósolhatatlan források",
+    "type": "term"
+  },
+  {
+    "id": "f370",
+    "front": "Mi a(z) Kriptográfiai primitívek lenyege?",
+    "back": "A kriptográfiai primitívek olyan alapvető építőelemek, amelyek segítségével bonyolultabb kriptográfiai protokollokat hozhatunk létre.",
+    "section": "Kriptográfiai primitívek",
+    "type": "qa"
+  },
+  {
+    "id": "f371",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Kriptográfiai primitívek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai primitívek",
+    "type": "term"
+  },
+  {
+    "id": "f372",
+    "front": "Mit jelent vagy mire utal: KEM?",
+    "back": "A(z) Kriptográfiai primitívek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai primitívek",
+    "type": "term"
+  },
+  {
+    "id": "f373",
+    "front": "Mit jelent vagy mire utal: KDF?",
+    "back": "A(z) Kriptográfiai primitívek temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kriptográfiai primitívek",
+    "type": "term"
+  },
+  {
+    "id": "f374",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Bevezetés a kriptográfiai primitívekbe temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kriptográfiai primitívekbe",
+    "type": "term"
+  },
+  {
+    "id": "f375",
+    "front": "Mit jelent vagy mire utal: MAC-függvények?",
+    "back": "A(z) Bevezetés a kriptográfiai primitívekbe temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Bevezetés a kriptográfiai primitívekbe",
+    "type": "term"
+  },
+  {
+    "id": "f376",
+    "front": "Mi a(z) Publikus kulcsú titkosítás lenyege?",
+    "back": "A publikus kulcsú titkosítás egy olyan titkosítási módszer, amelyben a küldő és a fogadó különböző kulcsokat használnak.",
+    "section": "Publikus kulcsú titkosítás",
+    "type": "qa"
+  },
+  {
+    "id": "f377",
+    "front": "Mit jelent vagy mire utal: Egyirányúság?",
+    "back": "A(z) Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f378",
+    "front": "Mit jelent vagy mire utal: Preimage-ellenállás?",
+    "back": "A(z) Hash-függvények temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Hash-függvények",
+    "type": "term"
+  },
+  {
+    "id": "f379",
+    "front": "Mi a(z) Digitális aláírások lenyege?",
+    "back": "A digitális aláírások olyan függvények, amelyek egy adott üzenetet és egy titkos kulcsot használnak fel, hogy egy aláírást generáljanak.",
+    "section": "Digitális aláírások",
+    "type": "qa"
+  },
+  {
+    "id": "f380",
+    "front": "Mi a(z) Hibrid titkosítás lenyege?",
+    "back": "A hibrid titkosítás olyan titkosítási módszer, amely a publikus kulcsú titkosítást és a szimmetrikus titkosítást kombinálja.",
+    "section": "Hibrid titkosítás",
+    "type": "qa"
+  },
+  {
+    "id": "f381",
+    "front": "Mi a(z) Kulcs-beágyazás mechanizmusok lenyege?",
+    "back": "A kulcs-beágyazás mechanizmusok olyan mechanizmusok, amelyek lehetővé teszik a kulcsok biztonságos beágyazását.",
+    "section": "Kulcs-beágyazás mechanizmusok",
+    "type": "qa"
+  },
+  {
+    "id": "f382",
+    "front": "Mi a(z) Kulcs-származtatás módszerek lenyege?",
+    "back": "A kulcs-származtatás módszerek olyan módszerek, amelyek lehetővé teszik a kulcsok származtatását.",
+    "section": "Kulcs-származtatás módszerek",
+    "type": "qa"
+  },
+  {
+    "id": "f383",
+    "front": "Mi a(z) Jelszóból származtatott kriptográfiai kulcsok lenyege?",
+    "back": "A jelszóból származtatott kriptográfiai kulcsok olyan kulcsok, amelyek egy jelszóból származnak.",
+    "section": "Jelszóból származtatott kriptográfiai kulcsok",
+    "type": "qa"
+  },
+  {
+    "id": "f384",
+    "front": "Mi a(z) Álvéletlen-generátorok lenyege?",
+    "back": "Az álvéletlen-generátorok olyan generátorok, amelyek álvéletlen számokat generálnak.",
+    "section": "Álvéletlen-generátorok",
+    "type": "qa"
+  },
+  {
+    "id": "f385",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Álvéletlen-generátorok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Álvéletlen-generátorok",
+    "type": "term"
+  },
+  {
+    "id": "f386",
+    "front": "Mit jelent vagy mire utal: Az álvéletlen-generátorok olyan?",
+    "back": "A(z) Álvéletlen-generátorok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Álvéletlen-generátorok",
+    "type": "term"
+  },
+  {
+    "id": "f387",
+    "front": "Mit jelent vagy mire utal: Az álvéletlen-generátorok biztosítják?",
+    "back": "A(z) Álvéletlen-generátorok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Álvéletlen-generátorok",
+    "type": "term"
+  },
+  {
+    "id": "f388",
+    "front": "Mi a(z) Kérdés 1 lenyege?",
+    "back": "Mi az a kriptográfiai primitív és milyen szerepet játszik a biztonságos kommunikációban?",
+    "section": "Kérdés 1",
+    "type": "qa"
+  },
+  {
+    "id": "f389",
+    "front": "Mit jelent vagy mire utal: Mi az a?",
+    "back": "A(z) Kérdés 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 1",
+    "type": "term"
+  },
+  {
+    "id": "f390",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfiai?",
+    "back": "A(z) Kérdés 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 1",
+    "type": "term"
+  },
+  {
+    "id": "f391",
+    "front": "Mi a(z) Kérdés 2 lenyege?",
+    "back": "Milyen típusú kriptográfiai alapalgoritmusokat tartalmaz a kriptográfia?",
+    "section": "Kérdés 2",
+    "type": "qa"
+  },
+  {
+    "id": "f392",
+    "front": "Mit jelent vagy mire utal: MAC?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f393",
+    "front": "Mit jelent vagy mire utal: Milyen típusú kriptográfiai?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f394",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfiai?",
+    "back": "A(z) Kérdés 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 2",
+    "type": "term"
+  },
+  {
+    "id": "f395",
+    "front": "Mi a(z) Kérdés 3 lenyege?",
+    "back": "Válasz A titkosítási séma olyan algoritmus, amely az eredeti üzenetet plaintext átalakítja kódolt üzenetté ciphertext , biztosítva az adatok titkosságát.",
+    "section": "Kérdés 3",
+    "type": "qa"
+  },
+  {
+    "id": "f396",
+    "front": "Mit jelent vagy mire utal: Mire szolgál a?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f397",
+    "front": "Mit jelent vagy mire utal: Válasz A titkosítási?",
+    "back": "A(z) Kérdés 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 3",
+    "type": "term"
+  },
+  {
+    "id": "f398",
+    "front": "Mi a(z) Kérdés 4 lenyege?",
+    "back": "Válasz A titkosítási sémák osztályozhatók szimmetrikus kulcsú, aszimmetrikus kulcsú, kulcsfolyam-rejtjelezők és blokkrejtjelezők szerint.",
+    "section": "Kérdés 4",
+    "type": "qa"
+  },
+  {
+    "id": "f399",
+    "front": "Mit jelent vagy mire utal: Milyen típusú titkosítási?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f400",
+    "front": "Mit jelent vagy mire utal: Válasz A titkosítási?",
+    "back": "A(z) Kérdés 4 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 4",
+    "type": "term"
+  },
+  {
+    "id": "f401",
+    "front": "Mi a(z) Kérdés 5 lenyege?",
+    "back": "Válasz A kriptográfiai hash-függvények olyan algoritmusok, amelyek az adatok integritását és hitelességét biztosítják, az adatok átalakításával egy rövidebb, állandó hosszúságú karakterláncra.",
+    "section": "Kérdés 5",
+    "type": "qa"
+  },
+  {
+    "id": "f402",
+    "front": "Mit jelent vagy mire utal: Mi a szerepe?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f403",
+    "front": "Mit jelent vagy mire utal: Válasz A kriptográfiai?",
+    "back": "A(z) Kérdés 5 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kérdés 5",
+    "type": "term"
+  },
+  {
+    "id": "f404",
+    "front": "Mi a(z) Attekintes lenyege?",
+    "back": "Ez a jegyzet lokalis fallback generatort hasznalva keszult, mert az LLM szolgaltatas eppen nem volt elerheto vagy kvotaba futott.",
+    "section": "Attekintes",
+    "type": "qa"
+  },
+  {
+    "id": "f405",
+    "front": "Mit jelent vagy mire utal: LLM?",
+    "back": "A(z) Attekintes temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Attekintes",
+    "type": "term"
+  },
+  {
+    "id": "f406",
+    "front": "Mit jelent vagy mire utal: BME?",
+    "back": "A(z) Attekintes temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Attekintes",
+    "type": "term"
+  },
+  {
+    "id": "f407",
+    "front": "Mit jelent vagy mire utal: Ez a jegyzet?",
+    "back": "A(z) Attekintes temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Attekintes",
+    "type": "term"
+  },
+  {
+    "id": "f408",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Kriptográfia - Néhány alkalmazás VIHIAC07 – IT biztonság, 2026 Buttyán Levente CrySyS Lab, BME buttyan@crysys.hu w w w .",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f409",
+    "front": "Mit jelent vagy mire utal: BME?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f410",
+    "front": "Mit jelent vagy mire utal: Kriptográfia - Néhány?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f411",
+    "front": "Mit jelent vagy mire utal: VIHIAC07?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f412",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- BME : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f413",
+    "front": "Mit jelent vagy mire utal: BME?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f414",
+    "front": "Mit jelent vagy mire utal: PKI?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f415",
+    "front": "Mit jelent vagy mire utal: TLS?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f416",
+    "front": "Mi a(z) Vizsgara figyelj lenyege?",
+    "back": "- Keresd az osszefuggest a fenyegetes, sebezhetoseg, vedelmi kontroll es kockazat kozott.",
+    "section": "Vizsgara figyelj",
+    "type": "qa"
+  },
+  {
+    "id": "f417",
+    "front": "Mit jelent vagy mire utal: Tudd a fogalmakat?",
+    "back": "A(z) Vizsgara figyelj temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Vizsgara figyelj",
+    "type": "term"
+  },
+  {
+    "id": "f418",
+    "front": "Mit jelent vagy mire utal: Keresd az osszefuggest?",
+    "back": "A(z) Vizsgara figyelj temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Vizsgara figyelj",
+    "type": "term"
+  },
+  {
+    "id": "f419",
+    "front": "Mit jelent vagy mire utal: Gyakorold?",
+    "back": "A(z) Vizsgara figyelj temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Vizsgara figyelj",
+    "type": "term"
+  },
+  {
+    "id": "f420",
+    "front": "Mi a(z) Active Recall lenyege?",
+    "back": "A forrasanyag ezt a temat es a kapcsolodo alapfogalmakat targyalja.",
+    "section": "Active Recall",
+    "type": "qa"
+  },
+  {
+    "id": "f421",
+    "front": "Mit jelent vagy mire utal: Onellenorzo kerdesek?",
+    "back": "A(z) Active Recall temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Active Recall",
+    "type": "term"
+  },
+  {
+    "id": "f422",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z 03 Crypto Applications BME 2026 hu lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f423",
+    "front": "Mit jelent vagy mire utal: BME?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f424",
+    "front": "Mit jelent vagy mire utal: Mi a z?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f425",
+    "front": "Mit jelent vagy mire utal: Crypto Applications BME?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f426",
+    "front": "Mi a(z) Kerdes 2 lenyege?",
+    "back": "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?",
+    "section": "Kerdes 2",
+    "type": "qa"
+  },
+  {
+    "id": "f427",
+    "front": "Mit jelent vagy mire utal: BME?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f428",
+    "front": "Mit jelent vagy mire utal: PKI?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f429",
+    "front": "Mit jelent vagy mire utal: TLS?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f430",
+    "front": "Mi a(z) Kerdes 3 lenyege?",
+    "back": "Milyen gyakorlati kockazat vagy vedelmi szempont kovetkezik az anyagbol?",
+    "section": "Kerdes 3",
+    "type": "qa"
+  },
+  {
+    "id": "f431",
+    "front": "Mit jelent vagy mire utal: Milyen gyakorlati kockazat?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f432",
+    "front": "Mit jelent vagy mire utal: Valasz 2025 április?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f433",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- András Gazdag CrySyS Lab, BME andras.gazdag@crysys.hu w w w .",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f434",
+    "front": "Mit jelent vagy mire utal: CVE?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f435",
+    "front": "Mit jelent vagy mire utal: SDL?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f436",
+    "front": "Mit jelent vagy mire utal: SDL?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f437",
+    "front": "Mit jelent vagy mire utal: CVE?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f438",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Valasz András Gazdag CrySyS Lab, BME andras.gazdag@crysys.hu w w w .",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f439",
+    "front": "Mit jelent vagy mire utal: SDL?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f440",
+    "front": "Mit jelent vagy mire utal: SDL?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f441",
+    "front": "Mit jelent vagy mire utal: CVE?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f442",
+    "front": "Mit jelent vagy mire utal: CVE?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f443",
+    "front": "Mit jelent vagy mire utal: Valasz WebKit Bugzilla?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f444",
+    "front": "Mit jelent vagy mire utal: LLM szolgaltatas eppen?",
+    "back": "A(z) Attekintes temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Attekintes",
+    "type": "term"
+  },
+  {
+    "id": "f445",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- h u -- 1 of 53 -- Áttekintés ▪ Bevezetés a memóriakezelési sérülékenységekbe ▪ x86 architektúra ▪ Függvényhívási mechanizmusok ▪ Stack overflow ▪ Védelmi mechanizmusok Implementációs hibák 2 -- 2 of 53 -- Szoftverbiztonság ▪ Mit jelent az, hogy egy szoftver biztonságos?",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f446",
+    "front": "Mit jelent vagy mire utal: Bevezetés a memóriakezelési?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f447",
+    "front": "Mit jelent vagy mire utal: Függvényhívási mechanizmusok?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f448",
+    "front": "Mit jelent vagy mire utal: Stack overflow?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f449",
+    "front": "Mit jelent vagy mire utal: SQL?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f450",
+    "front": "Mit jelent vagy mire utal: XSS?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f451",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z 05 SW ImplementationErrors HU lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f452",
+    "front": "Mit jelent vagy mire utal: SW ImplementationErrors HU?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f453",
+    "front": "Mit jelent vagy mire utal: Valasz h u?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f454",
+    "front": "Mit jelent vagy mire utal: SQL?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f455",
+    "front": "Mit jelent vagy mire utal: XSS?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f456",
+    "front": "Mit jelent vagy mire utal: Valasz?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f457",
+    "front": "Mit jelent vagy mire utal: Az egyik lehetséges?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f458",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- – https://owasp.org/www-project-web-security-testing-guide – Ezek nagyon ajánlott olvasmányok fejlesztők számára!",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f459",
+    "front": "Mit jelent vagy mire utal: Ezek nagyon ajánlott?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f460",
+    "front": "Mit jelent vagy mire utal: Tiltsd le a?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f461",
+    "front": "Mit jelent vagy mire utal: Naplózd a hozzáférés-védelmi?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f462",
+    "front": "Mit jelent vagy mire utal: OWASP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f463",
+    "front": "Mit jelent vagy mire utal: TOP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f464",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Valasz – https://owasp.org/www-project-web-security-testing-guide – Ezek nagyon ajánlott olvasmányok fejlesztők számára!",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f465",
+    "front": "Mit jelent vagy mire utal: SW Web HU?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f466",
+    "front": "Mit jelent vagy mire utal: Valasz?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f467",
+    "front": "Mit jelent vagy mire utal: OWASP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f468",
+    "front": "Mit jelent vagy mire utal: TOP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f469",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- – Egy bizonyos biztonsági mechanizmus nem teljesen érthető?",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f470",
+    "front": "Mit jelent vagy mire utal: SAST?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f471",
+    "front": "Mit jelent vagy mire utal: Egy bizonyos biztonsági?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f472",
+    "front": "Mit jelent vagy mire utal: Hátrány?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f473",
+    "front": "Mit jelent vagy mire utal: LLM?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f474",
+    "front": "Mit jelent vagy mire utal: TDD?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f475",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Valasz – Egy bizonyos biztonsági mechanizmus nem teljesen érthető?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f476",
+    "front": "Mit jelent vagy mire utal: SW Testing HU?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f477",
+    "front": "Mit jelent vagy mire utal: LLM?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f478",
+    "front": "Mit jelent vagy mire utal: TDD?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f479",
+    "front": "Mit jelent vagy mire utal: AAA?",
+    "back": "A(z) Attekintes temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Attekintes",
+    "type": "term"
+  },
+  {
+    "id": "f480",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Hitelesítés, engedélyezés, hozzáférés-szabályzás AAA VIHIAC07 – IT biztonság, 2026 Nagy Roland CrySyS Lab, BME rnagy@crysys.hu w w w .",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f481",
+    "front": "Mit jelent vagy mire utal: AAA?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f482",
+    "front": "Mit jelent vagy mire utal: Hitelesítés?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f483",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- AAA : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f484",
+    "front": "Mit jelent vagy mire utal: AAA?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f485",
+    "front": "Mit jelent vagy mire utal: PIN?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f486",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Valasz Hitelesítés, engedélyezés, hozzáférés-szabályzás AAA VIHIAC07 – IT biztonság, 2026 Nagy Roland CrySyS Lab, BME rnagy@crysys.hu w w w .",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f487",
+    "front": "Mit jelent vagy mire utal: AAA?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f488",
+    "front": "Mit jelent vagy mire utal: AAA?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f489",
+    "front": "Mit jelent vagy mire utal: PIN?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f490",
+    "front": "Mit jelent vagy mire utal: Valasz h u?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f491",
+    "front": "Mit jelent vagy mire utal: Alapfogalmak?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f492",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- © Hálózati Rendszerek és Szolgáltatások Tanszék 1 Budapest, 2026.",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f493",
+    "front": "Mit jelent vagy mire utal: ROSSZINDULAT?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f494",
+    "front": "Mit jelent vagy mire utal: SZOFTVEREK?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f495",
+    "front": "Mit jelent vagy mire utal: KIBERBŰNÖZÉS?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f496",
+    "front": "Mit jelent vagy mire utal: HIT?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f497",
+    "front": "Mit jelent vagy mire utal: MALWARE?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f498",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Valasz © Hálózati Rendszerek és Szolgáltatások Tanszék 1 Budapest, 2026.",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f499",
+    "front": "Mit jelent vagy mire utal: Malware HU lenyege?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f500",
+    "front": "Mit jelent vagy mire utal: HIT?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f501",
+    "front": "Mit jelent vagy mire utal: MALWARE?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f502",
+    "front": "Mit jelent vagy mire utal: ROSSZINDULAT?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f503",
+    "front": "Mit jelent vagy mire utal: SZOFTVEREK?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f504",
+    "front": "Mit jelent vagy mire utal: KIBERBŰNÖZÉS?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f505",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Az ilyen rendszereket a továbbiakban IT-rendszereknek nevezzük, ahol az IT rövidítés az információs technológiák kifejezésre utal.",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f506",
+    "front": "Mit jelent vagy mire utal: Az ilyen rendszereket?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f507",
+    "front": "Mit jelent vagy mire utal: IT-rendszereknek nevezzük?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f508",
+    "front": "Mit jelent vagy mire utal: IT rövidítés az?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f509",
+    "front": "Mit jelent vagy mire utal: CIA?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f510",
+    "front": "Mit jelent vagy mire utal: NSA?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f511",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z IT biztonság jegyzet Bevezetés az IT Biztonságba BME Villamosmérnöki és Informatikai Kar lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f512",
+    "front": "Mit jelent vagy mire utal: IT biztonság jegyzet?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f513",
+    "front": "Mit jelent vagy mire utal: CIA?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f514",
+    "front": "Mit jelent vagy mire utal: NSA?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f515",
+    "front": "Mit jelent vagy mire utal: Valasz Nyugodtan kijelenthetjük?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f516",
+    "front": "Mit jelent vagy mire utal: IT-rendszerek nélkül?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f517",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Ezek a folyamatok garantálják, hogy a fejlesztés alatt álló szoftver megfeleljen a követelményeknek és a specifikációnak.",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f518",
+    "front": "Mit jelent vagy mire utal: LLM?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f519",
+    "front": "Mit jelent vagy mire utal: Ezek a folyamatok?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f520",
+    "front": "Mit jelent vagy mire utal: LLM-ek bevezetése a?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f521",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- LLM : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f522",
+    "front": "Mit jelent vagy mire utal: XML?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f523",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z IT biztonság jegyzet Biztonsági tesztelés BME Villamosmérnöki és Informatikai Kar lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f524",
+    "front": "Mit jelent vagy mire utal: XML?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f525",
+    "front": "Mit jelent vagy mire utal: LLM?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f526",
+    "front": "Mit jelent vagy mire utal: Valasz A nagy?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f527",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Where on the stack are function parameters and local variables placed?A stack frame is a memory structure created during a function call to store its local variables, parameters, and return address.",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f528",
+    "front": "Mit jelent vagy mire utal: EBP?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f529",
+    "front": "Mit jelent vagy mire utal: NOP?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f530",
+    "front": "Mit jelent vagy mire utal: Where on the?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f531",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- GENERÁLT : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f532",
+    "front": "Mit jelent vagy mire utal: GENERÁLT?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f533",
+    "front": "Mit jelent vagy mire utal: EBP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f534",
+    "front": "Mit jelent vagy mire utal: NOP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f535",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z Control Questions kidolgozva2025 lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f536",
+    "front": "Mit jelent vagy mire utal: Control Questions kidolgozva2025?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f537",
+    "front": "Mit jelent vagy mire utal: Valasz Where on?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f538",
+    "front": "Mit jelent vagy mire utal: GENERÁLT?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f539",
+    "front": "Mit jelent vagy mire utal: EBP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f540",
+    "front": "Mit jelent vagy mire utal: NOP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f541",
+    "front": "Mit jelent vagy mire utal: EBP?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f542",
+    "front": "Mit jelent vagy mire utal: Valasz Local variables?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f543",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Ha tudjatok a jo valaszt, pls valami modon jeloljetek be Ha találtok olyan kérdést ami nincs benne, azt rakjatok be a vegere Az alábbiak közül a gyakorlatban melyik lehet a legkisebb valószínűséggel egy kripto rendszer elleni támadás alapja?",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f544",
+    "front": "Mit jelent vagy mire utal: Ha tudjatok a?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f545",
+    "front": "Mit jelent vagy mire utal: Ha találtok olyan?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f546",
+    "front": "Mit jelent vagy mire utal: Az alábbiak közül?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f547",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- DEC : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f548",
+    "front": "Mit jelent vagy mire utal: DEC?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f549",
+    "front": "Mit jelent vagy mire utal: PGP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f550",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z IT bizt kérdések HELP lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f551",
+    "front": "Mit jelent vagy mire utal: HELP?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f552",
+    "front": "Mit jelent vagy mire utal: IT bizt kérdések?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f553",
+    "front": "Mit jelent vagy mire utal: DEC?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f554",
+    "front": "Mit jelent vagy mire utal: PGP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f555",
+    "front": "Mit jelent vagy mire utal: Valasz A használt?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f556",
+    "front": "Mit jelent vagy mire utal: Side channel támadási?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f557",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- IT biztonság 2023 Összpontszám 166/166 Mi alapján nem tud szűrni egy egyszerű csomagszűrő?",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f558",
+    "front": "Mit jelent vagy mire utal: VLAN?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f559",
+    "front": "Mit jelent vagy mire utal: HTTP?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f560",
+    "front": "Mit jelent vagy mire utal: TCP?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f561",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- VLAN : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f562",
+    "front": "Mit jelent vagy mire utal: VLAN?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f563",
+    "front": "Mit jelent vagy mire utal: HTTP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f564",
+    "front": "Mit jelent vagy mire utal: TCP?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f565",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Valasz IT biztonság 2023 Összpontszám 166/166 Mi alapján nem tud szűrni egy egyszerű csomagszűrő?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f566",
+    "front": "Mit jelent vagy mire utal: IT biztonság 2023?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f567",
+    "front": "Mit jelent vagy mire utal: Valasz IT biztonság?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f568",
+    "front": "Mit jelent vagy mire utal: VLAN?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f569",
+    "front": "Mit jelent vagy mire utal: HTTP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f570",
+    "front": "Mit jelent vagy mire utal: TCP?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f571",
+    "front": "Mit jelent vagy mire utal: VLAN?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f572",
+    "front": "Mit jelent vagy mire utal: HTTP?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f573",
+    "front": "Mit jelent vagy mire utal: TCP?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f574",
+    "front": "Mit jelent vagy mire utal: Ha talaltok olyan?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f575",
+    "front": "Mit jelent vagy mire utal: ECB?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f576",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z ITbizt kérdések HELP - előadás diákkal lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f577",
+    "front": "Mit jelent vagy mire utal: ITbizt kérdések HELP?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f578",
+    "front": "Mit jelent vagy mire utal: ECB?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f579",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Rész: Milyen problémákkal kell az IT Security-nek megbírkózni?",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f580",
+    "front": "Mit jelent vagy mire utal: Rész?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f581",
+    "front": "Mit jelent vagy mire utal: Milyen problémákkal kell?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f582",
+    "front": "Mit jelent vagy mire utal: IT Security-nek megbírkózni?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f583",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- CIA : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f584",
+    "front": "Mit jelent vagy mire utal: PÉNZ?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f585",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z ITSEC Dia Kerdesek Kidolgozva lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f586",
+    "front": "Mit jelent vagy mire utal: ITSEC?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f587",
+    "front": "Mit jelent vagy mire utal: ITSEC Dia Kerdesek?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f588",
+    "front": "Mit jelent vagy mire utal: PÉNZ?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f589",
+    "front": "Mit jelent vagy mire utal: Valasz Támadások megelőzése?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f590",
+    "front": "Mit jelent vagy mire utal: Támadások felismerése és?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  },
+  {
+    "id": "f591",
+    "front": "Mit jelent vagy mire utal: NOTE?",
+    "back": "A(z) Attekintes temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Attekintes",
+    "type": "term"
+  },
+  {
+    "id": "f592",
+    "front": "Mi a(z) Fo pontok lenyege?",
+    "back": "- Beadtam ChatGPT-nek a pdfeket és a kérdéseket, majd javítottam, de azért persze saját felelősségre NOTE: Privacy diákban nincsenek control kérdések, az az anyag így nem szerepel Economics of Security ▸ What is the attacker’s advantage?",
+    "section": "Fo pontok",
+    "type": "qa"
+  },
+  {
+    "id": "f593",
+    "front": "Mit jelent vagy mire utal: NOTE?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f594",
+    "front": "Mit jelent vagy mire utal: ATM?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f595",
+    "front": "Mit jelent vagy mire utal: USA?",
+    "back": "A(z) Fo pontok temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fo pontok",
+    "type": "term"
+  },
+  {
+    "id": "f596",
+    "front": "Mi a(z) Fontos fogalmak lenyege?",
+    "back": "- NOTE : a fejezetben kiemelt fogalom vagy hivatkozasi pont.",
+    "section": "Fontos fogalmak",
+    "type": "qa"
+  },
+  {
+    "id": "f597",
+    "front": "Mit jelent vagy mire utal: NOTE?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f598",
+    "front": "Mit jelent vagy mire utal: ATM?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f599",
+    "front": "Mit jelent vagy mire utal: USA?",
+    "back": "A(z) Fontos fogalmak temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Fontos fogalmak",
+    "type": "term"
+  },
+  {
+    "id": "f600",
+    "front": "Mi a(z) Kerdes 1 lenyege?",
+    "back": "Mi a z ZH utáni kontroll kérdések lenyege a forrasanyag alapjan?",
+    "section": "Kerdes 1",
+    "type": "qa"
+  },
+  {
+    "id": "f601",
+    "front": "Mit jelent vagy mire utal: NOTE?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f602",
+    "front": "Mit jelent vagy mire utal: ZH utáni kontroll?",
+    "back": "A(z) Kerdes 1 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 1",
+    "type": "term"
+  },
+  {
+    "id": "f603",
+    "front": "Mit jelent vagy mire utal: NOTE?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f604",
+    "front": "Mit jelent vagy mire utal: ATM?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f605",
+    "front": "Mit jelent vagy mire utal: USA?",
+    "back": "A(z) Kerdes 2 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 2",
+    "type": "term"
+  },
+  {
+    "id": "f606",
+    "front": "Mit jelent vagy mire utal: Valasz Az?",
+    "back": "A(z) Kerdes 3 temakorben kiemelt fogalom, amelyet definicio es pelda szintjen is erdemes ismerni.",
+    "section": "Kerdes 3",
+    "type": "term"
+  }
+]

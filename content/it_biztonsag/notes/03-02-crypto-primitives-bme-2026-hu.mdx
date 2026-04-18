@@ -1,0 +1,475 @@
+---
+title: "02 Crypto Primitives BME 2026 hu (1/9)"
+lesson: 1
+section: "02 Crypto Primitives BME 2026 hu (1/9)"
+sources:
+  - type: "pdf"
+    title: "It_biztonsag - 02 Crypto Primitives BME 2026 hu (1/9)"
+    year: 2025
+---
+
+## Bevezető
+A kriptográfiai alapalgoritmusok (**primitívek**) azok az alapvető, jól meghatározott tulajdonságokkal rendelkező kriptográfiai algoritmusok, amelyeket építőelemként használunk a bonyolultabb kriptográfiai protokollokban vagy nagyobb rendszerekben. Ezek a primitívek biztosítják a titkosítás, hitelesítés és egyéb biztonsági funkciók alapját.
+
+## Kriptográfiai alapalgoritmusok
+A kriptográfiai alapalgoritmusok a következőket tartalmazzák:
+- **titkosítási sémák** (rejtjelező algoritmusok)
+- **kriptográfiai hash-függvények**
+- **MAC-függvények** (ahol MAC = Message Authentication Code)
+- **digitális aláírás sémák**
+- **kulcs-beágyazási** (key encapsulation) mechanizmusok (KEM-ek)
+- **kulcs-származtatás** (key derivation) függvények (KDF-ek)
+- **álvéletlen** (pseudo-random) generátorok (PRNG-k)
+
+> A kriptográfiai primitívek megértése elengedhetetlen a biztonságos kommunikáció és adattárolás megvalósításához.
+
+## Adat-reprezentáció
+Az adatok tárolásához, feldolgozásához és továbbításához szükségünk van az adatok reprezentációjára (adat-ábrázolásra) a számítógépen belül. A leggyakoribb adat-reprezentációs sémák a következők:
+- **egész számok**
+- **valós számok**
+- **szöveges karakterek**
+- **bonyolultabb objektumok**
+
+```python
+# Példa az adat-reprezentációra Pythonban
+szoveg = "Hello, világ!"
+print(szoveg.encode("utf-8"))  # b'Hello, vil\xc3\xa1g!'
+```
+
+## Titkosítási sémák
+A titkosítási sémák (**rejtjelezők**) olyan algoritmusok, amelyek az eredeti üzenetet (**plaintext**) átalakítják **kódolt üzenetté** (**ciphertext**). A titkosítási sémák osztályozhatók:
+- **szimmetrikus kulcsú** (konvencionális) rejtjelezők
+- **aszimmetrikus kulcsú** (publikus kulcsú) rejtjelezők
+- **kulcsfolyam-rejtjelezők** és **blokkrejtjelezők**
+
+$$
+\text{Plaintext} \xrightarrow{\text{Titkosítás}} \text{Ciphertext}
+$$
+
+A kriptográfiai alapalgoritmusok megértése és alkalmazása elengedhetetlen a biztonságos kommunikáció és adattárolás megvalósításához. A következő fejezetekben részletesebben fogunk foglalkozni a kriptográfiai alapalgoritmusokkal és azok alkalmazásával.
+A kriptográfia alapvető összetevői közé tartoznak a **kriptográfiai primitívek**, amelyek az adatok biztonságos átvitelének és tárolásának alapját képezik. Ezek a primitívek a kriptográfiai algoritmusok építőelemeiként szolgálnak, biztosítva az adatok titkosságát, integritását és hitelességét.
+
+## Bevezetés a kriptográfiai primitívekbe
+
+A kriptográfiai primitívek közé tartoznak a **szimmetrikus kulcsú rejtjelezők**, **aszimmetrikus kulcsú rejtjelezők**, **kulcsfolyam-rejtjelezők** és **blokkrejtjelezők**. Ezek a primitívek különböző módszereket használnak az adatok titkosítására és visszafejtésére.
+
+### Szimmetrikus kulcsú rejtjelezők
+
+A szimmetrikus kulcsú rejtjelezők **azonos kulcsot** használnak a titkosításhoz és a visszafejtéshez. Például az **AES** (Advanced Encryption Standard) egy széles körben használt szimmetrikus kulcsú rejtjelező.
+
+### Aszimmetrikus kulcsú rejtjelezők
+
+Az aszimmetrikus kulcsú rejtjelezők **két különböző kulcsot** használnak: egy **nyilvános kulcsot** a titkosításhoz és egy **magánkulcsot** a visszafejtéshez. Például az **RSA** (Rivest-Shamir-Adleman) egy széles körben használt aszimmetrikus kulcsú rejtjelező.
+
+## Kulcsfolyam-rejtjelezők
+
+A kulcsfolyam-rejtjelezők **álvéletlen bájtsorozatot** generálnak, amelyet a titkosítandó adatokkal **XOR** művelettel kombinálnak. A visszafejtéshez azonos álvéletlen bájtsorozatot kell generálni.
+
+> A kulcsfolyam-rejtjelezők **gyorsak** és **biztonságosak**, de **nem alkalmasak** olyan alkalmazásokra, ahol a kulcsot nem lehet biztonságosan megosztani.
+
+### XOR művelet
+
+A **XOR** (Exclusive OR) művelet **két bites** értéket vesz fel, és **akkor** ad **1**-et, ha a két bites érték **különböző**. A XOR művelet **asszociatív** és **kommutatív**.
+
+```python
+def xor(a, b):
+    return a ^ b
+
+print(xor(1, 0))  # 1
+print(xor(1, 1))  # 0
+print(xor(0, 0))  # 0
+```
+
+## Blokkrejtjelezők
+
+A blokkrejtjelezők **fix hosszúságú** adatblokkokat titkosítanak és visszafejtenek. A **blokkméret** általában **16 byte** (128 bit). A blokkrejtjelezők **biztonságosak**, de **lassabbak**, mint a kulcsfolyam-rejtjelezők.
+
+### Blokkrejtjelezők tulajdonságai
+
+A blokkrejtjelezők **két fontos tulajdonsággal** rendelkeznek:
+
+*   **Lavina-hatás** (avalanche effect): ha a bemenet **egyetlen bitje** megváltozik, akkor a kimenet **bitjeinek körülbelül fele** megváltozik.
+*   **Megjósolhatatlanság**: ha a **kulcs** ismeretlen, akkor a **kimenet** megjósolhatatlan.
+
+A blokkrejtjelezők **széles körben** használtak **kriptográfiai alkalmazásokban**, mint például a **hash-függvények** és a **MAC-függvények**.
+A kriptográfiai primitívek alapvető építőelemek a biztonságos kommunikációhoz. Ebben a fejezetben a **blokkrejtjelezők** és azok **módjai** kerülnek bemutatásra.
+
+## Bevezető
+A **blokkrejtjelezők** olyan algoritmusok, amelyek az üzenetet kis blokkokra osztják és azokat külön-külön titkosítják. Ez a módszer lehetővé teszi a **gyors és hatékony titkosítást**, de fontos, hogy a **biztonságot** is garantálni lehessen.
+
+## Blokkrejtjelezési módok
+A **blokkrejtjelezők** különböző módokban használhatók, ezek közül a leggyakoribbak:
+- **Electronic Codebook (ECB) mode**: Ez a legegyszerűbb mód, amelyben az üzenetet kis blokkokra osztják és azokat külön-külön titkosítják.
+- **Cipher Block Chaining (CBC) mode**: Ebben a módban az előző blokk titkosított verziója használható a következő blokk titkosításához.
+- **Cipher Feedback (CFB) mode**: Ebben a módban a titkosított blokkokat visszacsatolják a titkosítási folyamatba.
+- **Output Feedback (OFB) mode**: Ebben a módban a titkosított blokkokat visszacsatolják a titkosítási folyamatba, de a kulcsot nem használják fel.
+- **Counter (CTR) mode**: Ebben a módban a titkosított blokkokat egy ellenőrző számlálóval (counter) kombinálják.
+
+> "A **blokkrejtjelezők** használata során fontos, hogy a **biztonságot** garantálni lehessen, ezért a **módok** kiválasztásánál és a **kulcsok** kezelésénél nagy gondossággal kell eljárni."
+
+### Példa a CBC módra
+```python
+# Importáljuk a szükséges könyvtárakat
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+
+# Definiáljuk a kulcsot és az inicializációs vektort
+key = b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x10\x11\x12\x13\x14\x15'
+iv = b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x10\x11\x12\x13\x14\x15'
+
+# Definiáljuk a CBC módot
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+
+# Titkosítjuk az üzenetet
+encryptor = cipher.encryptor()
+padder = padding.PKCS7(128).padder()
+message = b'Hello, World!'
+padded_message = padder.update(message) + padder.finalize()
+ct = encryptor.update(padded_message) + encryptor.finalize()
+
+# Visszafejtjuk a titkosított üzenetet
+decryptor = cipher.decryptor()
+pt = decryptor.update(ct) + decryptor.finalize()
+unpadder = padding.PKCS7(128).unpadder()
+unpadded_message = unpadder.update(pt) + unpadder.finalize()
+
+print(unpadded_message.decode())
+```
+
+## Kitöltés
+A **kitöltés** (padding) szükséges, ha az üzenet hossza nem egész számú többszöröse a **blokkrejtjelező** blokméretének. A **kitöltés** célja, hogy az üzenetet kiegészítse a **blokkrejtjelező** blokméretének megfelelő hosszúságúra.
+
+## Összefoglalás
+A **blokkrejtjelezők** és azok **módjai** alapvető építőelemek a biztonságos kommunikációhoz. A **biztonságot** garantálni lehessen, ha a **módok** kiválasztásánál és a **kulcsok** kezelésénél nagy gondossággal járunk el. A **kitöltés** szükséges, ha az üzenet hossza nem egész számú többszöröse a **blokkrejtjelező** blokméretének.
+A kriptográfia alapjai közé tartoznak a **kriptográfiai primitívek**, amelyek az alapvető építőelemek a biztonságos kommunikációhoz. Ezek a primitívek magukban foglalják a **szimmetrikus** és **aszimmetrikus** titkosítást, valamint a **hash-függvényeket**.
+
+## Bevezetés a kriptográfiába
+
+A kriptográfia a kommunikáció biztonságának tudománya, amely az információ védelmét szolgálja a **lehallgatás**, **hamisítás** és **megtagadás** ellen. A kriptográfiai primitívek az alapvető eszközök, amelyek segítségével a kommunikáló felek biztonságosan cserélhetik ki információkat.
+
+## Szimmetrikus titkosítás
+
+A **szimmetrikus titkosítás** olyan titkosítási módszer, amelyben a **kódoló** és **dekódoló** kulcs **azonos**. A szimmetrikus titkosítás gyors és hatékony, de a kulcsok **biztonságos** megosztása problémát jelent.
+
+### CTR mód
+
+A **CTR** (Counter) mód egy olyan mód, amelyben a **kódoló** és **dekódoló** kulcs **azonos**, és a **kódolás** és **dekódolás** folyamata **azonos**. A CTR mód **gyors** és **hatékony**, de a **kulcsok** **biztonságos** megosztása továbbra is problémát jelent.
+
+```python
+def ctr_mode(plain_text, key):
+    # Kódolás
+    cipher_text = []
+    for i in range(len(plain_text)):
+        cipher_text.append(plain_text[i] ^ key[i % len(key)])
+    return cipher_text
+
+# Dekódolás
+def ctr_mode_dec(cipher_text, key):
+    return ctr_mode(cipher_text, key)
+```
+
+> A kriptográfiai primitívek az alapvető építőelemek a biztonságos kommunikációhoz. Ezek a primitívek magukban foglalják a szimmetrikus és aszimmetrikus titkosítást, valamint a hash-függvényeket.
+
+## Aszimmetrikus titkosítás
+
+Az **aszimmetrikus titkosítás** olyan titkosítási módszer, amelyben a **kódoló** és **dekódoló** kulcs **különböző**. Az aszimmetrikus titkosítás **lassabb** mint a szimmetrikus titkosítás, de a **kulcsok** **biztonságos** megosztása **egyszerűbb**.
+
+### RSA algoritmus
+
+Az **RSA** algoritmus egy olyan aszimmetrikus titkosítási algoritmus, amely a **prímszámok** **faktorizálásán** alapul. Az RSA algoritmus **biztonságos**, de **lassú**.
+
+$$
+c = m^e \mod n
+$$
+
+$$
+m = c^d \mod n
+$$
+
+- **Kulcspár-generálás**: $G() = (K+, K-)$
+- **Titkosítás**: $E(K+, X) = Y$
+- **Dekódolás**: $D(K-, Y) = X$
+
+## Hash-függvények
+
+A **hash-függvények** olyan függvények, amelyek **rövidítik** az **input** **adatokat**. A hash-függvények **gyorsak** és **hatékonyak**, de **nem** **biztonságosak**.
+
+- A hash-függvények **rövidítik** az **input** **adatokat**
+- A hash-függvények **gyorsak** és **hatékonyak**
+- A hash-függvények **nem** **biztonságosak**
+## Bevezetés
+A kriptográfiai alapok megértése elengedhetetlen a modern biztonsági rendszerek kifejlesztéséhez. Ebben a fejezetben a **kriptográfiai primitívekről** fogunk beszélni, amelyek az információbiztonság alapjait képezik.
+
+## Kriptográfiai Hash-függvények
+A kriptográfiai hash-függvények olyan függvények, amelyek **tetszőleges hosszúságú** üzenetet **rögzített hosszúságú** kimenetbe képeznek le. A hash-függvényeknek három fontos tulajdonsága van:
+- **Őskép-ellenállóság (pre-image resistance)**: adott y hash-értékre nehéz olyan x bemeneti értéket találni, amelyre H(x) = y
+- **Gyenge ütközés-ellenállóság (weak collision resistance)**: adott x bemeneti értékre nehéz olyan x'-től különböző x' bementi értéket találni, amelyre H(x') = H(x)
+- **Erős ütközés-ellenállóság (strong collision resistance)**: nehéz két olyan különböző x és x' bementi értéket találni, melyre H(x) = H(x')
+
+> A hash-függvények biztonságosak, ha nehéz megtalálni két különböző bemeneti értéket, amelyekhez azonos hash-érték tartozik.
+
+## Példa: SHA256
+A SHA256 egy **kriptográfiai hash-függvény**, amely 256 bites kimenetet eredményez. A SHA256-t széles körben használják különféle alkalmazásokban, beleértve a **digitális aláírások** és a **biztonságos kommunikációs protokollok**.
+
+### További Tulajdonságok
+A hash-függvények **lavina-hatást** mutatnak, ami azt jelenti, hogy a bemenet egyetlen bitjének változása a kimeneti bitek körülbelül felének a változását okozza. Ez a tulajdonság fontos a **biztonságos kommunikáció** szempontjából.
+
+## MAC-függvények
+A MAC-függvények (Message Authentication Code) olyan függvények, amelyek egy **tetszőleges hosszúságú üzenetet** és egy **titkos kulcsot** egy **rögzített hosszúságú kimenetbe** képeznek le. A MAC-függvények biztosítják az **üzenetek hitelesítését** és **integritásuk védelmét**.
+
+### Példa: HMAC
+Az HMAC (Keyed-Hash Message Authentication Code) egy MAC-függvény, amely egy **hash-függvényt** használ a MAC-kód létrehozásához. Az HMAC biztosítja az **üzenetek hitelesítését** és **integritásuk védelmét**.
+
+```python
+def hmac_sha256(key, message):
+    import hashlib
+    import hmac
+    return hmac.new(key, message, hashlib.sha256).hexdigest()
+```
+
+## Gyakorlat
+Játssz kicsit az `rsa.ipynb` iPython notebook-kal, ami a `Notebooks/RSA` folderben található! Próbáld ki a `hashing.ipynb` és a `MACfunctions.ipynb` notebookokat is, amelyek a `Notebooks/HashMACfunctions` folderben találhatóak. Ezek a notebookok segítenek megérteni a kriptográfiai alapokat és a hash-függvények, valamint a MAC-függvények működését.
+A **kriptográfia** alapvető célja a titkos információk védelme. Ennek érdekében különböző **kriptográfiai primitíveket** használunk, mint például a **hash-függvények**, **digitális aláírások** és **hibrid rejtjelezés**.
+
+## Bevezetés a kriptográfiai primitívekbe
+
+A kriptográfiai primitívek olyan alapvető építőelemek, amelyekből a kriptográfiai protokollok és alkalmazások épülnek. Ezek a primitívek biztosítják a titkos információk védelmét és a hitelesítést.
+
+### Hash-függvények
+
+A **hash-függvények** olyan függvények, amelyek egy bemeneti adatot egy rögzített hosszúságú kimeneti adattá alakítanak. A hash-függvényeknek két fontos tulajdonsága van:
+- **Determinisztikus**: ugyanazt a bemeneti adatot mindig ugyanazzal a kimeneti adattal alakítják.
+- **Egyirányú**: nem lehet visszafejteni a bemeneti adatot a kimeneti adatból.
+
+Példa hash-függvényre:
+```python
+import hashlib
+
+def hash_function(data):
+    return hashlib.sha256(data.encode()).hexdigest()
+
+print(hash_function("Hello, World!"))
+```
+
+## Digitális aláírások
+
+A **digitális aláírások** olyan kriptográfiai primitívek, amelyek lehetővé teszik a küldő azonosítását és a küldött adatok hitelesítését. A digitális aláírások **aszimmetrikus kulcsú** primitívek, azaz a küldő **privát kulcsát** használja az aláíráshoz, míg a fogadó a **publikus kulcsát** használja az aláírás ellenőrzéséhez.
+
+> A digitális aláírások biztosítják a **hitelesítést** és a **nem tagadhatóságot**, azaz a küldő nem tagadhatja le, hogy ő küldte az adatokat.
+
+## Hibrid rejtjelezés
+
+A **hibrid rejtjelezés** olyan kriptográfiai primitív, amely a **szimmetrikus kulcsú** és az **aszimmetrikus kulcsú** rejtjelezést kombinálja. A hibrid rejtjelezés **gyors** és **biztonságos**, mivel a szimmetrikus kulcsú rejtjelezés gyors, míg az aszimmetrikus kulcsú rejtjelezés biztonságos.
+
+A hibrid rejtjelezés működése:
+1. A küldő generál egy **szimmetrikus kulcsot**.
+2. A küldő **szimmetrikus kulcsú rejtjelezéssel** titkosítja az adatokat.
+3. A küldő **aszimmetrikus kulcsú rejtjelezéssel** titkosítja a szimmetrikus kulcsot.
+4. A fogadó **aszimmetrikus kulcsú dekódolással** visszafejti a szimmetrikus kulcsot.
+5. A fogadó **szimmetrikus kulcsú dekódolással** visszafejti az adatokat.
+
+$$
+\text{Hibrid rejtjelezés} = \text{Szimmetrikus kulcsú rejtjelezés} + \text{Aszimmetrikus kulcsú rejtjelezés}
+$$
+
+A kriptográfiai primitíveknek fontos szerepe van a titkos információk védelmében. A hash-függvények, digitális aláírások és hibrid rejtjelezés együtt biztosítják a **hitelesítést**, **nem tagadhatóságot** és **biztonságot**.
+A kriptográfiai primitívek olyan alapvető építőelemek, amelyek biztosítják a számítógépes rendszerek és hálózatok biztonságát. Ezek a primitívek **titkosítás**, **digitális aláírás** és **kulcscsere** protokollok formájában valósulnak meg. 
+
+## Bevezetés a kulcs-származtatásba
+A **kulcs-származtatás** olyan folyamat, amely **közös titokból** származtat **új kulcsokat**. Ez a folyamat fontos, mert lehetővé teszi, hogy a felek **új kulcsokat** hozzanak létre anélkül, hogy **közvetlenül** használnák a **közös titkot**.
+
+> A kulcs-származtatás célja, hogy **biztosítsa**, hogy ha a **származtatott kulcsok** **kompromittálódnak**, a **közös titok** továbbra is **titok** maradjon.
+
+## Kulcs-származtatás fajtái
+- **Erős titokból** történő kulcs-származtatás: ha a **közös titok** **erős** (nagy **entrópiával** rendelkező), akkor az **extract-and-expand** módszert használjuk.
+- **Gyenge titokból** történő kulcs-származtatás: ha a **közös titok** **gyenge** (kevés **entrópiát** tartalmazó), akkor a **kulcs-származtatásnál** figyelnünk kell az **offline szótár-alapú támadás** lehetőségére.
+
+### Példák kulcs-származtatásra
+- **HKDF** (HMAC-alapú KDF): egy **gyors** és **biztonságos** kulcs-származtatási módszer.
+- **PBKDF2**, **scrypt**, **Argon2**: lassú kulcs-származtatási módszerek, amelyek **ellenállnak** az **offline szótár-alapú támadásoknak**.
+
+## Véletlenszám-generátorok
+A **véletlenszám-generátorok** olyan eszközök, amelyek **véletlen számokat** generálnak. Ezek a számok **megjósolhatatlanok**, és **előre megjósolhatatlanság** a **kriptográfia** egyik **alapvető követelménye**.
+
+### Valódi vs. álvéletlen számok
+- **Valódi véletlenszámok**: **megjósolhatatlanok**, de **sokszor nem állnak rendelkezésre** megfelelő mennyiségben vagy sebességgel.
+- **Álvéletlen számok**: **nem valódi véletlenek**, de **gyorsak** és **nagy mennyiségű kimenetet** képesek generálni rövid idő alatt.
+
+```python
+import os
+import secrets
+
+# Valódi véletlenszám generálása
+valodi_veletlen = os.urandom(16)
+
+# Álvéletlen szám generálása
+alveletlen = secrets.token_bytes(16)
+```
+
+$$P(\text{valódi véletlen}) = \frac{1}{2^n}$$
+ahol $n$ a **véletlen szám** **bitjeinek száma**.
+A kriptográfiai primitívek olyan alapvető építőelemek, amelyek segítségével bonyolultabb kriptográfiai protokollokat hozhatunk létre. Ezek a primitívek biztosítják az adatok védelmét és a kommunikáció biztonságát az interneten.
+
+## Bevezetés a PRNG-kbe
+A **pseodoveletlen számgenerátorok (PRNG)** nem valódi véletlen kimenetet állítanak elő, viszont gyorsak, nagy mennyiségű kimenetet képesek generálni rövid idő alatt. Ha megfelelően vannak tervezve és használva, akkor olyan kimenetet produkálnak, ami egy külső megfigyelő számára praktikusan megkülönböztethetetlen egy valódi véletlen generátor kimenetétől.
+
+### A PRNG-k működése
+A PRNG-k belső állapotot használnak a kimenet generálásához. Minden kimenet generálás után frissítik a belső állapotot, és néha teljesen újra generálják (re-seed). A kimenetet a belső állapotból állítják elő egy **egyirányú függvény** segítségével, pl. **hash függvény** vagy **blokkrejtjelező**.
+
+> A PRNG-k kulcsfontosságúak a kriptográfiában, mivel lehetővé teszik a véletlen számok generálását, amelyek szükségesek a kriptográfiai protokollok biztonságához.
+
+## Valamennyire megjósolhatatlan források
+A valamennyire megjósolhatatlan források olyan források, amelyek nem teljesen véletlenek, de a támadó nem tudja mindent megfigyelni vagy befolyásolni. Például:
+- aktuális idő (óra)
+- billentyű-leütések közti idő
+- egér mozgás
+- disk hozzáférési idő
+- kamerakép, mikrofon
+- hardver mellékhatások (pl. ellenállás termikus zaja)
+
+### Kriptográfiai primitívek
+A kriptográfiai primitívek olyan alapvető építőelemek, amelyek segítségével bonyolultabb kriptográfiai protokollokat hozhatunk létre. Az áttekintett kriptográfiai primitívek közé tartoznak:
+- **titkosítási sémák** (rejtjelező algoritmusok)
+- **kriptográfiai hash-függvények**
+- **MAC-függvények**
+- **digitális aláírás sémák**
+- **kulcs-beágyazási mechanizmusok** (KEM-ek)
+- **kulcs-származtatás függvények** (KDF-ek)
+- **álvéletlen-generátorok** (PRNG-k)
+
+```python
+import hashlib
+
+def hash_function(data):
+    return hashlib.sha256(data.encode()).hexdigest()
+
+# Példa a hash függvény használatára
+data = "Ez egy példa szöveg"
+hashed_data = hash_function(data)
+print(hashed_data)
+```
+
+$$
+\text{Hash függvény}: h(x) = \text{SHA-256}(x)
+$$
+
+A kriptográfiai primitívek fontosak a kriptográfiában, mivel lehetővé teszik a biztonságos kommunikációt és az adatok védelmét. A PRNG-k és a valamennyire megjósolhatatlan források kulcsfontosságúak a kriptográfiai protokollok biztonságához.
+A kriptográfiai primitívek az **információbiztonság** alapjait képezik. Ezek a primitívek lehetővé teszik a biztonságos kommunikációt, az adatok védelmét és a hitelesítést. A kriptográfiai primitívek közé tartoznak a **titkosítási algoritmusok**, a **hash-függvények**, a **MAC-függvények** és a **digitális aláírások**.
+
+## Bevezetés a kriptográfiai primitívekbe
+A kriptográfiai primitívek a számítógépes biztonság alapjait képezik. Ezek a primitívek biztosítják, hogy az adatok biztonságosan legyenek tárolva és továbbítva. A kriptográfiai primitívek közé tartoznak a **publikus kulcsú titkosítás**, a **hash-függvények** és a **MAC-függvények**.
+
+## Publikus kulcsú titkosítás
+A **publikus kulcsú titkosítás** egy olyan titkosítási módszer, amelyben a küldő és a fogadó különböző kulcsokat használnak. A küldő a **nyilvános kulccsal** titkosítja az adatokat, a fogadó pedig a **magánkulccsal** dekódolja azokat. A publikus kulcsú titkosítás biztosítja, hogy az adatok biztonságosan legyenek továbbítva.
+
+> A publikus kulcsú titkosítás egyik legnagyobb előnye, hogy lehetővé teszi a biztonságos kommunikációt anélkül, hogy a feleknek találkozniuk kellene.
+
+## Hash-függvények
+A **hash-függvények** olyan függvények, amelyek egy adott bemenetet egy rövidebb, állandó hosszúságú kimenetté alakítanak. A hash-függvények biztosítják, hogy az adatok ne legyenek módosíthatók anélkül, hogy a módosítás észrevehető lenne.
+
+- A hash-függvényeknek három biztonsági követelményt kell kielégíteniük:
+  1. **Egyirányúság**: a hash-függvénynek egyirányúnak kell lennie, azaz nem lehet visszafejteni a bemenetet a kimenetből.
+  2. **Ütközés-ellenállás**: a hash-függvénynek ütközés-ellenállónak kell lennie, azaz két különböző bemenetnek nem lehet ugyanaz a kimenete.
+  3. **Preimage-ellenállás**: a hash-függvénynek preimage-ellenállónak kell lennie, azaz nem lehet megtalálni egy adott kimenethez tartozó bemenetet.
+
+## MAC-függvények
+A **MAC-függvények** (Message Authentication Code) olyan függvények, amelyek egy adott üzenetet és egy titkos kulcsot használnak fel, hogy egy ellenőrző kódot generáljanak. A MAC-függvények biztosítják, hogy az üzenet ne legyen módosítható anélkül, hogy a módosítás észrevehető lenne.
+
+```python
+import hashlib
+import hmac
+
+def mac_function(message, key):
+    return hmac.new(key, message, hashlib.sha256).hexdigest()
+
+# Példa használat
+message = b"Hello, World!"
+key = b"My secret key"
+mac = mac_function(message, key)
+print(mac)
+```
+
+## Digitális aláírások
+A **digitális aláírások** olyan függvények, amelyek egy adott üzenetet és egy titkos kulcsot használnak fel, hogy egy aláírást generáljanak. A digitális aláírások biztosítják, hogy az üzenet ne legyen módosítható anélkül, hogy a módosítás észrevehető lenne.
+
+> A digitális aláírások egyik legnagyobb előnye, hogy lehetővé teszik a hitelesítést és a nem tagadhatóságot.
+
+## Hibrid titkosítás
+A **hibrid titkosítás** olyan titkosítási módszer, amely a **publikus kulcsú titkosítást** és a **szimmetrikus titkosítást** kombinálja. A hibrid titkosítás biztosítja, hogy az adatok biztonságosan legyenek továbbítva.
+
+A hibrid titkosítás motivációja, hogy a publikus kulcsú titkosítás lassú, de biztonságos, míg a szimmetrikus titkosítás gyors, de kevésbé biztonságos. A hibrid titkosítás kombinálja a két módszer előnyeit, hogy egy gyors és biztonságos titkosítási módszert hozzon létre.
+
+## Kulcs-beágyazás mechanizmusok
+A **kulcs-beágyazás mechanizmusok** olyan mechanizmusok, amelyek lehetővé teszik a kulcsok biztonságos beágyazását. A kulcs-beágyazás mechanizmusok biztosítják, hogy a kulcsok ne legyenek módosíthatók anélkül, hogy a módosítás észrevehető lenne.
+
+## Kulcs-származtatás módszerek
+A **kulcs-származtatás módszerek** olyan módszerek, amelyek lehetővé teszik a kulcsok származtatását. A kulcs-származtatás módszerek biztosítják, hogy a kulcsok ne legyenek módosíthatók anélkül, hogy a módosítás észrevehető lenne.
+
+## Jelszóból származtatott kriptográfiai kulcsok
+A **jelszóból származtatott kriptográfiai kulcsok** olyan kulcsok, amelyek egy jelszóból származnak. A jelszóból származtatott kriptográfiai kulcsok biztosítják, hogy a kulcsok ne legyenek módosíthatók anélkül, hogy a módosítás észrevehető lenne.
+
+## Álvéletlen-generátorok
+Az **álvéletlen-generátorok** olyan generátorok, amelyek álvéletlen számokat generálnak. Az álvéletlen-generátorok biztosítják, hogy a számok ne legyenek módosíthatók anélkül, hogy a módosítás észrevehető lenne.
+
+```python
+import random
+
+def alvletlen_generator():
+    return random.randint(0, 100)
+
+# Példa használat
+alvletlen_szam = alvletlen_generator()
+print(alvletlen_szam)
+```
+
+A kriptográfiai primitívek alapjait képezik az **információbiztonságnak**. Ezek a primitívek biztosítják, hogy az adatok biztonságosan legyenek tárolva és továbbítva. A kriptográfiai primitívek közé tartoznak a **titkosítási algoritmusok**, a **hash-függvények**, a **MAC-függvények** és a **digitális aláírások**.
+
+---
+
+## 🧠 Active Recall
+
+<details>
+<summary>Önellenőrző kérdések (kattints a kibontáshoz)</summary>
+
+### Kérdés 1
+**Mi az a kriptográfiai primitív és milyen szerepet játszik a biztonságos kommunikációban?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfiai primitívek azok az alapvető, jól meghatározott tulajdonságokkal rendelkező kriptográfiai algoritmusok, amelyeket építőelemként használunk a bonyolultabb kriptográfiai protokollokban vagy nagyobb rendszerekben, biztosítva a titkosítás, hitelesítés és egyéb biztonsági funkciók alapját.
+</details>
+
+### Kérdés 2
+**Milyen típusú kriptográfiai alapalgoritmusokat tartalmaz a kriptográfia?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfiai alapalgoritmusok közé tartoznak a titkosítási sémák, kriptográfiai hash-függvények, MAC-függvények, digitális aláírás sémák, kulcs-beágyazási mechanizmusok, kulcs-származtatás függvények és álvéletlen generátorok.
+</details>
+
+### Kérdés 3
+**Mire szolgál a titkosítási séma a kriptográfiában?**
+
+<details>
+<summary>Válasz</summary>
+A titkosítási séma olyan algoritmus, amely az eredeti üzenetet (plaintext) átalakítja kódolt üzenetté (ciphertext), biztosítva az adatok titkosságát.
+</details>
+
+### Kérdés 4
+**Milyen típusú titkosítási sémák léteznek?**
+
+<details>
+<summary>Válasz</summary>
+A titkosítási sémák osztályozhatók szimmetrikus kulcsú, aszimmetrikus kulcsú, kulcsfolyam-rejtjelezők és blokkrejtjelezők szerint.
+</details>
+
+### Kérdés 5
+**Mi a szerepe a kriptográfiai hash-függvényeknek?**
+
+<details>
+<summary>Válasz</summary>
+A kriptográfiai hash-függvények olyan algoritmusok, amelyek az adatok integritását és hitelességét biztosítják, az adatok átalakításával egy rövidebb, állandó hosszúságú karakterláncra.
+</details>
+
+</details>
