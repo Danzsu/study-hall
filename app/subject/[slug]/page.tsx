@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
   Play, BookOpen, Layers, PenLine, RotateCcw,
-  ClipboardList, ArrowRight, Clock, Target, ChevronRight,
+  ClipboardList, ArrowRight, Clock, Target, ChevronRight, GraduationCap,
 } from 'lucide-react'
 import { getSubject, getSubjectSectionInfos, getNotesLessons } from '@/lib/content'
 import { Header } from '@/components/layout/Header'
@@ -23,7 +23,8 @@ const MODES = [
   { key: 'flashcards',    label: 'Flashkártyák',    sub: 'Koppints a megfordításhoz',      icon: Layers,        color: 'var(--green)' },
   { key: 'written',       label: 'Írásbeli teszt',  sub: 'AI értékeli a válaszod',         icon: PenLine,       color: 'var(--purple)' },
   { key: 'wrong-answers', label: 'Hibás válaszok',  sub: 'Gyakorold a hibákat',            icon: RotateCcw,     color: 'var(--gold)' },
-  { key: 'review',        label: 'Áttekintés',      sub: 'Minden kérdés böngészése',       icon: ClipboardList, color: 'var(--red)' },
+  { key: 'review',           label: 'Áttekintés',         sub: 'Minden kérdés böngészése',       icon: ClipboardList,  color: 'var(--red)' },
+  { key: 'exam-simulation',  label: 'Vizsga szimulátor',  sub: 'Időzített, konfigurálható vizsga', icon: GraduationCap, color: 'var(--purple)' },
 ] as const
 
 export default function SubjectPage({ params }: Readonly<Props>) {

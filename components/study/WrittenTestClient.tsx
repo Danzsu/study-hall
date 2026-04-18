@@ -59,7 +59,6 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
       }
     }
 
-    // Save scores to localStorage
     const existing = JSON.parse(localStorage.getItem(`writtenScores:${subjectSlug}`) ?? '{}')
     for (const [id, fb] of Object.entries(results)) {
       if (fb.score_pct < 70) {
@@ -78,8 +77,8 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
 
   if (questions.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--muted)] text-sm">No written questions available yet.</p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>No written questions available yet.</p>
       </div>
     )
   }
@@ -89,52 +88,47 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
       Object.values(feedbacks).reduce((s, f) => s + f.score_pct, 0) / questions.length
     )
     return (
-      <div className="max-w-3xl mx-auto px-4 py-6 animate-fade-in">
+      <div className="animate-fade-in" style={{ maxWidth: 768, margin: '0 auto', padding: '24px 16px' }}>
         {/* Overall score */}
-        <div className="card p-6 mb-6 text-center">
-          <div
-            className="text-5xl font-bold mb-1"
-            style={{ color: avg >= 70 ? '#22c55e' : '#E07355' }}
-          >
+        <div className="card" style={{ padding: 24, marginBottom: 20, textAlign: 'center' }}>
+          <div style={{ fontSize: 48, fontWeight: 800, lineHeight: 1, marginBottom: 4, color: avg >= 70 ? 'var(--green)' : 'var(--accent)' }}>
             {avg}%
           </div>
-          <p className="text-sm text-[var(--muted)]">Overall score</p>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>Overall score</p>
         </div>
 
         {/* Per-question feedback */}
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {questions.map((q) => {
             const fb = feedbacks[q.id]
             if (!fb) return null
             return (
-              <div key={q.id} className="card p-5">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <p className="text-sm font-medium text-[var(--foreground)] leading-relaxed">
+              <div key={q.id} className="card" style={{ padding: 20 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 12 }}>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)', lineHeight: 1.6, flex: 1 }}>
                     {q.question}
                   </p>
-                  <span
-                    className="text-2xl font-bold shrink-0"
-                    style={{ color: fb.score_pct >= 70 ? '#22c55e' : '#E07355' }}
-                  >
+                  <span style={{ fontSize: 22, fontWeight: 800, flexShrink: 0, color: fb.score_pct >= 70 ? 'var(--green)' : 'var(--accent)' }}>
                     {fb.score_pct}%
                   </span>
                 </div>
 
                 {/* User answer */}
-                <div className="mb-4 p-3 rounded-lg bg-[var(--surface2)] border border-[var(--border)]">
-                  <p className="text-xs text-[var(--muted)] mb-1 font-medium">Your answer</p>
-                  <p className="text-sm text-[var(--foreground)]">{answers[q.id]}</p>
+                <div style={{ marginBottom: 16, padding: 12, borderRadius: 8, background: 'var(--surface2)', border: '1px solid var(--border)' }}>
+                  <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4, fontWeight: 600 }}>Your answer</p>
+                  <p style={{ fontSize: 13, color: 'var(--text)' }}>{answers[q.id]}</p>
                 </div>
 
                 {/* What was correct */}
                 {fb.what_was_correct.length > 0 && (
-                  <div className="mb-2">
-                    <p className="text-xs font-medium text-green-600 dark:text-green-400 mb-1.5 flex items-center gap-1">
+                  <div style={{ marginBottom: 8 }}>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--green)', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
                       <CheckCircle size={12} /> What you got right
                     </p>
-                    <ul className="space-y-1">
+                    <ul style={{ paddingLeft: 0, margin: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 2 }}>
                       {fb.what_was_correct.map((item) => (
-                        <li key={item} className="text-xs text-[var(--foreground)] pl-4 relative before:content-['•'] before:absolute before:left-1 before:text-green-500">
+                        <li key={item} style={{ fontSize: 12, color: 'var(--text)', paddingLeft: 14, position: 'relative' }}>
+                          <span style={{ position: 'absolute', left: 0, color: 'var(--green)' }}>•</span>
                           {item}
                         </li>
                       ))}
@@ -144,13 +138,14 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
 
                 {/* What was missing */}
                 {fb.what_was_missing.length > 0 && (
-                  <div className="mb-3">
-                    <p className="text-xs font-medium text-accent mb-1.5 flex items-center gap-1">
+                  <div style={{ marginBottom: 12 }}>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--accent)', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
                       <AlertCircle size={12} /> What was missing
                     </p>
-                    <ul className="space-y-1">
+                    <ul style={{ paddingLeft: 0, margin: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 2 }}>
                       {fb.what_was_missing.map((item) => (
-                        <li key={item} className="text-xs text-[var(--foreground)] pl-4 relative before:content-['⚠'] before:absolute before:left-0 before:text-xs">
+                        <li key={item} style={{ fontSize: 12, color: 'var(--text)', paddingLeft: 14, position: 'relative' }}>
+                          <span style={{ position: 'absolute', left: 0 }}>⚠</span>
                           {item}
                         </li>
                       ))}
@@ -159,12 +154,12 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
                 )}
 
                 {/* Model answer */}
-                <details className="mt-3">
-                  <summary className="text-xs text-[var(--muted)] cursor-pointer hover:text-[var(--foreground)] transition-colors">
+                <details style={{ marginTop: 12 }}>
+                  <summary style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer' }}>
                     📖 Show model answer
                   </summary>
-                  <div className="mt-2 p-3 rounded-lg bg-accent/10 border border-accent/20">
-                    <p className="text-sm text-[var(--foreground)] leading-relaxed">{fb.model_answer}</p>
+                  <div style={{ marginTop: 8, padding: 12, borderRadius: 8, background: 'var(--accent-bg)', border: '1px solid rgba(224,115,85,0.2)' }}>
+                    <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.65 }}>{fb.model_answer}</p>
                   </div>
                 </details>
               </div>
@@ -174,7 +169,15 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
 
         <button
           onClick={() => { setPhase('writing'); setFeedbacks({}) }}
-          className="mt-6 w-full py-3 bg-accent hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm font-medium transition-colors"
+          style={{
+            marginTop: 24, width: '100%', padding: '12px 0',
+            background: 'var(--accent)', color: '#fff',
+            border: 'none', borderRadius: 10, fontSize: 14,
+            fontWeight: 600, cursor: 'pointer', fontFamily: "'DM Sans', system-ui",
+            transition: 'background 0.15s',
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent-hov)' }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent)' }}
         >
           Try Again
         </button>
@@ -183,13 +186,13 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-6">
+    <div style={{ maxWidth: 768, margin: '0 auto', padding: '24px 16px' }}>
       {/* Progress header */}
-      <div className="flex items-center justify-between text-xs text-[var(--muted)] mb-2">
-        <span>WRITTEN TEST</span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-muted)', marginBottom: 8, fontWeight: 700, letterSpacing: '0.7px', textTransform: 'uppercase' }}>
+        <span>Written Test</span>
         <span>{Object.values(answers).filter((a) => a.trim().length > 10).length} / {questions.length} answered</span>
       </div>
-      <div className="progress-bar mb-6">
+      <div className="progress-bar" style={{ marginBottom: 24 }}>
         <div
           className="progress-fill"
           style={{
@@ -199,16 +202,16 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
       </div>
 
       {/* Questions */}
-      <div className="space-y-6 animate-fade-in">
+      <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         {questions.map((q, i) => (
-          <div key={q.id} className="card p-5">
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <span className="text-xs font-medium text-[var(--muted)] uppercase tracking-wide">
+          <div key={q.id} className="card" style={{ padding: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 12 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.7px' }}>
                 Question {i + 1}
               </span>
-              <span className="text-xs text-accent shrink-0">{q.section}</span>
+              <span style={{ fontSize: 11, color: 'var(--accent)', flexShrink: 0 }}>{q.section}</span>
             </div>
-            <p className="text-[var(--foreground)] font-medium leading-relaxed mb-4">
+            <p style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)', lineHeight: 1.65, marginBottom: 16 }}>
               {q.question}
             </p>
             <textarea
@@ -216,27 +219,51 @@ export function WrittenTestClient({ questions, subjectSlug }: Readonly<Props>) {
               placeholder="Write your answer here..."
               value={answers[q.id] ?? ''}
               onChange={(e) => setAnswers((prev) => ({ ...prev, [q.id]: e.target.value }))}
-              className="w-full px-3 py-2.5 text-sm bg-[var(--surface2)] border border-[var(--border)] rounded-lg outline-none focus:border-accent text-[var(--foreground)] placeholder:text-[var(--muted)] transition-colors resize-none"
+              style={{
+                width: '100%', padding: '10px 12px',
+                fontSize: 14, background: 'var(--surface2)',
+                border: '1px solid var(--border)', borderRadius: 8,
+                outline: 'none', color: 'var(--text)',
+                fontFamily: "'Lora', Georgia, serif",
+                lineHeight: 1.7, resize: 'none',
+                transition: 'border-color 0.15s',
+                boxSizing: 'border-box',
+              }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--accent)' }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
             />
           </div>
         ))}
       </div>
 
       {/* Submit */}
-      <div className="mt-6">
+      <div style={{ marginTop: 24 }}>
         {error && (
-          <p className="text-sm text-red-400 mb-3 text-center">{error}</p>
+          <p style={{ fontSize: 13, color: 'var(--red)', marginBottom: 12, textAlign: 'center' }}>{error}</p>
         )}
         <button
           onClick={handleSubmit}
           disabled={!allAnswered || phase === 'evaluating'}
-          className="w-full py-3 bg-accent hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
+          style={{
+            width: '100%', padding: '14px 0',
+            background: allAnswered ? 'var(--accent)' : 'var(--border)',
+            color: allAnswered ? '#fff' : 'var(--text-muted)',
+            border: 'none', borderRadius: 10,
+            fontSize: 14, fontWeight: 600,
+            cursor: allAnswered ? 'pointer' : 'not-allowed',
+            fontFamily: "'DM Sans', system-ui",
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            transition: 'background 0.15s',
+            opacity: phase === 'evaluating' ? 0.8 : 1,
+          }}
+          onMouseEnter={(e) => { if (allAnswered && phase !== 'evaluating') (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent-hov)' }}
+          onMouseLeave={(e) => { if (allAnswered) (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent)' }}
         >
           {phase === 'evaluating' && <Loader2 size={16} className="animate-spin" />}
           {phase === 'evaluating' ? 'AI is evaluating...' : 'Submit for AI Evaluation'}
         </button>
         {!allAnswered && (
-          <p className="text-xs text-[var(--muted)] text-center mt-2">
+          <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8 }}>
             Answer all questions to submit (min. 10 characters each)
           </p>
         )}
