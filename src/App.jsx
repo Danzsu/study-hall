@@ -95,6 +95,11 @@ export default function App() {
     return () => clearInterval(interval)
   }, [])
 
+  // Sync dark mode with HTML class (for CSS variable overrides in globals.css)
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', s.dark)
+  }, [s.dark])
+
   // Onboarding redirect
   useEffect(() => {
     if (s.route !== '/onboarding' && !localStorage.getItem('onboardingDone')) {
