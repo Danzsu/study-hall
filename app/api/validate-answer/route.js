@@ -2,12 +2,143 @@ import { NextResponse } from 'next/server'
 
 const OPENROUTER_MODELS = [
   'google/gemma-4-26b-a4b-it:free',
-  'google/gemma-4-31b-it:free',
+  'google/gemma-4-31b-a4b-it:free',
   'nvidia/nemotron-3-super-120b-a12b:free',
 ]
 const REQUEST_TIMEOUT_MS = 25000
+const MAX_REQUEST_BODY_CHARS = 24000
+const MAX_FIELD_LENGTHS = {
+  question: 2000,
+  student_answer: 12000,
+  model_answer: 8000,
+  key_point: 400,
+  rubric_text: 600,
+}
+const MAX_LIST_ITEMS = 8
 
-function buildPrompt({ question, model_answer, key_points, user_answer }) {
+function clampText(value, maxLength) {
+  const text = String(value ?? '').trim()
+  if (!text) return ''
+  return text.length > maxLength ? text.slice(0, maxLength).trimEnd() : text
+}
+
+function normalizeTextArray(value, maxItems = MAX_LIST_ITEMS, maxLength = MAX_FIELD_LENGTHS.key_point) {
+  if (!Array.isArray(value)) return []
+  return value
+    .map((item) => clampText(item, maxLength))
+    .filter(Boolean)
+    .slice(0, maxItems)
+}
+
+function normalizeRubric(rawRubric) {
+  if (!rawRubric) return null
+
+  let rubric = rawRubric
+  if (typeof rawRubric === 'string') {
+    try {
+      rubric = JSON.parse(rawRubric)
+    } catch {
+      return null
+    }
+  }
+
+  if (!rubric || typeof rubric !== 'object' || Array.isArray(rubric)) return null
+
+  const normalized = {
+    must_have: normalizeTextArray(rubric.must_have ?? rubric.mustHave, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.rubric_text),
+    nice_to_have: normalizeTextArray(rubric.nice_to_have ?? rubric.niceToHave, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.rubric_text),
+    common_mistakes: normalizeTextArray(rubric.common_mistakes ?? rubric.commonMistakes, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.rubric_text),
+    score_bands: {},
+  }
+
+  const scoreBands = rubric.score_bands ?? rubric.scoreBands
+  if (scoreBands && typeof scoreBands === 'object' && !Array.isArray(scoreBands)) {
+    for (const [band, text] of Object.entries(scoreBands)) {
+      const key = clampText(band, 32)
+      const value = clampText(text, MAX_FIELD_LENGTHS.rubric_text)
+      if (key && value) normalized.score_bands[key] = value
+    }
+  }
+
+  if (!normalized.must_have.length && !normalized.nice_to_have.length && !normalized.common_mistakes.length && !Object.keys(normalized.score_bands).length) {
+    return null
+  }
+
+  return normalized
+}
+
+function fieldTooLong(value, maxLength) {
+  return String(value ?? '').trim().length > maxLength
+}
+
+function arrayTooLong(values, maxItems, maxLength) {
+  if (!Array.isArray(values)) return false
+  if (values.length > maxItems) return true
+  return values.some((item) => fieldTooLong(item, maxLength))
+}
+
+function normalizeWrittenAnswerPayload(payload) {
+  const rawBody = JSON.stringify(payload ?? {})
+  if (rawBody.length > MAX_REQUEST_BODY_CHARS) {
+    return { error: 'Payload too large', status: 413 }
+  }
+
+  const question = payload?.question
+  const studentAnswer = payload?.student_answer ?? payload?.user_answer
+  const modelAnswer = payload?.model_answer
+  const keyPoints = payload?.key_points ?? payload?.keyPoints ?? payload?.keypoints ?? []
+  const rubric = payload?.rubric
+
+  if (!String(question ?? '').trim() || !String(studentAnswer ?? '').trim()) {
+    return { error: 'question and student_answer required', status: 400 }
+  }
+
+  if (fieldTooLong(question, MAX_FIELD_LENGTHS.question)) {
+    return { error: 'question is too long', status: 413 }
+  }
+  if (fieldTooLong(studentAnswer, MAX_FIELD_LENGTHS.student_answer)) {
+    return { error: 'student_answer is too long', status: 413 }
+  }
+  if (modelAnswer != null && fieldTooLong(modelAnswer, MAX_FIELD_LENGTHS.model_answer)) {
+    return { error: 'model_answer is too long', status: 413 }
+  }
+  if (arrayTooLong(keyPoints, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.key_point)) {
+    return { error: 'key_points is too long', status: 413 }
+  }
+  if (rubric && typeof rubric === 'object' && !Array.isArray(rubric)) {
+    const rubricValues = [
+      ...(Array.isArray(rubric.must_have) ? rubric.must_have : Array.isArray(rubric.mustHave) ? rubric.mustHave : []),
+      ...(Array.isArray(rubric.nice_to_have) ? rubric.nice_to_have : Array.isArray(rubric.niceToHave) ? rubric.niceToHave : []),
+      ...(Array.isArray(rubric.common_mistakes) ? rubric.common_mistakes : Array.isArray(rubric.commonMistakes) ? rubric.commonMistakes : []),
+    ]
+    if (arrayTooLong(rubricValues, MAX_LIST_ITEMS * 3, MAX_FIELD_LENGTHS.rubric_text)) {
+      return { error: 'rubric is too long', status: 413 }
+    }
+  }
+
+  const normalizedRubric = normalizeRubric(rubric)
+  return {
+    question: clampText(question, MAX_FIELD_LENGTHS.question),
+    student_answer: clampText(studentAnswer, MAX_FIELD_LENGTHS.student_answer),
+    user_answer: clampText(studentAnswer, MAX_FIELD_LENGTHS.student_answer),
+    model_answer: clampText(modelAnswer, MAX_FIELD_LENGTHS.model_answer),
+    key_points: normalizeTextArray(keyPoints, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.key_point),
+    rubric: normalizedRubric,
+  }
+}
+
+function renderRubric(rubric) {
+  if (!rubric) return 'Rubric: none provided.'
+
+  return [
+    `Rubric must-have: ${rubric.must_have.length ? rubric.must_have.join('; ') : 'none'}`,
+    `Rubric nice-to-have: ${rubric.nice_to_have.length ? rubric.nice_to_have.join('; ') : 'none'}`,
+    `Rubric common mistakes: ${rubric.common_mistakes.length ? rubric.common_mistakes.join('; ') : 'none'}`,
+    `Rubric score bands: ${Object.keys(rubric.score_bands || {}).length ? Object.entries(rubric.score_bands).map(([band, text]) => `${band} => ${text}`).join(' | ') : 'none'}`,
+  ].join('\n')
+}
+
+function buildPrompt({ question, model_answer, key_points, user_answer, rubric }) {
   return `You are a strict but fair university professor evaluating a student's written answer.
 
 Question: ${question}
@@ -15,6 +146,8 @@ Question: ${question}
 Model answer (reference): ${model_answer}
 
 Key points to check: ${key_points?.join(', ') || 'See model answer'}
+
+${renderRubric(rubric)}
 
 Student's answer: ${user_answer}
 
@@ -58,9 +191,26 @@ function normalizeModelResult(result) {
   }
 }
 
-function localFallback({ model_answer, key_points, user_answer }) {
+function buildResponseShape({ payload, result, provider, model = null, fallback = null, providerErrors = [] }) {
+  const normalizedResult = normalizeModelResult(result) || {}
+  return {
+    provider,
+    model,
+    fallback,
+    score_pct: clampScore(normalizedResult.score_pct),
+    feedback_text: String(normalizedResult.feedback_text || ''),
+    what_was_correct: normalizeTextArray(normalizedResult.what_was_correct, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.rubric_text),
+    what_was_missing: normalizeTextArray(normalizedResult.what_was_missing, MAX_LIST_ITEMS, MAX_FIELD_LENGTHS.rubric_text),
+    model_answer: payload.model_answer || String(normalizedResult.model_answer || ''),
+    rubric: payload.rubric,
+    provider_errors: normalizeTextArray(providerErrors, 3, MAX_FIELD_LENGTHS.rubric_text),
+  }
+}
+
+function localFallback({ model_answer, key_points, user_answer, rubric }) {
   const answer = String(user_answer || '').toLowerCase()
-  const keys = (key_points?.length ? key_points : String(model_answer || '').split(/\W+/).filter(w => w.length > 5).slice(0, 8))
+  const rubricKeys = rubric ? [...(rubric.must_have || []), ...(rubric.nice_to_have || [])] : []
+  const keys = (key_points?.length ? key_points : rubricKeys.length ? rubricKeys : String(model_answer || '').split(/\W+/).filter(w => w.length > 5).slice(0, 8))
     .map(k => String(k).toLowerCase())
     .filter(Boolean)
 
@@ -80,6 +230,7 @@ function localFallback({ model_answer, key_points, user_answer }) {
     what_was_correct: hits.slice(0, 5),
     what_was_missing: missing,
     model_answer,
+    rubric,
     fallback: 'local',
   }
 }
@@ -142,16 +293,11 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  const studentAnswer = payload?.student_answer ?? payload?.user_answer
-  if (!payload?.question || !String(studentAnswer || '').trim()) {
-    return NextResponse.json({ error: 'question and student_answer required' }, { status: 400 })
+  const normalizedPayload = normalizeWrittenAnswerPayload(payload)
+  if (normalizedPayload?.error) {
+    return NextResponse.json({ error: normalizedPayload.error }, { status: normalizedPayload.status })
   }
 
-  const normalizedPayload = {
-    ...payload,
-    student_answer: studentAnswer,
-    user_answer: studentAnswer,
-  }
   const prompt = buildPrompt(normalizedPayload)
   const errors = []
   const controller = new AbortController()
@@ -160,7 +306,13 @@ export async function POST(req) {
   try {
     try {
       const groqResult = await callGroq(prompt, controller.signal)
-      if (groqResult) return NextResponse.json({ ...groqResult, provider: 'groq' })
+      if (groqResult) {
+        return NextResponse.json(buildResponseShape({
+          payload: normalizedPayload,
+          result: groqResult,
+          provider: 'groq',
+        }))
+      }
     } catch (err) {
       errors.push(String(err.message || err))
     }
@@ -168,7 +320,14 @@ export async function POST(req) {
     for (const model of OPENROUTER_MODELS) {
       try {
         const result = await callOpenRouter(prompt, model, controller.signal)
-        if (result) return NextResponse.json({ ...result, provider: 'openrouter', model })
+        if (result) {
+          return NextResponse.json(buildResponseShape({
+            payload: normalizedPayload,
+            result,
+            provider: 'openrouter',
+            model,
+          }))
+        }
       } catch (err) {
         errors.push(String(err.message || err))
       }
@@ -178,9 +337,11 @@ export async function POST(req) {
   }
 
   const fallback = localFallback(normalizedPayload)
-  return NextResponse.json({
-    ...normalizeModelResult(fallback),
+  return NextResponse.json(buildResponseShape({
+    payload: normalizedPayload,
+    result: fallback,
     provider: 'local',
-    provider_errors: errors.slice(-3),
-  })
+    fallback: 'local',
+    providerErrors: errors.slice(-3),
+  }))
 }

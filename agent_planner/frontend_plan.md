@@ -3,20 +3,15 @@
 ### Completed
 - Frontend P0 mojibake/copy fixes on `Written`, `Quiz`, and `Glossary` are done.
 - Written Test feedback, Quiz Results, and Glossary flash-session UX expansions are implemented.
-- Glossary concept clusters and concept map views are implemented with topic cards, map nodes, and targeted flash practice.
-- Onboarding subject cards now use subject `icon` / `emoji` metadata for distinctive icons.
-- Home hero CTA, SubjectRow actions, Flashcard ghost/result feedback, and Study callout/active-recall/source-disclaimer parity are implemented.
-- Study inline highlight / tooltip support and notes payload normalization are implemented.
-- Blackbox/whitebox frontend-adjacent smoke tests are available through `npm run test:smoke`.
+- Glossary concept clusters view is implemented with topic cards and cluster flash practice.
 
 ### In progress
-- Study parser / render boundary reviewer signoff is in progress.
-- Shared UI primitive cleanup and final cross-screen polish are still open.
+- Home / Subject / Study parity work is still open.
+- Remaining study parser hardening and content model cleanup are still open.
 
 ### Next
-- Treat `agent_planner/frontend_iteration_status.md` as the current operational backlog.
-- Finish Study parser edge cases, then run one final Home / Subject / Study / Search / Onboarding visual smoke pass.
-- The detailed sections below are retained as implementation reference; the status snapshot above is the current truth.
+- Finish the open P1/P3/P4 visual parity items.
+- Keep the UI primitives and design tokens aligned while the remaining screens are polished.
 
 # Frontend Design Implementation Plan
 
@@ -30,16 +25,16 @@
 
 | Prioritás | Képernyő / komponens | Indok |
 |-----------|---------------------|-------|
-| ✅ Done | Study oldal — Callout, ActiveRecall, SourceDisclaimer | Implemented; remaining work is parser edge-case hardening |
-| ✅ Done | Subject hero méret + modes kártyák layout | Implemented; keep in final visual smoke |
-| ✅ Done | Home — CTA gombok + SubjectRow gombok + "Add subject" | Implemented; keep in final visual smoke |
-| ✅ Done | Written Test feedback — 2-oszlopos layout + annotáció | Implemented |
-| ✅ Done | Quiz Results — grade arc + section breakdown + kérdéslista | Implemented |
+| 🔴 P1 | Study oldal — Callout, ActiveRecall, SourceDisclaimer | Legnagyobb vizuális különbség, minden lecke érinti |
+| 🔴 P1 | Subject hero méret + modes kártyák layout | Főoldalról azonnal látható |
+| 🔴 P1 | Home — CTA gombok + SubjectRow gombok + "Add subject" | Első képernyő, sok hiány |
+| 🟠 P2 | Written Test feedback — 2-oszlopos layout + annotáció | Teljesen hiányzó layout |
+| 🟠 P2 | Quiz Results — grade arc + section breakdown + kérdéslista | Hiányzó eredményképernyő részletek |
 | ✅ Done | Flashcard — Ghost stack + ResultOverlay | Implemented |
-| ✅ Done | Glossary — Concept map, cluster view, flash session | Implemented |
+| ✅ Done | Glossary — Concept map, cluster view, flash session | Cluster view, concept map, mode választó és flash session kész |
 | ✅ Done | Study oldal — inline `<H>` highlight, `<T>` tooltip | Implemented; reviewer signoff in progress |
-| 🟢 P4 | Review, WrongAnswers | Minor polish only |
-| 🟢 P4 | Onboarding, Pomodoro, Settings, Search, ExamSim | Minor polish only |
+| 🟢 P4 | Review, WrongAnswers | Már nagyon közel van |
+| 🟢 P4 | Onboarding, Pomodoro, Settings, Search, ExamSim | Szinte teljesen egyezik |
 
 ---
 
@@ -653,7 +648,7 @@ function ResultOverlay({ result }) {
 
 ### 7.3 Force-directed concept map (P3)
 **Design:** Canvas alapú interaktív graph, csomópontok vonszolhatók, pan/zoom  
-**Status:** Kész — a jelenlegi implementáció dependency-free concept map nézetet ad topic node-okkal, center node-dal, kapcsolati vonalakkal, node-open és flash actionökkel. A force-directed drag/pan/zoom rész tudatosan nem lett bevezetve, hogy ne nőjön a complexity és ne kelljen új graph dependency.
+**Status:** Kész — dependency-free concept map nézet topic node-okkal, center node-dal, kapcsolati vonalakkal, node-open és flash actionökkel.
 
 ---
 
@@ -675,7 +670,8 @@ Jelenlegi: szinte pontos
 ### 8.3 Onboarding
 Jelenlegi: szinte pontos  
 **Hiányzó részletek:**
-- **Kész:** a subject kártyák az API `icon` / `emoji` mezőiből választanak emoji fallbacket.
+- Design-ban a subjects kártyákon emoji ikon is van (🤖 ML, 📊 Stats, stb.)
+- `Subject.jsx:30` design-ban `emoji` mező is van az adatoknál
 
 ### 8.4 Pomodoro
 Jelenlegi: szinte pontos  

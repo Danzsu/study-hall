@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState, useRef, useEffect } from 'react'
 import {
   ChevronLeft, ChevronRight, Sparkles,
@@ -15,7 +15,7 @@ function evaluateAnswer(answer, question) {
   const wordCount = answer.trim().split(/\s+/).filter(Boolean).length
 
   if (wordCount < 15) {
-    return { score: 1, grade: 'incomplete', feedback: 'Your answer is too brief. Try to explain the concept in at least 2–3 sentences.', explanation: null }
+    return { score: 1, grade: 'incomplete', feedback: 'Your answer is too brief. Try to explain the concept in at least 2-3 sentences.', explanation: null }
   }
   if (coverage >= 0.65 || (keywords.length === 0 && wordCount >= 30)) {
     const hitList = hits.map(k => `"${k}"`).join(', ')
@@ -44,58 +44,131 @@ function ScoreBadge({ grade, t }) {
   )
 }
 
-function AnswerComparison({ userAnswer, result, t }) {
+function AnnotatedAnswer({ userAnswer, question, result, t }) {
   const borderMap = { correct: C.green, partial: C.gold, incorrect: C.red, incomplete: t.border2 }
   const bgMap     = { correct: `${C.green}14`, partial: `${C.gold}14`, incorrect: `${C.red}10`, incomplete: t.surface2 }
   const borderColor = borderMap[result.grade]
+  const keywords = question.keywords ?? []
+  const sentences = userAnswer.split(/(?<=[.!?])\s+/).filter(Boolean)
+  const lowerCorrect = (result.correct ?? []).map(item => String(item).toLowerCase())
+
+  const markSentence = (sentence) => {
+    const lower = sentence.toLowerCase()
+    const directHit = keywords.some(keyword => lower.includes(String(keyword).toLowerCase()))
+    const aiHit = lowerCorrect.some(keyword => keyword && lower.includes(keyword))
+    if (directHit || aiHit) return 'good'
+    if (sentence.trim().split(/\s+/).length >= 10 && result.grade === 'partial') return 'partial'
+    return 'neutral'
+  }
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 20 }}>
+    <div>
       <div style={{ border: `1px solid ${borderColor}`, borderLeft: `4px solid ${borderColor}`, borderRadius: '0 10px 10px 0', padding: '14px 16px', background: bgMap[result.grade] }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
           <ScoreBadge grade={result.grade} t={t} />
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.5px', color: t.textMuted }}>YOUR ANSWER</span>
-          {result.scorePct != null && (
-            <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 800, color: borderColor }}>{result.scorePct}%</span>
-          )}
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.5px', color: t.textMuted }}>ANNOTATED ANSWER</span>
         </div>
-        <p style={{ fontSize: 14, lineHeight: 1.7, color: t.text, fontFamily: "'Lora', Georgia, serif" }}>{userAnswer}</p>
+        <p style={{ fontSize: 14, lineHeight: 1.85, color: t.text, fontFamily: "'Lora', Georgia, serif" }}>
+          {sentences.length ? sentences.map((sentence, i) => {
+            const mark = markSentence(sentence)
+            return (
+              <span
+                key={i}
+                style={{
+                  background: mark === 'good' ? C.greenBg : mark === 'partial' ? C.goldBg : 'transparent',
+                  borderBottom: mark === 'good' ? `2px solid ${C.green}` : mark === 'partial' ? `2px solid ${C.gold}` : 'none',
+                  borderRadius: mark === 'neutral' ? 0 : '3px 3px 0 0',
+                  padding: mark === 'neutral' ? 0 : '0 3px',
+                  marginRight: 4,
+                }}
+              >
+                {sentence}{' '}
+              </span>
+            )
+          }) : userAnswer}
+        </p>
       </div>
 
       {result.explanation && (
-        <div style={{ border: `1px solid ${C.green}`, borderLeft: `4px solid ${C.green}`, borderRadius: '0 10px 10px 0', padding: '14px 16px', background: `${C.green}14` }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.5px', color: C.green, display: 'block', marginBottom: 8 }}>✓ IDEAL ANSWER</span>
+        <div style={{ marginTop: 12, border: `1px solid ${C.green}`, borderLeft: `4px solid ${C.green}`, borderRadius: '0 10px 10px 0', padding: '14px 16px', background: `${C.green}14` }}>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.5px', color: C.green, display: 'block', marginBottom: 8 }}>MODEL ANSWER</span>
           <p style={{ fontSize: 14, lineHeight: 1.7, color: t.text, fontFamily: "'Lora', Georgia, serif" }}>{result.explanation}</p>
         </div>
       )}
 
-      <div style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '14px 16px' }}>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: result.correct?.length || result.missing?.length ? 12 : 0 }}>
+      <div style={{ marginTop: 12, background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '14px 16px' }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
           <Sparkles size={16} style={{ color: C.accent, flexShrink: 0, marginTop: 2 }} />
           <div>
             <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: C.accent, display: 'block', marginBottom: 5 }}>AI EVALUATION</span>
             <p style={{ fontSize: 13.5, lineHeight: 1.65, color: t.textSub }}>{result.feedback}</p>
           </div>
         </div>
-        {(result.correct?.length > 0 || result.missing?.length > 0) && (
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', paddingLeft: 28 }}>
-            {result.correct?.length > 0 && (
-              <div style={{ flex: 1, minWidth: 140 }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.6px', color: C.green, marginBottom: 5 }}>✓ CORRECT</p>
-                {result.correct.map((pt, i) => (
-                  <p key={i} style={{ fontSize: 12, color: t.textSub, lineHeight: 1.5, marginBottom: 3 }}>· {pt}</p>
-                ))}
-              </div>
-            )}
-            {result.missing?.length > 0 && (
-              <div style={{ flex: 1, minWidth: 140 }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.6px', color: C.gold, marginBottom: 5 }}>⚠ MISSING</p>
-                {result.missing.map((pt, i) => (
-                  <p key={i} style={{ fontSize: 12, color: t.textSub, lineHeight: 1.5, marginBottom: 3 }}>· {pt}</p>
-                ))}
-              </div>
-            )}
-          </div>
+      </div>
+    </div>
+  )
+}
+
+function FeedbackSidebar({ question, result, t }) {
+  const keywords = question.keywords ?? []
+  const correct = new Set((result.correct ?? []).map(item => String(item).toLowerCase()))
+  const missing = new Set((result.missing ?? []).map(item => String(item).toLowerCase()))
+  const score = result.scorePct ?? Math.round((result.score / 3) * 100)
+  const scoreColor = score >= 80 ? C.green : score >= 50 ? C.gold : C.red
+
+  return (
+    <aside style={{ flex: '0 0 270px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 14, padding: '18px 16px', textAlign: 'center' }}>
+        <img src="/assets/mascot-clipboard.png" alt="" style={{ width: 88, height: 88, objectFit: 'contain', marginBottom: 8 }} />
+        <p style={{ fontSize: 34, fontWeight: 800, color: scoreColor, letterSpacing: '-1px', lineHeight: 1 }}>{score}%</p>
+        <p style={{ fontSize: 12, color: t.textMuted, fontWeight: 700, marginTop: 4 }}>Coverage</p>
+      </div>
+
+      <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 14, padding: '16px' }}>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted, marginBottom: 12 }}>KEY CONCEPT CHECKLIST</p>
+        {(keywords.length ? keywords : [...correct, ...missing]).slice(0, 10).map((keyword, i) => {
+          const lower = String(keyword).toLowerCase()
+          const isCovered = correct.has(lower) || (!missing.has(lower) && result.grade === 'correct')
+          return (
+            <div key={`${keyword}-${i}`} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 9 }}>
+              {isCovered
+                ? <CheckCircle2 size={15} style={{ color: C.green, flexShrink: 0, marginTop: 1 }} />
+                : <AlertCircle size={15} style={{ color: C.gold, flexShrink: 0, marginTop: 1 }} />
+              }
+              <span style={{ fontSize: 12.5, color: isCovered ? t.text : t.textMuted, lineHeight: 1.4 }}>{keyword}</span>
+            </div>
+          )
+        })}
+        {!keywords.length && !(result.correct?.length || result.missing?.length) && (
+          <p style={{ fontSize: 12, color: t.textMuted, lineHeight: 1.5 }}>No keyword rubric available for this question.</p>
         )}
+      </div>
+    </aside>
+  )
+}
+
+function AnswerComparison({ userAnswer, question, result, t }) {
+  return (
+    <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start', marginTop: 20, flexWrap: 'wrap' }}>
+      <div style={{ flex: '1 1 360px', minWidth: 0 }}>
+        <AnnotatedAnswer userAnswer={userAnswer} question={question} result={result} t={t} />
+      </div>
+      <FeedbackSidebar question={question} result={result} t={t} />
+    </div>
+  )
+}
+
+function EvaluatingPanel({ t }) {
+  return (
+    <div style={{ padding: '34px 28px', background: `${C.accent}10`, border: `1px dashed ${C.accent}55`, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 22 }}>
+      <img src="/assets/mascot-clipboard.png" alt="" style={{ width: 84, height: 84, objectFit: 'contain', flexShrink: 0 }} />
+      <div>
+        <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 17, fontWeight: 600, color: t.text, marginBottom: 10 }}>Reading carefully...</p>
+        <div style={{ display: 'flex', gap: 6 }}>
+          {[0, 1, 2].map(i => (
+            <span key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: C.accent, animation: 'pulse 1.2s ease-in-out infinite', animationDelay: `${i * 0.2}s` }} />
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -183,7 +256,7 @@ export default function Written({ subjectId }) {
   const allDone    = questions.length > 0 && Object.keys(results).length === questions.length
 
   if (!questions.length) {
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: t.textMuted }}>Loading…</div>
+    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: t.textMuted }}>Loading...</div>
   }
 
   return (
@@ -252,7 +325,11 @@ export default function Written({ subjectId }) {
           {q.q}
         </h2>
 
-        {!submitted ? (
+        {loading ? (
+          <div className="fade-up">
+            <EvaluatingPanel t={t} />
+          </div>
+        ) : !submitted ? (
           <div className="fade-up">
             <textarea
               ref={textareaRef}
@@ -260,7 +337,7 @@ export default function Written({ subjectId }) {
               value={userAnswer}
               onChange={e => setAnswers(p => ({ ...p, [q.id]: e.target.value }))}
               onKeyDown={e => { if (e.key === 'Enter' && e.ctrlKey) handleSubmit() }}
-              placeholder="Type your answer here… (Ctrl+Enter to submit)"
+              placeholder="Type your answer here... (Ctrl+Enter to submit)"
               rows={5}
               disabled={loading}
             />
@@ -268,7 +345,7 @@ export default function Written({ subjectId }) {
               <span style={{ fontSize: 12, color: t.textMuted }}>
                 {userAnswer.trim().split(/\s+/).filter(Boolean).length} words
                 {userAnswer.length > 0 && userAnswer.trim().split(/\s+/).length < 20 && (
-                  <span style={{ color: C.gold, marginLeft: 8 }}>· Aim for at least 30 words</span>
+                  <span style={{ color: C.gold, marginLeft: 8 }}>- Aim for at least 30 words</span>
                 )}
               </span>
               <button
@@ -285,13 +362,13 @@ export default function Written({ subjectId }) {
                 onMouseEnter={e => { if (!loading && userAnswer.trim()) e.currentTarget.style.background = C.accentHov }}
                 onMouseLeave={e => { e.currentTarget.style.background = C.accent }}
               >
-                {loading ? <><div className="spinner" /> Evaluating…</> : <><Sparkles size={15} /> Submit</>}
+                {loading ? <><div className="spinner" /> Evaluating...</> : <><Sparkles size={15} /> Submit</>}
               </button>
             </div>
           </div>
         ) : (
           <div className="fade-up">
-            <AnswerComparison userAnswer={userAnswer} result={result} t={t} />
+            <AnswerComparison userAnswer={userAnswer} question={q} result={result} t={t} />
           </div>
         )}
 
@@ -339,7 +416,7 @@ export default function Written({ subjectId }) {
                 display: 'flex', alignItems: 'center', gap: 8,
               }}>
                 <CheckCircle2 size={15} />
-                {totalScore}/{maxScore} pts — Test complete!
+                {totalScore}/{maxScore} pts - Test complete!
               </div>
             )
           )}

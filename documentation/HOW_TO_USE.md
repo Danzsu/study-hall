@@ -1,3 +1,10 @@
+## Current workflow note
+
+- A jelenlegi allapotban a frontend P0 UI javitasok keszen vannak.
+- A deploy elotti ellenorzeshez hasznald a `node scripts/check-backend.js` parancsot.
+- Helyi live probe-hoz adhatsz `--base-url http://localhost:3000` parametert.
+- A `vercel.json` mar tartalmazza a `validate-answer` timeoutot, ezt nem kell kulon emlekezetbol visszakeresni.
+
 # Study Hall használati útmutató
 
 Ez a dokumentum azt foglalja össze, hogy mi a projekt célja, hogyan használható a felület, hogyan indul fejlesztésre, hogyan működik a tartalomgenerálás, és hol találhatók a fontos fájlok.

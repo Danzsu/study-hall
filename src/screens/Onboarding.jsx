@@ -34,6 +34,21 @@ const POMODORO_PRESETS = [
   { id: 'sprint',   label: 'Sprint',    focus: 15, brk: 3,  desc: '15 min focus · 3 min break'   },
 ]
 
+const SUBJECT_EMOJIS = {
+  brain: '🤖',
+  book: '📚',
+  shield: '🛡️',
+  lock: '🔐',
+  code: '💻',
+  chart: '📊',
+  machine: '🤖',
+  security: '🔐',
+}
+
+function subjectEmoji(subject) {
+  return subject.emoji ?? SUBJECT_EMOJIS[subject.icon] ?? SUBJECT_EMOJIS[subject.id] ?? '📚'
+}
+
 function StepDots({ total, current, t }) {
   return (
     <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginBottom: 40 }}>
@@ -113,7 +128,7 @@ function StepSubjects({ subjects, selected, onToggle, t }) {
                   <Check size={10} color="#fff" strokeWidth={3} />
                 </div>
               )}
-              <span style={{ fontSize: 22 }}>{s.emoji ?? '📚'}</span>
+              <span style={{ fontSize: 22 }}>{subjectEmoji(s)}</span>
               <div>
                 <p style={{ fontSize: 13, fontWeight: 700, color: isSel ? s.color : t.text, marginBottom: 2 }}>{s.name}</p>
                 <p style={{ fontSize: 11, color: t.textSub, lineHeight: 1.4 }}>{s.desc ?? ''}</p>
@@ -248,7 +263,7 @@ export default function Onboarding() {
   useEffect(() => {
     fetch('/api/subjects')
       .then(r => r.json())
-      .then(data => setApiSubjects(data.map(s => ({ id: s.id, name: s.name, desc: s.desc, questions: s.questions, color: s.color ?? C.accent }))))
+      .then(data => setApiSubjects(data.map(s => ({ id: s.id, name: s.name, desc: s.desc, questions: s.questions, color: s.color ?? C.accent, icon: s.icon, emoji: s.emoji }))))
       .catch(() => {})
   }, [])
 

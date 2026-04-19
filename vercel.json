@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "app/api/validate-answer/route.js": {
+      "maxDuration": 30
+    }
+  }
+}

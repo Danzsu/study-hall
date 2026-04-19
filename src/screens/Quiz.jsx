@@ -1,7 +1,7 @@
-'use client'
+﻿'use client'
 import { useState, useEffect } from 'react'
 import {
-  CheckCircle2, XCircle, ChevronRight,
+  CheckCircle2, XCircle, ChevronRight, ChevronDown, ChevronUp,
   RotateCcw, Zap, BookOpen, AlertTriangle,
   Clock, Target, TrendingUp,
 } from 'lucide-react'
@@ -22,10 +22,11 @@ function formatTime(s) {
 }
 
 function scoreGrade(pct) {
-  if (pct >= 90) return { label: 'Excellent', color: C.green, emoji: '🏆' }
-  if (pct >= 75) return { label: 'Good',      color: C.blue,  emoji: '👍' }
-  if (pct >= 60) return { label: 'Passing',   color: C.gold,  emoji: '📈' }
-  return               { label: 'Keep going', color: C.red,   emoji: '💪' }
+  if (pct >= 90) return { grade: 'A', label: 'Excellent', color: C.green }
+  if (pct >= 80) return { grade: 'B', label: 'Strong', color: C.green }
+  if (pct >= 70) return { grade: 'C', label: 'Good', color: C.blue }
+  if (pct >= 60) return { grade: 'D', label: 'Passing', color: C.gold }
+  return               { grade: 'F', label: 'Keep going', color: C.red }
 }
 
 function Progress({ total, current, results, t }) {
@@ -64,7 +65,7 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
   const correctList = isMulti ? (q.correctMultiple ?? []) : [q.correct]
   const hasSelection = isMulti ? selectedList.length > 0 : selected !== null
   const isCorrect = submitted && (isMulti ? sameSet(selectedList, correctList) : selected === q.correct)
-  const buttonLabel = !submitted ? 'Submit' : qIdx < total - 1 ? 'Next question →' : 'See results →'
+  const buttonLabel = !submitted ? 'Submit' : qIdx < total - 1 ? 'Next question ->' : 'See results ->'
 
   const phaseStyle = {
     idle:  { opacity: 1, transform: 'translateX(0) scale(1)' },
@@ -162,8 +163,8 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
               }}>{LABELS[oi]}</span>
               <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, fontWeight: isCorrectOpt ? 600 : 400, flex: 1 }}>
                 {opt}
-                {isCorrectOpt && !isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.green, fontWeight: 700 }}>✓ correct</span>}
-                {isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.red, fontWeight: 700 }}>✗ your answer</span>}
+                {isCorrectOpt && !isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.green, fontWeight: 700 }}>correct</span>}
+                {isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.red, fontWeight: 700 }}>your answer</span>}
               </span>
               {isCorrectOpt && <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 2 }} />}
             </button>
@@ -187,7 +188,7 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
           }
           <div>
             <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.5px', color: isCorrect ? C.green : C.red, marginBottom: 4 }}>
-              {isCorrect ? 'CORRECT — well done!' : 'INCORRECT — review this'}
+              {isCorrect ? 'CORRECT - well done!' : 'INCORRECT - review this'}
             </p>
             <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.6 }}>{q.explain}</p>
           </div>
@@ -250,6 +251,61 @@ function SectionBreakdown({ questions, results, t }) {
   )
 }
 
+function QuestionBreakdown({ questions, results, answers, t }) {
+  const [open, setOpen] = useState({})
+
+  return (
+    <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 14, overflow: 'hidden', marginBottom: 28 }}>
+      <div style={{ padding: '16px 20px', borderBottom: `1px solid ${t.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted }}>QUESTION BREAKDOWN</p>
+        <span style={{ fontSize: 11, color: t.textMuted }}>{questions.length} answered</span>
+      </div>
+      {questions.map((q, i) => {
+        const isOpen = !!open[i]
+        const isCorrect = results[i] === 'correct'
+        const selected = Array.isArray(answers[q.id]) ? answers[q.id] : answers[q.id] == null ? [] : [answers[q.id]]
+        const correctList = q.type === 'multi' ? (q.correctMultiple ?? []) : [q.correct]
+
+        return (
+          <div key={q.id} style={{ borderBottom: i < questions.length - 1 ? `1px solid ${t.border}` : 'none' }}>
+            <button
+              onClick={() => setOpen(p => ({ ...p, [i]: !p[i] }))}
+              style={{ width: '100%', border: 'none', background: 'transparent', padding: '13px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12, textAlign: 'left', fontFamily: "'DM Sans', system-ui" }}
+            >
+              {isCorrect
+                ? <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0 }} />
+                : <XCircle size={16} style={{ color: C.red, flexShrink: 0 }} />
+              }
+              <span style={{ flex: 1, minWidth: 0, fontSize: 13.5, fontWeight: 650, color: t.text, lineHeight: 1.4 }}>{q.q}</span>
+              <span style={{ fontSize: 10, fontWeight: 800, color: isCorrect ? C.green : C.red, background: isCorrect ? C.greenBg : C.redBg, borderRadius: 20, padding: '3px 8px', flexShrink: 0 }}>
+                {isCorrect ? 'Correct' : 'Review'}
+              </span>
+              {isOpen ? <ChevronUp size={15} style={{ color: t.textMuted }} /> : <ChevronDown size={15} style={{ color: t.textMuted }} />}
+            </button>
+            {isOpen && (
+              <div style={{ padding: '0 18px 16px 46px', animation: 'explanationIn 0.22s ease both' }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: q.explain ? 10 : 0 }}>
+                  {(q.options ?? []).map((opt, oi) => {
+                    const wasSelected = selected.includes(oi)
+                    const wasCorrect = correctList.includes(oi)
+                    const color = wasCorrect ? C.green : wasSelected ? C.red : t.textMuted
+                    return (
+                      <span key={oi} style={{ border: `1px solid ${wasCorrect || wasSelected ? color + '70' : t.border}`, background: wasCorrect ? C.greenBg : wasSelected ? C.redBg : t.surface2, color, borderRadius: 8, padding: '5px 8px', fontSize: 11.5, fontWeight: 700 }}>
+                        {LABELS[oi]} {wasCorrect ? 'correct' : wasSelected ? 'yours' : ''}
+                      </span>
+                    )
+                  })}
+                </div>
+                {q.explain && <p style={{ fontSize: 13, lineHeight: 1.6, color: t.textSub }}>{q.explain}</p>}
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 function ResultsView({ questions, results, answers, timeTaken, subjectId, subjectName, t, onRetry }) {
   const [showAll, setShowAll] = useState(false)
   const correctCount = results.filter(r => r === 'correct').length
@@ -304,19 +360,19 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
               style={{ animation: `arcGrow 900ms cubic-bezier(0.22,1,0.36,1) both 200ms` }} />
           </svg>
           <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontSize: 28, fontWeight: 800, color: t.text, lineHeight: 1, letterSpacing: '-1px' }}>{pct}%</span>
-            <span style={{ fontSize: 11, fontWeight: 700, color: grade.color, marginTop: 2 }}>{grade.label}</span>
+            <span style={{ fontSize: 34, fontWeight: 900, color: grade.color, lineHeight: 1, letterSpacing: '-1px' }}>{grade.grade}</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted, marginTop: 3 }}>{correctCount}/{questions.length}</span>
           </div>
         </div>
         <div style={{ flex: 1, minWidth: 200 }}>
           <div style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 22 }}>{grade.emoji}</span>
+            <span style={{ fontSize: 13, fontWeight: 900, color: grade.color, background: `${grade.color}16`, border: `1px solid ${grade.color}35`, borderRadius: 8, padding: '4px 8px' }}>GRADE {grade.grade}</span>
             <h1 style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 22, fontWeight: 700, letterSpacing: '-0.3px', color: t.text }}>
               {grade.label} work
             </h1>
           </div>
           <p style={{ fontSize: 14, color: t.textSub, marginBottom: 20, lineHeight: 1.5 }}>
-            {questions.length} questions completed
+            {pct}% score across {questions.length} questions
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {[
@@ -338,6 +394,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
       </div>
 
       <SectionBreakdown questions={questions} results={results} t={t} />
+      <QuestionBreakdown questions={questions} results={results} answers={answers} t={t} />
 
       {/* Actions */}
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 36 }}>
@@ -384,7 +441,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
                 }}>
                   <XCircle size={16} style={{ color: C.red, flexShrink: 0, marginTop: 1 }} />
                   <div style={{ flex: 1 }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted }}>Q{origIdx + 1} · {q.section}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted }}>Q{origIdx + 1} - {q.section}</span>
                     <p style={{ fontSize: 14, fontWeight: 500, color: t.text, lineHeight: 1.5, marginTop: 2 }}>{q.q}</p>
                   </div>
                 </div>
@@ -421,7 +478,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
                 }}>
                   <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 1 }} />
                   <div style={{ flex: 1 }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted }}>Q{origIdx + 1} · {q.section}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted }}>Q{origIdx + 1} - {q.section}</span>
                     <p style={{ fontSize: 14, fontWeight: 500, color: t.text, lineHeight: 1.5, marginTop: 2 }}>{q.q}</p>
                   </div>
                 </div>
@@ -439,7 +496,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
             }}
           >
             <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0 }} />
-            <span style={{ fontSize: 13, color: t.textSub }}>{correctQs.length} questions answered correctly — click to expand</span>
+            <span style={{ fontSize: 13, color: t.textSub }}>{correctQs.length} questions answered correctly - click to expand</span>
             <ChevronRight size={14} style={{ color: t.textMuted, marginLeft: 'auto' }} />
           </div>
         )}
@@ -514,7 +571,7 @@ export default function Quiz({ subjectId, section }) {
   }
 
   if (!questions.length) {
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: t.textMuted }}>Loading…</div>
+    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: t.textMuted }}>Loading...</div>
   }
 
   return (

@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:blackbox": "node tests/blackbox-smoke.js",
+    "test:whitebox": "node tests/whitebox-content.js",
+    "test:smoke": "npm run test:whitebox && npm run test:blackbox",
     "plan:content": "node scripts/build-content-plan.js",
     "validate:content": "node scripts/validate-content.js",
-    "generate:content": "node scripts/generate-all.js"
+    "generate:content": "node scripts/generate-all.js",
+    "check:backend": "node scripts/check-backend.js"
   },
   "dependencies": {
     "groq-sdk": "^0.7.0",

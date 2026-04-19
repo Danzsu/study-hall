@@ -112,44 +112,7 @@ function renderContent(raw, t) {
 }
 
 function inlineFormat(text, t) {
-  // Split by bold/italic/code markers and render as spans
-  const parts = []
-  let remaining = text
-  let key = 0
-
-  while (remaining.length > 0) {
-    const boldMatch = remaining.match(/\*\*(.+?)\*\*/)
-    const italicMatch = remaining.match(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/)
-    const codeMatch = remaining.match(/`(.+?)`/)
-    const mathMatch = remaining.match(/\$([^$\n]+?)\$/)
-
-    const candidates = [boldMatch, italicMatch, codeMatch, mathMatch].filter(Boolean)
-    if (candidates.length === 0) {
-      parts.push(<span key={key++}>{remaining}</span>)
-      break
-    }
-
-    const first = candidates.reduce((a, b) => a.index < b.index ? a : b)
-    if (first.index > 0) {
-      parts.push(<span key={key++}>{remaining.slice(0, first.index)}</span>)
-    }
-
-    if (first === boldMatch) {
-      parts.push(<strong key={key++}>{first[1]}</strong>)
-      remaining = remaining.slice(first.index + first[0].length)
-    } else if (first === italicMatch) {
-      parts.push(<em key={key++}>{first[1]}</em>)
-      remaining = remaining.slice(first.index + first[0].length)
-    } else if (first === codeMatch) {
-      parts.push(<code key={key++} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 4, padding: '1px 5px', fontSize: '0.9em', fontFamily: "'JetBrains Mono', monospace" }}>{first[1]}</code>)
-      remaining = remaining.slice(first.index + first[0].length)
-    } else {
-      parts.push(<MathInline key={key++} value={first[1]} />)
-      remaining = remaining.slice(first.index + first[0].length)
-    }
-  }
-
-  return parts
+  return renderInlineNodes(text, t)
 }
 
 function MathInline({ value }) {
@@ -170,6 +133,222 @@ function MathBlock({ value, t }) {
   } catch {
     return <pre>{value}</pre>
   }
+}
+
+function normalizeNotePayload(data) {
+  const payload = data && typeof data === 'object' ? data : {}
+  const frontmatter = payload.frontmatter && typeof payload.frontmatter === 'object' ? payload.frontmatter : {}
+
+  return {
+    content: String(payload.content ?? payload.contentMdx ?? payload.body ?? '').replace(/\r\n/g, '\n'),
+    frontmatter,
+    activeRecall: normalizeRecallItems(payload.activeRecall ?? frontmatter.activeRecall ?? []),
+    sources: normalizeSources(payload.sources ?? frontmatter.sources ?? []),
+  }
+}
+
+function normalizeSources(value) {
+  if (!value) return []
+  const list = Array.isArray(value) ? value : [value]
+  return list.filter(item => item && typeof item === 'object')
+}
+
+function normalizeRecallItems(value) {
+  if (!Array.isArray(value)) return []
+  return value
+    .map(item => {
+      if (!item || typeof item !== 'object') return null
+      const question = String(item.question ?? item.q ?? '').trim()
+      const answer = String(item.answer ?? item.a ?? '').trim()
+      if (!question && !answer) return null
+      return { question, answer }
+    })
+    .filter(Boolean)
+}
+
+function parseTagAttributes(raw = '') {
+  const attrs = {}
+  const attrPattern = /([A-Za-z_:][A-Za-z0-9_:-]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g
+  let match
+  while ((match = attrPattern.exec(String(raw))) !== null) {
+    attrs[match[1].toLowerCase()] = match[2] ?? match[3] ?? match[4] ?? ''
+  }
+  return attrs
+}
+
+function resolveToneColor(value) {
+  const token = String(value || '').trim().toLowerCase()
+  if (!token) return C.accent
+  if (C[token]) return C[token]
+  if (/^#|^rgb|^hsl/.test(token)) return value
+  return C.accent
+}
+
+function transparentTone(color) {
+  const value = String(color || '').trim()
+  const shortHex = value.match(/^#([0-9a-f]{3})$/i)
+  if (shortHex) {
+    const expanded = shortHex[1].split('').map(ch => ch + ch).join('')
+    return `#${expanded}1e`
+  }
+  if (/^#[0-9a-f]{6}$/i.test(value)) return `${value}1e`
+  return `color-mix(in srgb, ${value} 12%, transparent)`
+}
+
+function InlineHighlight({ color = C.accent, children, t }) {
+  const tone = resolveToneColor(color)
+  return (
+    <mark
+      style={{
+        background: transparentTone(tone),
+        borderBottom: `2px solid ${tone}`,
+        borderRadius: 4,
+        color: t.text,
+        padding: '0 3px',
+        margin: '0 1px',
+      }}
+    >
+      {children}
+    </mark>
+  )
+}
+
+function InlineTooltip({ label, definition, t }) {
+  const [open, setOpen] = useState(false)
+  const safeLabel = String(label || '').trim()
+  const safeDefinition = String(definition || safeLabel || '').trim()
+
+  return (
+    <span
+      style={{ position: 'relative', display: 'inline-flex', alignItems: 'baseline', verticalAlign: 'baseline' }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={() => setOpen(false)}
+      tabIndex={0}
+      title={safeDefinition || safeLabel}
+    >
+      <span style={{ borderBottom: `1px dotted ${C.blue}`, color: t.text, cursor: safeDefinition ? 'help' : 'default', paddingBottom: 1 }}>
+        {safeLabel}
+      </span>
+      {open && safeDefinition && (
+        <span
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 'calc(100% + 8px)',
+            zIndex: 20,
+            width: 'max-content',
+            maxWidth: 'min(320px, 72vw)',
+            background: t.surface,
+            border: `1px solid ${t.border}`,
+            borderRadius: 10,
+            boxShadow: '0 12px 24px rgba(0,0,0,0.12)',
+            padding: '10px 12px',
+            color: t.text,
+            fontFamily: "'DM Sans',system-ui",
+            fontSize: 12.5,
+            lineHeight: 1.5,
+          }}
+        >
+          <span style={{ display: 'block', fontSize: 10, fontWeight: 800, letterSpacing: '0.8px', color: C.blue, marginBottom: 4 }}>
+            GLOSSARY
+          </span>
+          {safeDefinition}
+        </span>
+      )}
+    </span>
+  )
+}
+
+function parseTooltipContent(attrs, inner) {
+  const attrMap = parseTagAttributes(attrs)
+  const rawInner = String(inner || '').trim()
+  const pipeMatch = rawInner.match(/^(.+?)\s*[|:]\s*(.+)$/s)
+
+  const label = attrMap.term || attrMap.label || attrMap.text || attrMap.value || (pipeMatch ? pipeMatch[1].trim() : rawInner)
+  const definition = attrMap.definition || attrMap.def || attrMap.tooltip || attrMap.title || attrMap.gloss || attrMap.description || (pipeMatch ? pipeMatch[2].trim() : rawInner)
+
+  return { label, definition }
+}
+
+function renderInlineNodes(text, t) {
+  let remaining = String(text ?? '')
+  const nodes = []
+  let key = 0
+
+  while (remaining.length > 0) {
+    const candidates = []
+    const push = (kind, match, priority, build) => {
+      if (match && typeof match.index === 'number' && match.index >= 0) {
+        candidates.push({ kind, match, priority, build })
+      }
+    }
+
+    push('highlightTag', remaining.match(/<H\b([^>]*)>([\s\S]*?)<\/H>/i), 1, (match) => {
+      const attrs = parseTagAttributes(match[1])
+      return <InlineHighlight key={key++} color={attrs.color || attrs.tone || C.accent} t={t}>{renderInlineNodes(match[2], t)}</InlineHighlight>
+    })
+
+    push('tooltipTag', remaining.match(/<T\b([^>]*)>([\s\S]*?)<\/T>/i), 2, (match) => {
+      const { label, definition } = parseTooltipContent(match[1], match[2])
+      return <InlineTooltip key={key++} label={label} definition={definition} t={t} />
+    })
+
+    push('highlightSyntax', remaining.match(/==([\s\S]+?)==(?:\{([A-Za-z0-9_-]+)\})?/), 3, (match) => {
+      return <InlineHighlight key={key++} color={match[2] || C.accent} t={t}>{renderInlineNodes(match[1], t)}</InlineHighlight>
+    })
+
+    push('tooltipSyntax', remaining.match(/\{([^{}]+?)\}\[([^\[\]]+?)\]/), 4, (match) => {
+      return <InlineTooltip key={key++} label={match[1]} definition={match[2]} t={t} />
+    })
+
+    push('bold', remaining.match(/\*\*(.+?)\*\*/), 10, (match) => {
+      return <strong key={key++}>{renderInlineNodes(match[1], t)}</strong>
+    })
+
+    push('italic', remaining.match(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/), 11, (match) => {
+      return <em key={key++}>{renderInlineNodes(match[1], t)}</em>
+    })
+
+    push('code', remaining.match(/`(.+?)`/), 12, (match) => {
+      return <code key={key++} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 4, padding: '1px 5px', fontSize: '0.9em', fontFamily: "'JetBrains Mono', monospace" }}>{match[1]}</code>
+    })
+
+    push('math', remaining.match(/\$([^$\n]+?)\$/), 13, (match) => {
+      return <MathInline key={key++} value={match[1]} />
+    })
+
+    push('customTag', remaining.match(/<([A-Za-z][A-Za-z0-9]*)\b([^>]*)>([\s\S]*?)<\/\1>/), 20, (match) => {
+      const tagName = String(match[1] || '').toUpperCase()
+      if (tagName === 'H' || tagName === 'T') return null
+      return <span key={key++}>{renderInlineNodes(match[3], t)}</span>
+    })
+
+    if (!candidates.length) {
+      nodes.push(<span key={key++}>{remaining}</span>)
+      break
+    }
+
+    const selected = candidates.reduce((best, item) => {
+      if (!best) return item
+      if (item.match.index < best.match.index) return item
+      if (item.match.index > best.match.index) return best
+      return item.priority < best.priority ? item : best
+    }, null)
+
+    if (selected.match.index > 0) {
+      nodes.push(<span key={key++}>{remaining.slice(0, selected.match.index)}</span>)
+    }
+
+    const rendered = selected.build(selected.match)
+    if (rendered !== null) nodes.push(rendered)
+
+    const consumed = selected.match.index + selected.match[0].length
+    remaining = remaining.slice(consumed)
+  }
+
+  return nodes
 }
 
 function RecallCards({ items, t }) {
@@ -435,10 +614,11 @@ export default function Study({ subjectId, lesson: lessonProp }) {
     fetch(`/api/notes/${subjectId}/${activeSlug}`)
       .then(r => r.json())
       .then(data => {
-        setContent(data.content ?? '')
-        setFrontmatter(data.frontmatter ?? {})
-        setActiveRecall(data.activeRecall ?? [])
-        setSources(data.sources ?? data.frontmatter?.sources ?? [])
+        const normalized = normalizeNotePayload(data)
+        setContent(normalized.content)
+        setFrontmatter(normalized.frontmatter)
+        setActiveRecall(normalized.activeRecall)
+        setSources(normalized.sources)
         setLoading(false)
       })
       .catch(() => setLoading(false))

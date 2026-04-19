@@ -1,3 +1,10 @@
+## Current map updates
+
+- `scripts/check-backend.js`: backend smoke-check és live probe seged.
+- `vercel.json`: runtime budget / deploy guard a `validate-answer` route-hoz.
+- `documentation/IMPROVEMENT_CYCLES.md`: ciklusnaplo, aktualis completed/in progress/next statuszokkal.
+- `Agent_planner/improvement&error.md`: priorizalt error + improvement planner, aktualis delegaciokkal.
+
 # Study Hall projekt-térkép
 
 Rövid, gyakorlati áttekintés arról, hogy a repo fő részei mire valók, és hol érdemes elkezdeni a munkát.

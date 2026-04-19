@@ -308,3 +308,21 @@ Generated files:
 
 The plan is a shared planning artifact for notes, questions, flashcards, and glossary generation.
 The quality report is a heuristic check for coverage, completeness, and basic schema health.
+
+## Backend smoke check
+
+Run the lightweight backend readiness check after content generation or before deploy:
+
+```bash
+node scripts/check-backend.js
+node scripts/check-backend.js --subject it_biztonsag
+node scripts/check-backend.js --base-url http://127.0.0.1:3000
+```
+
+What it verifies:
+
+- generated content exists for the selected subject or subjects
+- the content quality report is not failing
+- `/api/health` responds when a base URL is provided
+- `/api/search` returns results for a real probe term when a base URL is provided
+- `/api/validate-answer` rejects empty payloads and returns a stable response shape for a sample written-answer payload
