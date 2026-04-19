@@ -5,6 +5,7 @@ const OPENROUTER_MODELS = [
   'google/gemma-4-31b-it:free',
   'nvidia/nemotron-3-super-120b-a12b:free',
 ]
+const REQUEST_TIMEOUT_MS = 25000
 
 function buildPrompt({ question, model_answer, key_points, user_answer }) {
   return `You are a strict but fair university professor evaluating a student's written answer.
@@ -44,6 +45,19 @@ function parseJsonContent(content) {
   }
 }
 
+function clampScore(value) {
+  const score = Number.isFinite(Number(value)) ? Number(value) : 0
+  return Math.min(100, Math.max(0, Math.round(score)))
+}
+
+function normalizeModelResult(result) {
+  if (!result || typeof result !== 'object') return result
+  return {
+    ...result,
+    score_pct: clampScore(result.score_pct),
+  }
+}
+
 function localFallback({ model_answer, key_points, user_answer }) {
   const answer = String(user_answer || '').toLowerCase()
   const keys = (key_points?.length ? key_points : String(model_answer || '').split(/\W+/).filter(w => w.length > 5).slice(0, 8))
@@ -57,7 +71,7 @@ function localFallback({ model_answer, key_points, user_answer }) {
   const missing = keys.filter(k => !hits.includes(k)).slice(0, 5)
 
   return {
-    score_pct: score,
+    score_pct: clampScore(score),
     feedback_text: score >= 70
       ? 'Good answer; it covers most expected points.'
       : score >= 40
@@ -70,7 +84,7 @@ function localFallback({ model_answer, key_points, user_answer }) {
   }
 }
 
-async function callGroq(prompt) {
+async function callGroq(prompt, signal) {
   if (!process.env.GROQ_API_KEY) return null
 
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -79,6 +93,7 @@ async function callGroq(prompt) {
       Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
       'Content-Type': 'application/json',
     },
+    signal,
     body: JSON.stringify({
       model: 'llama-3.3-70b-versatile',
       messages: [{ role: 'user', content: prompt }],
@@ -90,10 +105,10 @@ async function callGroq(prompt) {
 
   if (!res.ok) throw new Error(`Groq ${res.status}: ${await res.text()}`)
   const data = await res.json()
-  return parseJsonContent(data.choices?.[0]?.message?.content ?? '{}')
+  return normalizeModelResult(parseJsonContent(data.choices?.[0]?.message?.content ?? '{}'))
 }
 
-async function callOpenRouter(prompt, model) {
+async function callOpenRouter(prompt, model, signal) {
   if (!process.env.OPENROUTER_API_KEY) return null
 
   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -104,6 +119,7 @@ async function callOpenRouter(prompt, model) {
       'HTTP-Referer': 'http://localhost:3000',
       'X-Title': 'Study Hall',
     },
+    signal,
     body: JSON.stringify({
       model,
       messages: [{ role: 'user', content: prompt }],
@@ -115,32 +131,55 @@ async function callOpenRouter(prompt, model) {
 
   if (!res.ok) throw new Error(`OpenRouter ${model} ${res.status}: ${await res.text()}`)
   const data = await res.json()
-  return parseJsonContent(data.choices?.[0]?.message?.content ?? '{}')
+  return normalizeModelResult(parseJsonContent(data.choices?.[0]?.message?.content ?? '{}'))
 }
 
 export async function POST(req) {
-  const payload = await req.json()
-  const prompt = buildPrompt(payload)
-  const errors = []
-
+  let payload
   try {
-    const groqResult = await callGroq(prompt)
-    if (groqResult) return NextResponse.json({ ...groqResult, provider: 'groq' })
-  } catch (err) {
-    errors.push(String(err.message || err))
+    payload = await req.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  for (const model of OPENROUTER_MODELS) {
+  const studentAnswer = payload?.student_answer ?? payload?.user_answer
+  if (!payload?.question || !String(studentAnswer || '').trim()) {
+    return NextResponse.json({ error: 'question and student_answer required' }, { status: 400 })
+  }
+
+  const normalizedPayload = {
+    ...payload,
+    student_answer: studentAnswer,
+    user_answer: studentAnswer,
+  }
+  const prompt = buildPrompt(normalizedPayload)
+  const errors = []
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
+  try {
     try {
-      const result = await callOpenRouter(prompt, model)
-      if (result) return NextResponse.json({ ...result, provider: 'openrouter', model })
+      const groqResult = await callGroq(prompt, controller.signal)
+      if (groqResult) return NextResponse.json({ ...groqResult, provider: 'groq' })
     } catch (err) {
       errors.push(String(err.message || err))
     }
+
+    for (const model of OPENROUTER_MODELS) {
+      try {
+        const result = await callOpenRouter(prompt, model, controller.signal)
+        if (result) return NextResponse.json({ ...result, provider: 'openrouter', model })
+      } catch (err) {
+        errors.push(String(err.message || err))
+      }
+    }
+  } finally {
+    clearTimeout(timeoutId)
   }
 
+  const fallback = localFallback(normalizedPayload)
   return NextResponse.json({
-    ...localFallback(payload),
+    ...normalizeModelResult(fallback),
     provider: 'local',
     provider_errors: errors.slice(-3),
   })

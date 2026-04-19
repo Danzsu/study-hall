@@ -14,6 +14,7 @@ const fs = require('fs')
 const path = require('path')
 require('./load-env')
 const { buildFallbackFlashcards, buildFallbackGlossary } = require('./local-generators')
+const { loadContentPlanSummary } = require('./content-plan')
 const { callWithProviderLimit } = require('./llm-rate-limit')
 const { Groq } = require('groq-sdk')
 
@@ -86,10 +87,13 @@ function extractSections(content) {
 /**
  * Flashcardok generálása Groq-val
  */
-async function generateFlashcardsWithGroq(groq, notesContent, subjectName) {
+async function generateFlashcardsWithGroq(groq, notesContent, subjectName, planContext = '') {
   const prompt = `A következő tanulási anyag alapján készíts flashcardokat (kérdés-válasz párokat).
 
 TÁRGY: ${subjectName}
+
+SHARED CONTENT PLAN:
+${planContext || 'No cached plan available yet. Use the note structure directly.'}
 
 ANYAG:
 ${notesContent.slice(0, 6000)}
@@ -143,10 +147,13 @@ VISSZA: Csak a tiszta JSON tömböt.`
 /**
  * Glossary entries generálása Groq-val
  */
-async function generateGlossaryWithGroq(groq, notesContent, subjectName) {
+async function generateGlossaryWithGroq(groq, notesContent, subjectName, planContext = '') {
   const prompt = `A következő tanulási anyag alapján készíts szakmai glosszáriumot (kulcsszavak + definíciók).
 
 TÁRGY: ${subjectName}
+
+SHARED CONTENT PLAN:
+${planContext || 'No cached plan available yet. Use the note structure directly.'}
 
 ANYAG:
 ${notesContent.slice(0, 6000)}
@@ -209,6 +216,7 @@ async function main() {
   const forceLocalFallback = process.env.LOCAL_CONTENT_FALLBACK === '1'
   const groq = apiKey && !forceLocalFallback ? new Groq({ apiKey }) : null
   let useLocalFallback = !groq
+  const planContext = loadContentPlanSummary(subjectSlug)
   if (useLocalFallback) {
     console.log('Using local fallback extras generation.')
   }
@@ -254,7 +262,8 @@ async function main() {
           flashcards = await generateFlashcardsWithGroq(
             groq,
             section.content,
-            subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+            subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+            planContext
           )
         } catch (err) {
           console.log(`   Groq flashcard generation failed (${err.status || err.code || err.message}); switching to local fallback.`)
@@ -278,7 +287,8 @@ async function main() {
           glossary = await generateGlossaryWithGroq(
             groq,
             section.content,
-            subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+            subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+            planContext
           )
         } catch (err) {
           console.log(`   Groq glossary generation failed (${err.status || err.code || err.message}); switching to local fallback.`)

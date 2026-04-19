@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "subject": {
+    "slug": "it_biztonsag",
+    "name": "IT Biztonság"
+  },
+  "generatedAt": "2026-04-19T13:05:33.099Z",
+  "status": "pass",
+  "score": 95,
+  "checks": [
+    {
+      "name": "notes_count",
+      "status": "pass",
+      "detail": "18 notes found, target 18"
+    },
+    {
+      "name": "questions_count",
+      "status": "warn",
+      "detail": "40 questions found, target 56"
+    },
+    {
+      "name": "flashcards_count",
+      "status": "pass",
+      "detail": "606 flashcards found, target 72"
+    },
+    {
+      "name": "glossary_count",
+      "status": "pass",
+      "detail": "416 glossary entries found, target 36"
+    },
+    {
+      "name": "lesson_coverage",
+      "status": "pass",
+      "detail": "18 lesson records, 18 planned outline entries"
+    },
+    {
+      "name": "written_questions",
+      "status": "pass",
+      "detail": "3 written questions found"
+    },
+    {
+      "name": "written_completeness",
+      "status": "pass",
+      "detail": "Written questions have answers and key points."
+    },
+    {
+      "name": "plan_artifact",
+      "status": "pass",
+      "detail": "Plan has 36 concepts and 18 objectives"
+    }
+  ],
+  "issues": [],
+  "warnings": [
+    "Questions count is below the planned target."
+  ],
+  "recommendations": [
+    "Increase assessment coverage, especially written questions."
+  ],
+  "plan": {
+    "lessonSources": 18,
+    "testSources": 7,
+    "conceptInventory": 36,
+    "learningObjectives": 18
+  },
+  "content": {
+    "notes": 18,
+    "questions": 40,
+    "flashcards": 606,
+    "glossary": 416
+  },
+  "llm": {
+    "preferredProviders": [
+      "groq",
+      "openrouter"
+    ],
+    "budgetSnapshot": {
+      "groq": {
+        "provider": "groq",
+        "available": true,
+        "minDelayMs": 70000,
+        "maxRequestsPerHour": 45,
+        "usedLastHour": 0,
+        "remainingLastHour": 45,
+        "nextAvailableAt": 1776603273857
+      },
+      "openrouter": {
+        "provider": "openrouter",
+        "available": true,
+        "minDelayMs": 30000,
+        "maxRequestsPerHour": 90,
+        "usedLastHour": 0,
+        "remainingLastHour": 90,
+        "nextAvailableAt": 1776603273857
+      }
+    }
+  }
+}

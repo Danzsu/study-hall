@@ -15,6 +15,7 @@ const { extractPdfText } = require('./pdf-text')
 const { chunkDocument } = require('./document-chunker')
 const { buildActiveRecall, buildFallbackNote } = require('./local-generators')
 const { buildNotePrompt, getNoteDepth, getNoteLanguage } = require('./note-prompts')
+const { loadContentPlanSummary } = require('./content-plan')
 const { callWithProviderLimit } = require('./llm-rate-limit')
 const mammoth = require('mammoth')
 const { Groq } = require('groq-sdk')
@@ -104,6 +105,7 @@ async function generateNotesWithGroq(groq, sourceText, subjectName, sectionName,
     chunkCount: options.chunkCount ?? 1,
     language: options.language ?? 'hu',
     depth: options.depth ?? 'exam-prep notes',
+    planContext: options.planContext ?? '',
   })
   /* Legacy prompt removed; see scripts/note-prompts.js.
 
@@ -164,6 +166,7 @@ async function generateNotesWithOpenRouter(apiKey, sourceText, subjectName, sect
     chunkCount: options.chunkCount ?? 1,
     language: options.language ?? 'hu',
     depth: options.depth ?? 'exam-prep notes',
+    planContext: options.planContext ?? '',
   })
 
   const errors = []
@@ -259,6 +262,7 @@ async function main() {
   }
   const noteLanguage = getNoteLanguage()
   const noteDepth = getNoteDepth()
+  const planContext = loadContentPlanSummary(subjectSlug)
   console.log(`Note profile: language=${noteLanguage}, depth=${noteDepth}`)
 
   const sourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'lesson_sources')
@@ -399,6 +403,7 @@ async function main() {
           chunkCount: chunks.length,
           language: noteLanguage,
           depth: noteDepth,
+          planContext,
         }
         const chunkSectionName = sectionName + (chunks.length > 1 ? ` (${i + 1}/${chunks.length})` : '')
 

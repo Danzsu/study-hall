@@ -1,9 +1,10 @@
 'use client'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import {
-  Flame, TrendingUp, BookOpen,
+  Flame, TrendingUp,
   ChevronRight, Award, Zap,
   BarChart2, CheckCircle2, Play,
+  Timer, Plus, ArrowRight, Layers,
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
@@ -115,7 +116,7 @@ function SubjectRow({ s, t, open, onToggle }) {
             <div style={{ width: `${pct}%`, height: '100%', background: s.color, borderRadius: 99, transition: 'width 0.6s cubic-bezier(0.22,1,0.36,1)' }} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 5 }}>
-            <span style={{ fontSize: 11, color: t.textMuted }}>{s.done} / {s.questions} questions</span>
+            <span style={{ fontSize: 11, color: t.textMuted }}>{s.done} / {s.questions} questions - {s.lessons} lessons</span>
             <span style={{ fontSize: 11, color: t.textMuted }}>Avg <b style={{ color: t.textSub }}>{s.avgScore ?? '—'}%</b></span>
           </div>
         </div>
@@ -143,16 +144,22 @@ function SubjectRow({ s, t, open, onToggle }) {
           </div>
           <div style={{ display: 'flex', gap: 8, marginTop: 14 }}>
             <button
-              onClick={() => navigate('/quiz', { id: s.id, name: s.name })}
+              onClick={() => navigate('/subject', { id: s.id, name: s.name })}
               style={{ flex: 1, padding: '8px', background: s.color, color: '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
+            >
+              <ArrowRight size={11} /> Open subject
+            </button>
+            <button
+              onClick={() => navigate('/quiz', { id: s.id, name: s.name })}
+              style={{ flex: 1, padding: '8px', background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer', color: t.textSub, fontFamily: "'DM Sans',system-ui", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
             >
               <Play size={11} /> Quick quiz
             </button>
             <button
-              onClick={() => navigate('/review', { id: s.id, name: s.name })}
-              style={{ flex: 1, padding: '8px', background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer', color: t.textSub, fontFamily: "'DM Sans',system-ui", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
+              onClick={() => navigate('/flashcards', { id: s.id, name: s.name })}
+              style={{ flex: 1, padding: '8px', background: `${s.color}14`, border: `1px solid ${s.color}45`, borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer', color: s.color, fontFamily: "'DM Sans',system-ui", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
             >
-              <BookOpen size={11} /> Review
+              <Layers size={11} /> Flashcards
             </button>
           </div>
         </div>
@@ -234,11 +241,26 @@ export default function Home() {
 
         <div style={{ flex: 1 }}>
           <h1 style={{ fontFamily: "'Lora',serif", fontSize: 20, fontWeight: 700, letterSpacing: '-0.3px', marginBottom: 4 }}>
-            {streak > 0 ? `${streak}-day streak 🔥` : 'Start your streak today'}
+            {streak > 0 ? `${streak}-day streak` : 'Start your streak today'}
           </h1>
           <p style={{ fontSize: 13, color: t.textSub }}>
             {totalDone} of {totalQ} questions answered across {subjects.length} subjects
           </p>
+          <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
+            <button
+              onClick={() => subjects[0] && navigate('/study', { id: subjects[0].id, name: subjects[0].name })}
+              disabled={!subjects.length}
+              style={{ background: C.accent, color: '#fff', border: 'none', borderRadius: 8, padding: '9px 14px', fontSize: 13, fontWeight: 700, cursor: subjects.length ? 'pointer' : 'not-allowed', opacity: subjects.length ? 1 : 0.55, fontFamily: "'DM Sans',system-ui", display: 'inline-flex', alignItems: 'center', gap: 7 }}
+            >
+              <Play size={13} /> Continue learning
+            </button>
+            <button
+              onClick={() => navigate('/pomodoro')}
+              style={{ background: t.surface2, color: t.textSub, border: `1px solid ${t.border}`, borderRadius: 8, padding: '9px 14px', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", display: 'inline-flex', alignItems: 'center', gap: 7 }}
+            >
+              <Timer size={13} /> Start pomodoro
+            </button>
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: 24, flexShrink: 0 }}>
@@ -272,6 +294,21 @@ export default function Home() {
               onToggle={() => setOpen(p => ({ ...p, [s.id]: !p[s.id] }))}
             />
           ))}
+          <div
+            onClick={() => navigate('/onboarding')}
+            style={{ border: `2px dashed ${t.border2}`, borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', color: t.textMuted, background: t.surface }}
+          >
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: t.surface2, border: `1px solid ${t.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <Plus size={16} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ fontSize: 14, fontWeight: 700, color: t.textSub }}>Add a new subject</p>
+              <p style={{ fontSize: 12, color: t.textMuted, marginTop: 2 }}>
+                Upload notes or paste a syllabus and turn it into lessons, flashcards and quizzes.
+              </p>
+            </div>
+            <ArrowRight size={14} style={{ color: t.textMuted, flexShrink: 0 }} />
+          </div>
         </div>
       </div>
 

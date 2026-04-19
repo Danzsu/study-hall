@@ -13,6 +13,7 @@ const path = require('path')
 require('./load-env')
 const { extractPdfText } = require('./pdf-text')
 const { buildFallbackQuestions } = require('./local-generators')
+const { loadContentPlanSummary } = require('./content-plan')
 const { callWithProviderLimit } = require('./llm-rate-limit')
 const mammoth = require('mammoth')
 const { Groq } = require('groq-sdk')
@@ -72,11 +73,14 @@ function chunkText(text, maxChunkSize = 5000, overlap = 500) {
 /**
  * MCQ + Written kérdések generálása forrásszövegből
  */
-async function generateQuestionsWithGroq(groq, sourceText, subjectName, sectionName) {
+async function generateQuestionsWithGroq(groq, sourceText, subjectName, sectionName, planContext = '') {
   const prompt = `Te egy tapasztalt vizsgakérdés-szerkesztő vagy. A következő forrásanyag alapján készíts egyensúlyos kérdéssort.
 
 TÁRGY: ${subjectName}
 FEJEZET: ${sectionName}
+
+SHARED CONTENT PLAN:
+${planContext || 'No cached plan available yet. Derive coverage directly from the source material.'}
 
 FORRÁSSZÖVEG:
 ${sourceText.slice(0, 8000)}
@@ -201,6 +205,7 @@ async function main() {
   const sourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'test_sources')
   const contentDir = path.join(CONTENT_ROOT, subjectSlug)
   const outputPath = path.join(contentDir, 'questions.json')
+  const planContext = loadContentPlanSummary(subjectSlug)
 
   // Forrásfájlok listázása
   const pdfFiles = listSourceFiles(sourceDir, ['.pdf'])
@@ -275,7 +280,8 @@ async function main() {
             groq,
             chunks[i],
             subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-            chunkSection
+            chunkSection,
+            planContext
           )
         } catch (err) {
           console.log(`   Groq question generation failed (${err.status || err.code || err.message}); switching to local fallback.`)

@@ -82,6 +82,65 @@ A tartalom JSON/MDX fájlokban él a projektben (git-ben tárolva), feldolgozás
 
 ---
 
+## Szekcionálási logika (témakör-csoportosítás)
+
+### Alapelv
+
+**1 PPT/PDF forrás = 1 témakör (section).** Ha ugyanaz a témakör folytatódik a következő forrásban, az még mindig 1 témakör — nem hozunk létre új section-t csak azért, mert új fájl kezdődik.
+
+Cél: **minél kevesebb, de tartalmilag koherens témakör**. Nem chunk-határok, nem fájlhatárok — hanem valódi tananyag-egységek szerint.
+
+### Témakör-határok meghatározása
+
+A generáló script-eknek (`generate-notes.js`, `generate-questions.js`, `generate-extras.js`) az LLM-et kell megkérni, hogy azonosítsa a logikai témakör-határokat az alábbi szabályok szerint:
+
+| Szabály | Leírás |
+|---------|---------|
+| **Folytonosság** | Ha a következő PPT/fejezet az előző témát mélyíti, ugyanaz a section marad |
+| **Új section** | Csak akkor nyit új section-t, ha teljesen új fogalomkör kezdődik |
+| **Max section szám** | Egy tantárgyon belül maximum 6–10 section (nem 20-30 chunk) |
+| **Section neve** | Rövid, tartalmi cím (nem "1. fejezet", hanem pl. "Titkosítási alapok") |
+| **Sub-topic** | Egy section-on belül lehetnek al-témák (de ez a lectitle, nem új section) |
+
+### Implementáció a generáló script-ekben
+
+**`generate-notes.js`** — minden chunk generálásakor az LLM-nek átadandó kontextus:
+```
+"Az eddigi section-ök: [lista]. Csak akkor nyiss új section-t, ha teljesen
+új témakör kezdődik. Ha az anyag az előző section folytatása, használd
+ugyanazt a section nevet."
+```
+
+**`generate-questions.js`** — a kérdés `section` mezőjét a meglévő section listából kell választani, nem szabadon generálni:
+```
+"Lehetséges section-ök (csak ezeket használd): [meglévő lista]. Ne hozz
+létre új section nevet."
+```
+
+**`generate-extras.js`** — flashcard és glossary `section`/`category` mezői szintén a rögzített section listából jönnek.
+
+### Elvárt végeredmény (pl. IT Biztonság, 18 lecke)
+
+```
+❌ Rossz (túl granulált):
+  section: "Szimmetrikus titkosítás - AES"
+  section: "Szimmetrikus titkosítás - DES"
+  section: "Szimmetrikus titkosítás - 3DES"
+
+✅ Helyes (koherens):
+  section: "Szimmetrikus titkosítás"   ← minden AES/DES/3DES kérdés ide kerül
+```
+
+### Kapcsolódó fájlok
+
+- `scripts/generate-notes.js` — section tracking state hozzáadása (eddig generált section-ök átadása minden LLM hívásban)
+- `scripts/generate-questions.js` — section lista lock: először `getSubjectSections(slug)` beolvasás, LLM csak abból választhat
+- `scripts/generate-extras.js` — ugyanígy section lock
+- `scripts/note-prompts.js` — prompt frissítés: section-folytonosság szabály explicit megjelenítése
+- `lib/content.js` `getSubjectSections()` — már létezik, ezt kell input-ként átadni a script-eknek
+
+---
+
 ## Tartalom Struktúra
 
 ```
@@ -196,13 +255,67 @@ Font: DM Sans + Lora · Icons: Lucide React · Math: KaTeX
 - [x] Flashcard.jsx — subject neve megjelenik a progress bar felett
 
 ### 🔄 Fázis 3: Frontend design finomítás (folyamatban)
-- [ ] Quiz.jsx — expandable kérdés sorok eredmény nézetben (chevron + A/B/C/D badge-ek)
-- [ ] Settings.jsx — profil szekció (avatar, név, email), streak, sign out gomb
-- [ ] ExamSim.jsx — True/False kérdéstípus (`TfQuestion` komponens)
-- [ ] Study.jsx — `Callout` + `H` highlight komponensek, progress pill
-- [ ] Home.jsx — streak banner, subject card grid (2 oszlop)
-- [ ] Onboarding.jsx — 5. lépés (összefoglaló), layout átrendezés
-- [ ] Glossary.jsx — overview dashboard, lista/kártya/quiz mód toggle
+
+Részletes referencia: `frontend_plan.md` (design-to-code, 1:1 egyezés `frontend_claude_design/`-dal)
+
+#### 🔴 P1 — Kritikus (legnagyobb vizuális különbség)
+
+**Home (`src/screens/Home.jsx`)**
+- [ ] Hero banner: h1 streak szöveg + subtitle + "Continue learning" + "Start pomodoro" CTA gombok
+- [ ] SubjectRow expanded: "Open subject" (subject.color háttér) + "Flashcards" gombok hozzáadása
+- [ ] SubjectRow meta: `{s.lessons} lessons` szöveg hozzáadása
+- [ ] "Add a new subject" kártya (dashed border, plus ikon, navigate `/onboarding`)
+
+**Subject (`src/screens/Subject.jsx`)**
+- [ ] Hero h1 fontSize: 22px → 36px
+- [ ] Progress circle: 64px → 110px
+- [ ] Modes kártyák: horizontális rács layout (nem vertikális lista)
+
+**Study (`src/screens/Study.jsx`)**
+- [ ] `<Callout>` komponens (4 variáns: info/warning/tip/example, ikon + színes bal border)
+- [ ] `<ActiveRecall>` komponens (kérdés → kattints → válasz reveal + 1-5 self-rating)
+- [ ] `<SourceDisclaimer>` komponens (expandable lista, MDX frontmatter `sources` mezőből)
+
+#### 🟠 P2 — Magas prioritás
+
+**Written (`src/screens/Written.jsx`)**
+- [ ] 2-oszlopos feedback layout: bal = student válasz annotálva, jobb = keyword checklist sidebar
+- [ ] Mondat-szintű annotáció: helyes → zöld, hiányzó → piros aláhúzás
+- [ ] "Evaluating..." mascot animáció AI hívás közben
+
+**Quiz (`src/screens/Quiz.jsx`)**
+- [ ] Eredmény oldal: grade letter arc (A/B/C/D/F, score % alapján, SVG körív)
+- [ ] Section breakdown chart (helyes/helytelen arány szekciónként)
+- [ ] Kérdéslista expand/collapse (chevron + A/B/C/D badge-ek, helyes kiemelve)
+
+**Flashcard (`src/screens/Flashcard.jsx`)**
+- [ ] Ghost stack effekt (2 kártya halvány árnyék mögötte)
+- [ ] Result overlay flash (zöld/piros villanás swipe után)
+- [ ] Topic pill: colored glow border (subject.color alapján)
+
+#### 🟡 P3 — Nice-to-have
+
+**Glossary (`src/screens/Glossary.jsx`)**
+- [ ] Flash session módok: abbr-to-full, full-to-def, mixed
+- [ ] Concept cluster nézet (kategória csoportok, kártya rács)
+- [ ] Force-directed fogalomtérkép (d3.js vagy statikus SVG)
+
+**Study — inline komponensek**
+- [ ] `<H>` highlight komponens (sárga kiemelés inline szövegben)
+- [ ] `<T>` tooltip komponens (hover → definíció popup)
+
+#### 🟢 P4 — Polish (szinte kész)
+
+- [ ] Review (`src/screens/Review.jsx`) — minor tweaks
+- [ ] WrongAnswers (`src/screens/WrongAnswers.jsx`) — minor tweaks
+- [ ] Onboarding (`src/screens/Onboarding.jsx`) — 5. lépés összefoglaló, layout
+- [ ] Pomodoro (`src/screens/Pomodoro.jsx`) — kész
+- [ ] Settings (`src/screens/Settings.jsx`) — profil szekció (avatar, név), streak display
+- [ ] Search (`src/screens/Search.jsx`) — API bekötés (Phase 5-tel együtt)
+- [ ] ExamSim (`src/screens/ExamSim.jsx`) — True/False `TfQuestion` komponens
+
+**Globális hiányok:**
+- [ ] `app/globals.css` — `@keyframes rfade`, `cardDrop`, `pulse` animációk
 
 ### ✅ Fázis 4: Backend tartalom pipeline (KÉSZ)
 - [x] `scripts/generate-notes.js` — PDF/DOCX → MDX notes (Groq, `pdf-parse` + `mammoth`)
@@ -215,14 +328,45 @@ Font: DM Sans + Lora · Icons: Lucide React · Math: KaTeX
 - [ ] `content/it_biztonsag/` — IT Biztonság tárgy generálása (futtatandó)
 - [ ] `content/subjects.json` — IT Biztonság bejegyzés (automatikus)
 
-### Fázis 5: Keresés (nice-to-have)
-- [ ] `src/screens/Search.jsx` — live keresés kérdések/terms/lessons között
-- [ ] TopbarSearch widget (compact pill a TopBar-ban)
-- [ ] `src/App.jsx` — `#search` hash routing
+### Fázis 5: Keresés
+
+**Backend — `app/api/search/route.js` (új fájl)**
+
+`GET /api/search?q=<szöveg>&subject=<slug>&type=notes|questions|glossary`
+
+```
+1. Input validálás: q minimum 2 karakter
+2. Ha subject meg van adva → csak azt, különben összes (subjects.json-ból)
+3. Párhuzamos keresés type szerint:
+   - notes: getNotesLessons(slug) → title + section egyezés
+   - questions: getQuestions(slug) → q mező egyezés
+   - glossary: getGlossary(slug) → term + definition egyezés
+4. Minden találat: { type, subject, slug, title, snippet, url }
+5. Sorrend: exact match előre, majd abc
+```
+
+**Helper:** `searchContent(query, slugs, types)` függvény `lib/content.js`-ben
+
+**Frontend:** `src/screens/Search.jsx` — már létező screen, csak az API bekötése kell
+
+- [ ] `app/api/search/route.js` — keresés endpoint
+- [ ] `lib/content.js` — `searchContent()` helper
+- [ ] `src/screens/Search.jsx` — API bekötés (GET /api/search)
 
 ### Fázis 6: Deploy + Finalizálás
-- [ ] Vercel deploy
-- [ ] `GROQ_API_KEY` Vercel env var beállítás
+
+**B: `/api/health` endpoint (deploy előfeltétel)**
+
+`GET /api/health` → `{ status: "ok", subjects: 2, timestamp: "...", env: { groq: true } }`
+
+Logika: `getSubjects()` meghívás (hiba → "degraded"), `!!process.env.GROQ_API_KEY` check.
+
+**Deploy teendők:**
+- [ ] `app/api/health/route.js` — health check endpoint
+- [ ] `vercel.json` — function timeout: `{ "functions": { "app/api/validate-answer/route.js": { "maxDuration": 30 } } }`
+- [ ] Vercel Dashboard → Environment Variables: `GROQ_API_KEY`, `OPENROUTER_API_KEY`
+- [ ] `vercel deploy --prod` vagy GitHub repo kapcsolás
+- [ ] `/api/health` ellenőrzése deploy után
 - [ ] README.md — pipeline használati útmutató
 
 ---
@@ -255,6 +399,119 @@ Utána: `git add . && git commit && git push` → Vercel auto-deploy.
 | OpenRouter free | Model-függő | Backup LLM |
 | GitHub | Unlimited public repos | Kód + content tárolás |
 | **Összköltség** | **$0/hó** | ✅ |
+
+---
+
+### Fázis 7: Backend optimalizálás
+
+**B3: In-memory cache `lib/content.js`-ben**
+
+Probléma: minden API request `fs.readFileSync()` hívásokat végez újra. Megoldás: modulszintű `Map` cache — Vercel serverless container életciklusa alatt megmarad.
+
+```js
+// lib/content.js tetején
+const _cache = new Map();
+function cached(key, fn) {
+  if (_cache.has(key)) return _cache.get(key);
+  const val = fn();
+  _cache.set(key, val);
+  return val;
+}
+// Használat: return cached(`questions:${slug}`, () => { ...readFileSync... });
+```
+
+Érintett függvények: `getSubjects`, `getSubjectSummary`, `getQuestions`, `getFlashcards`, `getGlossary`, `getNotesLessons`
+
+- [ ] `lib/content.js` — `cached()` helper + alkalmazása minden loader függvényre
+
+**B4: `validate-answer` bugfixek**
+
+Fájl: `app/api/validate-answer/route.js`
+
+Jelenlegi hibák:
+- Hiányzó input → 500-as hiba (nem 400)
+- Score néha >100 vagy <0 jön vissza az LLM-től
+- Nincs timeout guard (Vercel 30s limit)
+
+Javítások:
+```js
+// 1. Input validálás
+if (!question || !student_answer)
+  return Response.json({ error: 'question és student_answer kötelező' }, { status: 400 });
+
+// 2. Score clamp
+score_pct = Math.min(100, Math.max(0, Math.round(score_pct)));
+
+// 3. AbortSignal timeout Groq híváshoz
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 25000);
+```
+
+- [ ] `app/api/validate-answer/route.js` — input validálás, score clamp, timeout
+
+### Fázis 8: Google Drive integráció (MVP automation)
+
+**Architektúra:** Vercel serverless-ben nem futhat hosszan tartó script. Ajánlott megközelítés: **GitHub Actions cron job**.
+
+```
+Google Drive (megosztott mappa)
+  ↓ GitHub Action (cron: minden 30 perc)
+  ↓ scripts/drive-sync.js — új fájlok észlelése (hash alapú diff)
+  ↓ download → storage/subjects/{slug}/sources/
+  ↓ node scripts/generate-all.js {slug}
+  ↓ git add content/{slug}/ && git commit && git push
+  ↓ Vercel auto-deploy
+```
+
+**Szükséges fájlok:**
+
+| Fájl | Feladat |
+|------|---------|
+| `scripts/drive-sync.js` | Drive API lekérdezés + download (`googleapis` npm) |
+| `scripts/check-new-files.js` | Hash-alapú változásdetekció (ne fusson ha nincs új fájl) |
+| `.github/workflows/drive-sync.yml` | GitHub Action: schedule + Node setup + git push |
+
+**GitHub Secrets:**
+- `GOOGLE_DRIVE_FOLDER_ID` — a megosztott mappa ID-ja
+- `GOOGLE_SERVICE_ACCOUNT_JSON` — Service Account credentials (Base64)
+- `GROQ_API_KEY` — AI generáláshoz a Action futtatásakor
+
+**Implementációs lépések:**
+- [ ] Google Cloud Console: Service Account létrehozása, Drive API engedélyezése
+- [ ] Service Account hozzáadása a Drive mappához (editor jog)
+- [ ] `googleapis` npm csomag telepítése
+- [ ] `scripts/drive-sync.js` megírása
+- [ ] `.github/workflows/drive-sync.yml` megírása
+- [ ] GitHub Secrets beállítása
+- [ ] Teszt: Drive-ba feltölteni egy PDF-et → 30 percen belül megjelenik az oldalon
+
+---
+
+## Implementációs sorrend (backend)
+
+```
+1. Fázis 7/B4: validate-answer bugfix     ← 30 perc, bugfix
+2. Fázis 7/B3: content caching            ← 30 perc, minden API gyorsabb
+3. Fázis 6/B:  /api/health endpoint       ← 20 perc, deploy blocker
+4. Fázis 5:    /api/search endpoint       ← 2-3 óra, Phase 5 lezárása
+5. Fázis 6:    Vercel deploy              ← 1 óra, éles indítás
+6. Fázis 8:    Google Drive automation    ← 4-6 óra, MVP automation
+```
+
+Párhuzamosan végezhető a frontend P1–P2 munkával.
+
+---
+
+## Deploy előtti ellenőrzési checklist
+
+- [ ] `GET /api/health` → `{ status: "ok" }`
+- [ ] `GET /api/search?q=titkosítás` → IT Biztonság találatok
+- [ ] `POST /api/validate-answer` üres body → 400 (nem 500)
+- [ ] `POST /api/validate-answer` helyes body → score 0–100 között
+- [ ] Flashcard 606 kártya betölt IT Biztonság tárgyhoz
+- [ ] Notes 18 lecke betölt IT Biztonság tárgyhoz
+- [ ] Dark/light mode működik
+- [ ] localStorage streak megmarad page reload után
 
 ---
 

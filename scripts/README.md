@@ -291,3 +291,20 @@ Ha problémád van, nyiss egy issue-t a GitHubon vagy ellenőrizd a `DEBUG=1` k�
 setx DEBUG 1
 node scripts/generate-notes.js it_biztonsag
 ```
+
+## Content plan and quality report
+
+The pipeline now writes a shared content plan before generation and a quality report after the full run.
+
+```bash
+node scripts/build-content-plan.js it_biztonsag
+node scripts/validate-content.js it_biztonsag
+```
+
+Generated files:
+
+- `content/<slug>/plan.json`
+- `content/<slug>/quality-report.json`
+
+The plan is a shared planning artifact for notes, questions, flashcards, and glossary generation.
+The quality report is a heuristic check for coverage, completeness, and basic schema health.

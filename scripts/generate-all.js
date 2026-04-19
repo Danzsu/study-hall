@@ -7,6 +7,7 @@
 
 const { execSync } = require('child_process')
 require('./load-env')
+const { getProviderBudgetSnapshot } = require('./llm-rate-limit')
 
 const subjectSlug = process.argv[2]
 
@@ -17,15 +18,19 @@ if (!subjectSlug) {
 }
 
 const scripts = [
+  { name: 'Build content plan', script: 'build-content-plan.js' },
   { name: 'Generate notes', script: 'generate-notes.js' },
   { name: 'Generate questions', script: 'generate-questions.js' },
   { name: 'Generate flashcards and glossary', script: 'generate-extras.js' },
   { name: 'Generate diagrams', script: 'generate-diagrams.js', optional: true },
   { name: 'Normalize content schema', script: 'normalize-content.js' },
+  { name: 'Validate content quality', script: 'validate-content.js' },
 ]
 
 console.log(`Generating full content package for ${subjectSlug}...\n`)
 console.log('='.repeat(50))
+console.log('LLM budget snapshot:')
+console.log(JSON.stringify(getProviderBudgetSnapshot(), null, 2))
 
 let successCount = 0
 let skipCount = 0

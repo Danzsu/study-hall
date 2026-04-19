@@ -1,33 +1,35 @@
 'use client'
 import { useState, useEffect } from 'react'
 import {
-  CheckCircle2, Circle, ChevronDown, ChevronLeft, ChevronRight,
-  Layers, Play, Menu, X, Clock,
+  Circle, ChevronDown, ChevronLeft, ChevronRight,
+  ChevronUp, Layers, Play, Menu, Clock,
+  AlertTriangle, Info, Lightbulb, FileText, Eye,
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
 import katex from 'katex'
 
-// Simple markdown → HTML converter for lesson content
-function mdToHtml(md) {
-  if (!md) return ''
-  return md
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/`(.+?)`/g, '<code>$1</code>')
-    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
-    .replace(/^\d+\. (.+)$/gm, '<oli>$1</oli>')
-    .replace(/(<oli>.*<\/oli>\n?)+/g, m => `<ol>${m.replace(/<\/?oli>/g, m2 => m2 === '<oli>' ? '<li>' : '</li>')}</ol>`)
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^([^<\n].+)$/gm, (line) => {
-      if (line.startsWith('<')) return line
-      return line
-    })
+const CALLOUTS = {
+  NOTE: { label: 'Note', color: C.blue, bg: C.blueBg, Icon: Info },
+  INFO: { label: 'Note', color: C.blue, bg: C.blueBg, Icon: Info },
+  TIP: { label: 'Tip', color: C.green, bg: C.greenBg, Icon: Lightbulb },
+  WARNING: { label: 'Warning', color: C.gold, bg: C.goldBg, Icon: AlertTriangle },
+  IMPORTANT: { label: 'Important', color: C.accent, bg: C.accentBg, Icon: AlertTriangle },
+  EXAMPLE: { label: 'Example', color: C.purple, bg: C.purpleBg, Icon: Lightbulb },
+}
+
+function Callout({ type = 'NOTE', children, t }) {
+  const spec = CALLOUTS[type] ?? CALLOUTS.NOTE
+  const Icon = spec.Icon
+  return (
+    <div style={{ border: `1px solid ${spec.color}55`, borderLeft: `4px solid ${spec.color}`, background: spec.bg, borderRadius: '0 10px 10px 0', padding: '16px 20px', margin: '28px 0', display: 'flex', gap: 14 }}>
+      <Icon size={18} style={{ color: spec.color, flexShrink: 0, marginTop: 2 }} />
+      <div>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: spec.color, marginBottom: 5, textTransform: 'uppercase' }}>{spec.label}</p>
+        <div style={{ fontSize: 14.5, lineHeight: 1.7, color: t.text, fontFamily: "'Lora', Georgia, serif" }}>{children}</div>
+      </div>
+    </div>
+  )
 }
 
 function renderContent(raw, t) {
@@ -53,11 +55,22 @@ function renderContent(raw, t) {
     } else if (line.startsWith('### ')) {
       elements.push(<h3 key={i} style={{ fontFamily: "'DM Sans',system-ui", fontSize: 16, fontWeight: 700, marginBottom: 8, marginTop: 24, color: t.text }}>{line.slice(4)}</h3>)
     } else if (line.startsWith('> ')) {
+      const quoteLines = []
+      while (i < lines.length && lines[i].startsWith('> ')) {
+        quoteLines.push(lines[i].slice(2))
+        i++
+      }
+      const marker = quoteLines[0]?.match(/^\[!(NOTE|INFO|TIP|WARNING|IMPORTANT|EXAMPLE)\]\s*$/i)
+      const type = marker ? marker[1].toUpperCase() : 'IMPORTANT'
+      const body = marker ? quoteLines.slice(1) : quoteLines
       elements.push(
-        <div key={i} style={{ borderLeft: `4px solid ${C.accent}`, background: `${C.accent}10`, borderRadius: '0 10px 10px 0', padding: '14px 18px', margin: '24px 0' }}>
-          <p style={{ fontSize: 14, lineHeight: 1.7, color: t.textSub, fontStyle: 'italic' }}>{inlineFormat(line.slice(2), t)}</p>
-        </div>
+        <Callout key={`callout-${i}`} type={type} t={t}>
+          {body.map((part, idx) => (
+            <p key={idx} style={{ margin: idx === 0 ? 0 : '8px 0 0' }}>{inlineFormat(part, t)}</p>
+          ))}
+        </Callout>
       )
+      continue
     } else if (line.startsWith('- ') || line.startsWith('* ')) {
       const items = []
       while (i < lines.length && (lines[i].startsWith('- ') || lines[i].startsWith('* '))) {
@@ -160,59 +173,158 @@ function MathBlock({ value, t }) {
 }
 
 function RecallCards({ items, t }) {
-  const [open, setOpen] = useState({})
+  const [idx, setIdx] = useState(0)
+  const [typed, setTyped] = useState({})
+  const [revealed, setRevealed] = useState({})
+  const [ratings, setRatings] = useState({})
   if (!items?.length) return null
+  const item = items[idx]
+  const doneCount = Object.keys(ratings).length
+  const confidence = items.length > 0 ? Math.round((Object.values(ratings).filter(v => v === 'correct').length / items.length) * 100) : 0
+
   return (
-    <section style={{ marginTop: 44, paddingTop: 28, borderTop: `1px solid ${t.border}` }}>
-      <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted, marginBottom: 12 }}>ACTIVE RECALL</p>
-      <div style={{ display: 'grid', gap: 10 }}>
-        {items.map((item, idx) => {
-          const active = !!open[idx]
+    <section style={{ marginTop: 48, paddingTop: 28, borderTop: `1px solid ${t.border}` }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
+        <img src="/assets/mascot-clipboard.png" alt="" style={{ width: 46, height: 46, objectFit: 'contain' }} />
+        <div style={{ flex: 1 }}>
+          <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted }}>ACTIVE RECALL</p>
+          <p style={{ fontSize: 13, color: t.textSub, marginTop: 3 }}>Type first, reveal second, then rate your confidence.</p>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
+        {items.map((_, i) => {
+          const r = ratings[i]
+          const color = r === 'correct' ? C.green : r === 'partial' ? C.gold : r === 'wrong' ? C.red : i === idx ? C.accent : t.border
           return (
             <button
-              key={idx}
-              onClick={() => setOpen(p => ({ ...p, [idx]: !p[idx] }))}
-              style={{
-                textAlign: 'left',
-                background: active ? `${C.accent}12` : t.surface,
-                border: `1px solid ${active ? C.accent + '50' : t.border}`,
-                borderRadius: 12,
-                padding: '14px 16px',
-                cursor: 'pointer',
-                fontFamily: "'DM Sans', system-ui",
-              }}
-            >
-              <span style={{ fontSize: 11, fontWeight: 800, color: C.accent, letterSpacing: '0.6px' }}>Q{idx + 1}</span>
-              <p style={{ fontSize: 14, fontWeight: 700, color: t.text, marginTop: 5, lineHeight: 1.45 }}>{item.question}</p>
-              {active && <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.65, marginTop: 10, fontFamily: "'Lora', Georgia, serif" }}>{item.answer}</p>}
-            </button>
+              key={i}
+              onClick={() => setIdx(i)}
+              aria-label={`Recall question ${i + 1}`}
+              style={{ flex: 1, height: 5, borderRadius: 99, background: color, border: 'none', cursor: 'pointer' }}
+            />
           )
         })}
       </div>
-    </section>
-  )
-}
 
-function SourcesBlock({ sources, t }) {
-  if (!sources?.length) return null
-  return (
-    <section style={{ marginTop: 36, background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 12, padding: '16px 18px' }}>
-      <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted, marginBottom: 10 }}>SOURCES</p>
-      <div style={{ display: 'grid', gap: 6 }}>
-        {sources.map((src, idx) => (
-          <p key={idx} style={{ fontSize: 12, color: t.textSub, lineHeight: 1.55 }}>
-            <strong style={{ color: t.text }}>{src.title ?? 'Forras'}</strong>
-            {src.author ? ` - ${src.author}` : ''}
-            {src.year ? ` (${src.year})` : ''}
-            {src.type ? ` · ${src.type}` : ''}
-          </p>
-        ))}
+      <div style={{ background: t.surface, border: `1.5px solid ${t.border}`, borderRadius: 14, padding: '28px 30px' }}>
+        <span style={{ fontSize: 11, fontWeight: 800, color: t.textMuted, letterSpacing: '1px' }}>QUESTION {idx + 1} OF {items.length}</span>
+        <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 18, fontWeight: 600, lineHeight: 1.5, marginTop: 12, marginBottom: 18, color: t.text }}>
+          {item.question}
+        </p>
+        <textarea
+          value={typed[idx] || ''}
+          onChange={e => setTyped(p => ({ ...p, [idx]: e.target.value }))}
+          placeholder="Type your answer here, then reveal the model answer..."
+          style={{ width: '100%', minHeight: 84, resize: 'vertical', background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '12px 14px', fontSize: 14, color: t.text, fontFamily: "'DM Sans',system-ui", lineHeight: 1.5, outline: 'none' }}
+          onFocus={e => e.target.style.borderColor = C.accent}
+          onBlur={e => e.target.style.borderColor = t.border}
+        />
+        {revealed[idx] ? (
+          <div style={{ marginTop: 18, padding: '16px 18px', background: `${C.accent}10`, borderLeft: `3px solid ${C.accent}`, borderRadius: '0 10px 10px 0' }}>
+            <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '1px', color: C.accent }}>MODEL ANSWER</span>
+            <p style={{ fontSize: 14, color: t.text, lineHeight: 1.7, marginTop: 6, fontFamily: "'Lora', Georgia, serif" }}>{item.answer}</p>
+            <p style={{ fontSize: 12, color: t.textSub, marginTop: 12, fontWeight: 700 }}>How well did you know this?</p>
+            <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
+              {[
+                { key: 'wrong', label: 'Forgot', color: C.red },
+                { key: 'partial', label: 'Partial', color: C.gold },
+                { key: 'correct', label: 'Confident', color: C.green },
+              ].map(b => (
+                <button
+                  key={b.key}
+                  onClick={() => setRatings(p => ({ ...p, [idx]: b.key }))}
+                  style={{ flex: '1 1 120px', padding: '10px', borderRadius: 8, background: ratings[idx] === b.key ? b.color : t.surface, color: ratings[idx] === b.key ? '#fff' : b.color, border: `1.5px solid ${b.color}`, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", fontSize: 13, fontWeight: 700 }}
+                >
+                  {b.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => setRevealed(p => ({ ...p, [idx]: true }))}
+            style={{ marginTop: 14, background: C.accent, color: '#fff', border: 'none', borderRadius: 8, padding: '9px 16px', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", display: 'inline-flex', alignItems: 'center', gap: 7 }}
+          >
+            <Eye size={14} /> Reveal answer
+          </button>
+        )}
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 16, gap: 12, flexWrap: 'wrap' }}>
+        <button
+          onClick={() => setIdx(Math.max(0, idx - 1))}
+          disabled={idx === 0}
+          style={{ opacity: idx === 0 ? 0.4 : 1, background: t.surface, border: `1px solid ${t.border}`, color: t.textSub, borderRadius: 8, padding: '8px 13px', fontSize: 13, fontWeight: 700, cursor: idx === 0 ? 'not-allowed' : 'pointer', fontFamily: "'DM Sans',system-ui" }}
+        >
+          Previous
+        </button>
+        <span style={{ fontSize: 12, color: t.textMuted }}>{doneCount} of {items.length} marked - {confidence}% confident</span>
+        <button
+          onClick={() => setIdx(Math.min(items.length - 1, idx + 1))}
+          disabled={idx === items.length - 1}
+          style={{ opacity: idx === items.length - 1 ? 0.4 : 1, background: C.accent, border: 'none', color: '#fff', borderRadius: 8, padding: '8px 13px', fontSize: 13, fontWeight: 700, cursor: idx === items.length - 1 ? 'not-allowed' : 'pointer', fontFamily: "'DM Sans',system-ui" }}
+        >
+          Next
+        </button>
       </div>
     </section>
   )
 }
 
-function Sidebar({ lessons, activeSlug, subjectId, sidebarOpen, onClose, t }) {
+function SourceDisclaimer({ sources, t }) {
+  const [open, setOpen] = useState(false)
+  if (!sources?.length) return null
+  return (
+    <section style={{ marginTop: 36, background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 12, overflow: 'hidden' }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{ width: '100%', padding: '14px 20px', background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', textAlign: 'left', fontFamily: "'DM Sans',system-ui" }}
+      >
+        <FileText size={16} style={{ color: t.textMuted, flexShrink: 0 }} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontSize: 13, fontWeight: 700, color: t.text }}>AI-generated content - verify before exam</p>
+          <p style={{ fontSize: 11.5, color: t.textMuted, marginTop: 2 }}>Grounded in {sources.length} source{sources.length > 1 ? 's' : ''} from your notes.</p>
+        </div>
+        {open ? <ChevronUp size={16} style={{ color: t.textMuted }} /> : <ChevronDown size={16} style={{ color: t.textMuted }} />}
+      </button>
+      {open && (
+        <div style={{ borderTop: `1px solid ${t.border}`, padding: '16px 20px 18px', background: t.surface }}>
+          <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.7px', color: t.textMuted, marginBottom: 12 }}>SOURCES</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {sources.map((src, idx) => (
+              <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: t.textSub, padding: '8px 10px', borderRadius: 8, background: t.surface2 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: C.accent, background: `${C.accent}14`, padding: '2px 6px', borderRadius: 4, minWidth: 22, textAlign: 'center', flexShrink: 0, marginTop: 1 }}>{idx + 1}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontWeight: 600, color: t.text }}>{src.title ?? 'Source material'}</p>
+                  {(src.author || src.year) && <p style={{ fontSize: 11.5, color: t.textMuted, marginTop: 2 }}>{[src.author, src.year].filter(Boolean).join(' - ')}</p>}
+                </div>
+                {src.type && <span style={{ fontSize: 10, fontWeight: 700, color: t.textMuted, flexShrink: 0 }}>{src.type}</span>}
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 11.5, color: t.textMuted, marginTop: 14, lineHeight: 1.6, fontStyle: 'italic' }}>
+            Explanations and definitions were generated with AI from the listed materials. For high-stakes exam prep, cross-check formulas and definitions against the original source.
+          </p>
+        </div>
+      )}
+    </section>
+  )
+}
+
+function StudyProgressPill({ current, total, t }) {
+  const pct = total > 0 ? Math.round((current / total) * 100) : 0
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 20, padding: '5px 12px', marginLeft: 'auto' }}>
+      <div style={{ width: 60, height: 4, background: t.border, borderRadius: 99, overflow: 'hidden' }}>
+        <div style={{ width: `${pct}%`, height: '100%', background: C.accent }} />
+      </div>
+      <span style={{ fontSize: 11, fontWeight: 700, color: t.textSub }}>{current}/{total}</span>
+    </div>
+  )
+}
+
+function Sidebar({ lessons, activeSlug, subjectId, sidebarOpen, t }) {
   const sections = {}
   for (const l of lessons) {
     if (!sections[l.section]) sections[l.section] = []
@@ -341,6 +453,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
   const prevLesson = lessons[activeIdx - 1] ?? null
   const nextLesson = lessons[activeIdx + 1] ?? null
   const active     = lessons[activeIdx] ?? null
+  const lessonProgress = activeIdx >= 0 ? activeIdx + 1 : 0
 
   return (
     <>
@@ -386,6 +499,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
                 </span>
               </div>
             )}
+            <StudyProgressPill current={lessonProgress} total={lessons.length} t={t} />
           </div>
 
           <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 40px 80px' }}>
@@ -419,7 +533,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
                 </div>
 
                 <RecallCards items={activeRecall} t={t} />
-                <SourcesBlock sources={sources} t={t} />
+                <SourceDisclaimer sources={sources} t={t} />
 
                 {/* Bottom nav */}
                 <div style={{

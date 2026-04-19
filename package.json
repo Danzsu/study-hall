@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "plan:content": "node scripts/build-content-plan.js",
+    "validate:content": "node scripts/validate-content.js",
+    "generate:content": "node scripts/generate-all.js"
   },
   "dependencies": {
     "groq-sdk": "^0.7.0",

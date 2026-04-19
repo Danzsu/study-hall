@@ -176,6 +176,34 @@ const MODES = [
   { icon: GraduationCap, label: 'Exam Sim',      sub: 'Timed, configurable exam',  color: C.purple, route: '/exam' },
 ]
 
+function ModesGrid({ subjectId, subject, t }) {
+  return (
+    <div style={{ marginBottom: 24 }}>
+      <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.7px', color: t.textMuted, marginBottom: 12 }}>STUDY MODES</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10 }}>
+        {MODES.map((m, i) => (
+          <button
+            key={i}
+            onClick={() => navigate(m.route, { id: subjectId, name: subject.name })}
+            style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 12, padding: '14px 14px', cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 14, transition: 'all 0.15s', fontFamily: "'DM Sans',system-ui" }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = m.color + '70'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 4px 16px ${m.color}18` }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}
+          >
+            <div style={{ width: 40, height: 40, borderRadius: 10, background: `${m.color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <m.icon size={18} style={{ color: m.color }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ fontSize: 14, fontWeight: 700, color: t.text, marginBottom: 2 }}>{m.label}</p>
+              <p style={{ fontSize: 12, color: t.textSub, lineHeight: 1.4 }}>{m.sub}</p>
+            </div>
+            <ArrowRight size={14} style={{ color: t.textMuted, flexShrink: 0 }} />
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Subject({ subjectId }) {
   const t = useTheme()
   const [subject, setSubject] = useState(null)
@@ -232,7 +260,7 @@ export default function Subject({ subjectId }) {
 
   const doneQ = subject.sections.reduce((a, s) => a + (s.done ?? 0), 0)
   const pct   = subject.questions > 0 ? Math.round((doneQ / subject.questions) * 100) : 0
-  const circ  = 2 * Math.PI * 26
+  const circ  = 2 * Math.PI * 48
   const dash  = (pct / 100) * circ
   const activeSection = subject.sections.find(s => s.status === 'active')
 
@@ -242,13 +270,13 @@ export default function Subject({ subjectId }) {
     <main style={{ maxWidth: 720, margin: '0 auto', padding: '32px 24px 80px' }}>
 
       {/* HERO */}
-      <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 16, padding: '24px', marginBottom: 20, display: 'flex', gap: 20, alignItems: 'flex-start' }}>
+      <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 16, padding: '24px', marginBottom: 20, display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
             <div style={{ width: 10, height: 10, borderRadius: '50%', background: subject.color }} />
             <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.5px', color: t.textMuted }}>SUBJECT</p>
           </div>
-          <h1 style={{ fontFamily: "'Lora',serif", fontSize: 22, fontWeight: 700, letterSpacing: '-0.3px', marginBottom: 8, color: t.text }}>{subject.name}</h1>
+          <h1 style={{ fontFamily: "'Lora',serif", fontSize: 36, fontWeight: 700, letterSpacing: '-0.8px', lineHeight: 1.1, marginBottom: 8, color: t.text }}>{subject.name}</h1>
           <p style={{ fontSize: 14, color: t.textSub, lineHeight: 1.6, marginBottom: 18 }}>{subject.desc}</p>
           <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
             {[
@@ -263,34 +291,31 @@ export default function Subject({ subjectId }) {
           </div>
         </div>
 
-        <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+        <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
           <div style={{ position: 'relative' }}>
-            <svg width={64} height={64} style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx={32} cy={32} r={26} fill="none" stroke={t.surface2} strokeWidth={5} />
-              <circle cx={32} cy={32} r={26} fill="none" stroke={subject.color} strokeWidth={5}
+            <svg width={110} height={110} style={{ transform: 'rotate(-90deg)' }}>
+              <circle cx={55} cy={55} r={48} fill="none" stroke={t.surface2} strokeWidth={7} />
+              <circle cx={55} cy={55} r={48} fill="none" stroke={subject.color} strokeWidth={7}
                 strokeLinecap="round" strokeDasharray={`${dash} ${circ}`}
                 style={{ transition: 'stroke-dasharray 1s cubic-bezier(0.22,1,0.36,1)' }} />
             </svg>
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: 14, fontWeight: 800, color: t.text }}>{pct}%</span>
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: 26, fontWeight: 800, color: t.text, letterSpacing: '-1px' }}>{pct}%</span>
+              <span style={{ fontSize: 10, color: t.textMuted, fontWeight: 600 }}>{doneQ}/{subject.questions}</span>
             </div>
           </div>
+          {activeSection && (
+            <button
+              onClick={() => navigate('/study', { id: subjectId, name: subject.name })}
+              style={{ background: subject.color, color: '#fff', border: 'none', borderRadius: 8, padding: '8px 16px', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", display: 'flex', alignItems: 'center', gap: 6 }}
+            >
+              <ArrowRight size={14} /> Continue lesson
+            </button>
+          )}
         </div>
       </div>
 
-      {/* CONTINUE BUTTON */}
-      {activeSection && (
-        <div style={{ marginBottom: 20 }}>
-          <button
-            onClick={() => navigate('/study', { id: subjectId, name: subject.name })}
-            style={{ width: '100%', padding: '14px 20px', background: C.accent, color: '#fff', border: 'none', borderRadius: 12, fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans',system-ui", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, transition: 'background 0.15s' }}
-            onMouseEnter={e => e.currentTarget.style.background = C.accentHov}
-            onMouseLeave={e => e.currentTarget.style.background = C.accent}
-          >
-            <ArrowRight size={16} /> Continue — {activeSection.name}
-          </button>
-        </div>
-      )}
+      <ModesGrid subjectId={subjectId} subject={subject} t={t} />
 
       {/* LEARNING PATH */}
       <div style={{ marginBottom: 24 }}>
@@ -317,29 +342,6 @@ export default function Subject({ subjectId }) {
         </div>
       </div>
 
-      {/* STUDY MODES */}
-      <div>
-        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.7px', color: t.textMuted, marginBottom: 12 }}>STUDY MODES</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
-          {MODES.map((m, i) => (
-            <button
-              key={i}
-              onClick={() => navigate(m.route, { id: subjectId, name: subject.name })}
-              style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 12, padding: '14px 12px', cursor: 'pointer', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 8, transition: 'all 0.15s', fontFamily: "'DM Sans',system-ui" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = m.color + '70'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 4px 16px ${m.color}18` }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}
-            >
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: `${m.color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <m.icon size={15} style={{ color: m.color }} />
-              </div>
-              <div>
-                <p style={{ fontSize: 13, fontWeight: 700, color: t.text, marginBottom: 2 }}>{m.label}</p>
-                <p style={{ fontSize: 11, color: t.textSub, lineHeight: 1.4 }}>{m.sub}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
     </main>
     </>
   )

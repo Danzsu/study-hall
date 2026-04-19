@@ -1,0 +1,1543 @@
+{
+  "version": 1,
+  "generatedAt": "2026-04-19T12:54:33.857Z",
+  "subject": {
+    "slug": "it_biztonsag",
+    "name": "IT Biztonság",
+    "description": "IT biztonság jegyzetek és tanulási anyagok"
+  },
+  "sourceCounts": {
+    "lessonSources": 18,
+    "testSources": 7
+  },
+  "existing": {
+    "notesCount": 18,
+    "questionCount": 40,
+    "flashcardCount": 606,
+    "glossaryCount": 416
+  },
+  "lessonSources": [
+    {
+      "id": "lesson-01",
+      "kind": "lesson",
+      "order": 1,
+      "fileName": "00-IntroITsec-BME-2026-hu.pdf",
+      "title": "00 IntroITsec BME 2026 Hu",
+      "textChars": 26029,
+      "headings": [],
+      "signals": [
+        "Bevezet",
+        "IT biztons",
+        "VIHIAC07",
+        "Butty",
+        "Levente CrySyS Lab",
+        "BME buttyan",
+        "Tartalom",
+        "Az IT biztons"
+      ],
+      "boldTerms": [],
+      "summary": "Bevezetés az IT biztonságba VIHIAC07 – IT biztonság, 2026 Buttyán Levente CrySyS Lab, BME buttyan@crysys.hu w w w . c r y s y s . h u -- 1 of 61 -- Tartalom § IT biztonsági alapfogalmak és összefüggések bevezetése § Az IT biztonság kockázat alapú megközelítése § Miért nehéz az IT"
+    },
+    {
+      "id": "lesson-02",
+      "kind": "lesson",
+      "order": 2,
+      "fileName": "01-Crypto-History-BME-2026-hu.pdf",
+      "title": "01 Crypto History BME 2026 Hu",
+      "textChars": 23695,
+      "headings": [],
+      "signals": [
+        "Kriptogr",
+        "VIHIAC07",
+        "IT biztons",
+        "Levente Butty",
+        "CrySyS Lab",
+        "BME buttyan",
+        "Algoritmikus m",
+        "MAC"
+      ],
+      "boldTerms": [],
+      "summary": "Kriptográfia - Történelmi áttekintés VIHIAC07 – IT biztonság, 2026 Levente Buttyán CrySyS Lab, BME buttyan@crysys.hu w w w . c r y s y s . h u -- 1 of 58 -- Kriptográfia § Algoritmikus módszerek tárháza információbiztonsági szolgáltatások megvalósítására – rejtjelezés (titkosítás"
+    },
+    {
+      "id": "lesson-03",
+      "kind": "lesson",
+      "order": 3,
+      "fileName": "02-Crypto-Primitives-BME-2026-hu.pdf",
+      "title": "02 Crypto Primitives BME 2026 Hu",
+      "textChars": 27099,
+      "headings": [],
+      "signals": [
+        "Kriptogr",
+        "Alapalgoritmusok VIHIAC07",
+        "IT biztons",
+        "Butty",
+        "Levente CrySyS Lab",
+        "BME buttyan",
+        "MAC-f",
+        "MAC"
+      ],
+      "boldTerms": [],
+      "summary": "Kriptográfia - Alapalgoritmusok VIHIAC07 – IT biztonság, 2026 Buttyán Levente CrySyS Lab, BME buttyan@crysys.hu w w w . c r y s y s . h u -- 1 of 64 -- Kriptográfiai alapalgoritmusok A kriptográfiai alapalgoritmusok (primitívek) azok az alapvető, jól meghatározott tulajdonságokka"
+    },
+    {
+      "id": "lesson-04",
+      "kind": "lesson",
+      "order": 4,
+      "fileName": "03-Crypto-Applications-BME-2026-hu.pdf",
+      "title": "03 Crypto Applications BME 2026 Hu",
+      "textChars": 22109,
+      "headings": [],
+      "signals": [
+        "Kriptogr",
+        "VIHIAC07",
+        "IT biztons",
+        "Butty",
+        "Levente CrySyS Lab",
+        "BME buttyan",
+        "Tartalom",
+        "Nyilv"
+      ],
+      "boldTerms": [],
+      "summary": "Kriptográfia - Néhány alkalmazás VIHIAC07 – IT biztonság, 2026 Buttyán Levente CrySyS Lab, BME buttyan@crysys.hu w w w . c r y s y s . h u -- 1 of 44 -- Tartalom § Kriptográfiai primitívek alkalmazásai ebben a tárgyban – jelenlétet igazoló tokenek generálása – pontszerző előadáso"
+    },
+    {
+      "id": "lesson-05",
+      "kind": "lesson",
+      "order": 5,
+      "fileName": "04_SW-SDL.pdf",
+      "title": "04 SW SDL",
+      "textChars": 20756,
+      "headings": [],
+      "signals": [
+        "Szoftverbiztons",
+        "VIHIAC07",
+        "IT biztons",
+        "Andr",
+        "Gazdag CrySyS Lab",
+        "BME andras",
+        "Tartalom",
+        "Security Development Lifecycle"
+      ],
+      "boldTerms": [],
+      "summary": "Szoftverbiztonság VIHIAC07 – IT biztonság, 2026 Dr. András Gazdag CrySyS Lab, BME andras.gazdag@crysys.hu w w w . c r y s y s . h u -- 1 of 65 -- Tartalom ▪ A szoftverbiztonság helyzete manapság ▪ Security Development Lifecycle – Pre-SDL: tanulás – SDL: követelmények, tervezés, i"
+    },
+    {
+      "id": "lesson-06",
+      "kind": "lesson",
+      "order": 6,
+      "fileName": "05_SW_ImplementationErrors-HU.pdf",
+      "title": "05 SW ImplementationErrors HU",
+      "textChars": 20998,
+      "headings": [],
+      "signals": [
+        "Implement",
+        "VIHIAC07",
+        "IT Security",
+        "Andr",
+        "Gazdag CrySyS Lab",
+        "BME agazdag",
+        "Bevezet",
+        "Stack overflow"
+      ],
+      "boldTerms": [],
+      "summary": "Implementációs hibák VIHIAC07 – IT Security, 2026 Dr. András Gazdag CrySyS Lab, BME agazdag@crysys.hu w w w . c r y s y s . h u -- 1 of 53 -- Áttekintés ▪ Bevezetés a memóriakezelési sérülékenységekbe ▪ x86 architektúra ▪ Függvényhívási mechanizmusok ▪ Stack overflow ▪ Védelmi me"
+    },
+    {
+      "id": "lesson-07",
+      "kind": "lesson",
+      "order": 7,
+      "fileName": "06_SW_Web-HU.pdf",
+      "title": "06 SW Web HU",
+      "textChars": 22420,
+      "headings": [],
+      "signals": [
+        "Webbiztons",
+        "VIHIAC07",
+        "IT biztons",
+        "Gazdag Andr",
+        "CrySyS Lab",
+        "BME agazdag",
+        "Tartalom",
+        "Incidensek"
+      ],
+      "boldTerms": [],
+      "summary": "Webbiztonság VIHIAC07 – IT biztonság, 2026 Dr. Gazdag András CrySyS Lab, BME agazdag@crysys.hu w w w . c r y s y s . h u -- 1 of 56 -- Tartalom ▪ Webbiztonság – Incidensek – OWASP Top 10 – Érdekes támadások 2 Webbiztonság -- 2 of 56 -- Webbiztonsági incidensek -- 3 of 56 -- Infor"
+    },
+    {
+      "id": "lesson-08",
+      "kind": "lesson",
+      "order": 8,
+      "fileName": "08_SW-Testing-HU.pdf",
+      "title": "08 SW Testing HU",
+      "textChars": 15846,
+      "headings": [],
+      "signals": [
+        "Biztons",
+        "VIHIAC07",
+        "IT biztons",
+        "Fut",
+        "Papp Dorottya CrySyS",
+        "Lab",
+        "BME dpapp",
+        "Motiv"
+      ],
+      "boldTerms": [],
+      "summary": "Biztonsági tesztelés VIHIAC07 – IT biztonság, 2026 Dr. Futóné Dr. Papp Dorottya CrySyS Lab, BME dpapp@crysys.hu w w w . c r y s y s . h u -- 1 of 56 -- Motiváció ▪ A tesztelés és a minőségbiztosítás mindig is fontos volt ▪ Az LLM-ek forradalmasították a szoftverfejlesztést ▪ De n"
+    },
+    {
+      "id": "lesson-09",
+      "kind": "lesson",
+      "order": 9,
+      "fileName": "09_AAA_HU.pdf",
+      "title": "09 AAA HU",
+      "textChars": 29639,
+      "headings": [],
+      "signals": [
+        "Hiteles",
+        "AAA",
+        "VIHIAC07",
+        "IT biztons",
+        "Nagy Roland CrySyS",
+        "Lab",
+        "BME rnagy",
+        "Alapfogalmak"
+      ],
+      "boldTerms": [],
+      "summary": "Hitelesítés, engedélyezés, hozzáférés-szabályzás (AAA) VIHIAC07 – IT biztonság, 2026 Nagy Roland CrySyS Lab, BME rnagy@crysys.hu w w w . c r y s y s . h u -- 1 of 58 -- | Alapfogalmak ▪ Authentication (authentikáció, hitelesítés) – Célja, hogy a rendszerrel kapcsolatba lépni kívá"
+    },
+    {
+      "id": "lesson-10",
+      "kind": "lesson",
+      "order": 10,
+      "fileName": "10-Malware-HU.pdf",
+      "title": "10 Malware HU",
+      "textChars": 20588,
+      "headings": [],
+      "signals": [
+        "Rendszerek",
+        "Szolg",
+        "Tansz",
+        "Budapest",
+        "Rosszindulat",
+        "Fut",
+        "Papp Dorottya CrySyS",
+        "Lab"
+      ],
+      "boldTerms": [],
+      "summary": "© Hálózati Rendszerek és Szolgáltatások Tanszék 1 Budapest, 2026. 04. 13. Budapest, 2026. 04. 13. Rosszindulatú szoftverek Dr. Futóné Dr. Papp Dorottya CrySyS Lab, BME-HIT dpapp@crysys.hu -- 1 of 58 -- © Hálózati Rendszerek és Szolgáltatások Tanszék 2 MALWARE • Az angol malicious"
+    },
+    {
+      "id": "lesson-11",
+      "kind": "lesson",
+      "order": 11,
+      "fileName": "Control Questions - kidolgozva2025.docx",
+      "title": "Control Questions Kidolgozva2025",
+      "textChars": 44053,
+      "headings": [],
+      "signals": [
+        "AI GENER",
+        "LT Control Questions",
+        "SoftSec - Implementation",
+        "Which programming languages",
+        "Low-level programming languages",
+        "What is a",
+        "Where on the",
+        "Local variables are"
+      ],
+      "boldTerms": [],
+      "summary": "AI GENERÁLT Control Questions SoftSec - Implementation errors - slides Fájl Which programming languages are most affected by the buffer overflow problem?Low-level programming languages like C and C++ are most affected by buffer overflow problems because they allow direct memory m"
+    },
+    {
+      "id": "lesson-12",
+      "kind": "lesson",
+      "order": 12,
+      "fileName": "IT bizt kérdések (HELP).docx",
+      "title": "IT Bizt KéRdéSek (HELP)",
+      "textChars": 17415,
+      "headings": [],
+      "signals": [
+        "Ha tudjatok a",
+        "Ha tal",
+        "Az al",
+        "Side channel t",
+        "Gyenge kulcsmenedzsment Protokoll",
+        "Az 1980-as",
+        "PC-s v",
+        "Kiber-fizikai t"
+      ],
+      "boldTerms": [],
+      "summary": "Ha tudjatok a jo valaszt, pls valami modon jeloljetek be Ha találtok olyan kérdést ami nincs benne, azt rakjatok be a vegere Az alábbiak közül a gyakorlatban melyik lehet a legkisebb valószínűséggel egy kripto rendszer elleni támadás alapja? A használt kriptográfiai primitív felt"
+    },
+    {
+      "id": "lesson-13",
+      "kind": "lesson",
+      "order": 13,
+      "fileName": "IT biztonság 2023.docx",
+      "title": "IT BiztonsáG 2023",
+      "textChars": 45463,
+      "headings": [],
+      "signals": [
+        "IT biztons",
+        "Mi alapj",
+        "Forr",
+        "IP c",
+        "IPv6 forgalom",
+        "VLAN taggel ell",
+        "HTTP fejl",
+        "TCP port sz"
+      ],
+      "boldTerms": [],
+      "summary": "IT biztonság 2023 Összpontszám 166/166 Mi alapján nem tud szűrni egy egyszerű csomagszűrő? 1/1 Forrás és cél IP cím és portszám kombinációk IPv6 forgalom, VLAN taggel ellátott csomagok HTTP fejléc értéke TCP port száma, TCP agek Sorrend megőrző titkosítás... 1/1 Amikor egy adatot"
+    },
+    {
+      "id": "lesson-14",
+      "kind": "lesson",
+      "order": 14,
+      "fileName": "IT biztonság jegyzet_ Bevezetés az IT Biztonságba _ BME Villamosmérnöki és Informatikai Kar.pdf",
+      "title": "IT BiztonsáG Jegyzet BevezetéS Az IT BiztonsáGba BME VillamosméRnöKi éS Informatikai Kar",
+      "textChars": 52180,
+      "headings": [],
+      "signals": [
+        "IT biztons",
+        "Kezd",
+        "Tant",
+        "BMEVIHIAC07 2025",
+        "VIHIAC07",
+        "DA P E",
+        "DA S",
+        "GT U D"
+      ],
+      "boldTerms": [],
+      "summary": "IT biztonság jegyzet Kezdőoldal / Tantárgyaim / IT biztonság - BMEVIHIAC07 2025/26/2 / IT biztonság (VIHIAC07) / IT biztonság jegyzet B U DA P E S T I M Ű S Z A K I É S G A Z DA S Á GT U D O M Á N Y I E G Y E T E M V i l l a m o s m é r n ö k i é s I n f o r m a t i k a i K a r 1"
+    },
+    {
+      "id": "lesson-15",
+      "kind": "lesson",
+      "order": 15,
+      "fileName": "IT biztonság jegyzet_ Biztonsági tesztelés _ BME Villamosmérnöki és Informatikai Kar.pdf",
+      "title": "IT BiztonsáG Jegyzet BiztonsáGi TeszteléS BME VillamosméRnöKi éS Informatikai Kar",
+      "textChars": 19672,
+      "headings": [],
+      "signals": [
+        "IT biztons",
+        "Kezd",
+        "Tant",
+        "BMEVIHIAC07 2025",
+        "VIHIAC07",
+        "DA P E",
+        "DA S",
+        "GT U D"
+      ],
+      "boldTerms": [],
+      "summary": "IT biztonság jegyzet Kezdőoldal / Tantárgyaim / IT biztonság - BMEVIHIAC07 2025/26/2 / IT biztonság (VIHIAC07) / IT biztonság jegyzet B U DA P E S T I M Ű S Z A K I É S G A Z DA S Á GT U D O M Á N Y I E G Y E T E M V i l l a m o s m é r n ö k i é s I n f o r m a t i k a i K a r 6"
+    },
+    {
+      "id": "lesson-16",
+      "kind": "lesson",
+      "order": 16,
+      "fileName": "ITbizt kérdések (HELP) - előadás diákkal.docx",
+      "title": "ITbizt KéRdéSek (HELP) ElőAdáS DiáKkal",
+      "textChars": 17406,
+      "headings": [],
+      "signals": [
+        "Ha tudjatok a",
+        "Ha talaltok olyan",
+        "Az al",
+        "Side channel t",
+        "Gyenge kulcsmenedzsment Protokoll",
+        "Az 1980-as",
+        "PC-s v",
+        "Kiber-fizikai t"
+      ],
+      "boldTerms": [],
+      "summary": "Ha tudjatok a jo valaszt, pls valami modon jeloljetek be Ha talaltok olyan kerdest ami nincs benne, azt rakjatok be a vegere A megtalált válaszok után a releváns dia beszúrása Az alábbiak közül a gyakorlatban melyik lehet a legkisebb valószínűséggel egy kripto rendszer elleni tám"
+    },
+    {
+      "id": "lesson-17",
+      "kind": "lesson",
+      "order": 17,
+      "fileName": "ITSEC_Dia_Kerdesek_Kidolgozva.docx",
+      "title": "ITSEC Dia Kerdesek Kidolgozva",
+      "textChars": 37992,
+      "headings": [],
+      "signals": [
+        "IT Biztons",
+        "Milyen probl",
+        "IT Security-nek megb",
+        "Fel",
+        "Ki az a",
+        "Csoportoknak",
+        "Mag",
+        "Mit tud a"
+      ],
+      "boldTerms": [],
+      "summary": "IT Biztonság control questions válaszok 1. Rész: Milyen problémákkal kell az IT Security-nek megbírkózni? Támadások megelőzése Támadások felismerése és azokra reagálás Felépülés a biztonsági hibákból Mi/Ki az a támadó és miért lehet egy támadás sikeres a rendszer ellen? Csoportok"
+    },
+    {
+      "id": "lesson-18",
+      "kind": "lesson",
+      "order": 18,
+      "fileName": "ZH utáni kontroll kérdések.docx",
+      "title": "ZH UtáNi Kontroll KéRdéSek",
+      "textChars": 18402,
+      "headings": [],
+      "signals": [
+        "Beadtam ChatGPT-nek a",
+        "NOTE",
+        "Privacy di",
+        "Economics of Security",
+        "What is the",
+        "What do incentive",
+        "Characterize the",
+        "Ha nem az"
+      ],
+      "boldTerms": [],
+      "summary": "Beadtam ChatGPT-nek a pdfeket és a kérdéseket, majd javítottam, de azért persze saját felelősségre NOTE: Privacy diákban nincsenek control kérdések, az az anyag így nem szerepel Economics of Security ▸ What is the attacker’s advantage? Az „attacker’s advantage” azt jelenti, hogy "
+    }
+  ],
+  "testSources": [
+    {
+      "id": "test-01",
+      "kind": "test",
+      "order": 1,
+      "fileName": "2025_ZH.md",
+      "title": "2025 ZH",
+      "textChars": 15536,
+      "headings": [],
+      "signals": [
+        "Mely",
+        "Melyik",
+        "RSA felt",
+        "Kvantumsz",
+        "CVE ID",
+        "Az al",
+        "Gyenge",
+        "Mi igaz a"
+      ],
+      "boldTerms": [
+        "Mely állítások igazak az evasion támadásokra gépi modellek ellen?",
+        "Melyik állítás igaz?",
+        "Melyik állítás igaz? A publikus sérülékenységek (vulnerabilities)…",
+        "Az alábbiak közül melyik követelményt kell egy modern kriptográfiai hash függvénynek kielégítenie?",
+        "Mi igaz a Data Execution Prevention (DEP) működési elvére?",
+        "Az alábbiak közül mely szolgáltatásokat biztosítják mind a MAC függvények (MAC functions), mind pedig a digitális aláírás sémák?",
+        "A NIST aktuális iránymutatása szerint, mely kijelentések igazak?",
+        "Modellt szeretnénk tanítani, hogy egy közösségi platformot megvalósító alkalmazásban hibákat ismerjen fel. Mi lehet a modell (hasznos) bemenete?"
+      ],
+      "summary": "1. **Mely állítások igazak az evasion támadásokra gépi modellek ellen?** 1. A támadó keresi egy testing bemeneti minta olyan módosítását, amit a betanított modell félreklasszifikál 2. A támadó keresi azt a vektort, amit egy testing mintához hozzáadva az így kapott mintát a modell"
+    },
+    {
+      "id": "test-02",
+      "kind": "test",
+      "order": 2,
+      "fileName": "IT biztonság 2023.docx",
+      "title": "IT BiztonsáG 2023",
+      "textChars": 45463,
+      "headings": [],
+      "signals": [
+        "IT biztons",
+        "Mi alapj",
+        "Forr",
+        "IP c",
+        "IPv6 forgalom",
+        "VLAN taggel ell",
+        "HTTP fejl",
+        "TCP port sz"
+      ],
+      "boldTerms": [],
+      "summary": "IT biztonság 2023 Összpontszám 166/166 Mi alapján nem tud szűrni egy egyszerű csomagszűrő? 1/1 Forrás és cél IP cím és portszám kombinációk IPv6 forgalom, VLAN taggel ellátott csomagok HTTP fejléc értéke TCP port száma, TCP agek Sorrend megőrző titkosítás... 1/1 Amikor egy adatot"
+    },
+    {
+      "id": "test-03",
+      "kind": "test",
+      "order": 3,
+      "fileName": "IT_biztonsag_ZH_2018.pdf",
+      "title": "IT Biztonsag ZH 2018",
+      "textChars": 2508,
+      "headings": [],
+      "signals": [
+        "Melyik m",
+        "Apple Root tan",
+        "ROP t",
+        "ASLR 3",
+        "CVE a",
+        "Egy adatb",
+        "Melyik nem igaz",
+        "Android rendszer"
+      ],
+      "boldTerms": [],
+      "summary": "megbeszélőőő 1. Melyik múvelet hajtódik végre iOS bootolása során első lépésként? a. Apple Root tanúsítvány betölt 2. hatásos védelem ROP támadással szemben? a. ASLR 3. CVE a. Egy adatbázis, amely minden ismert sérülékenységet tartalmaz. 4. Melyik nem igaz Android rendszer általá"
+    },
+    {
+      "id": "test-04",
+      "kind": "test",
+      "order": 4,
+      "fileName": "IT_biztonsag_ZH_2021.docx",
+      "title": "IT Biztonsag ZH 2021",
+      "textChars": 4091,
+      "headings": [],
+      "signals": [
+        "Melyik hajt",
+        "CA key",
+        "Melyik lehet hat",
+        "ROP ellen",
+        "Return Oriented Programming",
+        "DEP b",
+        "ASLR v",
+        "Harvard arch d"
+      ],
+      "boldTerms": [],
+      "summary": "1. Melyik hajtódik végre az iOS bootolása során első lépésként? a. low level bootloader b. iBoot kód ellenőrzése c. apple root tanusítvány betöltésre kerül d. kernel inicializálódik 1. read only boot rom (hardware root of trust, apple root CA key) 2. iBoot 3. iOS kernel 2. Melyik"
+    },
+    {
+      "id": "test-05",
+      "kind": "test",
+      "order": 5,
+      "fileName": "IT_biztonsag_ZH_2021.pdf",
+      "title": "IT Biztonsag ZH 2021",
+      "textChars": 4130,
+      "headings": [],
+      "signals": [
+        "Melyik hajt",
+        "CA key",
+        "Melyik lehet hat",
+        "ROP ellen",
+        "Return Oriented Programming",
+        "DEP b",
+        "ASLR v",
+        "Harvard arch d"
+      ],
+      "boldTerms": [],
+      "summary": "1. Melyik hajtódik végre az iOS bootolása során első lépésként? a. low level bootloader b. iBoot kód ellenőrzése c. apple root tanusítvány betöltésre kerül d. kernel inicializálódik 1. read only boot rom (hardware root of trust, apple root CA key) 2. iBoot 3. iOS kernel 2. Melyik"
+    },
+    {
+      "id": "test-06",
+      "kind": "test",
+      "order": 6,
+      "fileName": "IT_biztonsag_ZH_kerdesek_2020.pdf",
+      "title": "IT Biztonsag ZH Kerdesek 2020",
+      "textChars": 1165,
+      "headings": [],
+      "signals": [
+        "ZH K",
+        "Diffie-Helmann milyen matematikai",
+        "Mi a fingerprint",
+        "Milyen programoz",
+        "SQL injection-hoz",
+        "Mi nincs DMZ-ben",
+        "Mivel nem foglalkozik",
+        "IT biztons"
+      ],
+      "boldTerms": [],
+      "summary": "ZH Kérdések 1. Diffie-Helmann milyen matematikai problémára épül? 2. Mi a fingerprint m….? (ujjlenyomat-minutia szerintem) 3. Milyen programozói hiba nem vezethet SQL injection-hoz? 4. Különböző hackercsoportok jellemzőinek ismertetése. 5. Mi nincs DMZ-ben? 6. Mivel nem foglalkoz"
+    },
+    {
+      "id": "test-07",
+      "kind": "test",
+      "order": 7,
+      "fileName": "ZH utáni kontroll kérdések.docx",
+      "title": "ZH UtáNi Kontroll KéRdéSek",
+      "textChars": 18402,
+      "headings": [],
+      "signals": [
+        "Beadtam ChatGPT-nek a",
+        "NOTE",
+        "Privacy di",
+        "Economics of Security",
+        "What is the",
+        "What do incentive",
+        "Characterize the",
+        "Ha nem az"
+      ],
+      "boldTerms": [],
+      "summary": "Beadtam ChatGPT-nek a pdfeket és a kérdéseket, majd javítottam, de azért persze saját felelősségre NOTE: Privacy diákban nincsenek control kérdések, az az anyag így nem szerepel Economics of Security ▸ What is the attacker’s advantage? Az „attacker’s advantage” azt jelenti, hogy "
+    }
+  ],
+  "lessonOutline": [
+    {
+      "id": "01-00-introitsec-bme-2026-hu",
+      "order": 1,
+      "title": "00 IntroITsec BME 2026 hu",
+      "section": "00 IntroITsec BME 2026 hu",
+      "time": "47 min"
+    },
+    {
+      "id": "02-01-crypto-history-bme-2026-hu",
+      "order": 2,
+      "title": "01 Crypto History BME 2026 hu",
+      "section": "01 Crypto History BME 2026 hu",
+      "time": "44 min"
+    },
+    {
+      "id": "03-02-crypto-primitives-bme-2026-hu",
+      "order": 3,
+      "title": "02 Crypto Primitives BME 2026 hu",
+      "section": "02 Crypto Primitives BME 2026 hu",
+      "time": "47 min"
+    },
+    {
+      "id": "04-03-crypto-applications-bme-2026-hu",
+      "order": 4,
+      "title": "03 Crypto Applications BME 2026 hu",
+      "section": "03 Crypto Applications BME 2026 hu",
+      "time": "41 min"
+    },
+    {
+      "id": "05-04-sw-sdl",
+      "order": 5,
+      "title": "04 SW SDL",
+      "section": "04 SW SDL",
+      "time": "38 min"
+    },
+    {
+      "id": "06-05-sw-implementationerrors-hu",
+      "order": 6,
+      "title": "05 SW ImplementationErrors HU",
+      "section": "05 SW ImplementationErrors HU",
+      "time": "38 min"
+    },
+    {
+      "id": "07-06-sw-web-hu",
+      "order": 7,
+      "title": "06 SW Web HU",
+      "section": "06 SW Web HU",
+      "time": "41 min"
+    },
+    {
+      "id": "08-08-sw-testing-hu",
+      "order": 8,
+      "title": "08 SW Testing HU",
+      "section": "08 SW Testing HU",
+      "time": "29 min"
+    },
+    {
+      "id": "09-09-aaa-hu",
+      "order": 9,
+      "title": "09 AAA HU",
+      "section": "09 AAA HU",
+      "time": "50 min"
+    },
+    {
+      "id": "10-10-malware-hu",
+      "order": 10,
+      "title": "10 Malware HU",
+      "section": "10 Malware HU",
+      "time": "38 min"
+    },
+    {
+      "id": "11-it-biztons-g-jegyzet-bevezet-s-az-it-biztons-gba-bme-villamosm-rn-ki-s-informatikai-kar",
+      "order": 11,
+      "title": "IT biztonság jegyzet_ Bevezetés az IT Biztonságba _ BME Villamosmérnöki és Informatikai Kar",
+      "section": "IT biztonság jegyzet_ Bevezetés az IT Biztonságba _ BME Villamosmérnöki és Informatikai Kar",
+      "time": "86 min"
+    },
+    {
+      "id": "12-it-biztons-g-jegyzet-biztons-gi-tesztel-s-bme-villamosm-rn-ki-s-informatikai-kar",
+      "order": 12,
+      "title": "IT biztonság jegyzet_ Biztonsági tesztelés _ BME Villamosmérnöki és Informatikai Kar",
+      "section": "IT biztonság jegyzet_ Biztonsági tesztelés _ BME Villamosmérnöki és Informatikai Kar",
+      "time": "35 min"
+    },
+    {
+      "id": "13-control-questions-kidolgozva2025",
+      "order": 13,
+      "title": "Control Questions kidolgozva2025",
+      "section": "Control Questions kidolgozva2025",
+      "time": "74 min"
+    },
+    {
+      "id": "14-it-bizt-k-rd-sek-help-",
+      "order": 14,
+      "title": "IT bizt kérdések (HELP)",
+      "section": "IT bizt kérdések (HELP)",
+      "time": "32 min"
+    },
+    {
+      "id": "15-it-biztons-g-2023",
+      "order": 15,
+      "title": "IT biztonság 2023",
+      "section": "IT biztonság 2023",
+      "time": "77 min"
+    },
+    {
+      "id": "16-itbizt-k-rd-sek-help-el-ad-s-di-kkal",
+      "order": 16,
+      "title": "ITbizt kérdések (HELP) - előadás diákkal",
+      "section": "ITbizt kérdések (HELP) - előadás diákkal",
+      "time": "32 min"
+    },
+    {
+      "id": "17-itsec-dia-kerdesek-kidolgozva",
+      "order": 17,
+      "title": "ITSEC Dia Kerdesek Kidolgozva",
+      "section": "ITSEC Dia Kerdesek Kidolgozva",
+      "time": "65 min"
+    },
+    {
+      "id": "18-zh-ut-ni-kontroll-k-rd-sek",
+      "order": 18,
+      "title": "ZH utáni kontroll kérdések",
+      "section": "ZH utáni kontroll kérdések",
+      "time": "35 min"
+    }
+  ],
+  "rawNotes": [
+    {
+      "file": "01-00-introitsec-bme-2026-hu.mdx",
+      "headings": [
+        "Bevezetés az IT biztonságba",
+        "IT biztonsági alapfogalmak",
+        "Információbiztonsági követelmények",
+        "Az IT biztonság általános célja",
+        "Támadások",
+        "Támadó jellemzői",
+        "Információszerző képesség",
+        "Műszaki tudás, szakértelem",
+        "Erőforrások",
+        "Tipikus támadó profilok"
+      ],
+      "boldTerms": [
+        "IT biztonság",
+        "kiberfenyegetések",
+        "informatikai rendszereket",
+        "információkat",
+        "biztonsági mechanizmusok",
+        "sebezhetőségek",
+        "Hozzáférés-ellenőrzés",
+        "Hitelesítés",
+        "Számonkérhetőség",
+        "Rendelkezésre állás",
+        "integritás",
+        "bizalmasság"
+      ],
+      "signals": [
+        "IntroITsec BME 2026",
+        "IT biztons",
+        "Az IT biztons",
+        "Bevezet",
+        "Hozz",
+        "Hiteles",
+        "Rendelkez",
+        "Inform",
+        "Ezeket a k",
+        "CIA tri",
+        "Integrit",
+        "Ez a"
+      ]
+    },
+    {
+      "file": "02-01-crypto-history-bme-2026-hu.mdx",
+      "headings": [
+        "Bevezetés a kriptográfiába",
+        "A kriptográfia története",
+        "Történelmi rejtjelezők",
+        "Példa: Caesar-rejtjelező",
+        "A kriptográfia történelme",
+        "A kriptográfia alapfogalmai",
+        "A kriptográfiai algoritmusok",
+        "A Caesar-rejtjelező algoritmus megvalósítása",
+        "A betű eltolása a megadott pozícióval",
+        "A kriptográfia jövője"
+      ],
+      "boldTerms": [
+        "kriptográfia",
+        "rejtjelezést",
+        "üzenet hitelesítő kód",
+        "integritásvédelem",
+        "eredet hitelesítés",
+        "digitális aláírás",
+        "eredet letagadhatatlanság",
+        "algoritmikus módszerek",
+        "kriptográfiai függvénykönyvtárakban",
+        "katonai és diplomáciai alkalmazások",
+        "üzleti alkalmazásokban",
+        "mindennapi életben"
+      ],
+      "signals": [
+        "Crypto History BME",
+        "Ez mag",
+        "MAC",
+        "Bevezet",
+        "API-kon kereszt",
+        "OpenSSL",
+        "NaCl",
+        "Java Cryptography Extension",
+        "JCE",
+        "PyCryptodome",
+        "Ha j",
+        "Szk"
+      ]
+    },
+    {
+      "file": "03-02-crypto-primitives-bme-2026-hu.mdx",
+      "headings": [
+        "Bevezető",
+        "Kriptográfiai alapalgoritmusok",
+        "Adat-reprezentáció",
+        "Példa az adat-reprezentációra Pythonban",
+        "Titkosítási sémák",
+        "Bevezetés a kriptográfiai primitívekbe",
+        "Szimmetrikus kulcsú rejtjelezők",
+        "Aszimmetrikus kulcsú rejtjelezők",
+        "Kulcsfolyam-rejtjelezők",
+        "XOR művelet"
+      ],
+      "boldTerms": [
+        "primitívek",
+        "titkosítási sémák",
+        "kriptográfiai hash-függvények",
+        "MAC-függvények",
+        "digitális aláírás sémák",
+        "kulcs-beágyazási",
+        "kulcs-származtatás",
+        "álvéletlen",
+        "egész számok",
+        "valós számok",
+        "szöveges karakterek",
+        "bonyolultabb objektumok"
+      ],
+      "signals": [
+        "Crypto Primitives BME",
+        "Bevezet",
+        "Ezek a primit",
+        "Kriptogr",
+        "MAC-f",
+        "MAC",
+        "Message Authentication Code",
+        "KEM-ek",
+        "KDF-ek",
+        "PRNG-k",
+        "Adat-reprezent",
+        "Az adatok t"
+      ]
+    },
+    {
+      "file": "04-03-crypto-applications-bme-2026-hu.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "BME, PKI, TLS, AES",
+        "Kerdes 3",
+        "április 29 esetén '250429’ – 1 bájtos elválasztó karakter » a '-’ karakter – 3 bájtos sorszám » egy 3 számjegyű sorszám sztringgé alakítva » pl."
+      ],
+      "boldTerms": [
+        "BME",
+        "PKI",
+        "TLS",
+        "AES",
+        "ECB",
+        "ASCII",
+        "CRL",
+        "HSM",
+        "USB",
+        "PIN",
+        "Mi a(z) 03 Crypto Applications BME 2026 hu lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "Crypto Applications BME",
+        "Crypto-Applications-BME-2026-hu",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Kriptogr",
+        "VIHIAC07",
+        "IT biztons",
+        "Butty",
+        "Levente CrySyS Lab",
+        "BME buttyan",
+        "Fo pontok -",
+        "Sok alkalmaz"
+      ]
+    },
+    {
+      "file": "05-04-sw-sdl.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "BME, SDL, CVE, NEM",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "BME",
+        "SDL",
+        "CVE",
+        "NEM",
+        "OWASP",
+        "CLASP",
+        "BSIMM",
+        "CIA",
+        "KISS",
+        "YYYY",
+        "Mi a(z) 04 SW SDL lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "SW SDL",
+        "SDL",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Andr",
+        "Gazdag CrySyS Lab",
+        "BME andras",
+        "Fo pontok -",
+        "WebKit Bugzilla",
+        "CVE-2025-24162",
+        "HKUS3Lab and chluo",
+        "WHUSecLab CoreMedia Available"
+      ]
+    },
+    {
+      "file": "06-05-sw-implementationerrors-hu.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "BME, SQL, XSS, TOCTOU",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "BME",
+        "SQL",
+        "XSS",
+        "TOCTOU",
+        "API",
+        "NULL",
+        "CPU",
+        "IIS",
+        "MOV",
+        "ADD",
+        "Mi a(z) 05 SW ImplementationErrors HU lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "SW ImplementationErrors HU",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Bevezet",
+        "Stack overflow",
+        "Implement",
+        "Szoftverbiztons",
+        "Mit jelent az",
+        "Fo pontok -",
+        "Az egyik lehets",
+        "Mem",
+        "Struktur"
+      ]
+    },
+    {
+      "file": "07-06-sw-web-hu.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "BME, OWASP, TOP, API",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "BME",
+        "OWASP",
+        "TOP",
+        "API",
+        "CWE",
+        "SSRF",
+        "CSRF",
+        "URL",
+        "HTTP",
+        "CSS",
+        "Mi a(z) 06 SW Web HU lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "SW Web HU",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Ezek nagyon aj",
+        "Fo pontok -",
+        "Tiltsd le a",
+        "Napl",
+        "Webbiztons",
+        "A02",
+        "Security Misconfiguration --",
+        "Security Misconfiguration",
+        "Konfigur"
+      ]
+    },
+    {
+      "file": "08-08-sw-testing-hu.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "BME, LLM, TDD, BDD",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "BME",
+        "LLM",
+        "TDD",
+        "BDD",
+        "ATDD",
+        "SDL",
+        "CWE",
+        "SQL",
+        "XML",
+        "HTML",
+        "Mi a(z) 08 SW Testing HU lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "SW Testing HU",
+        "Testing-HU",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Egy bizonyos biztons",
+        "Fo pontok -",
+        "Biztons",
+        "Code Review",
+        "Mit kell keresni",
+        "Hamis pozit",
+        "Hamis negat",
+        "Szoftver Mem"
+      ]
+    },
+    {
+      "file": "09-09-aaa-hu.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "AAA, BME, PIN, SMS",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "AAA",
+        "BME",
+        "PIN",
+        "SMS",
+        "MFA",
+        "SHA",
+        "KDF",
+        "XXX",
+        "XXXXX",
+        "XXXX",
+        "Mi a(z) 09 AAA HU lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "AAA HU",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Hiteles",
+        "AAA VIHIAC07",
+        "IT biztons",
+        "Nagy Roland CrySyS",
+        "Lab",
+        "BME rnagy",
+        "Fo pontok -",
+        "Alapfogalmak",
+        "Authentication authentik"
+      ]
+    },
+    {
+      "file": "10-10-malware-hu.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "BME, HIT, MALWARE, ELF",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "BME",
+        "HIT",
+        "MALWARE",
+        "ELF",
+        "PDF",
+        "ROSSZINDULAT",
+        "SZOFTVEREK",
+        "KIBERBŰNÖZÉS",
+        "SMS",
+        "PUA",
+        "Mi a(z) 10 Malware HU lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "Malware HU",
+        "Malware-HU",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Rendszerek",
+        "Szolg",
+        "Tansz",
+        "Budapest",
+        "Fo pontok -",
+        "ROSSZINDULAT",
+        "SZOFTVEREK",
+        "KIBERB"
+      ]
+    },
+    {
+      "file": "11-it-biztons-g-jegyzet-bevezet-s-az-it-biztons-gba-bme-villamosm-rn-ki-s-informatikai-kar.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "AAA, CIA, NSA, TAO",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "AAA",
+        "CIA",
+        "NSA",
+        "TAO",
+        "APT",
+        "CAPEC",
+        "MITRE",
+        "TARA",
+        "API",
+        "CVE",
+        "Mi a(z) IT biztonság jegyzet_ Bevezetés az IT Biztonságba _ BME Villamosmérnöki és Informatikai Kar lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "IT biztons",
+        "Bevezet",
+        "BME Villamosm",
+        "Informatikai Kar",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Az ilyen rendszereket",
+        "IT-rendszereknek nevezz",
+        "IT r",
+        "Fo pontok -",
+        "Nyugodtan kijelenthetj",
+        "IT-rendszerek n"
+      ]
+    },
+    {
+      "file": "12-it-biztons-g-jegyzet-biztons-gi-tesztel-s-bme-villamosm-rn-ki-s-informatikai-kar.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "LLM, SQL, XML, CWE",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "LLM",
+        "SQL",
+        "XML",
+        "CWE",
+        "SAST",
+        "DAST",
+        "HTTP",
+        "SCA",
+        "CVE",
+        "SBOM",
+        "Mi a(z) IT biztonság jegyzet_ Biztonsági tesztelés _ BME Villamosmérnöki és Informatikai Kar lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "IT biztons",
+        "Biztons",
+        "BME Villamosm",
+        "Informatikai Kar",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Ezek a folyamatok",
+        "Fo pontok -",
+        "LLM-ek bevezet",
+        "LLM-ek",
+        "Ennek k",
+        "Teszttervez"
+      ]
+    },
+    {
+      "file": "13-control-questions-kidolgozva2025.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "GENERÁLT, EBP, NOP, XOR",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "GENERÁLT",
+        "EBP",
+        "NOP",
+        "XOR",
+        "DEP",
+        "ASLR",
+        "GCC",
+        "AAA",
+        "USB",
+        "MFA",
+        "Mi a(z) Control Questions kidolgozva2025 lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "Control Questions kidolgozva2025",
+        "Control Questions -",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Where on the",
+        "Fo pontok -",
+        "Local variables are",
+        "EBP register at",
+        "EBP - offset",
+        "Function parameters are",
+        "EBP",
+        "What is the"
+      ]
+    },
+    {
+      "file": "14-it-bizt-k-rd-sek-help-.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "DEC, PIN, PGP, ECB",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "DEC",
+        "PIN",
+        "PGP",
+        "ECB",
+        "OFB",
+        "CTR",
+        "CBC",
+        "NAT",
+        "TCP",
+        "ACL",
+        "Mi a(z) IT bizt kérdések (HELP) lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "IT bizt k",
+        "HELP",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Ha tudjatok a",
+        "Ha tal",
+        "Az al",
+        "Fo pontok -",
+        "Side channel t",
+        "Gyenge kulcsmenedzsment Protokoll",
+        "Transzparens titkos",
+        "Homomorf titkos"
+      ]
+    },
+    {
+      "file": "15-it-biztons-g-2023.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "VLAN, HTTP, TCP, NEM",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "VLAN",
+        "HTTP",
+        "TCP",
+        "NEM",
+        "MAC",
+        "NAT",
+        "URL",
+        "HAMIS",
+        "GOOGLE",
+        "CHROME",
+        "Mi a(z) IT biztonság 2023 lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "IT biztons",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Mi alapj",
+        "Fo pontok -",
+        "Forr",
+        "IP c",
+        "IPv6 forgalom",
+        "VLAN taggel ell",
+        "HTTP fejl",
+        "TCP port sz",
+        "TCP agek Sorrend"
+      ]
+    },
+    {
+      "file": "16-itbizt-k-rd-sek-help-el-ad-s-di-kkal.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "DEC, PIN, ECB, OFB",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "DEC",
+        "PIN",
+        "ECB",
+        "OFB",
+        "CTR",
+        "CBC",
+        "NAT",
+        "TCP",
+        "ACL",
+        "RSA",
+        "Mi a(z) ITbizt kérdések (HELP) - előadás diákkal lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "ITbizt k",
+        "HELP",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Ha tudjatok a",
+        "Ha talaltok olyan",
+        "Az al",
+        "Fo pontok -",
+        "Side channel t",
+        "Gyenge kulcsmenedzsment Protokoll",
+        "Transzparens titkos",
+        "Homomorf titkos"
+      ]
+    },
+    {
+      "file": "17-itsec-dia-kerdesek-kidolgozva.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "CIA, AAA, PÉNZ, SDL",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "CIA",
+        "AAA",
+        "PÉNZ",
+        "SDL",
+        "CVE",
+        "KISS",
+        "DEV",
+        "TST",
+        "JRA",
+        "NOP",
+        "Mi a(z) ITSEC Dia Kerdesek Kidolgozva lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "ITSEC Dia Kerdesek",
+        "Kidolgozva",
+        "ITSEC",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Milyen probl",
+        "IT Security-nek megb",
+        "Fo pontok -",
+        "Fel",
+        "Ki az a",
+        "Csoportoknak",
+        "Felm"
+      ]
+    },
+    {
+      "file": "18-zh-ut-ni-kontroll-k-rd-sek.mdx",
+      "headings": [
+        "Attekintes",
+        "Fo pontok",
+        "Fontos fogalmak",
+        "Vizsgara figyelj",
+        "Active Recall",
+        "Kerdes 1",
+        "Kerdes 2",
+        "NOTE, ATM, USA, ISO",
+        "Kerdes 3"
+      ],
+      "boldTerms": [
+        "NOTE",
+        "ATM",
+        "USA",
+        "ISO",
+        "GDPR",
+        "SEC",
+        "USD",
+        "BSOD",
+        "SMB",
+        "BSD",
+        "Mi a(z) ZH utáni kontroll kérdések lenyege a forrasanyag alapjan?",
+        "Mely fogalmakat erdemes biztosan felismerni ebben a reszben?"
+      ],
+      "signals": [
+        "ZH ut",
+        "Attekintes Ez a",
+        "LLM szolgaltatas eppen",
+        "Beadtam ChatGPT-nek a",
+        "NOTE",
+        "Privacy di",
+        "Economics of Security",
+        "What is the",
+        "Fo pontok -",
+        "Ha nem az",
+        "ATM",
+        "USA"
+      ]
+    }
+  ],
+  "conceptInventory": [
+    "Bevezet",
+    "IT biztons",
+    "VIHIAC07",
+    "Butty",
+    "Levente CrySyS Lab",
+    "BME buttyan",
+    "Tartalom",
+    "Az IT biztons",
+    "Kriptogr",
+    "Levente Butty",
+    "CrySyS Lab",
+    "Algoritmikus m",
+    "MAC",
+    "Alapalgoritmusok VIHIAC07",
+    "MAC-f",
+    "Nyilv",
+    "Szoftverbiztons",
+    "Andr",
+    "Gazdag CrySyS Lab",
+    "BME andras",
+    "Security Development Lifecycle",
+    "Implement",
+    "IT Security",
+    "BME agazdag",
+    "Stack overflow",
+    "Webbiztons",
+    "Gazdag Andr",
+    "Incidensek",
+    "Biztons",
+    "Fut",
+    "Papp Dorottya CrySyS",
+    "Lab",
+    "BME dpapp",
+    "Motiv",
+    "Hiteles",
+    "AAA"
+  ],
+  "learningObjectives": [
+    "Explain the core ideas in 00 IntroITsec BME 2026 Hu.",
+    "Explain the core ideas in 01 Crypto History BME 2026 Hu.",
+    "Explain the core ideas in 02 Crypto Primitives BME 2026 Hu.",
+    "Explain the core ideas in 03 Crypto Applications BME 2026 Hu.",
+    "Explain the core ideas in 04 SW SDL.",
+    "Explain the core ideas in 05 SW ImplementationErrors HU.",
+    "Explain the core ideas in 06 SW Web HU.",
+    "Explain the core ideas in 08 SW Testing HU.",
+    "Explain the core ideas in 09 AAA HU.",
+    "Explain the core ideas in 10 Malware HU.",
+    "Explain the core ideas in Control Questions Kidolgozva2025.",
+    "Explain the core ideas in IT Bizt KéRdéSek (HELP).",
+    "Explain the core ideas in IT BiztonsáG 2023.",
+    "Explain the core ideas in IT BiztonsáG Jegyzet BevezetéS Az IT BiztonsáGba BME VillamosméRnöKi éS Informatikai Kar.",
+    "Explain the core ideas in IT BiztonsáG Jegyzet BiztonsáGi TeszteléS BME VillamosméRnöKi éS Informatikai Kar.",
+    "Explain the core ideas in ITbizt KéRdéSek (HELP) ElőAdáS DiáKkal.",
+    "Explain the core ideas in ITSEC Dia Kerdesek Kidolgozva.",
+    "Explain the core ideas in ZH UtáNi Kontroll KéRdéSek."
+  ],
+  "qualityTargets": {
+    "notesMin": 18,
+    "notesIdeal": 18,
+    "questionsMin": 42,
+    "questionsIdeal": 56,
+    "flashcardsMin": 36,
+    "flashcardsIdeal": 72,
+    "glossaryMin": 27,
+    "glossaryIdeal": 36
+  },
+  "llm": {
+    "preferredProviders": [
+      "groq",
+      "openrouter"
+    ],
+    "budgetSnapshot": {
+      "groq": {
+        "provider": "groq",
+        "available": true,
+        "minDelayMs": 70000,
+        "maxRequestsPerHour": 45,
+        "usedLastHour": 0,
+        "remainingLastHour": 45,
+        "nextAvailableAt": 1776603273857
+      },
+      "openrouter": {
+        "provider": "openrouter",
+        "available": true,
+        "minDelayMs": 30000,
+        "maxRequestsPerHour": 90,
+        "usedLastHour": 0,
+        "remainingLastHour": 90,
+        "nextAvailableAt": 1776603273857
+      }
+    }
+  },
+  "status": "ready",
+  "summary": "Subject: IT Biztonság (it_biztonsag)\nLesson sources: 18\nTest sources: 7\nExisting notes: 18\nExisting questions: 40\nExisting flashcards: 606\nExisting glossary entries: 416\nPlanned note target: 18\nPlanned question target: 56\nPlanned flashcard target: 72\nPlanned glossary target: 36\nKey concepts: Bevezet, IT biztons, VIHIAC07, Butty, Levente CrySyS Lab, BME buttyan, Tartalom, Az IT biztons\nLearning objectives: Explain the core ideas in 00 IntroITsec BME 2026 Hu. | Explain the core ideas in 01 Crypto History BME 2026 Hu. | Explain the core ideas in 02 Crypto Primitives BME 2026 Hu. | Explain the core ideas in 03 Crypto Applications BME 2026 Hu. | Explain the core ideas in 04 SW SDL. | Explain the core ideas in 05 SW ImplementationErrors HU."
+}

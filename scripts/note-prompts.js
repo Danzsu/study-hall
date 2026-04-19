@@ -12,7 +12,7 @@ function getNoteDepth() {
   return process.env.NOTE_DEPTH || 'exam-prep notes'
 }
 
-function buildNotePrompt({ sourceText, subjectName, sectionName, chunkIndex, chunkCount, language, depth }) {
+function buildNotePrompt({ sourceText, subjectName, sectionName, chunkIndex, chunkCount, language, depth, planContext = '' }) {
   const noteLanguage = LANGUAGE_LABELS[language] || LANGUAGE_LABELS.hu
 
   return `You are an elite university note-making agent for engineering and STEM students.
@@ -24,6 +24,9 @@ Section: ${sectionName}
 Chunk: ${chunkIndex + 1}/${chunkCount}
 Note language: ${noteLanguage}
 Depth: ${depth}
+
+Shared content plan:
+${planContext || 'No cached plan available yet. Derive structure from the source material directly.'}
 
 Source material:
 ${sourceText}

@@ -44,6 +44,24 @@ function routeForItem(item, subjectId) {
   return ['/review', { id: subjectId }]
 }
 
+function normalizeApiResult(item) {
+  const kind = item.type === 'notes'
+    ? 'lesson'
+    : item.type === 'glossary'
+      ? 'term'
+      : item.type === 'flashcards'
+        ? 'flashcard'
+        : 'question'
+  return {
+    id: item.slug || item.title,
+    kind,
+    title: item.title,
+    body: item.snippet || '',
+    section: item.section,
+    lessonSlug: kind === 'lesson' ? item.slug : undefined,
+  }
+}
+
 function ResultItem({ item, query, t, subjectId, onPick }) {
   const kind = KIND[item.kind] || KIND.question
   const Icon = kind.Icon
@@ -154,9 +172,11 @@ export default function SearchScreen({ subjectId }) {
   const inputRef = useRef(null)
   const [subject, setSubject] = useState(null)
   const [index, setIndex] = useState([])
+  const [apiResults, setApiResults] = useState([])
   const [query, setQuery] = useState('')
   const [recent, setRecent] = useState([])
   const [loading, setLoading] = useState(true)
+  const [searching, setSearching] = useState(false)
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -223,7 +243,33 @@ export default function SearchScreen({ subjectId }) {
     return () => { cancelled = true }
   }, [subjectId])
 
-  const results = runSearch(index, query)
+  useEffect(() => {
+    const q = query.trim()
+    if (!subjectId || q.length < 2) {
+      setApiResults([])
+      setSearching(false)
+      return
+    }
+
+    const controller = new AbortController()
+    const timer = setTimeout(() => {
+      setSearching(true)
+      fetch(`/api/search?q=${encodeURIComponent(q)}&subject=${encodeURIComponent(subjectId)}`, { signal: controller.signal })
+        .then(r => r.ok ? r.json() : [])
+        .then(data => setApiResults(Array.isArray(data) ? data.map(normalizeApiResult) : []))
+        .catch(err => {
+          if (err.name !== 'AbortError') setApiResults(runSearch(index, q))
+        })
+        .finally(() => setSearching(false))
+    }, 180)
+
+    return () => {
+      clearTimeout(timer)
+      controller.abort()
+    }
+  }, [query, subjectId, index])
+
+  const results = query.trim().length >= 2 ? apiResults : []
   const grouped = groupResults(results)
   const suggestions = [
     { label: 'Wrong answers', icon: Zap, color: C.accent, action: () => navigate('/wrong-answers', { id: subjectId }) },
@@ -306,8 +352,8 @@ export default function SearchScreen({ subjectId }) {
                 <p style={{ fontSize: 13, color: t.textMuted }}>No recent searches yet.</p>
               )}
             </div>
-          ) : loading ? (
-            <div style={{ padding: 30, color: t.textMuted, textAlign: 'center' }}>Building search index...</div>
+          ) : loading || searching ? (
+            <div style={{ padding: 30, color: t.textMuted, textAlign: 'center' }}>{loading ? 'Building search index...' : 'Searching...'}</div>
           ) : results.length ? (
             <div>
               <div style={{ padding: '11px 18px', background: t.surface2, borderBottom: `1px solid ${t.border}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
