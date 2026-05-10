@@ -9,6 +9,14 @@ const {
   normalizeQuestion,
   readJSON,
 } = require('../scripts/content-utils')
+const {
+  buildAssessmentSourceText,
+  detectAssessmentBlocks,
+  detectLearningSignals,
+  detectVisualReferences,
+  normalizeExtractedText,
+  slugifySourceName,
+} = require('../scripts/source-intelligence')
 
 const ROOT = path.join(__dirname, '..')
 const CONTENT_ROOT = path.join(ROOT, 'content')
@@ -96,6 +104,44 @@ function checkLessonShape(lesson) {
   assert.ok(Array.isArray(lesson.activeRecall), 'Lesson activeRecall must be an array')
 }
 
+function checkSourceIntelligence() {
+  const sample = normalizeExtractedText(`
+Control questions
+
+1. What is the attacker advantage?
+Explain why defenders must protect every entry point.
+
+Figure 2: Authentication flow between client, identity provider, and resource server.
+`)
+
+  assert.ok(!sample.includes('\r'), 'Extraction normalization should remove CRLF noise')
+  assert.equal(slugifySourceName('Árvíztűrő Source 01.pdf'), 'arvizturo-source-01-pdf')
+
+  const assessments = detectAssessmentBlocks(sample, { sourceKind: 'lesson' })
+  assert.ok(assessments.length >= 1, 'Question-like source blocks should be detected')
+  assert.equal(assessments[0].target, 'questions')
+  assert.ok(['control', 'question-candidate'].includes(assessments[0].kind), 'Assessment kind should be specific enough for routing')
+
+  const weakQuestions = detectAssessmentBlocks('Why does this topic matter?', { sourceKind: 'lesson' })
+  assert.equal(weakQuestions[0].target, 'notes-review', 'Weak lesson questions should be preserved without automatic quiz routing')
+
+  const visualRefs = detectVisualReferences(sample)
+  assert.ok(visualRefs.some(item => item.type === 'figure'), 'Figure references should be preserved as visual metadata')
+
+  const assessmentSourceText = buildAssessmentSourceText({
+    sourceFile: 'sample.pdf',
+    assessmentBlocks: assessments,
+  })
+  assert.ok(assessmentSourceText.includes('SOURCE ROUTING'), 'Assessment source text should carry routing instructions')
+  assert.ok(assessmentSourceText.includes('test/quiz'), 'Assessment source text should route to test/quiz generation')
+
+  const learningSignals = detectLearningSignals(sample)
+  assert.ok(Array.isArray(learningSignals.concepts), 'Learning signals should expose concepts')
+  assert.ok(Array.isArray(learningSignals.definitions), 'Learning signals should expose definitions')
+  assert.ok(Array.isArray(learningSignals.examples), 'Learning signals should expose examples')
+  assert.equal(typeof learningSignals.density, 'object', 'Learning signals should expose density metadata')
+}
+
 function main() {
   const subject = readSubjectFiles(SUBJECT_SLUG)
   checkSubjectIndex(subject.subject)
@@ -109,6 +155,7 @@ function main() {
   checkNormalizedFlashcard(subject.flashcards[0], subject.subject.name)
   checkNormalizedGlossary(subject.glossary[0], subject.subject.name)
   checkLessonShape(subject.lessons[0])
+  checkSourceIntelligence()
 
   const normalizedQuestion = normalizeQuestion({
     type: 'mc',

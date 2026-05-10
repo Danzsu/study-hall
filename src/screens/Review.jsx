@@ -153,7 +153,7 @@ export default function Review({ subjectId }) {
         </div>
 
         {/* Main */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 640, width: '100%', margin: '0 auto', padding: '28px 20px 0' }}>
+        <div className="page-wrap" style={{ '--pw': '640px', flex: 1, display: 'flex', flexDirection: 'column', paddingTop: 28, paddingBottom: 0 }}>
 
           {pool.length === 0 ? (
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, color: t.textMuted }}>

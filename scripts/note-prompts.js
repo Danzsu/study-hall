@@ -12,7 +12,17 @@ function getNoteDepth() {
   return process.env.NOTE_DEPTH || 'exam-prep notes'
 }
 
-function buildNotePrompt({ sourceText, subjectName, sectionName, chunkIndex, chunkCount, language, depth, planContext = '' }) {
+function buildNotePrompt({
+  sourceText,
+  subjectName,
+  sectionName,
+  chunkIndex,
+  chunkCount,
+  language,
+  depth,
+  planContext = '',
+  extractionMetadata = '',
+}) {
   const noteLanguage = LANGUAGE_LABELS[language] || LANGUAGE_LABELS.hu
 
   return `You are an elite university note-making agent for engineering and STEM students.
@@ -27,6 +37,9 @@ Depth: ${depth}
 
 Shared content plan:
 ${planContext || 'No cached plan available yet. Derive structure from the source material directly.'}
+
+Extraction metadata:
+${extractionMetadata || 'No extra extraction metadata available.'}
 
 Source material:
 ${sourceText}
@@ -45,14 +58,14 @@ Hard requirements:
 
 Frontmatter shape:
 ---
-title: "${sectionName.replace(/"/g, "'")}"
+title: "${sectionName.replaceAll('"', "'")}"
 lesson: ${chunkIndex + 1}
-section: "${sectionName.replace(/"/g, "'")}"
+section: "${sectionName.replaceAll('"', "'")}"
 language: "${language}"
-depth: "${depth.replace(/"/g, "'")}"
+depth: "${depth.replaceAll('"', "'")}"
 sources:
   - type: "source"
-    title: "${subjectName.replace(/"/g, "'")} - ${sectionName.replace(/"/g, "'")}"
+    title: "${subjectName.replaceAll('"', "'")} - ${sectionName.replaceAll('"', "'")}"
     year: 2026
 ---
 

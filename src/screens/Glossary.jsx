@@ -60,7 +60,7 @@ function FlashSession({ deck, mode, t, onExit }) {
   if (done) {
     const pct = Math.round((known.size / cards.length) * 100)
     return (
-      <div style={{ maxWidth: 520, margin: '0 auto', padding: '60px 24px', textAlign: 'center' }}>
+      <div className="page-wrap" style={{ '--pw': '520px', paddingTop: 60, paddingBottom: 24, textAlign: 'center' }}>
         <div style={{ fontSize: 48, marginBottom: 16 }}>{pct >= 80 ? '🎉' : pct >= 50 ? '💪' : '📖'}</div>
         <h2 style={{ fontFamily: "'Lora',serif", fontSize: 26, fontWeight: 700, marginBottom: 8, color: t.text }}>Session Complete</h2>
         <p style={{ color: t.textSub, marginBottom: 36, fontSize: 15 }}>{cards.length} cards reviewed</p>
@@ -84,7 +84,7 @@ function FlashSession({ deck, mode, t, onExit }) {
   }
 
   return (
-    <div style={{ maxWidth: 600, margin: '0 auto', padding: '40px 24px' }}>
+    <div className="page-wrap" style={{ paddingTop: 40, paddingBottom: 40 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
         <div style={{ flex: 1, height: 5, background: t.border, borderRadius: 99, overflow: 'hidden' }}>
           <div style={{ width: `${(idx / cards.length) * 100}%`, height: '100%', background: C.accent, borderRadius: 99, transition: 'width 0.3s' }} />
@@ -362,7 +362,7 @@ export default function Glossary({ subjectId }) {
   return (
     <>
       <style>{`@keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}`}</style>
-      <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 24px 80px' }}>
+      <main className="page-wrap" style={{ paddingTop: 24, paddingBottom: 80 }}>
 
         {/* Search */}
         <div style={{ position: 'relative', marginBottom: 16 }}>

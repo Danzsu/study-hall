@@ -11,13 +11,12 @@
 const fs = require('fs')
 const path = require('path')
 require('./load-env')
-const { extractPdfText } = require('./pdf-text')
 const { chunkDocument } = require('./document-chunker')
 const { buildActiveRecall, buildFallbackNote } = require('./local-generators')
 const { buildNotePrompt, getNoteDepth, getNoteLanguage } = require('./note-prompts')
 const { loadContentPlanSummary } = require('./content-plan')
 const { callWithProviderLimit } = require('./llm-rate-limit')
-const mammoth = require('mammoth')
+const { readSourceDocument } = require('./source-intelligence')
 const { Groq } = require('groq-sdk')
 
 // ── KONFIGURÁCIÓ ──────────────────────────────────────────────────────────────
@@ -34,21 +33,6 @@ const OPENROUTER_MODELS = [
 // ── HELPER FÜGGVÉNYEK ─────────────────────────────────────────────────────────
 
 /**
- * PDF fájl szövegének kinyerése
- */
-async function extractTextFromPDF(pdfPath) {
-  return extractPdfText(pdfPath)
-}
-
-/**
- * DOCX fájl szövegének kinyerése
- */
-async function extractTextFromDOCX(docxPath) {
-  const result = await mammoth.extractRawText({ path: docxPath })
-  return result.value
-}
-
-/**
  * Forrásfájlok listázása egy mappából
  */
 function listSourceFiles(folderPath, extensions) {
@@ -56,6 +40,59 @@ function listSourceFiles(folderPath, extensions) {
   return fs.readdirSync(folderPath)
     .filter(f => extensions.some(ext => f.toLowerCase().endsWith(ext)))
     .map(f => path.join(folderPath, f))
+}
+
+function listFilesRecursive(folderPath, extensions) {
+  if (!fs.existsSync(folderPath)) return []
+  const entries = fs.readdirSync(folderPath, { withFileTypes: true })
+  const files = []
+  for (const entry of entries) {
+    const fullPath = path.join(folderPath, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...listFilesRecursive(fullPath, extensions))
+      continue
+    }
+    if (extensions.some((ext) => entry.name.toLowerCase().endsWith(ext))) {
+      files.push(fullPath)
+    }
+  }
+  return files.sort((a, b) => a.localeCompare(b))
+}
+
+function collectSourceAssets(sourceDir) {
+  const assetExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.bmp', '.tif', '.tiff']
+  return listFilesRecursive(sourceDir, assetExtensions).map((assetPath) => ({
+    filePath: assetPath,
+    relativePath: path.relative(sourceDir, assetPath),
+    size: fs.statSync(assetPath).size,
+  }))
+}
+
+function copySourceAssets(assets, targetDir) {
+  if (!assets.length) return []
+
+  fs.mkdirSync(targetDir, { recursive: true })
+  const copied = []
+
+  for (const asset of assets) {
+    const outputPath = path.join(targetDir, asset.relativePath)
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+    fs.copyFileSync(asset.filePath, outputPath)
+    copied.push({
+      sourcePath: asset.filePath,
+      relativePath: path.relative(path.join(CONTENT_ROOT, path.basename(path.dirname(targetDir))), outputPath),
+      outputPath,
+      size: asset.size,
+    })
+  }
+
+  return copied
+}
+
+function summarizeSourceAssets(assets, limit = 5) {
+  if (!assets.length) return 'Source assets: none'
+  const names = assets.slice(0, limit).map((asset) => path.basename(asset.relativePath))
+  return `Source assets (${assets.length}): ${names.join(', ')}${assets.length > limit ? ', ...' : ''}`
 }
 
 /**
@@ -106,6 +143,7 @@ async function generateNotesWithGroq(groq, sourceText, subjectName, sectionName,
     language: options.language ?? 'hu',
     depth: options.depth ?? 'exam-prep notes',
     planContext: options.planContext ?? '',
+    extractionMetadata: options.extractionMetadata ?? '',
   })
   /* Legacy prompt removed; see scripts/note-prompts.js.
 
@@ -167,6 +205,7 @@ async function generateNotesWithOpenRouter(apiKey, sourceText, subjectName, sect
     language: options.language ?? 'hu',
     depth: options.depth ?? 'exam-prep notes',
     planContext: options.planContext ?? '',
+    extractionMetadata: options.extractionMetadata ?? '',
   })
 
   const errors = []
@@ -268,11 +307,14 @@ async function main() {
   const sourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'lesson_sources')
   const outputDir = path.join(CONTENT_ROOT, subjectSlug, 'notes')
   const artifactsDir = path.join(CONTENT_ROOT, subjectSlug, 'notes', 'artifacts')
+  const sourceAssetsDir = path.join(CONTENT_ROOT, subjectSlug, 'source-assets')
 
   // Forrásfájlok listázása
   const pdfFiles = listSourceFiles(sourceDir, ['.pdf'])
   const docxFiles = listSourceFiles(sourceDir, ['.docx'])
-  const allFiles = [...pdfFiles, ...docxFiles]
+  const mdFiles = listSourceFiles(sourceDir, ['.md', '.mdx', '.txt'])
+  const allFiles = [...pdfFiles, ...docxFiles, ...mdFiles]
+  const sourceAssets = collectSourceAssets(sourceDir)
 
   if (allFiles.length === 0) {
     console.error(`❌ Nem található forrásfájl itt: ${sourceDir}`)
@@ -281,7 +323,7 @@ async function main() {
   }
 
   console.log(`📚 ${subjectSlug} feldolgozása...`)
-  console.log(`   Talált fájlok: ${allFiles.length} (${pdfFiles.length} PDF, ${docxFiles.length} DOCX)`)
+  console.log(`   Talált fájlok: ${allFiles.length} (${pdfFiles.length} PDF, ${docxFiles.length} DOCX, ${mdFiles.length} MD/TXT)`)
 
   // Kimeneti mappa létrehozása
   if (!fs.existsSync(outputDir)) {
@@ -291,6 +333,14 @@ async function main() {
 
   // Meta információk a subjecthez
   fs.mkdirSync(artifactsDir, { recursive: true })
+  const copiedAssets = copySourceAssets(sourceAssets, sourceAssetsDir)
+  if (copiedAssets.length) {
+    fs.writeFileSync(path.join(CONTENT_ROOT, subjectSlug, 'source-assets.json'), JSON.stringify(copiedAssets.map((asset) => ({
+      sourcePath: path.relative(CONTENT_ROOT, asset.sourcePath),
+      relativePath: path.relative(path.join(CONTENT_ROOT, subjectSlug), asset.outputPath),
+      size: asset.size,
+    })), null, 2), 'utf-8')
+  }
 
   const metaPath = path.join(CONTENT_ROOT, subjectSlug, 'meta.json')
   const meta = {
@@ -311,14 +361,16 @@ async function main() {
 
     console.log(`\n📄 ${fileName} feldolgozása...`)
 
-    // Szöveg kinyerése
+    // Szöveg, kérdésblokkok és forrás-assetek kinyerése
+    let sourceDocument
     let rawText = ''
     try {
-      if (fileExt === '.pdf') {
-        rawText = await extractTextFromPDF(file)
-      } else if (fileExt === '.docx') {
-        rawText = await extractTextFromDOCX(file)
-      }
+      sourceDocument = await readSourceDocument(file, {
+        subjectSlug,
+        sourceKind: 'lesson',
+        contentRoot: CONTENT_ROOT,
+      })
+      rawText = sourceDocument.text
     } catch (err) {
       console.error(`   ❌ Hiba a fájl olvasásakor: ${err.message}`)
       continue
@@ -349,17 +401,42 @@ async function main() {
     const lessonSlug = `${String(lessonCounter + 1).padStart(2, '0')}-${path.basename(file, fileExt).toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-')}`
     const outputPath = path.join(outputDir, `${lessonSlug}.mdx`)
     const artifactPath = path.join(artifactsDir, `${lessonSlug}.json`)
+    const sourceRef = {
+      type: sourceDocument.sourceKind,
+      title: sourceDocument.sourceFile,
+      manifest: path.relative(path.join(CONTENT_ROOT, subjectSlug), sourceDocument.manifestPath).replace(/\\/g, '/'),
+      visualReferences: sourceDocument.visualReferences.length,
+      assessmentBlocks: sourceDocument.assessmentBlocks.length,
+      routedAssessmentBlocks: sourceDocument.assessmentBlocks.filter((block) => block.target === 'questions').length,
+      extractedAssets: sourceDocument.extractedAssets.map((asset) => ({
+        ...asset,
+        path: path.relative(path.join(CONTENT_ROOT, subjectSlug), path.join(sourceDocument.assetDir, asset.file)).replace(/\\/g, '/'),
+      })),
+    }
     fs.writeFileSync(artifactPath, JSON.stringify({
       sourceFile: fileName,
       lessonSlug,
       sectionName,
       language: noteLanguage,
       depth: noteDepth,
+      extraction: sourceDocument.extraction,
+      sourceManifest: sourceRef.manifest,
+      assessmentBlocks: sourceDocument.assessmentBlocks,
+      visualReferences: sourceDocument.visualReferences,
+      learningSignals: sourceDocument.learningSignals,
+      extractedAssets: sourceRef.extractedAssets,
+      sourceAssets: copiedAssets.map((asset) => ({
+        relativePath: path.relative(path.join(CONTENT_ROOT, subjectSlug), asset.outputPath),
+        size: asset.size,
+      })),
       chunks: chunks.map(chunk => ({
         index: chunk.index,
         chars: chunk.chars,
         headings: chunk.headings,
         visualCandidates: chunk.visualCandidates,
+        questionCandidates: chunk.questionCandidates,
+        learningSignals: chunk.learningSignals,
+        learningIntent: chunk.learningIntent,
       })),
     }, null, 2), 'utf-8')
 
@@ -372,6 +449,7 @@ async function main() {
         section: sectionName,
         lesson: lessonCounter + 1,
         time: `${Math.ceil(rawText.length / 2000) * 3 + 5} min`,
+        sources: [sourceRef],
       })
       lessonCounter++
       continue
@@ -387,6 +465,7 @@ async function main() {
         section: sectionName,
         lesson: lessonCounter + 1,
         time: `${Math.ceil(rawText.length / 2000) * 3 + 5} min`,
+        sources: [sourceRef],
       })
       lessonCounter++
       continue
@@ -404,6 +483,16 @@ async function main() {
           language: noteLanguage,
           depth: noteDepth,
           planContext,
+          extractionMetadata: [
+            summarizeSourceAssets(copiedAssets),
+            `Extracted embedded assets: ${sourceDocument.extractedAssets.length}`,
+            `Visual references in source: ${sourceDocument.visualReferences.length}`,
+            `Assessment/question blocks in source: ${sourceDocument.assessmentBlocks.length}`,
+            `Routed assessment blocks: ${sourceDocument.assessmentBlocks.filter((block) => block.target === 'questions').length}`,
+            `Learning signal density: ${JSON.stringify(sourceDocument.learningSignals?.density || {})}`,
+            `Chunk learning intent: ${chunks[i].learningIntent?.label || chunks[i].learningIntent?.primary || 'study'}`,
+            `Question-like blocks in chunk: ${chunks[i].questionCandidates?.length || 0}`,
+          ].join('\n'),
         }
         const chunkSectionName = sectionName + (chunks.length > 1 ? ` (${i + 1}/${chunks.length})` : '')
 
@@ -480,6 +569,7 @@ async function main() {
       section: sectionName,
       lesson: lessonCounter + 1,
       time: `${Math.ceil(rawText.length / 2000) * 3 + 5} min`, // Becsült olvasási idő
+      sources: [sourceRef],
     })
 
     lessonCounter++

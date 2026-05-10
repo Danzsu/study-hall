@@ -3,6 +3,8 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { Clock, Play, ChevronRight, ChevronLeft, CheckCircle2, XCircle, PenLine, Sparkles, RotateCcw, Flag, Check, Minus, Plus } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
+import QuestionRenderer, { evaluateAnswer } from '../components/QuestionRenderer'
+import MarkdownText from '../components/MarkdownText'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -20,13 +22,20 @@ function fmtTime(s) {
 function mapQuestion(q, idx) {
   return {
     id: q.id || String(idx),
-    type: q.type === 'mcq' ? 'mc' : q.type === 'written' ? 'written' : 'mc',
+    type: q.type === 'written' ? 'written' : (q.type ?? 'mcq'),
     q: q.question || q.q || '',
+    question: q.question || q.q || '',
     section: q.section || q.topic || 'General',
     options: q.options || [],
     correct: typeof q.correct === 'number' ? q.correct : (q.correct_index ?? 0),
+    correctMultiple: q.correctMultiple,
     keywords: q.key_points || q.keywords || [],
     ideal: q.ideal_answer || q.explanation || '',
+    answer: q.answer,
+    blanks: q.blanks,
+    choices: q.choices,
+    formulaText: q.formulaText,
+    formulaChips: q.formulaChips,
   }
 }
 
@@ -95,7 +104,7 @@ function McQuestion({ q, answer, onAnswer, submitted, t }) {
         return (
           <button key={i} onClick={() => !submitted && onAnswer(i)} style={{ background: bg, border, borderRadius: 12, padding: '13px 16px', display: 'flex', alignItems: 'flex-start', gap: 12, cursor: submitted ? 'default' : 'pointer', textAlign: 'left', width: '100%', transition: 'all .15s' }}>
             <span style={{ width: 26, height: 26, borderRadius: 7, background: labelBg, color: labelColor, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, flexShrink: 0 }}>{labels[i]}</span>
-            <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, flex: 1, fontWeight: isSel || isCorr ? 600 : 400 }}>{opt}
+            <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, flex: 1, fontWeight: isSel || isCorr ? 600 : 400 }}><MarkdownText text={opt} />
               {isCorr && !isWrong && <span style={{ marginLeft: 6, fontSize: 11, color: C.green, fontWeight: 700 }}>✓ correct</span>}
               {isWrong && <span style={{ marginLeft: 6, fontSize: 11, color: C.red, fontWeight: 700 }}>✗ your answer</span>}
             </span>
@@ -161,7 +170,7 @@ function Configurator({ rawQuestions, onStart, t }) {
   const [shuffleQ, setShuffleQ] = useState(true)
   const [showTimer, setShowTimer] = useState(true)
 
-  const mcPool = rawQuestions.filter(q => q.type === 'mc' && activeSections.has(q.section))
+  const mcPool = rawQuestions.filter(q => q.type !== 'written' && activeSections.has(q.section))
   const wrPool = rawQuestions.filter(q => q.type === 'written' && activeSections.has(q.section))
   const safeMc = Math.min(mcCount, mcPool.length)
   const safeWr = Math.min(wrCount, wrPool.length)
@@ -184,12 +193,12 @@ function Configurator({ rawQuestions, onStart, t }) {
 
   const sectionStats = sections.map(sec => ({
     sec,
-    mc: rawQuestions.filter(q => q.type === 'mc' && q.section === sec).length,
+    mc: rawQuestions.filter(q => q.type !== 'written' && q.section === sec).length,
     wr: rawQuestions.filter(q => q.type === 'written' && q.section === sec).length,
   }))
 
   return (
-    <div style={{ maxWidth: 520, margin: '0 auto', padding: '36px 24px 80px', animation: 'examFadeUp .32s ease both' }}>
+    <div className="page-wrap" style={{ '--pw': '520px', paddingTop: 36, paddingBottom: 80, animation: 'examFadeUp .32s ease both' }}>
       <div style={{ marginBottom: 28 }}>
         <h1 style={{ fontFamily: "'Lora',serif", fontSize: 24, fontWeight: 700, letterSpacing: '-0.3px', marginBottom: 6, color: t.text }}>Configure your exam</h1>
         <p style={{ fontSize: 14, color: t.textSub, lineHeight: 1.6 }}>Choose which topics to include, set the question mix, and time limit.</p>
@@ -317,8 +326,8 @@ function ExamSession({ config, onEnd, t }) {
     setTimeout(() => { setIdx(next); setPhase('in'); requestAnimationFrame(() => requestAnimationFrame(() => setPhase('idle'))) }, 200)
   }
 
-  const typeLabel = { mc: 'MULTIPLE CHOICE', written: 'WRITTEN' }
-  const typeColor = { mc: C.accent, written: C.purple }
+  const typeLabel = { mcq: 'MULTIPLE CHOICE', multi: 'MULTI-SELECT', mc: 'MULTIPLE CHOICE', written: 'WRITTEN', true_false: 'TRUE / FALSE', fill_the_blanks: 'FILL BLANKS', drag_n_drop: 'DRAG & DROP', simple_input: 'SHORT ANSWER', formula_drag_drop: 'FORMULA', calc_input: 'CALCULATION' }
+  const typeColor = { written: C.purple, multi: C.accent, formula_drag_drop: C.blue, calc_input: C.blue }
 
   const phaseStyle = {
     idle:        { opacity: 1, transform: 'translateX(0) scale(1)' },
@@ -331,9 +340,9 @@ function ExamSession({ config, onEnd, t }) {
     : phase === 'in' ? 'none' : 'opacity .18s, transform .2s ease'
 
   if (submitted) {
-    const mcScore  = questions.filter(q => q.type === 'mc').filter(q => answers[q.id] === q.correct).length
+    const mcScore  = questions.filter(q => q.type !== 'written').filter(q => evaluateAnswer(q, answers[q.id]) === true).length
     const wrScore  = Object.values(evalResults).reduce((a, r) => a + r.score, 0)
-    const mcMax    = questions.filter(q => q.type === 'mc').length
+    const mcMax    = questions.filter(q => q.type !== 'written').length
     const wrMax    = questions.filter(q => q.type === 'written').length * 2
     const totalPts = mcScore + wrScore
     const maxPts   = mcMax + wrMax
@@ -342,7 +351,7 @@ function ExamSession({ config, onEnd, t }) {
     const gradeCol = pct >= 85 ? C.green : pct >= 70 ? C.blue : pct >= 55 ? C.gold : C.red
 
     return (
-      <div style={{ maxWidth: 560, margin: '0 auto', padding: '40px 24px 80px', animation: 'examFadeUp .36s ease' }}>
+      <div className="page-wrap" style={{ '--pw': '560px', paddingTop: 40, paddingBottom: 80, animation: 'examFadeUp .36s ease' }}>
         <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 18, padding: '28px 24px', textAlign: 'center', marginBottom: 20 }}>
           <p style={{ fontSize: 32, marginBottom: 10 }}>{pct >= 85 ? '🏆' : pct >= 70 ? '👍' : pct >= 55 ? '📈' : '💪'}</p>
           <h2 style={{ fontFamily: "'Lora',serif", fontSize: 24, fontWeight: 700, marginBottom: 6, color: t.text }}>{grade}</h2>
@@ -357,7 +366,7 @@ function ExamSession({ config, onEnd, t }) {
         <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.7px', color: t.textMuted, marginBottom: 12 }}>QUESTION REVIEW</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
           {questions.map((q, i) => {
-            const correct  = q.type === 'mc' ? answers[q.id] === q.correct : evalResults[q.id]?.grade === 'correct'
+            const correct  = q.type !== 'written' ? evaluateAnswer(q, answers[q.id]) === true : evalResults[q.id]?.grade === 'correct'
             const partial  = q.type === 'written' && evalResults[q.id]?.grade === 'partial'
             const col      = correct ? C.green : partial ? C.gold : C.red
             return (
@@ -365,7 +374,7 @@ function ExamSession({ config, onEnd, t }) {
                 <span style={{ fontSize: 10, fontWeight: 800, color: t.textMuted, flexShrink: 0, minWidth: 20 }}>#{i+1}</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 3 }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: typeColor[q.type], background: `${typeColor[q.type]}14`, border: `1px solid ${typeColor[q.type]}28`, borderRadius: 20, padding: '1px 7px' }}>{typeLabel[q.type]}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: (typeColor[q.type] ?? C.accent), background: `${(typeColor[q.type] ?? C.accent)}14`, border: `1px solid ${(typeColor[q.type] ?? C.accent)}28`, borderRadius: 20, padding: '1px 7px' }}>{(typeLabel[q.type] ?? q.type.replace(/_/g, ' ').toUpperCase())}</span>
                     {correct ? <CheckCircle2 size={13} style={{ color: C.green }}/> : partial ? <span style={{ fontSize: 11, color: C.gold, fontWeight: 700 }}>Partial</span> : <XCircle size={13} style={{ color: C.red }}/>}
                   </div>
                   <p style={{ fontSize: 12, color: t.textSub, lineHeight: 1.4 }}>{q.q}</p>
@@ -389,7 +398,7 @@ function ExamSession({ config, onEnd, t }) {
   }
 
   return (
-    <div style={{ maxWidth: 640, margin: '0 auto', padding: '28px 24px 120px' }}>
+    <div className="page-wrap" style={{ '--pw': '640px', paddingTop: 28, paddingBottom: 120 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
         <div style={{ flex: 1, height: 3, background: t.border, borderRadius: 99, overflow: 'hidden' }}>
           <div style={{ width: `${((idx + 1) / questions.length) * 100}%`, height: '100%', background: C.accent, borderRadius: 99, transition: 'width .4s cubic-bezier(0.22,1,0.36,1)' }}/>
@@ -413,18 +422,22 @@ function ExamSession({ config, onEnd, t }) {
           <div style={{ padding: '16px 20px 14px', borderBottom: `1px solid ${t.border}` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.7px', color: typeColor[q.type] }}>{typeLabel[q.type]}</span>
+                <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.7px', color: (typeColor[q.type] ?? C.accent) }}>{(typeLabel[q.type] ?? q.type.replace(/_/g, ' ').toUpperCase())}</span>
                 <span style={{ fontSize: 10, color: t.textMuted }}>{q.section}</span>
               </div>
               <button onClick={() => setFlagged(p => ({ ...p, [q.id]: !p[q.id] }))} style={{ background: isFlagged ? C.goldBg : 'none', border: `1px solid ${isFlagged ? C.gold + '50' : t.border}`, borderRadius: 7, padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, color: isFlagged ? C.gold : t.textMuted, fontSize: 11, fontWeight: 700, fontFamily: 'inherit' }}>
                 <Flag size={11}/>{isFlagged ? 'Flagged' : 'Flag'}
               </button>
             </div>
-            <h2 style={{ fontFamily: "'Lora',serif", fontSize: 18, fontWeight: 700, lineHeight: 1.48, color: t.text }}>{q.q}</h2>
+            <h2 style={{ fontFamily: "'Lora',serif", fontSize: 18, fontWeight: 700, lineHeight: 1.48, color: t.text }}><MarkdownText text={q.q} /></h2>
           </div>
           <div style={{ padding: '18px 20px' }}>
-            {q.type === 'mc' && <McQuestion q={q} answer={answers[q.id]} onAnswer={v => setAnswers(p => ({ ...p, [q.id]: v }))} submitted={false} t={t}/>}
-            {q.type === 'written' && <WrittenQuestion q={q} answer={answers[q.id]} onAnswer={v => setAnswers(p => ({ ...p, [q.id]: v }))} submitted={false} evalResult={null} t={t}/>}
+            {q.type === 'written'
+              ? <WrittenQuestion q={q} answer={answers[q.id]} onAnswer={v => setAnswers(p => ({ ...p, [q.id]: v }))} submitted={false} evalResult={null} t={t}/>
+              : (q.type === 'mcq' || q.type === 'multi')
+                ? <McQuestion q={q} answer={answers[q.id]} onAnswer={v => setAnswers(p => ({ ...p, [q.id]: v }))} submitted={false} t={t}/>
+                : <QuestionRenderer q={q} selected={answers[q.id]} onSelect={v => setAnswers(p => ({ ...p, [q.id]: v }))} submitted={false} t={t}/>
+            }
           </div>
         </div>
       </div>

@@ -2,9 +2,10 @@
 
 - Already landed: shared content plan, quality report, provider-aware rate limiting, `scripts/check-backend.js`, `app/api/health`, and `vercel.json` timeout for `validate-answer`.
 - Also landed: written-answer runtime hardening with payload/field guards, optional rubric support, and a stable remote/local response shape.
+- New backend batch landed: source intelligence learning signals, chunk learning intent, routed assessment metadata, structured concept/objective/coverage plan schema, and concept-aware question metadata.
 - Live validation: backend smoke-check passes against `localhost:3000`.
-- Still open: make the shared plan more structured, add stronger coverage/rubric metadata, and keep the run-level budget policy explicit.
-- Next: structured plan schema, continuity-aware notes generation, quiz coverage matrix, and rubric-based written grading.
+- Still open: add stronger validation gates for coverage, visual-reference preservation, rubric metadata, and run-level budget policy.
+- Next: concept coverage validation, continuity-aware notes generation, visual preservation checks, duplicate/thin question checks, and rubric-based written grading.
 
 # Agentic AI workflow improvement notes
 

@@ -229,14 +229,27 @@ What it tracks:
 - heading and paragraph boundaries
 - larger semantic chunks
 - overlap from previous context
+- learning intent per chunk: concept review, definition review, example grounding, question practice, or general study
+- concept, definition, example, and question signals for downstream generators
 - visual candidates such as figures, diagrams, tables, equations, code, and architecture blocks
+- assessment/question candidates such as control questions, quiz blocks, ZH/exam prompts, and self-check sections
 - artifact metadata for later diagram/image generation
+- source asset manifests under `content/<slug>/sources/assets/<source>/manifest.json`
 
 Artifact output:
 
 ```bash
 content/<slug>/notes/artifacts/<lesson>.json
+content/<slug>/sources/assets/<source>/manifest.json
 ```
+
+Source-intelligence behavior:
+- PDF/DOCX/MD/TXT text is normalized through one shared extraction layer.
+- DOCX embedded images are copied into `content/<slug>/sources/assets/<source>/`.
+- PDF figures that cannot be extracted by the current dependency set are still preserved as visual references in the manifest.
+- If a lesson source contains explicit control questions, quiz prompts, ZH/exam text, or self-check questions, the question generator routes only high-confidence blocks into `questions.json` generation.
+- Weak question-like lines are preserved as `notes-review` metadata so rhetorical lecture questions do not automatically become quiz items.
+- Existing image files placed near sources are copied into `content/<slug>/source-assets/` for stable local preservation.
 
 Note generation profile:
 
@@ -307,7 +320,9 @@ Generated files:
 - `content/<slug>/quality-report.json`
 
 The plan is a shared planning artifact for notes, questions, flashcards, and glossary generation.
+It now includes structured concepts, learning objectives, a coverage matrix, extraction quality, routed assessment counts, and LLM budget metadata.
 The quality report is a heuristic check for coverage, completeness, and basic schema health.
+It warns when generated questions are not linked back to enough planned concept ids.
 
 ## Backend smoke check
 

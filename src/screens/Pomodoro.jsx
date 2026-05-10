@@ -83,7 +83,7 @@ function PomodoroSettings({ focusMins: initFocus, breakMins: initBreak, totalRou
   const [tr, setTr] = useState(initRounds)
 
   return (
-    <div style={{ maxWidth: 440, margin: '0 auto', padding: '40px 24px' }}>
+    <div className="page-wrap" style={{ '--pw': '440px', paddingTop: 40, paddingBottom: 40 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 32 }}>
         <Stepper label="FOCUS" value={fm} unit="min" min={5} max={90} onChange={setFm} t={t} accentColor={C.accent}/>
         <Stepper label="BREAK" value={bm} unit="min" min={1} max={30} onChange={setBm} t={t} accentColor={C.green}/>

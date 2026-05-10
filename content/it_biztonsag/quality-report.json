@@ -4,7 +4,7 @@
     "slug": "it_biztonsag",
     "name": "IT Biztonság"
   },
-  "generatedAt": "2026-04-19T13:05:33.099Z",
+  "generatedAt": "2026-04-20T14:15:33.485Z",
   "status": "pass",
   "score": 95,
   "checks": [
@@ -47,11 +47,22 @@
       "name": "plan_artifact",
       "status": "pass",
       "detail": "Plan has 36 concepts and 18 objectives"
+    },
+    {
+      "name": "structured_plan_contract",
+      "status": "pass",
+      "detail": "36 structured concepts, 20 objectives, 30 coverage rows"
+    },
+    {
+      "name": "question_concept_coverage",
+      "status": "warn",
+      "detail": "0/30 planned concepts linked from generated questions"
     }
   ],
   "issues": [],
   "warnings": [
-    "Questions count is below the planned target."
+    "Questions count is below the planned target.",
+    "Generated questions do not yet cover enough planned concept ids."
   ],
   "recommendations": [
     "Increase assessment coverage, especially written questions."
@@ -60,7 +71,10 @@
     "lessonSources": 18,
     "testSources": 7,
     "conceptInventory": 36,
-    "learningObjectives": 18
+    "learningObjectives": 18,
+    "structuredConcepts": 36,
+    "objectives": 20,
+    "coverageRows": 30
   },
   "content": {
     "notes": 18,
@@ -81,7 +95,7 @@
         "maxRequestsPerHour": 45,
         "usedLastHour": 0,
         "remainingLastHour": 45,
-        "nextAvailableAt": 1776603273857
+        "nextAvailableAt": 1776694448362
       },
       "openrouter": {
         "provider": "openrouter",
@@ -90,7 +104,7 @@
         "maxRequestsPerHour": 90,
         "usedLastHour": 0,
         "remainingLastHour": 90,
-        "nextAvailableAt": 1776603273857
+        "nextAvailableAt": 1776694448362
       }
     }
   }

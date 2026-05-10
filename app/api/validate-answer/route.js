@@ -235,6 +235,29 @@ function localFallback({ model_answer, key_points, user_answer, rubric }) {
   }
 }
 
+async function callGoogle(prompt, signal) {
+  if (!process.env.GOOGLE_AI_KEY) return null
+
+  const res = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.GOOGLE_AI_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    signal,
+    body: JSON.stringify({
+      model: process.env.GOOGLE_STANDARD_MODELS?.split(',')[0]?.trim() || 'gemini-2.5-flash-lite',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.3,
+      max_tokens: 800,
+    }),
+  })
+
+  if (!res.ok) throw new Error(`Google ${res.status}: ${await res.text()}`)
+  const data = await res.json()
+  return normalizeModelResult(parseJsonContent(data.choices?.[0]?.message?.content ?? '{}'))
+}
+
 async function callGroq(prompt, signal) {
   if (!process.env.GROQ_API_KEY) return null
 
@@ -304,6 +327,20 @@ export async function POST(req) {
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
   try {
+    try {
+      const googleResult = await callGoogle(prompt, controller.signal)
+      if (googleResult) {
+        return NextResponse.json(buildResponseShape({
+          payload: normalizedPayload,
+          result: googleResult,
+          provider: 'google',
+          model: process.env.GOOGLE_STANDARD_MODELS?.split(',')[0]?.trim() || 'gemini-2.5-flash-lite',
+        }))
+      }
+    } catch (err) {
+      errors.push(String(err.message || err))
+    }
+
     try {
       const groqResult = await callGroq(prompt, controller.signal)
       if (groqResult) {

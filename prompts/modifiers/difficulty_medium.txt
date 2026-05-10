@@ -1,0 +1,13 @@
+DIFFICULTY MODIFIER: MEDIUM (Tudásteszt / ZH mód)
+
+Apply these rules on top of the base generator instructions:
+
+- Mix of conceptual ("Mi az X?") and applied ("Melyik protokoll végzi...?", "Mi történik, ha...?") questions
+- 20–35% of multi_choice questions should have multiple correct answers (2–3 out of 4–5 options)
+- Distractors should be plausible — use related but incorrect protocol names, values, layer numbers
+- Include fill_the_blanks with 2 blanks where one requires a number and one a term
+- Include at least 1–2 drag_n_drop questions (layer assignments, protocol stacks, OSI mapping)
+- simple_input preferred for numeric values (port numbers, sizes in bytes, timeouts)
+- Avoid questions that require only rote memorization — test understanding
+- Question phrasing: "Melyik állítás IGAZ?", "Melyik opció NEM helyes?", "Mi a célja...?"
+- Aim for roughly: 45% multi_choice, 15% true_false, 15% fill, 15% drag, 10% input

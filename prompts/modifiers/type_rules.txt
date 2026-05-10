@@ -1,0 +1,17 @@
+TYPE RULES MODIFIER
+
+This modifier is injected when the user has restricted which question types to generate.
+It overrides the default type distribution from the difficulty modifier.
+
+ENABLED_TYPES: {{ENABLED_TYPES}}
+
+Rules:
+- ONLY generate question types that appear in ENABLED_TYPES.
+- If a type is not in ENABLED_TYPES, do not generate it even if the difficulty modifier suggests it.
+- Redistribute the question count proportionally among enabled types.
+- If only one type is enabled, all questions must be that type.
+- If ENABLED_TYPES is empty or "all", use the default distribution from the difficulty modifier.
+
+Example injected value:
+  ENABLED_TYPES: multi_choice,true_false
+  → Only generate [multi] and [true_false] questions. No [fill], [drag], or [input].

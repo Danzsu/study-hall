@@ -423,7 +423,7 @@ export default function WrongAnswers({ subjectId }) {
         @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
         @keyframes explanationIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
       `}</style>
-      <main style={{ maxWidth: 640, margin: '0 auto', padding: '40px 24px 80px' }}>
+      <main className="page-wrap" style={{ '--pw': '640px', paddingTop: 40, paddingBottom: 80 }}>
         {done ? (
           <SessionResults
             questions={questions} results={results} t={t}

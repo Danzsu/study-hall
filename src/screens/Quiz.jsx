@@ -8,6 +8,8 @@ import {
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
 import { playSound } from '../sounds'
+import QuestionRenderer, { evaluateAnswer, hasValidSelection } from '../components/QuestionRenderer'
+import MarkdownText from '../components/MarkdownText'
 
 const LABELS = ['A', 'B', 'C', 'D']
 
@@ -61,10 +63,11 @@ function Progress({ total, current, results, t }) {
 
 function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit, onNext, phase, t }) {
   const isMulti = q.type === 'multi'
+  const isMcqType = q.type === 'mcq' || q.type === 'multi'
   const selectedList = Array.isArray(selected) ? selected : selected == null ? [] : [selected]
   const correctList = isMulti ? (q.correctMultiple ?? []) : [q.correct]
-  const hasSelection = isMulti ? selectedList.length > 0 : selected !== null
-  const isCorrect = submitted && (isMulti ? sameSet(selectedList, correctList) : selected === q.correct)
+  const hasSelection = hasValidSelection(q, selected)
+  const isCorrect = submitted && (evaluateAnswer(q, selected) === true)
   const buttonLabel = !submitted ? 'Submit' : qIdx < total - 1 ? 'Next question ->' : 'See results ->'
 
   const phaseStyle = {
@@ -113,64 +116,68 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
         fontSize: 19, fontWeight: 700, lineHeight: 1.5,
         letterSpacing: '-0.2px', marginBottom: 24, color: t.text,
       }}>
-        {q.q}
+        <MarkdownText text={q.q} />
       </h2>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-        {(q.options || []).map((opt, oi) => {
-          const isSelected   = selectedList.includes(oi)
-          const isCorrectOpt = submitted && correctList.includes(oi)
-          const isWrongOpt   = submitted && isSelected && !correctList.includes(oi)
+      {isMcqType ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+          {(q.options || []).map((opt, oi) => {
+            const isSelected   = selectedList.includes(oi)
+            const isCorrectOpt = submitted && correctList.includes(oi)
+            const isWrongOpt   = submitted && isSelected && !correctList.includes(oi)
 
-          let bg, border, labelBg, labelColor
-          if (isCorrectOpt) {
-            bg = `${C.green}14`; border = `2px solid ${C.green}70`
-            labelBg = C.green; labelColor = '#fff'
-          } else if (isWrongOpt) {
-            bg = `${C.red}10`; border = `2px solid ${C.red}60`
-            labelBg = C.red; labelColor = '#fff'
-          } else if (isSelected && !submitted) {
-            bg = `${C.accent}16`; border = `2px solid ${C.accent}`
-            labelBg = C.accent; labelColor = '#fff'
-          } else {
-            bg = t.surface; border = `1.5px solid ${t.border}`
-            labelBg = t.surface2; labelColor = t.textMuted
-          }
+            let bg, border, labelBg, labelColor
+            if (isCorrectOpt) {
+              bg = `${C.green}14`; border = `2px solid ${C.green}70`
+              labelBg = C.green; labelColor = '#fff'
+            } else if (isWrongOpt) {
+              bg = `${C.red}10`; border = `2px solid ${C.red}60`
+              labelBg = C.red; labelColor = '#fff'
+            } else if (isSelected && !submitted) {
+              bg = `${C.accent}16`; border = `2px solid ${C.accent}`
+              labelBg = C.accent; labelColor = '#fff'
+            } else {
+              bg = t.surface; border = `1.5px solid ${t.border}`
+              labelBg = t.surface2; labelColor = t.textMuted
+            }
 
-          return (
-            <button
-              key={oi}
-              onClick={() => !submitted && onSelect(isMulti
-                ? (isSelected ? selectedList.filter(v => v !== oi) : [...selectedList, oi])
-                : oi
-              )}
-              style={{
-                background: bg, border, borderRadius: 12,
-                padding: '14px 16px',
-                display: 'flex', alignItems: 'flex-start', gap: 12,
-                cursor: submitted ? 'default' : 'pointer',
-                textAlign: 'left', width: '100%',
-                transition: 'all 0.15s ease',
-              }}
-              onMouseEnter={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = `${C.accent}60` }}
-              onMouseLeave={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = t.border }}
-            >
-              <span style={{
-                width: 28, height: 28, borderRadius: 7, flexShrink: 0,
-                background: labelBg, color: labelColor,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 11, fontWeight: 800, transition: 'all 0.15s',
-              }}>{LABELS[oi]}</span>
-              <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, fontWeight: isCorrectOpt ? 600 : 400, flex: 1 }}>
-                {opt}
-                {isCorrectOpt && !isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.green, fontWeight: 700 }}>correct</span>}
-                {isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.red, fontWeight: 700 }}>your answer</span>}
-              </span>
-              {isCorrectOpt && <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 2 }} />}
-            </button>
-          )
-        })}
-      </div>
+            return (
+              <button
+                key={oi}
+                onClick={() => !submitted && onSelect(isMulti
+                  ? (isSelected ? selectedList.filter(v => v !== oi) : [...selectedList, oi])
+                  : oi
+                )}
+                style={{
+                  background: bg, border, borderRadius: 12,
+                  padding: '14px 16px',
+                  display: 'flex', alignItems: 'flex-start', gap: 12,
+                  cursor: submitted ? 'default' : 'pointer',
+                  textAlign: 'left', width: '100%',
+                  transition: 'all 0.15s ease',
+                }}
+                onMouseEnter={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = `${C.accent}60` }}
+                onMouseLeave={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = t.border }}
+              >
+                <span style={{
+                  width: 28, height: 28, borderRadius: 7, flexShrink: 0,
+                  background: labelBg, color: labelColor,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 11, fontWeight: 800, transition: 'all 0.15s',
+                }}>{LABELS[oi]}</span>
+                <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, fontWeight: isCorrectOpt ? 600 : 400, flex: 1 }}>
+                  <MarkdownText text={opt} />
+                  {isCorrectOpt && !isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.green, fontWeight: 700 }}>correct</span>}
+                  {isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.red, fontWeight: 700 }}>your answer</span>}
+                </span>
+                {isCorrectOpt && <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 2 }} />}
+              </button>
+            )
+          })}
+        </div>
+      ) : (
+        <QuestionRenderer q={q} selected={selected} onSelect={onSelect} submitted={submitted} t={t} />
+      )}
 
       {submitted && q.explain && (
         <div style={{
@@ -190,7 +197,7 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
             <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.5px', color: isCorrect ? C.green : C.red, marginBottom: 4 }}>
               {isCorrect ? 'CORRECT - well done!' : 'INCORRECT - review this'}
             </p>
-            <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.6 }}>{q.explain}</p>
+            <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.6 }}><MarkdownText text={q.explain} /></p>
           </div>
         </div>
       )}
@@ -525,7 +532,7 @@ export default function Quiz({ subjectId, section }) {
     fetch(`/api/questions/${subjectId}${qs}`)
       .then(r => r.json())
       .then(data => {
-        const mcOnly = data.filter(q => (q.type === 'mc' || q.type === 'mcq' || q.type === 'multi') && q.options?.length > 0)
+        const mcOnly = data.filter(q => q.type !== 'written')
         setAllQuestions(mcOnly)
         setQuestions(mcOnly.slice(0, 20))
       })
@@ -536,15 +543,12 @@ export default function Quiz({ subjectId, section }) {
   const busy = phase !== 'idle'
 
   const handleSubmit = () => {
-    const hasSelection = Array.isArray(selected) ? selected.length > 0 : selected !== null
-    if (!hasSelection || submitted) return
+    if (!hasValidSelection(q, selected) || submitted) return
     setSubmitted(true)
     setAnswers(p => ({ ...p, [q.id]: selected }))
-    const correct = q.type === 'multi'
-      ? sameSet(selected, q.correctMultiple ?? [])
-      : selected === q.correct
-    playSound(correct ? 'correct' : 'wrong')
-    setResults(r => [...r, correct ? 'correct' : 'wrong'])
+    const correct = evaluateAnswer(q, selected)
+    playSound(correct !== false ? 'correct' : 'wrong')
+    setResults(r => [...r, correct !== false ? 'correct' : 'wrong'])
   }
 
   const handleNext = () => {
@@ -581,7 +585,7 @@ export default function Quiz({ subjectId, section }) {
         @keyframes explanationIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
         @keyframes arcGrow { from{stroke-dasharray:0 327} to{stroke-dasharray:var(--dash,0) 327} }
       `}</style>
-      <main style={{ maxWidth: 640, margin: '0 auto', padding: '40px 24px 80px' }}>
+      <main className="page-wrap" style={{ '--pw': '640px', paddingTop: 40, paddingBottom: 80 }}>
         {done ? (
           <ResultsView
             questions={questions}

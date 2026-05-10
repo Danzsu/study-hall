@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { TopBar, TabBar } from './shell'
+import { TopBar } from './shell'
 import { useStore, useTheme, store } from './store'
 import { FONT_SANS } from './theme'
 
@@ -70,10 +70,9 @@ export default function RouteShell({ route = '/home', slug, subjectName, lesson,
   return (
     <div style={{ minHeight: '100vh', background: t.bg, color: t.text, fontFamily: FONT_SANS, transition: 'background .3s, color .3s' }}>
       {!noChrome && <TopBar crumbs={crumbs} />}
-      <div style={{ paddingBottom: noChrome ? 0 : 80 }}>
+      <div style={{ paddingBottom: noChrome ? 0 : 24 }}>
         {children}
       </div>
-      {!noChrome && <TabBar />}
     </div>
   )
 }

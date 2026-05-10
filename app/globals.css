@@ -256,6 +256,41 @@
   .font-serif { font-family: 'Lora', Georgia, serif; }
   .font-mono  { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
+  /* Responsive page content container — use className="page-wrap", override --pw for max-width */
+  .page-wrap {
+    width: 100%;
+    max-width: var(--pw, 820px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(16px, 4vw, 40px);
+    padding-right: clamp(16px, 4vw, 40px);
+  }
+
+  /* ── Mobile ──────────────────────────────────────────────────────────── */
+  @media (max-width: 767px) {
+    /* TopBar nav: leave absolute centering, but allow horizontal scroll */
+    .topbar-nav {
+      max-width: calc(100vw - 180px);
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .topbar-nav::-webkit-scrollbar { display: none; }
+    .topbar-nav button { white-space: nowrap; }
+
+    /* Page content: tighter padding on mobile */
+    .page-wrap {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+  }
+
+  /* Very small screens: icons only in nav */
+  @media (max-width: 480px) {
+    .topbar-nav .nav-label { display: none; }
+    .topbar-nav button { padding: 6px 10px !important; }
+  }
+
   /* Callout variants */
   .callout {
     border-radius: 0 10px 10px 0;

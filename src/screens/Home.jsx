@@ -221,7 +221,7 @@ export default function Home() {
   const dash = (pctTotal / 100) * circ
 
   return (
-    <main style={{ maxWidth: 780, margin: '0 auto', padding: '32px 24px 80px' }}>
+    <main className="page-wrap" style={{ paddingTop: 32, paddingBottom: 80 }}>
 
       {/* SUMMARY BANNER */}
       <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 16, padding: '24px', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 24 }}>

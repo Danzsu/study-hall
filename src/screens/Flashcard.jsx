@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Check, X, RotateCcw } from 'lucide-react'
 import { useTheme, useStore } from '../store'
 import { C } from '../theme'
+import MarkdownText from '../components/MarkdownText'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -99,14 +100,14 @@ function Card({ card, flipped, phase, onFlip, t }) {
               fontWeight: 700, lineHeight: 1.3, color: t.text, marginBottom: 14,
               letterSpacing: '-0.3px', maxWidth: 360,
             }}>
-              {card.full}
+              <MarkdownText text={card.full} />
             </p>
           )}
           <p style={{
             fontFamily: "'Lora', Georgia, serif",
             fontSize: 14.5, color: t.textSub, lineHeight: 1.75, fontStyle: 'italic', maxWidth: 360,
           }}>
-            {card.def}
+            <MarkdownText text={card.def} />
           </p>
           <span style={{
             position: 'absolute', bottom: 18, fontSize: 11, color: t.textMuted, fontFamily: "'DM Sans', system-ui",
@@ -303,7 +304,7 @@ export default function Flashcard({ subjectId }) {
         .btns.on  { opacity:1; transform:translateY(0);    pointer-events:auto; }
       `}</style>
 
-      <main style={{ maxWidth: 500, margin: '0 auto', padding: '40px 24px 80px' }}>
+      <main className="page-wrap" style={{ '--pw': '500px', paddingTop: 40, paddingBottom: 80 }}>
         {/* Subject context */}
         {subjectName && (
           <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.6px', color: t.textMuted, marginBottom: 16, textAlign: 'center' }}>

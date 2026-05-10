@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import {
   Home, Layers, AlertTriangle, BookOpen,
-  Search, Moon, Sun, Settings,
+  Search, Moon, Sun, Settings, GraduationCap,
 } from 'lucide-react'
 import { useStore, useTheme, navigate, store } from './store'
 import { FONT_SANS, FONT_MONO } from './theme'
@@ -36,36 +36,57 @@ function readPreferredSubjectId() {
   }
 }
 
+const SUBJECT_ROUTES = /^\/(?:subject|study|quiz|review|wrong-answers|flashcards|written|glossary|exam|search)\/([^/?]+)/
+
+function readSubjectFromUrl() {
+  if (typeof window === 'undefined') return ''
+  const m = window.location.pathname.match(SUBJECT_ROUTES)
+  return m ? decodeURIComponent(m[1]) : ''
+}
+
 function usePreferredSubjectId(params) {
-  const [fallbackSubjectId, setFallbackSubjectId] = useState('')
+  const [fallbackSubjectId, setFallbackSubjectId] = useState(() =>
+    readPreferredSubjectId() || readSubjectFromUrl()
+  )
 
   useEffect(() => {
+    if (fallbackSubjectId) return
     let cancelled = false
-    const onboardedSubject = readPreferredSubjectId()
-
-    if (onboardedSubject) {
-      setFallbackSubjectId(onboardedSubject)
-      return
-    }
-
     fetch('/api/subjects')
       .then(r => r.json())
       .then(data => {
         if (!cancelled) setFallbackSubjectId(data?.[0]?.id || data?.[0]?.slug || '')
       })
       .catch(() => {})
-
     return () => { cancelled = true }
-  }, [])
+  }, [fallbackSubjectId])
 
   return params?.id || params?.slug || fallbackSubjectId
 }
+
+const NAV_TABS = [
+  { path: '/home',          label: 'Home',        Icon: Home },
+  { path: '/subject',       label: 'Study Hall',  Icon: GraduationCap },
+  { path: '/review',        label: 'Review',      Icon: Layers },
+  { path: '/wrong-answers', label: 'Mistakes',    Icon: AlertTriangle },
+  { path: '/glossary',      label: 'Glossary',    Icon: BookOpen },
+]
 
 export function TopBar({ crumbs = [], right }) {
   const t = useTheme()
   const s = useStore()
   const subjectId = usePreferredSubjectId(s.params)
   const pom = s.pomodoro
+  const navRef = useRef(null)
+  const [pill, setPill] = useState(null)
+
+  useLayoutEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+    const active = nav.querySelector('[data-active="true"]')
+    if (!active) { setPill(null); return }
+    setPill({ left: active.offsetLeft, width: active.offsetWidth })
+  }, [s.route])
   const pomPct = pom.mode === 'focus'
     ? (1 - pom.secondsLeft / (25 * 60))
     : (1 - pom.secondsLeft / (5 * 60))
@@ -77,37 +98,81 @@ export function TopBar({ crumbs = [], right }) {
       padding: '0 20px', gap: 14, position: 'sticky', top: 0, zIndex: 100,
       fontFamily: FONT_SANS,
     }}>
+      {/* Logo */}
       <div
         onClick={() => navigate('/home')}
-        style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
+        style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', flexShrink: 0 }}
       >
-        <img src="/assets/mascot-plain.png" alt="" style={{ width: 26, height: 26, objectFit: 'contain' }} />
-        <span style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-0.3px', color: t.text }}>
+        <img src="/assets/mascot-plain.png" alt="" style={{ width: 96, height: 96, objectFit: 'contain' }} />
+        <span style={{ fontWeight: 800, fontSize: 16, letterSpacing: '-0.3px', color: t.text }}>
           Study Hall
         </span>
       </div>
 
-      {crumbs.length > 0 && <>
-        <span style={{ color: t.border2, fontSize: 16 }}>›</span>
-        {crumbs.map((c, i) => (
-          <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span
-              onClick={c.href ? () => navigate(c.href) : undefined}
+      {/* Center nav */}
+      <nav ref={navRef} className="topbar-nav" style={{
+        position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+        display: 'flex', alignItems: 'center', gap: 2,
+        background: t.surface2, border: `1px solid ${t.border}`,
+        borderRadius: 99, padding: '3px',
+      }}>
+        {pill && (
+          <div style={{
+            position: 'absolute', top: 3, bottom: 3,
+            left: pill.left, width: pill.width,
+            background: t.surface, borderRadius: 99,
+            boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+            transition: 'left .22s cubic-bezier(0.22,1,0.36,1), width .22s cubic-bezier(0.22,1,0.36,1)',
+            pointerEvents: 'none',
+          }} />
+        )}
+        {NAV_TABS.map(({ path, label, Icon }) => {
+          const on = s.route === path || s.route.startsWith(path + '/')
+          const disabled = path !== '/home' && !subjectId
+          return (
+            <button
+              key={path}
+              data-active={on ? 'true' : null}
+              onClick={() => !disabled && navigate(path, subjectId ? { id: subjectId } : {})}
               style={{
-                fontSize: 13,
-                color: i === crumbs.length - 1 ? t.text : t.textSub,
-                fontWeight: i === crumbs.length - 1 ? 600 : 500,
-                cursor: c.href ? 'pointer' : 'default',
+                display: 'flex', alignItems: 'center', gap: 6,
+                padding: '6px 12px', borderRadius: 99,
+                border: 'none', cursor: 'pointer',
+                background: 'transparent',
+                color: on ? t.accent : t.textSub,
+                opacity: disabled ? 0.4 : 1,
+                fontWeight: on ? 700 : 500, fontSize: 12.5, fontFamily: FONT_SANS,
+                position: 'relative', zIndex: 1,
+                transition: 'color .15s',
               }}
-            >{c.label}</span>
-            {i < crumbs.length - 1 && <span style={{ color: t.border2, fontSize: 16 }}>›</span>}
-          </span>
-        ))}
-      </>}
+            >
+              <Icon size={13} />
+              <span className="nav-label">{label}</span>
+            </button>
+          )
+        })}
+      </nav>
 
+      {/* Right icons */}
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
         {right}
-        {/* Pomodoro mini */}
+        {crumbs.length > 0 && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginRight: 4 }}>
+            {crumbs.map((c, i) => (
+              <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                {i > 0 && <span style={{ color: t.border2, fontSize: 14 }}>›</span>}
+                <span
+                  onClick={c.href ? () => navigate(c.href) : undefined}
+                  style={{
+                    fontSize: 12, color: i === crumbs.length - 1 ? t.text : t.textSub,
+                    fontWeight: i === crumbs.length - 1 ? 600 : 500,
+                    cursor: c.href ? 'pointer' : 'default',
+                  }}
+                >{c.label}</span>
+              </span>
+            ))}
+          </div>
+        )}
         <button
           onClick={() => navigate('/pomodoro')}
           style={{

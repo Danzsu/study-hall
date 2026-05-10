@@ -1,0 +1,14 @@
+DIFFICULTY MODIFIER: EASY (Tanulási mód)
+
+Apply these rules on top of the base generator instructions:
+
+- Focus on definitions, basic concepts, and memorization ("Mi az X?", "Mit jelent Y?")
+- Prefer single correct-answer multi_choice questions
+- Distractors should be clearly distinguishable from the correct answer (not tricky)
+- Prefer true_false questions for straightforward factual claims
+- Avoid multi-step reasoning or application questions
+- Fill-in-the-blank answers should be single well-known terms (not numbers or formulas)
+- If a concept has a commonly used Hungarian name, use that in the question
+- Question length: keep titles short and direct
+- Aim for roughly: 50% multi_choice, 30% true_false, 10% fill, 10% input
+- Do not generate drag_n_drop questions in easy mode

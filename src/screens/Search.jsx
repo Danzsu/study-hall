@@ -289,7 +289,7 @@ export default function SearchScreen({ subjectId }) {
         @keyframes searchFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
         .search-card{animation:searchFade .26s ease both}
       `}</style>
-      <main style={{ maxWidth: 860, margin: '0 auto', padding: '34px 24px 96px' }}>
+      <main className="page-wrap" style={{ '--pw': '860px', paddingTop: 34, paddingBottom: 96 }}>
         <div style={{ marginBottom: 26 }}>
           <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: t.textMuted, marginBottom: 8 }}>SEARCH</p>
           <h1 style={{ fontFamily: FONT_SERIF, fontSize: 30, fontWeight: 700, letterSpacing: '-0.5px', color: t.text, marginBottom: 6 }}>

@@ -112,6 +112,20 @@ _QUESTION_MODELS = {
 }
 
 
+def _normalize_question_payload(raw: dict, q_type: str) -> dict:
+    payload = dict(raw)
+    payload["question"] = payload.get("question") or payload.get("q") or ""
+    if q_type == "written":
+        payload["model_answer"] = payload.get("model_answer") or payload.get("model_answer_text") or payload.get("ideal") or payload.get("answer") or ""
+        payload["key_points"] = payload.get("key_points") or payload.get("keywords") or payload.get("keyPoints") or []
+    else:
+        payload["options"] = payload.get("options") or payload.get("opts") or []
+        if "correct" not in payload and "answer" in payload:
+            payload["correct"] = payload["answer"]
+        payload["explanation"] = payload.get("explanation") or payload.get("explain") or ""
+    return payload
+
+
 def parse_question(raw: dict, idx: int, existing_count: int) -> dict | None:
     """Validate a raw question dict via Pydantic. Returns None on failure."""
     q_type = str(raw.get("type", "mcq")).lower().strip()
@@ -120,7 +134,7 @@ def parse_question(raw: dict, idx: int, existing_count: int) -> dict | None:
         print(f"  Skipping unknown question type '{q_type}' at index {idx}")
         return None
     try:
-        obj = model_cls(**raw)
+        obj = model_cls(**_normalize_question_payload(raw, q_type))
         d = obj.model_dump()
         d["id"] = f"q{existing_count + idx + 1}"
         return d
@@ -129,10 +143,17 @@ def parse_question(raw: dict, idx: int, existing_count: int) -> dict | None:
         return None
 
 
+def _normalize_flashcard_payload(raw: dict) -> dict:
+    payload = dict(raw)
+    payload["question"] = payload.get("question") or payload.get("front") or payload.get("term") or payload.get("full") or ""
+    payload["answer"] = payload.get("answer") or payload.get("back") or payload.get("definition") or payload.get("def") or ""
+    return payload
+
+
 def parse_flashcard(raw: dict, idx: int, existing_count: int) -> dict | None:
     """Validate a raw flashcard dict. Returns None on failure."""
     try:
-        obj = Flashcard(**raw)
+        obj = Flashcard(**_normalize_flashcard_payload(raw))
         d = obj.model_dump()
         d["id"] = f"fc{existing_count + idx + 1}"
         return d
@@ -141,10 +162,18 @@ def parse_flashcard(raw: dict, idx: int, existing_count: int) -> dict | None:
         return None
 
 
+def _normalize_glossary_payload(raw: dict) -> dict:
+    payload = dict(raw)
+    payload["term"] = payload.get("term") or payload.get("full") or payload.get("front") or ""
+    payload["definition"] = payload.get("definition") or payload.get("def") or payload.get("back") or ""
+    payload["category"] = payload.get("category") or payload.get("section") or "General"
+    return payload
+
+
 def parse_glossary_term(raw: dict, idx: int, existing_count: int) -> dict | None:
     """Validate a raw glossary term dict. Returns None on failure."""
     try:
-        obj = GlossaryTerm(**raw)
+        obj = GlossaryTerm(**_normalize_glossary_payload(raw))
         d = obj.model_dump()
         d["id"] = f"g{existing_count + idx + 1}"
         return d

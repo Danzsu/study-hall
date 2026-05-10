@@ -1,9 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const mammoth = require('mammoth')
-const { extractPdfText } = require('./pdf-text')
 const { getProviderBudgetSnapshot, getPreferredProviders } = require('./llm-rate-limit')
 const { readJSON, titleFromSlug, writeJSON } = require('./content-utils')
+const { readSourceDocument } = require('./source-intelligence')
 
 const ROOT = path.join(__dirname, '..')
 const STORAGE_ROOT = path.join(ROOT, 'storage', 'subjects')
@@ -57,6 +56,10 @@ function listFilesRecursive(dirPath) {
   return files.sort((a, b) => a.localeCompare(b))
 }
 
+function isReadableSourceFile(filePath) {
+  return ['.pdf', '.docx', '.md', '.mdx', '.txt'].includes(path.extname(filePath).toLowerCase())
+}
+
 function normalizeText(text) {
   return String(text || '')
     .replace(/\r\n/g, '\n')
@@ -70,6 +73,17 @@ function unique(values) {
 
 function take(values, limit) {
   return values.slice(0, limit)
+}
+
+function slugId(value, fallback = 'item') {
+  const slug = String(value || fallback)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48)
+  return slug || fallback
 }
 
 function cleanTitle(value) {
@@ -128,27 +142,18 @@ function extractBoldTerms(text, limit = 12) {
   return unique(matches.map((value) => value.replace(/\*\*/g, '').trim()).filter(Boolean)).slice(0, limit)
 }
 
-async function extractPdfTextAsync(filePath) {
-  return extractPdfText(filePath)
-}
-
-async function readTextForPlan(filePath) {
+async function readSourceForPlan(filePath, subjectSlug, kind) {
   const ext = path.extname(filePath).toLowerCase()
   try {
-    if (ext === '.pdf') {
-      return normalizeText(await extractPdfTextAsync(filePath))
-    }
-    if (ext === '.docx') {
-      const result = await mammoth.extractRawText({ path: filePath })
-      return normalizeText(result.value)
-    }
-    if (ext === '.md' || ext === '.mdx' || ext === '.txt') {
-      return normalizeText(fs.readFileSync(filePath, 'utf-8'))
-    }
+    if (!['.pdf', '.docx', '.md', '.mdx', '.txt'].includes(ext)) return null
+    return readSourceDocument(filePath, {
+      subjectSlug,
+      sourceKind: kind,
+      contentRoot: CONTENT_ROOT,
+    })
   } catch (error) {
-    return ''
+    return null
   }
-  return ''
 }
 
 function sourceGroups(subjectSlug) {
@@ -156,15 +161,16 @@ function sourceGroups(subjectSlug) {
   const lessonDir = path.join(baseDir, 'sources', 'lesson_sources')
   const testDir = path.join(baseDir, 'sources', 'test_sources')
 
-  const lessonSources = listFilesRecursive(lessonDir)
-  const testSources = listFilesRecursive(testDir)
+  const lessonSources = listFilesRecursive(lessonDir).filter(isReadableSourceFile)
+  const testSources = listFilesRecursive(testDir).filter(isReadableSourceFile)
 
   return { lessonDir, lessonSources, testDir, testSources }
 }
 
-async function summarizeSource(filePath, kind, order) {
+async function summarizeSource(filePath, kind, order, subjectSlug) {
   const title = cleanTitle(path.basename(filePath, path.extname(filePath)))
-  const text = await readTextForPlan(filePath)
+  const sourceDocument = await readSourceForPlan(filePath, subjectSlug, kind)
+  const text = sourceDocument?.text || ''
   const headings = extractHeadings(text, 8)
   const signals = extractSignals(text, 8)
   const boldTerms = extractBoldTerms(text, 8)
@@ -179,6 +185,22 @@ async function summarizeSource(filePath, kind, order) {
     headings,
     signals,
     boldTerms,
+    assessmentBlocks: sourceDocument?.assessmentBlocks?.length || 0,
+    routedAssessmentBlocks: sourceDocument?.assessmentBlocks?.filter((block) => block.target === 'questions').length || 0,
+    visualReferences: sourceDocument?.visualReferences?.length || 0,
+    extractedAssets: sourceDocument?.extractedAssets?.length || 0,
+    learningSignalCounts: sourceDocument?.learningSignals?.density || {},
+    learningSignals: {
+      concepts: sourceDocument?.learningSignals?.concepts?.slice(0, 12) || [],
+      definitions: sourceDocument?.learningSignals?.definitions?.slice(0, 6) || [],
+      examples: sourceDocument?.learningSignals?.examples?.slice(0, 6) || [],
+      formulas: sourceDocument?.learningSignals?.formulas?.slice(0, 6) || [],
+      procedures: sourceDocument?.learningSignals?.procedures?.slice(0, 6) || [],
+      pitfalls: sourceDocument?.learningSignals?.pitfalls?.slice(0, 6) || [],
+    },
+    sourceManifest: sourceDocument?.manifestPath
+      ? path.relative(subjectDir(subjectSlug), sourceDocument.manifestPath).replace(/\\/g, '/')
+      : null,
     summary: text ? text.slice(0, 280) : '',
   }
 }
@@ -241,9 +263,138 @@ function makeObjectives(plan) {
 function makeConceptInventory(plan) {
   const tokens = [
     ...plan.lessonSources.flatMap((item) => [...item.headings, ...item.signals, ...item.boldTerms]),
+    ...plan.lessonSources.flatMap((item) => item.learningSignals?.concepts?.map((concept) => concept.label) || []),
     ...plan.rawNotes.flatMap((item) => [...item.headings, ...item.signals, ...item.boldTerms]),
   ]
   return take(unique(tokens), 36)
+}
+
+function makeStructuredConcepts(plan) {
+  const byKey = new Map()
+  const addConcept = (label, source, signalType = 'term') => {
+    const clean = String(label || '').replace(/\s+/g, ' ').trim()
+    if (!clean || clean.length < 3) return
+    const key = clean.toLowerCase()
+    const existing = byKey.get(key) || {
+      id: `concept-${slugId(clean)}`,
+      label: clean,
+      priority: 0,
+      sourceIds: [],
+      evidence: [],
+      signalTypes: [],
+    }
+    existing.priority += signalType === 'heading' ? 3 : signalType === 'definition' ? 2 : 1
+    if (source?.id && !existing.sourceIds.includes(source.id)) existing.sourceIds.push(source.id)
+    if (!existing.signalTypes.includes(signalType)) existing.signalTypes.push(signalType)
+    if (source?.title && existing.evidence.length < 3) existing.evidence.push(`${source.title}: ${signalType}`)
+    byKey.set(key, existing)
+  }
+
+  for (const source of plan.lessonSources) {
+    source.headings.forEach((term) => addConcept(term, source, 'heading'))
+    source.signals.forEach((term) => addConcept(term, source, 'term'))
+    source.boldTerms.forEach((term) => addConcept(term, source, 'bold'))
+    for (const concept of source.learningSignals?.concepts || []) addConcept(concept.label, source, 'learning-signal')
+    for (const definition of source.learningSignals?.definitions || []) {
+      const label = extractSignals(definition.excerpt, 1)[0]
+      addConcept(label, source, 'definition')
+    }
+  }
+
+  return [...byKey.values()]
+    .sort((a, b) => b.priority - a.priority || a.label.localeCompare(b.label))
+    .slice(0, 36)
+    .map((concept, index) => ({
+      ...concept,
+      id: concept.id || `concept-${String(index + 1).padStart(2, '0')}`,
+      priority: Math.min(10, concept.priority),
+    }))
+}
+
+function makeStructuredObjectives(plan) {
+  const concepts = plan.concepts || []
+  const sourceObjectives = plan.lessonSources.slice(0, 12).map((source, index) => {
+    const conceptIds = concepts
+      .filter((concept) => concept.sourceIds.includes(source.id))
+      .slice(0, 4)
+      .map((concept) => concept.id)
+    return {
+      id: `objective-${String(index + 1).padStart(2, '0')}`,
+      type: source.assessmentBlocks ? 'exam-prep' : 'understanding',
+      description: source.assessmentBlocks
+        ? `Understand ${source.title} well enough to answer its explicit assessment questions.`
+        : `Explain the core ideas in ${source.title} in a source-grounded way.`,
+      sourceIds: [source.id],
+      conceptIds,
+      assessmentPriority: source.assessmentBlocks ? 'high' : 'normal',
+    }
+  })
+
+  const coverageObjectives = concepts.slice(0, 8).map((concept, index) => ({
+    id: `objective-concept-${String(index + 1).padStart(2, '0')}`,
+    type: 'coverage',
+    description: `Create notes and practice items that help recall and apply ${concept.label}.`,
+    sourceIds: concept.sourceIds,
+    conceptIds: [concept.id],
+    assessmentPriority: concept.signalTypes.includes('definition') ? 'high' : 'normal',
+  }))
+
+  return [...sourceObjectives, ...coverageObjectives].slice(0, 24)
+}
+
+function makeCoverageMatrix(plan) {
+  return (plan.concepts || []).slice(0, 30).map((concept) => {
+    const hasAssessment = plan.lessonSources
+      .concat(plan.testSources)
+      .some((source) => concept.sourceIds.includes(source.id) && source.assessmentBlocks > 0)
+    return {
+      conceptId: concept.id,
+      concept: concept.label,
+      sourceIds: concept.sourceIds,
+      notes: true,
+      quizTarget: hasAssessment || concept.priority >= 4 ? 2 : 1,
+      writtenTarget: hasAssessment || concept.signalTypes.includes('procedure') ? 1 : 0,
+      flashcardTarget: 1,
+      glossaryTarget: concept.signalTypes.includes('definition') || concept.priority >= 3 ? 1 : 0,
+    }
+  })
+}
+
+function summarizeExtractionQuality(plan) {
+  const sources = [...plan.lessonSources, ...plan.testSources]
+  const totals = sources.reduce((acc, source) => {
+    acc.textChars += source.textChars || 0
+    acc.assessmentBlocks += source.assessmentBlocks || 0
+    acc.routedAssessmentBlocks += source.routedAssessmentBlocks || 0
+    acc.visualReferences += source.visualReferences || 0
+    acc.extractedAssets += source.extractedAssets || 0
+    acc.definitions += source.learningSignalCounts?.definitions || 0
+    acc.examples += source.learningSignalCounts?.examples || 0
+    acc.formulas += source.learningSignalCounts?.formulas || 0
+    acc.procedures += source.learningSignalCounts?.procedures || 0
+    acc.pitfalls += source.learningSignalCounts?.pitfalls || 0
+    return acc
+  }, {
+    textChars: 0,
+    assessmentBlocks: 0,
+    routedAssessmentBlocks: 0,
+    visualReferences: 0,
+    extractedAssets: 0,
+    definitions: 0,
+    examples: 0,
+    formulas: 0,
+    procedures: 0,
+    pitfalls: 0,
+  })
+
+  const readableSources = sources.filter((source) => source.textChars >= 200).length
+  return {
+    readableSources,
+    totalSources: sources.length,
+    readabilityRatio: sources.length ? Number((readableSources / sources.length).toFixed(2)) : 0,
+    totals,
+    risk: readableSources < sources.length ? 'some-sources-have-low-text' : 'normal',
+  }
 }
 
 function buildSummary(plan) {
@@ -262,6 +413,9 @@ function buildSummary(plan) {
     `Planned glossary target: ${targets.glossaryIdeal}`,
     `Key concepts: ${plan.conceptInventory.slice(0, 8).join(', ') || 'none yet'}`,
     `Learning objectives: ${plan.learningObjectives.slice(0, 6).join(' | ') || 'none yet'}`,
+    `Structured concepts: ${(plan.concepts || []).slice(0, 8).map((item) => item.label).join(', ') || 'none yet'}`,
+    `Coverage rows: ${(plan.coverageMatrix || []).length}`,
+    `Extraction quality: ${plan.extractionQuality?.readableSources || 0}/${plan.extractionQuality?.totalSources || 0} readable sources, ${plan.extractionQuality?.totals?.routedAssessmentBlocks || 0}/${plan.extractionQuality?.totals?.assessmentBlocks || 0} routed assessment blocks, ${plan.extractionQuality?.totals?.visualReferences || 0} visual refs`,
   ].join('\n')
 }
 
@@ -289,12 +443,12 @@ async function buildContentPlan(subjectSlug, options = {}) {
 
   const lessonSummaries = []
   for (let i = 0; i < lessonSources.length; i++) {
-    lessonSummaries.push(await summarizeSource(lessonSources[i], 'lesson', i))
+    lessonSummaries.push(await summarizeSource(lessonSources[i], 'lesson', i, subjectSlug))
   }
 
   const testSummaries = []
   for (let i = 0; i < testSources.length; i++) {
-    testSummaries.push(await summarizeSource(testSources[i], 'test', i))
+    testSummaries.push(await summarizeSource(testSources[i], 'test', i, subjectSlug))
   }
 
   const plan = {
@@ -320,7 +474,11 @@ async function buildContentPlan(subjectSlug, options = {}) {
     lessonOutline: existingNotes.lessonOutline,
     rawNotes: existingNotes.rawNotes,
     conceptInventory: [],
+    concepts: [],
     learningObjectives: [],
+    objectives: [],
+    coverageMatrix: [],
+    extractionQuality: {},
     qualityTargets: {},
     llm: {
       preferredProviders: getPreferredProviders({ preferFast: false }),
@@ -330,7 +488,11 @@ async function buildContentPlan(subjectSlug, options = {}) {
   }
 
   plan.conceptInventory = makeConceptInventory(plan)
+  plan.concepts = makeStructuredConcepts(plan)
   plan.learningObjectives = makeObjectives(plan)
+  plan.objectives = makeStructuredObjectives(plan)
+  plan.coverageMatrix = makeCoverageMatrix(plan)
+  plan.extractionQuality = summarizeExtractionQuality(plan)
   plan.qualityTargets = buildQualityTargets(plan)
   plan.summary = buildSummary(plan)
   plan.status = plan.lessonSources.length || plan.lessonOutline.length ? 'ready' : 'draft'
@@ -391,6 +553,8 @@ function validateContent(subjectSlug, plan = loadPlan(subjectSlug)) {
   const glossary = content.glossary
   const lessons = content.lessons
   const writtenQuestions = questions.filter((item) => String(item.type || '').toLowerCase() === 'written')
+  const coverageRows = Array.isArray(fallbackPlan.coverageMatrix) ? fallbackPlan.coverageMatrix : []
+  const questionConceptIds = new Set(questions.flatMap((item) => Array.isArray(item.conceptIds) ? item.conceptIds : []))
   const issues = []
   const warnings = []
   const checks = []
@@ -476,6 +640,27 @@ function validateContent(subjectSlug, plan = loadPlan(subjectSlug)) {
   })
   score += planReady ? 15 : 5
 
+  const structuredPlanReady = (fallbackPlan.concepts?.length || 0) > 0
+    && (fallbackPlan.objectives?.length || 0) > 0
+    && coverageRows.length > 0
+  checks.push({
+    name: 'structured_plan_contract',
+    status: structuredPlanReady ? 'pass' : 'warn',
+    detail: `${fallbackPlan.concepts?.length || 0} structured concepts, ${fallbackPlan.objectives?.length || 0} objectives, ${coverageRows.length} coverage rows`,
+  })
+  if (!structuredPlanReady) warnings.push('Structured concept/objective/coverage plan is incomplete.')
+
+  if (coverageRows.length) {
+    const coveredRows = coverageRows.filter((row) => questionConceptIds.has(row.conceptId)).length
+    const coverageRatio = Number((coveredRows / coverageRows.length).toFixed(2))
+    checks.push({
+      name: 'question_concept_coverage',
+      status: coverageRatio >= 0.45 ? 'pass' : 'warn',
+      detail: `${coveredRows}/${coverageRows.length} planned concepts linked from generated questions`,
+    })
+    if (coverageRatio < 0.45) warnings.push('Generated questions do not yet cover enough planned concept ids.')
+  }
+
   if (!questions.length) issues.push('No questions.json content found.')
   if (!flashcards.length) issues.push('No flashcards.json content found.')
   if (!glossary.length) issues.push('No glossary.json content found.')
@@ -509,6 +694,9 @@ function validateContent(subjectSlug, plan = loadPlan(subjectSlug)) {
       testSources: fallbackPlan.sourceCounts?.testSources || fallbackPlan.testSources?.length || 0,
       conceptInventory: fallbackPlan.conceptInventory.length,
       learningObjectives: fallbackPlan.learningObjectives.length,
+      structuredConcepts: fallbackPlan.concepts?.length || 0,
+      objectives: fallbackPlan.objectives?.length || 0,
+      coverageRows: coverageRows.length,
     },
     content: {
       notes: content.notes,

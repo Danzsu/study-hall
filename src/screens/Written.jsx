@@ -275,7 +275,7 @@ export default function Written({ subjectId }) {
         .spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite}
       `}</style>
 
-      <main style={{ maxWidth: 680, margin: '0 auto', padding: '40px 28px 80px' }}>
+      <main className="page-wrap" style={{ '--pw': '680px', paddingTop: 40, paddingBottom: 80 }}>
 
         {/* Question dots */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>

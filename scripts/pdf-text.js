@@ -7,7 +7,12 @@ async function extractPdfText(pdfPath) {
 
   try {
     const result = await parser.getText()
-    return result.text || ''
+    return String(result.text || '')
+      .replace(/\r\n/g, '\n')
+      .replace(/\u0000/g, '')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{4,}/g, '\n\n\n')
+      .trim()
   } finally {
     await parser.destroy()
   }

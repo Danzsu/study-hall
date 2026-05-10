@@ -8,6 +8,7 @@ import {
 import { useTheme, navigate } from '../store'
 import { C } from '../theme'
 import katex from 'katex'
+import MarkdownText from '../components/MarkdownText'
 
 const CALLOUTS = {
   NOTE: { label: 'Note', color: C.blue, bg: C.blueBg, Icon: Info },
@@ -41,13 +42,20 @@ function renderContent(raw, t) {
     const line = lines[i]
 
     if (line.startsWith('$$')) {
+      const after = line.slice(2)
       const mathLines = []
-      i++
-      while (i < lines.length && !lines[i].startsWith('$$')) {
-        mathLines.push(lines[i])
+      if (after.endsWith('$$')) {
+        // Single-line format: $$formula$$
+        mathLines.push(after.slice(0, -2))
+      } else {
+        if (after.trim()) mathLines.push(after) // content on same line as opening $$
         i++
+        while (i < lines.length && !lines[i].startsWith('$$')) {
+          mathLines.push(lines[i])
+          i++
+        }
       }
-      elements.push(<MathBlock key={i} value={mathLines.join('\n')} t={t} />)
+      elements.push(<MathBlock key={i} value={mathLines.join('\n').trim()} t={t} />)
     } else if (line.startsWith('# ')) {
       elements.push(<h1 key={i} style={{ fontFamily: "'Lora',Georgia,serif", fontSize: 28, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.5px', marginBottom: 12, marginTop: 36, color: t.text }}>{line.slice(2)}</h1>)
     } else if (line.startsWith('## ')) {
@@ -102,6 +110,8 @@ function renderContent(raw, t) {
       )
     } else if (line.trim() === '' || line.trim() === '---') {
       // skip
+    } else if (/^<\/?[a-zA-Z][a-zA-Z0-9-]*(\s[^>]*)?>?\s*$/.test(line.trim()) && !/^<[HT]\s/i.test(line)) {
+      // skip standalone HTML block tag lines (details, summary, etc.)
     } else {
       elements.push(<p key={i} style={{ marginBottom: 20, lineHeight: 1.8 }}>{inlineFormat(line, t)}</p>)
     }
@@ -126,12 +136,17 @@ function MathInline({ value }) {
 function MathBlock({ value, t }) {
   try {
     return (
-      <div style={{ overflowX: 'auto', background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '16px 18px', margin: '24px 0' }}
-        dangerouslySetInnerHTML={{ __html: katex.renderToString(value, { throwOnError: false, displayMode: true }) }}
+      <div style={{
+        overflowX: 'auto', WebkitOverflowScrolling: 'touch',
+        background: t.surface2, border: `1px solid ${t.border}`,
+        borderRadius: 10, padding: '16px 18px', margin: '24px 0',
+        maxWidth: '100%',
+      }}
+        dangerouslySetInnerHTML={{ __html: katex.renderToString(value, { throwOnError: false, displayMode: true, fleqn: false }) }}
       />
     )
   } catch {
-    return <pre>{value}</pre>
+    return <pre style={{ overflowX: 'auto', padding: '16px 18px' }}>{value}</pre>
   }
 }
 
@@ -389,7 +404,7 @@ function RecallCards({ items, t }) {
       <div style={{ background: t.surface, border: `1.5px solid ${t.border}`, borderRadius: 14, padding: '28px 30px' }}>
         <span style={{ fontSize: 11, fontWeight: 800, color: t.textMuted, letterSpacing: '1px' }}>QUESTION {idx + 1} OF {items.length}</span>
         <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 18, fontWeight: 600, lineHeight: 1.5, marginTop: 12, marginBottom: 18, color: t.text }}>
-          {item.question}
+          <MarkdownText text={item.question} />
         </p>
         <textarea
           value={typed[idx] || ''}
@@ -402,7 +417,7 @@ function RecallCards({ items, t }) {
         {revealed[idx] ? (
           <div style={{ marginTop: 18, padding: '16px 18px', background: `${C.accent}10`, borderLeft: `3px solid ${C.accent}`, borderRadius: '0 10px 10px 0' }}>
             <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '1px', color: C.accent }}>MODEL ANSWER</span>
-            <p style={{ fontSize: 14, color: t.text, lineHeight: 1.7, marginTop: 6, fontFamily: "'Lora', Georgia, serif" }}>{item.answer}</p>
+            <p style={{ fontSize: 14, color: t.text, lineHeight: 1.7, marginTop: 6, fontFamily: "'Lora', Georgia, serif" }}><MarkdownText text={item.answer} /></p>
             <p style={{ fontSize: 12, color: t.textSub, marginTop: 12, fontWeight: 700 }}>How well did you know this?</p>
             <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
               {[
@@ -591,7 +606,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
   const [frontmatter, setFrontmatter] = useState({})
   const [activeRecall, setActiveRecall] = useState([])
   const [sources, setSources] = useState([])
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 768 : true)
   const [loading, setLoading]         = useState(false)
 
   // Fetch lessons list
@@ -682,7 +697,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
             <StudyProgressPill current={lessonProgress} total={lessons.length} t={t} />
           </div>
 
-          <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 40px 80px' }}>
+          <div style={{ maxWidth: 1440, margin: '0 auto', padding: '48px clamp(16px, 4vw, 60px) 80px' }}>
             {loading && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '40vh', color: t.textMuted }}>
                 Loading…

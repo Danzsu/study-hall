@@ -267,7 +267,7 @@ export default function Subject({ subjectId }) {
   return (
     <>
     <style>{`@keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}`}</style>
-    <main style={{ maxWidth: 720, margin: '0 auto', padding: '32px 24px 80px' }}>
+    <main className="page-wrap" style={{ paddingTop: 32, paddingBottom: 80 }}>
 
       {/* HERO */}
       <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 16, padding: '24px', marginBottom: 20, display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>

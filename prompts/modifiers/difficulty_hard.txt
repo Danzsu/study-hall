@@ -1,0 +1,16 @@
+DIFFICULTY MODIFIER: HARD (Éles vizsga mód)
+
+Apply these rules on top of the base generator instructions:
+
+- Questions must require reasoning, not just recall ("Mi következik ebből...?", "Miért nem működne...?")
+- Multi_choice distractors must be very close to the correct answer (same category, similar values, subtle difference)
+  Example: not "TCP vs UDP" but "TCP slow start threshold vs TCP congestion window"
+- At least 40% of multi_choice questions must have 2 or more correct answers
+- Include negation questions: "Melyik állítás NEM igaz az X-ről?"
+- Fill_the_blanks: use 2–3 blanks, mix numbers and terms in the same question
+- Drag_n_drop: use 4–5 slots with 2+ distractors
+- simple_input: ask for exact values (RFC numbers, specific byte counts, timer values)
+- true_false: only for subtle or commonly misunderstood claims
+  Example: "A TCP garantálja, hogy az adatok sorrendben érkeznek meg." (Igaz — de csak végpont szinten)
+- Aim for roughly: 50% multi_choice, 10% true_false, 15% fill, 15% drag, 10% input
+- Never use trivially obvious distractors — every wrong option should be something a student might genuinely believe

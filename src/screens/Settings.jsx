@@ -258,7 +258,7 @@ export default function Settings() {
         @keyframes stFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
         .st-fu{animation:stFadeUp .3s ease both}
       `}</style>
-      <main style={{ maxWidth: 480, margin: '0 auto', padding: '16px 20px 80px' }} className="st-fu">
+      <main className="page-wrap st-fu" style={{ '--pw': '480px', paddingTop: 16, paddingBottom: 80 }}>
 
         <SectionLabel label="STUDY"/>
         <Card t={t}>
