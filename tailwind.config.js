@@ -22,9 +22,14 @@ const config = {
         purple: { DEFAULT: '#9B6DD9', bg: 'rgba(155,109,217,0.11)' },
       },
       fontFamily: {
-        sans:  ["'DM Sans'", 'system-ui', 'sans-serif'],
-        serif: ["'Lora'", 'Georgia', 'serif'],
-        mono:  ["'JetBrains Mono'", 'ui-monospace', 'monospace'],
+        sans:        ['var(--font-sans)',        'system-ui', 'sans-serif'],
+        serif:       ['var(--font-serif)',       'Georgia', 'serif'],
+        mono:        ['var(--font-mono)',        'ui-monospace', 'monospace'],
+        handwritten: ['var(--font-handwritten)', 'cursive'],
+        fraunces:    ['var(--font-fraunces)',    'Georgia', 'serif'],
+        montserrat:  ['var(--font-montserrat)',  'system-ui', 'sans-serif'],
+        archivo:     ['var(--font-archivo)',     'system-ui', 'sans-serif'],
+        alfaslab:    ['var(--font-alfaslab)',    'Georgia', 'serif'],
       },
       borderRadius: {
         xl:  '0.75rem',

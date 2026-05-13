@@ -36,6 +36,9 @@ dev-server.err.log
 storage/
 content/*/sources/
 
+# AI-generated images (regenerable, can be large)
+public/assets/generated/
+
 # vercel
 .vercel
 

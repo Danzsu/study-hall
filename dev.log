@@ -1,0 +1,62 @@
+
+> study-hall@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1022ms
+ ✓ Compiled /api/health in 231ms (76 modules)
+ GET /api/health 200 in 283ms
+ ✓ Compiled /api/subjects in 57ms (78 modules)
+ GET /api/subjects 200 in 70ms
+ ✓ Compiled /api/notes/[slug]/[lesson] in 32ms (76 modules)
+ GET /api/notes/it_biztonsag/02-01-crypto-history-bme-2026-hu 200 in 197ms
+ GET /api/notes/it_biztonsag/02-01-crypto-history-bme-2026-hu 200 in 11ms
+ ✓ Compiled /api/health in 26ms (76 modules)
+ GET /api/health 200 in 36ms
+ ✓ Compiled /api/subjects in 14ms (78 modules)
+ GET /api/subjects 200 in 24ms
+ GET /api/subjects 200 in 4ms
+ ✓ Compiled /api/questions/[slug] in 41ms (76 modules)
+ GET /api/questions/it_biztonsag 200 in 208ms
+ ✓ Compiled /api/flashcards/[slug] in 35ms (76 modules)
+ GET /api/flashcards/it_biztonsag 200 in 195ms
+ ✓ Compiled /api/glossary/[slug] in 28ms (78 modules)
+ GET /api/glossary/it_biztonsag 200 in 201ms
+ ✓ Compiled /api/questions/[slug] in 18ms (80 modules)
+ GET /api/questions/it_biztonsag 200 in 35ms
+ GET /api/flashcards/it_biztonsag 200 in 10ms
+ GET /api/glossary/it_biztonsag 200 in 390ms
+ GET /api/questions/it_biztonsag 200 in 9ms
+ GET /api/questions/it_biztonsag 200 in 10ms
+ GET /api/flashcards/it_biztonsag 200 in 10ms
+ GET /api/glossary/it_biztonsag 200 in 10ms
+ GET /api/questions/it_biztonsag 200 in 9ms
+ ✓ Compiled /api/notes/[slug]/[lesson] in 42ms (78 modules)
+ GET /api/notes/it_biztonsag/01-00-introitsec-bme-2026-hu 200 in 63ms
+ ✓ Compiled /api/search in 37ms (76 modules)
+ GET /api/search?q=titkositas&slug=it_biztonsag 200 in 51ms
+ GET /api/search?q=titkositas&slug=it_biztonsag 200 in 5ms
+ GET /api/search?q=titkositas 200 in 5ms
+ GET /api/search?q=crypto 200 in 10ms
+ ✓ Compiled /api/health in 44ms (76 modules)
+ GET /api/health 200 in 54ms
+ ✓ Compiled /api/search in 12ms (78 modules)
+ GET /api/search?q=Az%20IT%20biztons%C3%A1g&subject=it_biztonsag&type=glossary 200 in 22ms
+ ✓ Compiled /api/validate-answer in 79ms (107 modules)
+ POST /api/validate-answer 400 in 93ms
+ ✓ Compiled /api/notes/[slug]/[lesson] in 28ms (109 modules)
+ GET /api/notes/it_biztonsag/01-00-introitsec-bme-2026-hu 200 in 48ms
+ ⨯ Failed to find font override values for font `Newsreader`
+ ○ Compiling / ...
+ ⨯ Failed to find font override values for font `Newsreader`
+ ✓ Compiled / in 1499ms (714 modules)
+(node:42508) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ GET / 200 in 1573ms
+ ✓ Compiled /subject/[slug] in 132ms (667 modules)
+ GET /subject/it_biztonsag 200 in 341ms
+ ○ Compiling /study/[slug] ...

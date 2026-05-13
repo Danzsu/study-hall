@@ -9,6 +9,8 @@ import { useTheme, navigate } from '../store'
 import { C } from '../theme'
 import katex from 'katex'
 import MarkdownText from '../components/MarkdownText'
+import { themes } from '../../lib/courseTheme'
+import { MermaidDiagram } from '../components/study/MermaidDiagram'
 
 const CALLOUTS = {
   NOTE: { label: 'Note', color: C.blue, bg: C.blueBg, Icon: Info },
@@ -95,18 +97,90 @@ function renderContent(raw, t) {
       }
       elements.push(<ol key={`ol-${i}`} style={{ paddingLeft: 24, marginBottom: 20, lineHeight: 1.75, color: t.text }}>{items}</ol>)
       continue
+    } else if (/^!\[([^\]]*)\]\(([^)]+)\)\s*$/.test(line)) {
+      const imgMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)\s*$/)
+      elements.push(
+        <figure key={i} style={{ margin: '24px 0', textAlign: 'center' }}>
+          <img
+            src={imgMatch[2]}
+            alt={imgMatch[1]}
+            style={{
+              maxWidth: '100%',
+              borderRadius: 10,
+              border: `1px solid ${t.border}`,
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          />
+          {imgMatch[1] && (
+            <figcaption style={{
+              marginTop: 8, fontSize: 13, color: t.textSub,
+              fontStyle: 'italic', fontFamily: "'Lora', Georgia, serif",
+            }}>
+              {imgMatch[1]}
+            </figcaption>
+          )}
+        </figure>
+      )
     } else if (line.startsWith('```')) {
-      const lang = line.slice(3)
+      const lang = line.slice(3).trim()
       const codeLines = []
       i++
       while (i < lines.length && !lines[i].startsWith('```')) {
         codeLines.push(lines[i])
         i++
       }
+      if (lang === 'mermaid') {
+        elements.push(<MermaidDiagram key={i} code={codeLines.join('\n')} t={t} />)
+      } else {
+        elements.push(
+          <pre key={i} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '16px 18px', margin: '24px 0', overflowX: 'auto', fontSize: 13, lineHeight: 1.6, color: t.text, fontFamily: "'JetBrains Mono', monospace" }}>
+            <code>{codeLines.join('\n')}</code>
+          </pre>
+        )
+      }
+    } else if (/^<Callout\b/i.test(line.trim())) {
+      const openMatch = line.match(/<Callout\b([^>]*)>/i)
+      const attrs = openMatch ? parseTagAttributes(openMatch[1]) : {}
+      const bodyLines = []
+      if (!/<\/Callout>/i.test(line)) {
+        i++
+        while (i < lines.length && !/<\/Callout>/i.test(lines[i])) {
+          bodyLines.push(lines[i])
+          i++
+        }
+      } else {
+        const inner = line.replace(/<Callout\b[^>]*>/i, '').replace(/<\/Callout>/i, '').trim()
+        if (inner) bodyLines.push(inner)
+      }
+      const variantMap = { insight: 'NOTE', important: 'IMPORTANT', warning: 'WARNING', note: 'NOTE', example: 'EXAMPLE', tip: 'TIP' }
+      const type = variantMap[String(attrs.variant || '').toLowerCase()] ?? 'NOTE'
       elements.push(
-        <pre key={i} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '16px 18px', margin: '24px 0', overflowX: 'auto', fontSize: 13, lineHeight: 1.6, color: t.text, fontFamily: "'JetBrains Mono', monospace" }}>
-          <code>{codeLines.join('\n')}</code>
-        </pre>
+        <Callout key={`cv-${i}`} type={type} t={t}>
+          {bodyLines.map((part, idx) => (
+            <p key={idx} style={{ margin: idx === 0 ? 0 : '8px 0 0' }}>{inlineFormat(part.trim(), t)}</p>
+          ))}
+        </Callout>
+      )
+    } else if (/^<MarginNote\b/i.test(line.trim())) {
+      const openMatch = line.match(/<MarginNote\b([^>]*)>/i)
+      const attrs = openMatch ? parseTagAttributes(openMatch[1]) : {}
+      const bodyLines = []
+      if (!/<\/MarginNote>/i.test(line)) {
+        i++
+        while (i < lines.length && !/<\/MarginNote>/i.test(lines[i])) {
+          bodyLines.push(lines[i])
+          i++
+        }
+      }
+      elements.push(
+        <aside key={`mn-${i}`} style={{ borderLeft: `3px solid ${C.accent}`, paddingLeft: 14, margin: '20px 0', fontSize: 13, lineHeight: 1.6, color: t.textSub, fontStyle: 'italic' }}>
+          {attrs.label && <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.8px', marginBottom: 4, textTransform: 'uppercase', color: t.textMuted }}>{attrs.label}</p>}
+          {bodyLines.map((part, idx) => (
+            <p key={idx} style={{ margin: idx === 0 ? 0 : '6px 0 0' }}>{inlineFormat(part.trim(), t)}</p>
+          ))}
+        </aside>
       )
     } else if (line.trim() === '' || line.trim() === '---') {
       // skip
@@ -210,19 +284,35 @@ function transparentTone(color) {
   return `color-mix(in srgb, ${value} 12%, transparent)`
 }
 
-function InlineHighlight({ color = C.accent, children, t }) {
+function InlineHighlight({ color = C.accent, type = 'plain', children, t }) {
   const tone = resolveToneColor(color)
+  const bg   = transparentTone(tone)
+
+  if (type === 'marker') {
+    return (
+      <span style={{ position: 'relative', display: 'inline', zIndex: 0 }}>
+        <span aria-hidden="true" style={{
+          position: 'absolute', inset: '1px -5px',
+          background: bg, border: `1.5px solid ${tone}`,
+          borderRadius: 3, zIndex: -1,
+          filter: 'url(#study-roughen)', transform: 'rotate(-0.4deg)',
+        }} />
+        {children}
+      </span>
+    )
+  }
+  if (type === 'gradient') {
+    return (
+      <span style={{
+        backgroundImage: `linear-gradient(transparent 58%, ${bg} 58%)`,
+        display: 'inline', padding: '0 2px',
+      }}>
+        {children}
+      </span>
+    )
+  }
   return (
-    <mark
-      style={{
-        background: transparentTone(tone),
-        borderBottom: `2px solid ${tone}`,
-        borderRadius: 4,
-        color: t.text,
-        padding: '0 3px',
-        margin: '0 1px',
-      }}
-    >
+    <mark style={{ background: bg, borderBottom: `2px solid ${tone}`, borderRadius: 4, color: t.text, padding: '0 3px', margin: '0 1px' }}>
       {children}
     </mark>
   )
@@ -302,7 +392,7 @@ function renderInlineNodes(text, t) {
 
     push('highlightTag', remaining.match(/<H\b([^>]*)>([\s\S]*?)<\/H>/i), 1, (match) => {
       const attrs = parseTagAttributes(match[1])
-      return <InlineHighlight key={key++} color={attrs.color || attrs.tone || C.accent} t={t}>{renderInlineNodes(match[2], t)}</InlineHighlight>
+      return <InlineHighlight key={key++} color={attrs.color || attrs.tone || C.accent} type={attrs.type || 'plain'} t={t}>{renderInlineNodes(match[2], t)}</InlineHighlight>
     })
 
     push('tooltipTag', remaining.match(/<T\b([^>]*)>([\s\S]*?)<\/T>/i), 2, (match) => {
@@ -310,8 +400,8 @@ function renderInlineNodes(text, t) {
       return <InlineTooltip key={key++} label={label} definition={definition} t={t} />
     })
 
-    push('highlightSyntax', remaining.match(/==([\s\S]+?)==(?:\{([A-Za-z0-9_-]+)\})?/), 3, (match) => {
-      return <InlineHighlight key={key++} color={match[2] || C.accent} t={t}>{renderInlineNodes(match[1], t)}</InlineHighlight>
+    push('highlightSyntax', remaining.match(/==([\s\S]+?)==\{([A-Za-z0-9_#-]+)(?::([a-z]+))?\}/), 3, (match) => {
+      return <InlineHighlight key={key++} color={match[2] || C.accent} type={match[3] || 'plain'} t={t}>{renderInlineNodes(match[1], t)}</InlineHighlight>
     })
 
     push('tooltipSyntax', remaining.match(/\{([^{}]+?)\}\[([^\[\]]+?)\]/), 4, (match) => {
@@ -609,6 +699,30 @@ export default function Study({ subjectId, lesson: lessonProp }) {
   const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 768 : true)
   const [loading, setLoading]         = useState(false)
 
+  const [accentVars, setAccentVars] = useState({})
+
+  useEffect(() => {
+    if (!subjectId) return
+    fetch('/api/subjects')
+      .then(r => r.json())
+      .then(data => {
+        const subject = Array.isArray(data) ? data.find(s => s.id === subjectId || s.slug === subjectId) : null
+        const color = subject?.color
+        if (!color) return
+        const theme = Object.values(themes).find(t => t.accent.toLowerCase() === color.toLowerCase())
+        if (theme) {
+          setAccentVars({
+            '--accent':        theme.accent,
+            '--accent-dark':   theme.accentDark,
+            '--accent-darker': theme.accentDarker,
+            '--accent-light':  theme.accentLight,
+            '--accent-faded':  theme.accentFaded,
+          })
+        }
+      })
+      .catch(() => {})
+  }, [subjectId])
+
   // Fetch lessons list
   useEffect(() => {
     if (!subjectId) return
@@ -697,7 +811,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
             <StudyProgressPill current={lessonProgress} total={lessons.length} t={t} />
           </div>
 
-          <div style={{ maxWidth: 1440, margin: '0 auto', padding: '48px clamp(16px, 4vw, 60px) 80px' }}>
+          <div style={{ maxWidth: 1440, margin: '0 auto', padding: '48px clamp(16px, 4vw, 60px) 80px', ...accentVars }}>
             {loading && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '40vh', color: t.textMuted }}>
                 Loading…

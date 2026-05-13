@@ -54,6 +54,41 @@ async function callLLM(systemPrompt, userMessage) {
   throw new Error('All LLM providers failed')
 }
 
+async function reviewPass(draft) {
+  const GOOGLE_AI_KEY = process.env.GOOGLE_AI_KEY
+  if (!GOOGLE_AI_KEY) return draft
+  try {
+    const client = new OpenAI({
+      apiKey: GOOGLE_AI_KEY,
+      baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
+    })
+    const res = await client.chat.completions.create({
+      model: 'gemini-2-flash',
+      messages: [
+        {
+          role: 'system',
+          content: `You are an MDX study notes quality reviewer. Fix structural issues ONLY — do NOT change content, language, or meaning.
+Fixes to apply:
+1. Ensure each ## section has a learning-objective callout on the first content line: > **Mit tanulsz ebből a szekcióból?** [one sentence]
+2. Correct misused callout types (NOTE/TIP/WARNING/IMPORTANT/EXAMPLE must match their semantics).
+3. Remove IMAGE_NEEDED markers that are missing the | separator (malformed).
+Output only the fixed MDX, no commentary, no wrapper text.`,
+        },
+        {
+          role: 'user',
+          content: `Review and fix this MDX draft:\n\n${draft}`,
+        },
+      ],
+      max_tokens: 8000,
+      temperature: 0.1,
+    })
+    return res.choices[0]?.message?.content || draft
+  } catch (e) {
+    console.error('[generate-notes] reviewPass failed, using draft:', e.message)
+    return draft
+  }
+}
+
 function parseImageCandidates(mdx) {
   const lines = mdx.split('\n')
   const imageCandidates = []
@@ -137,6 +172,10 @@ Generate detailed MDX study notes for this section. Start with a ## heading that
     rawMdx = await callLLM(systemPrompt, userMessage)
   } catch (err) {
     return Response.json({ error: err.message }, { status: 502 })
+  }
+
+  if (process.env.ENABLE_REVIEW_PASS === 'true') {
+    rawMdx = await reviewPass(rawMdx)
   }
 
   const { cleanedMdx, imageCandidates } = parseImageCandidates(rawMdx)

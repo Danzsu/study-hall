@@ -513,7 +513,7 @@ export default function Upload() {
             {lessons.length > 0 && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: allImageCandidates.length > 0 ? 24 : 0 }}>
                 {lessons.map((l, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 7, background: T.surface2, fontSize: 13 }}>
+                  <div key={l.slug || String(i)} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 7, background: T.surface2, fontSize: 13 }}>
                     <span style={{ color: T.green, fontWeight: 700, fontSize: 15 }}>✓</span>
                     <span style={{ color: T.text, fontWeight: 500, flex: 1 }}>{l.title}</span>
                     <span style={{ color: T.green, fontSize: 12, fontWeight: 600 }}>Kész</span>
@@ -542,12 +542,14 @@ export default function Upload() {
                     const isDone = result && result !== 'pending' && result !== 'error'
                     const isSkipped = result === 'skipped'
                     const isError = result === 'error'
+                    const cardBg = isDone && !isSkipped ? T.greenBg : T.surface2
+                    const cardBorder = isDone && !isSkipped ? `1px solid ${T.green}44` : `1px solid ${T.border}`
                     return (
                       <div key={c.placeholder} style={{
                         display: 'flex', alignItems: 'flex-start', gap: 12,
                         padding: '12px 14px', borderRadius: 9,
-                        background: isSkipped ? T.surface2 : isDone ? T.greenBg : T.surface2,
-                        border: `1px solid ${isSkipped ? T.border : isDone ? T.green + '44' : T.border}`,
+                        background: cardBg,
+                        border: cardBorder,
                       }}>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ fontWeight: 600, fontSize: 13, color: T.text, marginBottom: 2 }}>{c.concept}</div>

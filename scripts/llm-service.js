@@ -54,12 +54,12 @@ const VISION_CAPABLE = new Set(
     .map(([k]) => k)
 );
 
-const DEFAULT_GOOGLE_STANDARD = 'gemini-2.5-flash-lite,gemini-3.1-flash-lite';
+const DEFAULT_GOOGLE_STANDARD = 'gemini-2.5-flash-lite,gemini-3.1-flash-lite,gemini-2.5-flash';
 const DEFAULT_GOOGLE_PREMIUM  = 'gemini-2.5-flash,gemini-2.5-flash-lite';
-const DEFAULT_GROQ_LARGE   = ['llama-3.3-70b-versatile', 'llama-3.1-70b-versatile', 'qwen-qwq-32b'];
-const DEFAULT_GROQ_SMALL   = ['llama-3.1-8b-instant', 'gemma2-9b-it', 'llama-3.2-3b-preview'];
-const DEFAULT_OR_LARGE     = ['qwen/qwen3-coder:free', 'nvidia/nemotron-3-super-120b-a12b:free', 'google/gemma-2-27b-it:free'];
-const DEFAULT_OR_SMALL     = ['google/gemma-2-9b-it:free', 'inclusionai/ling-2.6-flash:free', 'meta-llama/llama-3.1-8b-instruct:free'];
+const DEFAULT_GROQ_LARGE   = ['llama-3.3-70b-versatile'];
+const DEFAULT_GROQ_SMALL   = ['llama-3.1-8b-instant', 'gemma2-9b-it'];
+const DEFAULT_OR_LARGE     = ['meta-llama/llama-3.3-70b-instruct:free', 'google/gemma-3-27b-it:free'];
+const DEFAULT_OR_SMALL     = ['google/gemma-3-12b-it:free', 'meta-llama/llama-3.1-8b-instruct:free'];
 
 function buildActiveChain(chainName, needsVision = false) {
   const entries = [];

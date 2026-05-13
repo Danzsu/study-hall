@@ -148,41 +148,46 @@ VISSZA: Csak a tiszta JSON tömböt.`
  * Glossary entries generálása Groq-val
  */
 async function generateGlossaryWithGroq(groq, notesContent, subjectName, planContext = '') {
-  const prompt = `A következő tanulási anyag alapján készíts szakmai glosszáriumot (kulcsszavak + definíciók).
+  const prompt = `A következő tanulási anyag alapján készíts szakmai glosszáriumot.
 
 TÁRGY: ${subjectName}
-
-SHARED CONTENT PLAN:
-${planContext || 'No cached plan available yet. Use the note structure directly.'}
 
 ANYAG:
 ${notesContent.slice(0, 6000)}
 
-KÉSZÍTS GLOSSZÁRIUMOT AZ ALÁBBI SZABÁLYOK SZERINT:
+SZIGORÚ SZABÁLYOK — olvasd el figyelmesen:
 
-1. FORMÁTUM:
-   - Kulcsszó (szakkifejezés)
-   - Részletes definíció (2-4 mondat)
-   - Kategória (pl: "Biztonság", "Kriptográfia", "Hálózat")
+EGY GLOSSARY ENTRY: önálló szakkifejezés, rövidítés vagy tulajdonnév, amelyet a
+hallgatónak vizsgán definiálnia kell. NEM az:
+- Fejezetcím (pl. "Bevezetés az IT biztonságba", "A CIA triád alkalmazása")
+- Mondattöredék (pl. "Ezeket a követelményeket", "Az információszerzés megelőzheti")
+- Magyar névelővel kezdődő kifejezés, amely nem maga a fogalom
+  (ROSSZ: "Az IT biztonság", "Az egyéni támadók" — ezek mondatkezdetek)
+- Általános fogalom domain-specifikus értelem nélkül (pl. "Képességek", "Erőforrások")
 
-2. JSON FORMÁTUM:
+HELYES term példák: "CIA triád", "AES-256", "SQL injection", "hitelesítés",
+"TLS 1.3", "Diffie–Hellman kulcscsere", "brute-force támadás", "hash függvény"
+
+DEFINÍCIÓ: 2–3 mondat. Magyarázd meg MI EZ és HOGYAN MŰKÖDIK.
+SOHA ne írd: "A(z) X szekcióban szereplő fogalom" — ez értéktelen.
+
+DARABSZÁM: pontosan 6–12 entry. Kevesebb de jobb minőségű.
+
+ELLENŐRZÉS felvétel előtt:
+- Főnév, rövidítés vagy névvel ellátott fogalom? ✓
+- Vizsgán definíció kérhető belőle? ✓
+- A definíció elmagyarázza mi ez, nem egy szekcióra hivatkozik? ✓
+- 50 karakternél rövidebb és legfeljebb 4 szóból áll? ✓
+
+JSON FORMÁTUM (csak a tömböt add vissza, wrapper kulcs nélkül):
 [
   {
-    "id": "g1",
     "term": "Szakkifejezés",
-    "definition": "Részletes definíció 2-4 mondatban",
-    "category": "Kategória neve",
-    "aliases": ["szinonima1", "szinonima2"]
+    "definition": "2-3 mondatos definíció, ami elmagyarázza mi ez és hogyan működik.",
+    "category": "Kriptográfia",
+    "aliases": []
   }
-]
-
-3. DARABSZÁM: 20-30 entry legyen
-
-4. FONTOSSÁG: Csak a legfontosabb szakkifejezéseket vedd fel
-
-5. MAGYAR NYELV: Minden magyarul!
-
-VISSZA: Csak a tiszta JSON tömböt.`
+]`
 
   const completion = await callWithProviderLimit('groq', () => groq.chat.completions.create({
     model: GROQ_MODEL,
@@ -199,6 +204,23 @@ VISSZA: Csak a tiszta JSON tömböt.`
   } catch {
     return []
   }
+}
+
+/**
+ * Kiszűri a rossz minőségű glossary entryket:
+ * - placeholder definíciókat (fallback generátortól)
+ * - fejezetcímeket és mondattöredékeket (Magyar névelővel kezdődő term)
+ * - túl hosszú termeket (mondattöredékek)
+ */
+function validateGlossaryEntry(g) {
+  const term = (g.term || '').trim()
+  const def  = (g.definition || g.def || '').trim()
+  if (def.includes('szereplo fontos fogalom') || def.includes('kapcsolodo jegyzetkornyezetbol')) return false
+  if (/^(Az?\s|A\(z\)\s)/i.test(term)) return false
+  if (term.length > 55 || term.length < 2) return false
+  if (term.split(/\s+/).length > 5) return false
+  if (!def || def.length < 30) return false
+  return true
 }
 
 // ── FŐ FOLYAMAT ───────────────────────────────────────────────────────────────
@@ -281,7 +303,8 @@ async function main() {
       // Glossary
       let glossary
       if (useLocalFallback) {
-        glossary = buildFallbackGlossary(section.title, section.content)
+        glossary = []
+        console.log(`   ⚠️  Using local fallback mode — skipping glossary for "${section.title}"`)
       } else {
         try {
           glossary = await generateGlossaryWithGroq(
@@ -291,9 +314,8 @@ async function main() {
             planContext
           )
         } catch (err) {
-          console.log(`   Groq glossary generation failed (${err.status || err.code || err.message}); switching to local fallback.`)
-          useLocalFallback = true
-          glossary = buildFallbackGlossary(section.title, section.content)
+          console.log(`   ⚠️  Glossary LLM failed for "${section.title}" (${err.status || err.code || err.message}), skipping section (no placeholders)`)
+          glossary = []
         }
       }
       const glossaryWithSection = glossary.map(g => ({
@@ -318,23 +340,25 @@ async function main() {
 
   const seenGlossary = new Set()
   const uniqueGlossary = allGlossary.filter(g => {
-    const key = g.term.toLowerCase()
+    const key = (g.term || '').toLowerCase()
     if (seenGlossary.has(key)) return false
     seenGlossary.add(key)
     return true
   })
 
+  const validatedGlossary = uniqueGlossary.filter(validateGlossaryEntry)
+
   // ID-k generálása
   uniqueFlashcards.forEach((f, idx) => { f.id = `f${idx + 1}` })
-  uniqueGlossary.forEach((g, idx) => { g.id = `g${idx + 1}` })
+  validatedGlossary.forEach((g, idx) => { g.id = `g${idx + 1}` })
 
   // Mentés
   fs.writeFileSync(flashcardsPath, JSON.stringify(uniqueFlashcards, null, 2), 'utf-8')
-  fs.writeFileSync(glossaryPath, JSON.stringify(uniqueGlossary, null, 2), 'utf-8')
+  fs.writeFileSync(glossaryPath, JSON.stringify(validatedGlossary, null, 2), 'utf-8')
 
   console.log(`\n✅ Generálás kész!`)
   console.log(`   🃏 Flashcardok: ${uniqueFlashcards.length}`)
-  console.log(`   📖 Glossary: ${uniqueGlossary.length}`)
+  console.log(`   📖 Glossary: ${validatedGlossary.length} (${uniqueGlossary.length - validatedGlossary.length} placeholder/fragment kiszűrve)`)
   console.log(`   📁 Flashcards: ${flashcardsPath}`)
   console.log(`   📁 Glossary: ${glossaryPath}`)
 
@@ -352,10 +376,10 @@ async function main() {
     description: `${subjectSlug} tanulási anyagok`,
     color: '#E07355',
     icon: 'book',
-    questionCount: uniqueFlashcards.length + uniqueGlossary.length,
+    questionCount: uniqueFlashcards.length + validatedGlossary.length,
     lessonCount: mdxFiles.length,
     flashcardCount: uniqueFlashcards.length,
-    glossaryCount: uniqueGlossary.length,
+    glossaryCount: validatedGlossary.length,
   }
 
   if (existingIdx >= 0) {

@@ -5,18 +5,22 @@ const MODEL_LIMITS = {
   'gemini-2.5-flash':        { rpm: 1000, tpm: 1000000,  rpd: 10000,    vision: true  },
   'gemini-2.5-flash-lite':   { rpm: 4000, tpm: 4000000,  rpd: Infinity, vision: true  },
   'gemini-3.1-flash-lite':   { rpm: 4000, tpm: 4000000,  rpd: 150000,   vision: true  },
+  'gemini-2-flash':          { rpm: 2000, tpm: 4000000,  rpd: Infinity, vision: true  },
+  'gemini-3-flash':          { rpm: 1000, tpm: 2000000,  rpd: 10000,    vision: true  },
   // Google — Gemma (last-resort fallback only; low TPM makes them impractical for long prompts)
   'gemma-3-27b-it':          { rpm: 30,   tpm: 15000,    rpd: 14400,    vision: false },
   'gemma-4-31b-it':          { rpm: 30,   tpm: 16000,    rpd: 14400,    vision: true  },
   'gemma-4-26b-a4b-it':      { rpm: 30,   tpm: 16000,    rpd: 14400,    vision: true  },
+  // Google — image generation (Nano Banana):
+  'gemini-2.5-flash-preview-image-generation': { rpm: 500, tpm: 500000, rpd: 2000, vision: false },
+  'gemini-3.0-pro-preview-image-generation':   { rpm: 20,  tpm: 100000, rpd: 250,  vision: false },
+  'gemini-3.1-flash-preview-image-generation': { rpm: 100, tpm: 200000, rpd: 1000, vision: false },
+  'imagen-4.0-fast-generate-002':              { rpm: 10,  tpm: 0,      rpd: 70,   vision: false },
   // Groq — large
   'llama-3.3-70b-versatile': { rpm: 30,   tpm: 6000,     rpd: 1000,     vision: false },
-  'llama-3.1-70b-versatile': { rpm: 30,   tpm: 6000,     rpd: 1000,     vision: false },
-  'qwen-qwq-32b':            { rpm: 30,   tpm: 6000,     rpd: 1000,     vision: false },
   // Groq — small
   'llama-3.1-8b-instant':    { rpm: 30,   tpm: 6000,     rpd: 14400,    vision: false },
   'gemma2-9b-it':            { rpm: 30,   tpm: 6000,     rpd: 14400,    vision: false },
-  'llama-3.2-3b-preview':    { rpm: 30,   tpm: 6000,     rpd: 14400,    vision: false },
 };
 
 class RateLimiter {
