@@ -1,22 +1,8 @@
-import { verifyIdToken, isAdminEmail } from '@/lib/firebase-admin'
+import { requireAdmin } from '@/lib/auth-middleware'
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024 // 20 MB
 const CHUNK_SIZE = 14000
 const OVERLAP = 300
-
-async function requireAdmin(req) {
-  const token = req.headers.get('authorization')?.slice(7)
-  if (!token) return null
-  // Password fallback (when Firebase not configured)
-  const adminPw = process.env.ADMIN_PASSWORD
-  if (adminPw && token === adminPw) return { email: 'admin', uid: 'local' }
-  try {
-    const decoded = await verifyIdToken(token)
-    return isAdminEmail(decoded.email) ? decoded : null
-  } catch {
-    return null
-  }
-}
 
 function detectFileType(fileName, mimeType) {
   const name = (fileName || '').toLowerCase()

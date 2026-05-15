@@ -1,19 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { verifyIdToken, isAdminEmail } from '@/lib/firebase-admin'
+import { requireAdmin } from '@/lib/auth-middleware'
 
 const CONTENT_ROOT = path.join(process.cwd(), 'content')
-
-async function requireAdmin(req) {
-  const token = req.headers.get('authorization')?.slice(7)
-  if (!token) return null
-  try {
-    const decoded = await verifyIdToken(token)
-    return isAdminEmail(decoded.email) ? decoded : null
-  } catch {
-    return null
-  }
-}
 
 function sanitizeSlug(slug) {
   return String(slug || '').toLowerCase().replace(/[^a-z0-9_-]/g, '_').slice(0, 80)

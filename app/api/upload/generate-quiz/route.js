@@ -1,15 +1,4 @@
-import { verifyIdToken, isAdminEmail } from '@/lib/firebase-admin'
-
-async function requireAdmin(req) {
-  const token = req.headers.get('authorization')?.slice(7)
-  if (!token) return null
-  try {
-    const decoded = await verifyIdToken(token)
-    return isAdminEmail(decoded.email) ? decoded : null
-  } catch {
-    return null
-  }
-}
+import { requireAdmin } from '@/lib/auth-middleware'
 
 const ALL_ENABLED_TYPES = ['multi_choice', 'true_false', 'fill_the_blanks', 'drag_n_drop', 'simple_input', 'formula_drag_drop', 'calc_input']
 

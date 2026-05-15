@@ -1,6 +1,30 @@
 'use client'
 import { useEffect, useState } from 'react'
 
+let mermaidPromise = null
+
+function getMermaid() {
+  if (!mermaidPromise) {
+    mermaidPromise = import('mermaid').then(m => {
+      const mermaid = m.default
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+          primaryColor: 'rgba(224,115,85,0.10)',
+          primaryBorderColor: '#E07355',
+          primaryTextColor: '#1A1A1A',
+          lineColor: '#3A3A3A',
+          fontSize: '14px',
+          fontFamily: 'var(--font-sans, system-ui, sans-serif)',
+        },
+      })
+      return mermaid
+    })
+  }
+  return mermaidPromise
+}
+
 export function MermaidDiagram({ code, t }) {
   const [svg, setSvg] = useState('')
   const [error, setError] = useState('')
@@ -9,19 +33,7 @@ export function MermaidDiagram({ code, t }) {
     let cancelled = false
     async function render() {
       try {
-        const mermaid = (await import('mermaid')).default
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: 'base',
-          themeVariables: {
-            primaryColor: 'rgba(224,115,85,0.10)',
-            primaryBorderColor: '#E07355',
-            primaryTextColor: '#1A1A1A',
-            lineColor: '#3A3A3A',
-            fontSize: '14px',
-            fontFamily: 'DM Sans, system-ui, sans-serif',
-          },
-        })
+        const mermaid = await getMermaid()
         const id = `mermaid-${Math.random().toString(36).slice(2)}`
         const { svg: rendered } = await mermaid.render(id, code)
         if (!cancelled) setSvg(rendered)

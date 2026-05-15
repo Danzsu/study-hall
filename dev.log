@@ -60,3 +60,31 @@
  ✓ Compiled /subject/[slug] in 132ms (667 modules)
  GET /subject/it_biztonsag 200 in 341ms
  ○ Compiling /study/[slug] ...
+ ✓ Compiled /study/[slug] in 4.7s (4715 modules)
+ GET /study/it_biztonsag 200 in 4961ms
+ ○ Compiling /search/[slug] ...
+ ✓ Compiled /search/[slug] in 1469ms (4730 modules)
+ GET /search/it_biztonsag 200 in 1689ms
+ ✓ Compiled /onboarding in 233ms (4745 modules)
+ GET /onboarding 200 in 296ms
+ ✓ Compiled /glossary/[slug] in 241ms (4756 modules)
+ GET /glossary/it_biztonsag 200 in 465ms
+ GET /api/health 200 in 5ms
+ ✓ Compiled /api/subjects in 170ms (2425 modules)
+ GET /api/subjects 200 in 190ms
+ ✓ Compiled /api/subjects/[slug] in 117ms (2427 modules)
+ GET /api/subjects/it_biztonsag 200 in 298ms
+ ✓ Compiled /api/questions/[slug] in 103ms (2429 modules)
+ GET /api/questions/it_biztonsag 200 in 123ms
+ ✓ Compiled /api/flashcards/[slug] in 114ms (2431 modules)
+ GET /api/flashcards/it_biztonsag 200 in 137ms
+ ✓ Compiled /api/glossary/[slug] in 125ms (2433 modules)
+ GET /api/glossary/it_biztonsag 200 in 150ms
+ ✓ Compiled /api/notes/[slug] in 135ms (2435 modules)
+ GET /api/notes/it_biztonsag 200 in 311ms
+ GET /api/notes/it_biztonsag/01-00-introitsec-bme-2026-hu 200 in 9ms
+ GET /api/search?q=IT&subject=it_biztonsag 200 in 15ms
+ GET /api/search?q=x&subject=it_biztonsag 400 in 3ms
+ POST /api/validate-answer 400 in 8ms
+ POST /api/validate-answer 413 in 2ms
+ POST /api/validate-answer 200 in 628ms

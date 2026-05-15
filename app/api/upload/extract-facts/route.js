@@ -1,15 +1,4 @@
-import { verifyIdToken, isAdminEmail } from '@/lib/firebase-admin'
-
-async function requireAdmin(req) {
-  const token = req.headers.get('authorization')?.slice(7)
-  if (!token) return null
-  try {
-    const decoded = await verifyIdToken(token)
-    return isAdminEmail(decoded.email) ? decoded : null
-  } catch {
-    return null
-  }
-}
+import { requireAdmin } from '@/lib/auth-middleware'
 
 export async function POST(req) {
   const admin = await requireAdmin(req)

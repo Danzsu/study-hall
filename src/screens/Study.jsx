@@ -29,7 +29,7 @@ function Callout({ type = 'NOTE', children, t }) {
       <Icon size={18} style={{ color: spec.color, flexShrink: 0, marginTop: 2 }} />
       <div>
         <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.8px', color: spec.color, marginBottom: 5, textTransform: 'uppercase' }}>{spec.label}</p>
-        <div style={{ fontSize: 14.5, lineHeight: 1.7, color: t.text, fontFamily: "'Lora', Georgia, serif" }}>{children}</div>
+        <div style={{ fontSize: 14.5, lineHeight: 1.7, color: t.text, fontFamily: "var(--font-serif, 'Lora', Georgia, serif)" }}>{children}</div>
       </div>
     </div>
   )
@@ -59,7 +59,7 @@ function renderContent(raw, t) {
       }
       elements.push(<MathBlock key={i} value={mathLines.join('\n').trim()} t={t} />)
     } else if (line.startsWith('# ')) {
-      elements.push(<h1 key={i} style={{ fontFamily: "'Lora',Georgia,serif", fontSize: 28, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.5px', marginBottom: 12, marginTop: 36, color: t.text }}>{line.slice(2)}</h1>)
+      elements.push(<h1 key={i} style={{ fontFamily: "var(--font-serif, 'Lora', Georgia, serif)", fontSize: 28, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.5px', marginBottom: 12, marginTop: 36, color: t.text }}>{line.slice(2)}</h1>)
     } else if (line.startsWith('## ')) {
       elements.push(<h2 key={i} style={{ fontFamily: "'DM Sans',system-ui", fontSize: 20, fontWeight: 800, letterSpacing: '-0.3px', marginBottom: 12, marginTop: 32, color: t.text }}>{line.slice(3)}</h2>)
     } else if (line.startsWith('### ')) {
@@ -116,7 +116,7 @@ function renderContent(raw, t) {
           {imgMatch[1] && (
             <figcaption style={{
               marginTop: 8, fontSize: 13, color: t.textSub,
-              fontStyle: 'italic', fontFamily: "'Lora', Georgia, serif",
+              fontStyle: 'italic', fontFamily: "var(--font-serif, 'Lora', Georgia, serif)",
             }}>
               {imgMatch[1]}
             </figcaption>
@@ -135,7 +135,7 @@ function renderContent(raw, t) {
         elements.push(<MermaidDiagram key={i} code={codeLines.join('\n')} t={t} />)
       } else {
         elements.push(
-          <pre key={i} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '16px 18px', margin: '24px 0', overflowX: 'auto', fontSize: 13, lineHeight: 1.6, color: t.text, fontFamily: "'JetBrains Mono', monospace" }}>
+          <pre key={i} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 10, padding: '16px 18px', margin: '24px 0', overflowX: 'auto', fontSize: 13, lineHeight: 1.6, color: t.text, fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>
             <code>{codeLines.join('\n')}</code>
           </pre>
         )
@@ -417,7 +417,7 @@ function renderInlineNodes(text, t) {
     })
 
     push('code', remaining.match(/`(.+?)`/), 12, (match) => {
-      return <code key={key++} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 4, padding: '1px 5px', fontSize: '0.9em', fontFamily: "'JetBrains Mono', monospace" }}>{match[1]}</code>
+      return <code key={key++} style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 4, padding: '1px 5px', fontSize: '0.9em', fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>{match[1]}</code>
     })
 
     push('math', remaining.match(/\$([^$\n]+?)\$/), 13, (match) => {
@@ -493,7 +493,7 @@ function RecallCards({ items, t }) {
 
       <div style={{ background: t.surface, border: `1.5px solid ${t.border}`, borderRadius: 14, padding: '28px 30px' }}>
         <span style={{ fontSize: 11, fontWeight: 800, color: t.textMuted, letterSpacing: '1px' }}>QUESTION {idx + 1} OF {items.length}</span>
-        <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 18, fontWeight: 600, lineHeight: 1.5, marginTop: 12, marginBottom: 18, color: t.text }}>
+        <p style={{ fontFamily: "var(--font-serif, 'Lora', Georgia, serif)", fontSize: 18, fontWeight: 600, lineHeight: 1.5, marginTop: 12, marginBottom: 18, color: t.text }}>
           <MarkdownText text={item.question} />
         </p>
         <textarea
@@ -507,7 +507,7 @@ function RecallCards({ items, t }) {
         {revealed[idx] ? (
           <div style={{ marginTop: 18, padding: '16px 18px', background: `${C.accent}10`, borderLeft: `3px solid ${C.accent}`, borderRadius: '0 10px 10px 0' }}>
             <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '1px', color: C.accent }}>MODEL ANSWER</span>
-            <p style={{ fontSize: 14, color: t.text, lineHeight: 1.7, marginTop: 6, fontFamily: "'Lora', Georgia, serif" }}><MarkdownText text={item.answer} /></p>
+            <p style={{ fontSize: 14, color: t.text, lineHeight: 1.7, marginTop: 6, fontFamily: "var(--font-serif, 'Lora', Georgia, serif)" }}><MarkdownText text={item.answer} /></p>
             <p style={{ fontSize: 12, color: t.textSub, marginTop: 12, fontWeight: 700 }}>How well did you know this?</p>
             <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
               {[
@@ -823,21 +823,21 @@ export default function Study({ subjectId, lesson: lessonProp }) {
                 {/* Lesson header */}
                 <div style={{ marginBottom: 36, paddingBottom: 28, borderBottom: `1px solid ${t.border}` }}>
                   <h1 style={{
-                    fontFamily: "'Lora', Georgia, serif",
+                    fontFamily: "var(--font-serif, 'Lora', Georgia, serif)",
                     fontSize: 30, fontWeight: 700, lineHeight: 1.25,
                     letterSpacing: '-0.5px', marginBottom: 12, color: t.text,
                   }}>
                     {frontmatter.title ?? active?.title ?? ''}
                   </h1>
                   {frontmatter.description && (
-                    <p style={{ fontSize: 16, color: t.textSub, lineHeight: 1.6, fontFamily: "'Lora', Georgia, serif", fontStyle: 'italic' }}>
+                    <p style={{ fontSize: 16, color: t.textSub, lineHeight: 1.6, fontFamily: "var(--font-serif, 'Lora', Georgia, serif)", fontStyle: 'italic' }}>
                       {frontmatter.description}
                     </p>
                   )}
                 </div>
 
                 {/* Body */}
-                <div style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 15.5, lineHeight: 1.8, color: t.text }}>
+                <div style={{ fontFamily: "var(--font-serif, 'Lora', Georgia, serif)", fontSize: 15.5, lineHeight: 1.8, color: t.text }}>
                   {renderContent(content, t)}
                 </div>
 

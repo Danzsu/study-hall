@@ -1,19 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { verifyIdToken, isAdminEmail } from '@/lib/firebase-admin'
-
-async function requireAdmin(req) {
-  const token = req.headers.get('authorization')?.slice(7)
-  if (!token) return null
-  const adminPw = process.env.ADMIN_PASSWORD
-  if (adminPw && token === adminPw) return { email: 'admin', uid: 'local' }
-  try {
-    const decoded = await verifyIdToken(token)
-    return isAdminEmail(decoded.email) ? decoded : null
-  } catch {
-    return null
-  }
-}
+import { requireAdmin } from '@/lib/auth-middleware'
 
 function sanitizeSlug(slug) {
   return String(slug || '').toLowerCase().replaceAll(/[^a-z0-9_-]/g, '').slice(0, 80)
@@ -94,6 +81,9 @@ async function generateWithNanoBanana(fullPrompt, GOOGLE_AI_KEY, model) {
       signal: AbortSignal.timeout(45000),
     }
   )
+  if (res.status === 401 || res.status === 403 || res.status === 400) {
+    throw new Error(`Permanent error ${res.status} from ${model}`)
+  }
   if (!res.ok) return null
   const data = await res.json()
   const part = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)
@@ -114,6 +104,9 @@ async function generateWithImagen4Fast(fullPrompt, GOOGLE_AI_KEY) {
       signal: AbortSignal.timeout(30000),
     }
   )
+  if (res.status === 401 || res.status === 403 || res.status === 400) {
+    throw new Error(`Permanent error ${res.status} from imagen-4.0-fast-generate-002`)
+  }
   if (!res.ok) return null
   const data = await res.json()
   const base64 = data.predictions?.[0]?.bytesBase64Encoded
@@ -158,15 +151,19 @@ export async function POST(req) {
   // Try Nano Banana chain
   let result = null
   let usedModel = null
-  for (const model of NANO_BANANA_CHAIN) {
-    result = await generateWithNanoBanana(fullPrompt, GOOGLE_AI_KEY, model)
-    if (result) { usedModel = model; break }
-  }
+  try {
+    for (const model of NANO_BANANA_CHAIN) {
+      result = await generateWithNanoBanana(fullPrompt, GOOGLE_AI_KEY, model)
+      if (result) { usedModel = model; break }
+    }
 
-  // Last resort: Imagen 4 Fast
-  if (!result) {
-    result = await generateWithImagen4Fast(fullPrompt, GOOGLE_AI_KEY)
-    if (result) usedModel = 'imagen-4.0-fast-generate-002'
+    // Last resort: Imagen 4 Fast
+    if (!result) {
+      result = await generateWithImagen4Fast(fullPrompt, GOOGLE_AI_KEY)
+      if (result) usedModel = 'imagen-4.0-fast-generate-002'
+    }
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 502 })
   }
 
   if (!result) {

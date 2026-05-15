@@ -147,7 +147,7 @@ VISSZA: Csak a tiszta JSON tömböt.`
 /**
  * Glossary entries generálása Groq-val
  */
-async function generateGlossaryWithGroq(groq, notesContent, subjectName, planContext = '') {
+async function generateGlossaryWithGroq(groq, notesContent, subjectName) {
   const prompt = `A következő tanulási anyag alapján készíts szakmai glosszáriumot.
 
 TÁRGY: ${subjectName}
@@ -310,8 +310,7 @@ async function main() {
           glossary = await generateGlossaryWithGroq(
             groq,
             section.content,
-            subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-            planContext
+            subjectSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
           )
         } catch (err) {
           console.log(`   ⚠️  Glossary LLM failed for "${section.title}" (${err.status || err.code || err.message}), skipping section (no placeholders)`)

@@ -1,23 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import OpenAI from 'openai'
-import { verifyIdToken, isAdminEmail } from '@/lib/firebase-admin'
+import { requireAdmin } from '@/lib/auth-middleware'
 
 const PROMPTS_DIR = path.join(process.cwd(), 'prompts')
-
-async function requireAdmin(req) {
-  const token = req.headers.get('authorization')?.slice(7)
-  if (!token) return null
-  // Password fallback (when Firebase not configured)
-  const adminPw = process.env.ADMIN_PASSWORD
-  if (adminPw && token === adminPw) return { email: 'admin', uid: 'local' }
-  try {
-    const decoded = await verifyIdToken(token)
-    return isAdminEmail(decoded.email) ? decoded : null
-  } catch {
-    return null
-  }
-}
 
 async function callLLM(systemPrompt, userMessage) {
   const providers = [
