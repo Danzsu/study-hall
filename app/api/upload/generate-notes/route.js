@@ -49,7 +49,7 @@ async function reviewPass(draft) {
       baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
     })
     const res = await client.chat.completions.create({
-      model: 'gemini-2-flash',
+      model: process.env.GOOGLE_STANDARD_MODELS?.split(',')[0]?.trim() || 'gemini-2.5-flash-lite',
       messages: [
         {
           role: 'system',

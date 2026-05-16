@@ -11,6 +11,8 @@ import katex from 'katex'
 import MarkdownText from '../components/MarkdownText'
 import { themes } from '../../lib/courseTheme'
 import { MermaidDiagram } from '../components/study/MermaidDiagram'
+import { Callout as StudyCallout, MarginNote as StudyMarginNote, SectionHeading } from '../components/study/index.jsx'
+import { appendActivity } from '../lib/activityLog'
 
 const CALLOUTS = {
   NOTE: { label: 'Note', color: C.blue, bg: C.blueBg, Icon: Info },
@@ -154,14 +156,14 @@ function renderContent(raw, t) {
         const inner = line.replace(/<Callout\b[^>]*>/i, '').replace(/<\/Callout>/i, '').trim()
         if (inner) bodyLines.push(inner)
       }
-      const variantMap = { insight: 'NOTE', important: 'IMPORTANT', warning: 'WARNING', note: 'NOTE', example: 'EXAMPLE', tip: 'TIP' }
-      const type = variantMap[String(attrs.variant || '').toLowerCase()] ?? 'NOTE'
+      const xmlVariantMap = { insight: 'insight', important: 'important', warning: 'warning', note: 'note', example: 'insight', tip: 'note' }
+      const variant = xmlVariantMap[String(attrs.variant || '').toLowerCase()] ?? 'note'
       elements.push(
-        <Callout key={`cv-${i}`} type={type} t={t}>
+        <StudyCallout key={`cv-${i}`} variant={variant}>
           {bodyLines.map((part, idx) => (
             <p key={idx} style={{ margin: idx === 0 ? 0 : '8px 0 0' }}>{inlineFormat(part.trim(), t)}</p>
           ))}
-        </Callout>
+        </StudyCallout>
       )
     } else if (/^<MarginNote\b/i.test(line.trim())) {
       const openMatch = line.match(/<MarginNote\b([^>]*)>/i)
@@ -175,12 +177,30 @@ function renderContent(raw, t) {
         }
       }
       elements.push(
-        <aside key={`mn-${i}`} style={{ borderLeft: `3px solid ${C.accent}`, paddingLeft: 14, margin: '20px 0', fontSize: 13, lineHeight: 1.6, color: t.textSub, fontStyle: 'italic' }}>
-          {attrs.label && <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.8px', marginBottom: 4, textTransform: 'uppercase', color: t.textMuted }}>{attrs.label}</p>}
+        <StudyMarginNote key={`mn-${i}`} label={attrs.label || 'Side note'}>
           {bodyLines.map((part, idx) => (
             <p key={idx} style={{ margin: idx === 0 ? 0 : '6px 0 0' }}>{inlineFormat(part.trim(), t)}</p>
           ))}
-        </aside>
+        </StudyMarginNote>
+      )
+    } else if (/^<SectionHeading\b/i.test(line.trim())) {
+      const openMatch = line.match(/<SectionHeading\b([^>]*)>/i)
+      const shAttrs = openMatch ? parseTagAttributes(openMatch[1]) : {}
+      const shLines = []
+      if (!/<\/SectionHeading>/i.test(line)) {
+        i++
+        while (i < lines.length && !/<\/SectionHeading>/i.test(lines[i])) {
+          shLines.push(lines[i]); i++
+        }
+      } else {
+        const inner = line.replace(/<SectionHeading\b[^>]*>/i, '').replace(/<\/SectionHeading>/i, '').trim()
+        if (inner) shLines.push(inner)
+      }
+      const lvl = parseInt(shAttrs.level ?? '2', 10)
+      elements.push(
+        <SectionHeading key={`sh-${i}`} level={isNaN(lvl) ? 2 : Math.max(2, Math.min(3, lvl))}>
+          {inlineFormat(shLines.join(' ').trim(), t)}
+        </SectionHeading>
       )
     } else if (line.trim() === '' || line.trim() === '---') {
       // skip
@@ -700,6 +720,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
   const [loading, setLoading]         = useState(false)
 
   const [accentVars, setAccentVars] = useState({})
+  const [subjectName, setSubjectName] = useState('')
 
   useEffect(() => {
     if (!subjectId) return
@@ -707,6 +728,7 @@ export default function Study({ subjectId, lesson: lessonProp }) {
       .then(r => r.json())
       .then(data => {
         const subject = Array.isArray(data) ? data.find(s => s.id === subjectId || s.slug === subjectId) : null
+        if (subject?.name) setSubjectName(subject.name)
         const color = subject?.color
         if (!color) return
         const theme = Object.values(themes).find(t => t.accent.toLowerCase() === color.toLowerCase())
@@ -749,8 +771,10 @@ export default function Study({ subjectId, lesson: lessonProp }) {
         setActiveRecall(normalized.activeRecall)
         setSources(normalized.sources)
         setLoading(false)
+        appendActivity({ type: 'study', subjectId, subjectName: subjectName || subjectId, color: accentVars['--accent'] || '#E07355', durationSecs: 0, score: null, total: null })
       })
       .catch(() => setLoading(false))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectId, activeSlug])
 
   // Sync lessonProp → activeSlug when navigated from outside

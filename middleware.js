@@ -15,7 +15,7 @@ export function middleware(request) {
     // Page navigation: browsers don't send custom headers for page loads,
     // so we read the token from a cookie set at login time.
     const token = request.cookies.get('admin-token')?.value
-    if (!token || token.length < 4) {
+    if (!token || token.length < 16) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
     return NextResponse.next()

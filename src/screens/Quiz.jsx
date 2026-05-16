@@ -6,6 +6,7 @@ import {
   Clock, Target, TrendingUp,
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
+import { appendSession } from '../lib/activityLog'
 import { C } from '../theme'
 import { playSound } from '../sounds'
 import QuestionRenderer, { evaluateAnswer, hasValidSelection } from '../components/QuestionRenderer'
@@ -345,6 +346,15 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
     const newMeta = wrongQs.reduce((acc, q) => ({ ...acc, [q.id]: { selected: answers[q.id], date: now } }), {})
     localStorage.setItem(dateKey, JSON.stringify({ ...existingDates, ...newDates }))
     localStorage.setItem(metaKey, JSON.stringify({ ...existingMeta, ...newMeta }))
+    appendSession({
+      type: 'quiz',
+      subjectId,
+      subjectName,
+      color: C.accent,
+      durationSecs: timeTaken,
+      score: correctCount,
+      total: questions.length,
+    })
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

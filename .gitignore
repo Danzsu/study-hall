@@ -52,3 +52,11 @@ pipeline/*.pyc
 pipeline/.venv/
 sync/__pycache__/
 sync/*.pyc
+
+# Python pipeline pycache
+pipeline/extractors/__pycache__/
+
+# Keep directory structure but ignore job files
+!storage/jobs/
+storage/jobs/*.json
+!storage/jobs/.gitkeep

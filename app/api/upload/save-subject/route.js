@@ -33,7 +33,7 @@ export async function POST(req) {
         const seen = new Set(existing.map(q => String(q.question || '').toLowerCase().slice(0, 60)))
         const newOnes = questions.filter(q => !seen.has(String(q.question || '').toLowerCase().slice(0, 60)))
         finalQuestions = [...existing, ...newOnes]
-      } catch { /* ignore parse errors, overwrite */ }
+      } catch (e) { console.warn('[save-subject] Failed to parse existing questions.json, overwriting:', e.message) }
     }
   }
 
@@ -46,7 +46,7 @@ export async function POST(req) {
     const metaPath = path.join(subjectDir, 'meta.json')
     let existingMeta = {}
     if (fs.existsSync(metaPath)) {
-      try { existingMeta = JSON.parse(fs.readFileSync(metaPath, 'utf-8')) } catch { /* ignore */ }
+      try { existingMeta = JSON.parse(fs.readFileSync(metaPath, 'utf-8')) } catch (e) { console.warn('[save-subject] Failed to parse meta.json:', e.message) }
     }
     fs.writeFileSync(metaPath, JSON.stringify({ ...existingMeta, slug: safeSlug, name: name || existingMeta.name || safeSlug, ...meta }, null, 2), 'utf-8')
   }
@@ -55,7 +55,7 @@ export async function POST(req) {
   const subjectsPath = path.join(CONTENT_ROOT, 'subjects.json')
   let subjects = []
   if (fs.existsSync(subjectsPath)) {
-    try { subjects = JSON.parse(fs.readFileSync(subjectsPath, 'utf-8')) } catch { /* ignore */ }
+    try { subjects = JSON.parse(fs.readFileSync(subjectsPath, 'utf-8')) } catch (e) { console.warn('[save-subject] Failed to parse subjects.json:', e.message) }
   }
   const existing = subjects.findIndex(s => s.slug === safeSlug)
   const entry = {

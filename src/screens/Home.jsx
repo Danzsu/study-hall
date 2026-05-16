@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import {
   Flame, TrendingUp,
   ChevronRight, Award, Zap,
@@ -12,19 +12,49 @@ import { C } from '../theme'
 // ── HEATMAP ───────────────────────────────────────────────────────────────────
 const MONTHS = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr']
 
-function buildHeatmap() {
+function buildWeekFromLog(log) {
+  const ordered = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  const buckets = Object.fromEntries(ordered.map(d => [d, 0]))
+  const DAY_IDX = { 0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat' }
+  const now = new Date()
+  const mondayOffset = (now.getDay() + 6) % 7
+  const weekStart = new Date(now)
+  weekStart.setHours(0, 0, 0, 0)
+  weekStart.setDate(now.getDate() - mondayOffset)
+  const weekEnd = new Date(weekStart)
+  weekEnd.setDate(weekStart.getDate() + 7)
+  for (const e of log) {
+    const d = new Date(e.ts)
+    if (d >= weekStart && d < weekEnd) {
+      const key = DAY_IDX[d.getDay()]
+      buckets[key] = (buckets[key] ?? 0) + (e.durationSecs > 0 ? Math.ceil(e.durationSecs / 60) : 5)
+    }
+  }
+  return ordered.map(day => ({ day, mins: buckets[day] ?? 0 }))
+}
+
+function buildHeatmapFromLog(log) {
   const W = 15
-  return Array.from({ length: W }, (_, w) =>
-    Array.from({ length: 7 }, (_, d) => {
-      const age = (W - w) * 7 - d
-      const p = age < 7 ? 0.82 : age < 21 ? 0.55 : 0.3
-      return Math.random() < p ? Math.ceil(Math.random() * 4) : 0
+  const dayMins = {}
+  for (const e of log) {
+    const key = new Date(e.ts).toISOString().slice(0, 10)
+    dayMins[key] = (dayMins[key] ?? 0) + (e.durationSecs > 0 ? Math.ceil(e.durationSecs / 60) : 5)
+  }
+  const now = new Date()
+  now.setHours(23, 59, 59, 999)
+  const mondayOffset = (new Date().getDay() + 6) % 7
+  return Array.from({ length: W }, (_, wi) =>
+    Array.from({ length: 7 }, (_, di) => {
+      const daysBack = (W - 1 - wi) * 7 + (6 - di) - mondayOffset
+      const d = new Date(now)
+      d.setDate(now.getDate() - daysBack)
+      const m = dayMins[d.toISOString().slice(0, 10)] ?? 0
+      return m === 0 ? 0 : m < 10 ? 1 : m < 20 ? 2 : m < 40 ? 3 : 4
     })
   )
 }
-const HMAP = buildHeatmap()
 
-function Heatmap({ t }) {
+function Heatmap({ t, hmap }) {
   const bg = t.dark
     ? ['#252525', '#4A1F10', '#7A3020', '#B04428', '#E07355']
     : ['#EDE9E3', '#F5C4B3', '#F0A088', '#E07355', '#C85E40']
@@ -49,11 +79,11 @@ function Heatmap({ t }) {
             <div style={{ flex: 1 }} />
           </div>
           <div style={{ display: 'flex', gap: 2 }}>
-            {HMAP.map((week, wi) => (
+            {hmap.map((week, wi) => (
               <div key={wi} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 {week.map((v, di) => (
                   <div key={di} style={{ height: 11, borderRadius: 2, background: bg[v], cursor: v > 0 ? 'pointer' : 'default' }}
-                    title={v > 0 ? `${v * 10} min` : 'No activity'} />
+                    title={v > 0 ? `${v * 10}+ min` : 'No activity'} />
                 ))}
               </div>
             ))}
@@ -168,26 +198,14 @@ function SubjectRow({ s, t, open, onToggle }) {
   )
 }
 
-const WEEK_TEMPLATE = [
-  { day: 'Mon', mins: 0 }, { day: 'Tue', mins: 18 }, { day: 'Wed', mins: 32 },
-  { day: 'Thu', mins: 25 }, { day: 'Fri', mins: 14 }, { day: 'Sat', mins: 40 },
-  { day: 'Sun', mins: 0 },
-]
-
-const ACHIEVEMENTS = [
-  { Icon: Flame,     label: '7-day streak',  desc: 'Study 7 days in a row',    done: false, progress: 5,  total: 7  },
-  { Icon: TrendingUp, label: 'Perfect score', desc: 'Get 10/10 on a quiz',      done: false, progress: 8,  total: 10 },
-  { Icon: Award,     label: '50 questions',  desc: 'Answer 50 questions',      done: true,  progress: 50, total: 50 },
-  { Icon: BarChart2, label: 'All subjects',  desc: 'Study 3+ subjects',        done: true,  progress: 3,  total: 3  },
-  { Icon: Zap,       label: 'Speed runner',  desc: 'Complete quiz in < 5 min', done: false, progress: 0,  total: 1  },
-]
-
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 export default function Home() {
   const t = useTheme()
   const [subjects, setSubjects] = useState([])
   const [open, setOpen] = useState({})
   const [sessions, setSessions] = useState([])
+  const [week, setWeek] = useState(() => ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(day => ({ day, mins: 0 })))
+  const [hmap, setHmap] = useState(() => Array.from({ length: 15 }, () => Array(7).fill(0)))
 
   useEffect(() => {
     try {
@@ -196,10 +214,14 @@ export default function Home() {
       setSessions([])
     }
 
+    let log = []
+    try { log = JSON.parse(localStorage.getItem('activityLog') ?? '[]') } catch {}
+    setWeek(buildWeekFromLog(log))
+    setHmap(buildHeatmapFromLog(log))
+
     fetch('/api/subjects')
       .then(r => r.json())
       .then(data => {
-        // Merge with localStorage progress
         const result = data.map(s => {
           const progress = JSON.parse(localStorage.getItem(`progress:${s.id}`) ?? '{}')
           const done = progress.done ?? 0
@@ -216,6 +238,31 @@ export default function Home() {
   const pctTotal  = totalQ > 0 ? Math.round((totalDone / totalQ) * 100) : 0
   const streak    = subjects.length > 0 ? Math.max(...subjects.map(s => s.streak ?? 0)) : 0
   const avgScore  = subjects.length > 0 ? Math.round(subjects.filter(s => s.avgScore).reduce((a, s) => a + s.avgScore, 0) / (subjects.filter(s => s.avgScore).length || 1)) : 0
+
+  const achievements = useMemo(() => {
+    let log = []
+    try { log = JSON.parse(localStorage.getItem('activityLog') ?? '[]') } catch {}
+
+    const seen = new Set(log.map(e => new Date(e.ts).toISOString().slice(0, 10)))
+    let actStreak = 0
+    for (let i = 0; i < 365; i++) {
+      const d = new Date(); d.setDate(d.getDate() - i)
+      if (seen.has(d.toISOString().slice(0, 10))) actStreak++; else break
+    }
+
+    const quizEntries = log.filter(e => e.type === 'quiz' && e.total)
+    const totalAnswered = quizEntries.reduce((s, e) => s + (e.total ?? 0), 0)
+    const bestRatio = quizEntries.reduce((b, e) => Math.max(b, (e.score ?? 0) / (e.total || 1)), 0)
+    const speedRun = quizEntries.some(e => e.durationSecs < 300 && (e.total ?? 0) >= 5)
+
+    return [
+      { Icon: Flame,      label: '7-day streak',  desc: 'Study 7 days in a row',    done: actStreak >= 7, progress: Math.min(actStreak, 7), total: 7 },
+      { Icon: TrendingUp, label: 'Perfect score',  desc: 'Get 10/10 on a quiz',      done: bestRatio >= 1 && quizEntries.some(e => (e.total ?? 0) >= 10), progress: Math.round(bestRatio * 10), total: 10 },
+      { Icon: Award,      label: '50 questions',   desc: 'Answer 50 questions',      done: totalAnswered >= 50, progress: Math.min(totalAnswered, 50), total: 50 },
+      { Icon: BarChart2,  label: 'All subjects',   desc: 'Study 3+ subjects',        done: subjects.length >= 3, progress: subjects.length, total: 3 },
+      { Icon: Zap,        label: 'Speed runner',   desc: 'Complete quiz in < 5 min', done: speedRun, progress: speedRun ? 1 : 0, total: 1 },
+    ]
+  }, [subjects])
 
   const circ = 2 * Math.PI * 30
   const dash = (pctTotal / 100) * circ
@@ -240,7 +287,7 @@ export default function Home() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <h1 style={{ fontFamily: "'Lora',serif", fontSize: 20, fontWeight: 700, letterSpacing: '-0.3px', marginBottom: 4 }}>
+          <h1 style={{ fontFamily: "var(--font-serif, 'Lora', serif)", fontSize: 20, fontWeight: 700, letterSpacing: '-0.3px', marginBottom: 4 }}>
             {streak > 0 ? `${streak}-day streak` : 'Start your streak today'}
           </h1>
           <p style={{ fontSize: 13, color: t.textSub }}>
@@ -279,8 +326,8 @@ export default function Home() {
 
       {/* ACTIVITY ROW */}
       <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 14, marginBottom: 20 }}>
-        <WeekBars t={t} week={WEEK_TEMPLATE} />
-        <Heatmap t={t} />
+        <WeekBars t={t} week={week} />
+        <Heatmap t={t} hmap={hmap} />
       </div>
 
       {/* SUBJECTS */}
@@ -323,10 +370,10 @@ export default function Home() {
           {sessions.length === 0 ? (
             <p style={{ padding: '18px', fontSize: 12, color: t.textMuted, textAlign: 'center' }}>No sessions yet — start studying!</p>
           ) : sessions.slice(0, 5).map((s, i) => {
-            const pct = Math.round((s.score / s.total) * 100)
+            const pct = s.total > 0 ? Math.round((s.score / s.total) * 100) : 0
             const scoreColor = pct >= 80 ? C.green : pct >= 60 ? C.gold : C.accent
             return (
-              <div key={i} style={{ padding: '11px 18px', borderBottom: i < sessions.length - 1 ? `1px solid ${t.border}` : 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div key={i} style={{ padding: '11px 18px', borderBottom: i < Math.min(sessions.length, 5) - 1 ? `1px solid ${t.border}` : 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{ width: 6, height: 6, borderRadius: '50%', background: s.color ?? C.accent, flexShrink: 0 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ fontSize: 13, fontWeight: 600, color: t.text }}>{s.type}</p>
@@ -347,7 +394,7 @@ export default function Home() {
             <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.7px', color: t.textMuted }}>ACHIEVEMENTS</p>
           </div>
           <div style={{ padding: '12px 18px 14px', display: 'flex', flexDirection: 'column', gap: 11 }}>
-            {ACHIEVEMENTS.map((a, i) => {
+            {achievements.map((a, i) => {
               const pct = Math.min(100, Math.round((a.progress / a.total) * 100))
               return (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 11, opacity: a.done ? 1 : 0.75 }}>

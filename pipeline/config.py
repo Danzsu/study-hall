@@ -6,6 +6,9 @@ load_dotenv(Path(__file__).parent.parent / ".env.local")
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+GOOGLE_AI_KEY = os.getenv("GOOGLE_AI_KEY", "")
+GEMINI_FLASH = "gemini-2.5-flash"
+GEMINI_FLASH_LITE = "gemini-2.5-flash-lite"
 
 # Model selection
 MAIN_MODEL = "llama-3.3-70b-versatile"

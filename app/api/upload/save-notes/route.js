@@ -58,7 +58,7 @@ export async function POST(req) {
           // Carry mdxContent through for file writing below
           mdxContent: l.mdxContent,
         }))]
-      } catch { /* ignore parse errors, fall through to overwrite */ }
+      } catch (e) { console.warn('[save-notes] Failed to parse lessons.json, overwriting:', e.message) }
     }
   }
 
@@ -92,7 +92,7 @@ export async function POST(req) {
   const subjectsPath = path.join(CONTENT_ROOT, 'subjects.json')
   let subjects = []
   if (fs.existsSync(subjectsPath)) {
-    try { subjects = JSON.parse(fs.readFileSync(subjectsPath, 'utf-8')) } catch { /* ignore */ }
+    try { subjects = JSON.parse(fs.readFileSync(subjectsPath, 'utf-8')) } catch (e) { console.warn('[save-notes] Failed to parse subjects.json:', e.message) }
   }
   const existingIdx = subjects.findIndex(s => s.slug === safeSlug)
   const subjectEntry = {

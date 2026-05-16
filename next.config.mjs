@@ -4,6 +4,10 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['firebase-admin'],
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+  },
 }
 
 export default nextConfig

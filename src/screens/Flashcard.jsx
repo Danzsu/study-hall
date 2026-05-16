@@ -4,6 +4,7 @@ import { Check, X, RotateCcw } from 'lucide-react'
 import { useTheme, useStore } from '../store'
 import { C } from '../theme'
 import MarkdownText from '../components/MarkdownText'
+import { appendSession } from '../lib/activityLog'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -180,6 +181,20 @@ export default function Flashcard({ subjectId }) {
   const [retry, setRetry]       = useState(new Set())
   const [flash, setFlash]       = useState(null)
   const [done, setDone]         = useState(false)
+
+  useEffect(() => {
+    if (!done) return
+    appendSession({
+      type: 'flashcard',
+      subjectId,
+      subjectName: subjectName || subjectId,
+      color: C.green,
+      durationSecs: 0,
+      score: known.size,
+      total: cards.length,
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done])
 
   useEffect(() => {
     if (!subjectId) return
