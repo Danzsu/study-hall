@@ -6,7 +6,9 @@ const STEPS = [
   { id: 'evaluating_images',   label: 'Képek értékelése' },
   { id: 'generating_sections', label: 'Szekciók generálása' },
   { id: 'generating_diagrams', label: 'Diagramok' },
-  { id: 'extras',              label: 'Kérdések & flashcard' },
+  { id: 'generating_quiz',     label: 'Kérdések generálása' },
+  { id: 'generating_extras',   label: 'Flashcard & szójegyzék' },
+  { id: 'validating_answers',  label: 'Válaszok validálása' },
   { id: 'done',                label: 'Kész' },
 ]
 
@@ -36,6 +38,7 @@ export default function GenerationPanel() {
   const [job, setJob] = useState(null)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [connLost, setConnLost] = useState(false)
   const fileRef = useRef(null)
 
   useEffect(() => {
@@ -44,11 +47,14 @@ export default function GenerationPanel() {
     es.onmessage = (e) => {
       try {
         const data = JSON.parse(e.data)
+        setConnLost(false)
         setJob(data)
         if (data.status === 'done' || data.status === 'failed' || data.error) es.close()
       } catch {}
     }
-    es.onerror = () => es.close()
+    // Transient errors: keep the EventSource open so the browser auto-reconnects;
+    // just surface the state to the user. Terminal states close in onmessage above.
+    es.onerror = () => setConnLost(true)
     return () => es.close()
   }, [jobId])
 
@@ -65,7 +71,12 @@ export default function GenerationPanel() {
       formData.append('file', file)
       formData.append('config', JSON.stringify(config))
 
-      const res = await fetch('/api/upload/generate-pipeline', { method: 'POST', body: formData })
+      const token = globalThis.window ? (sessionStorage.getItem('admin-token') || '') : ''
+      const res = await fetch('/api/upload/generate-pipeline', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Hiba a feltöltésnél')
       setJobId(data.job_id)
@@ -138,6 +149,15 @@ export default function GenerationPanel() {
           {job.status === 'done' && ' — Elkészült!'}
           {job.status === 'failed' && ` — Hiba: ${job.error}`}
         </p>
+
+        {connLost && job.status !== 'done' && job.status !== 'failed' && (
+          <div style={{
+            background: '#fff3bf', border: '1px solid #f59f00', borderRadius: 8,
+            padding: '0.6rem 1rem', marginBottom: '1rem', fontSize: '0.85rem',
+          }}>
+            ⚠ Kapcsolat megszakadt — újracsatlakozás… (a generálás a háttérben fut tovább)
+          </div>
+        )}
 
         {/* Warnings */}
         {job.warnings?.length > 0 && (
