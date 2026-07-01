@@ -2,15 +2,48 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Trust vote tallies — publicly readable, writable only by authenticated users
+    // Trust vote tallies — publicly readable. Writes are constrained to the
+    // exact deltas lib/question-votes.js produces, so a client cannot set
+    // arbitrary tallies (e.g. positiveVotes: 999999) by bypassing the app:
+    //   create:      first vote        -> total == 1,  positive in {0, 1}
+    //   update (a):  new voter         -> total +1,    positive +0 or +1
+    //   update (b):  voter switches    -> total same,  positive +1 or -1
     match /questionTrustVotes/{docId} {
       allow read;
-      allow write: if request.auth != null;
+
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['positiveVotes', 'totalVotes'])
+        && request.resource.data.positiveVotes is int
+        && request.resource.data.totalVotes is int
+        && request.resource.data.totalVotes == 1
+        && (request.resource.data.positiveVotes == 0 || request.resource.data.positiveVotes == 1);
+
+      allow update: if request.auth != null
+        && request.resource.data.keys().hasOnly(['positiveVotes', 'totalVotes'])
+        && request.resource.data.positiveVotes is int
+        && request.resource.data.totalVotes is int
+        && request.resource.data.positiveVotes >= 0
+        && request.resource.data.positiveVotes <= request.resource.data.totalVotes
+        && (
+          (request.resource.data.totalVotes == resource.data.totalVotes + 1
+            && (request.resource.data.positiveVotes == resource.data.positiveVotes
+                || request.resource.data.positiveVotes == resource.data.positiveVotes + 1))
+          ||
+          (request.resource.data.totalVotes == resource.data.totalVotes
+            && (request.resource.data.positiveVotes == resource.data.positiveVotes + 1
+                || request.resource.data.positiveVotes == resource.data.positiveVotes - 1))
+        );
+
+      allow delete: if false;
     }
 
     // Per-user vote records — owned exclusively by the authenticated user
     match /userVotes/{userId}/questionVotes/{docId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, delete: if request.auth != null && request.auth.uid == userId;
+      allow create, update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['voteType'])
+        && request.resource.data.voteType in ['trust', 'distrust'];
     }
   }
 }

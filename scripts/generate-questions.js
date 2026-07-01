@@ -284,6 +284,13 @@ async function processSourceFile(sourceItem, { subjectSlug, subjectName, difficu
   return enriched
 }
 
+function writeQuestionsOutput(questions, outputPath) {
+  if (!Array.isArray(questions) || questions.length === 0) {
+    throw new Error('No questions generated — refusing to overwrite existing questions.json with an empty set')
+  }
+  fs.writeFileSync(outputPath, JSON.stringify(questions, null, 2), 'utf-8')
+}
+
 function deduplicateAndAssignIds(questions) {
   const seen = new Set()
   const unique = questions.filter(q => {
@@ -347,7 +354,7 @@ async function main() {
   }
 
   const unique = deduplicateAndAssignIds(allQuestions)
-  fs.writeFileSync(outputPath, JSON.stringify(unique, null, 2), 'utf-8')
+  writeQuestionsOutput(unique, outputPath)
 
   const typeCounts = {}
   for (const q of unique) typeCounts[q.type] = (typeCounts[q.type] || 0) + 1
@@ -367,4 +374,4 @@ if (require.main === module) {
   })
 }
 
-module.exports = { parseArgs, resolveSourceFiles }
+module.exports = { parseArgs, resolveSourceFiles, writeQuestionsOutput }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseArgs, resolveSourceFiles } from '../../scripts/generate-questions.js'
+import { parseArgs, resolveSourceFiles, writeQuestionsOutput } from '../../scripts/generate-questions.js'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -42,5 +42,24 @@ describe('resolveSourceFiles', () => {
   })
   it('falls back to scan (empty for unknown slug)', () => {
     expect(resolveSourceFiles({ subjectSlug: 'nonexistent_xyz', inputFile: null, sourceKind: 'test' })).toHaveLength(0)
+  })
+})
+
+describe('writeQuestionsOutput', () => {
+  it('writes non-empty question sets', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gq-'))
+    const out = path.join(tmp, 'questions.json')
+    writeQuestionsOutput([{ id: 'q1', type: 'mcq', question: 'Q?' }], out)
+    expect(JSON.parse(fs.readFileSync(out, 'utf-8'))).toHaveLength(1)
+    fs.rmSync(tmp, { recursive: true, force: true })
+  })
+
+  it('refuses to write an empty array (protects existing questions.json)', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gq-'))
+    const out = path.join(tmp, 'questions.json')
+    fs.writeFileSync(out, JSON.stringify([{ id: 'existing' }]))
+    expect(() => writeQuestionsOutput([], out)).toThrow(/no questions/i)
+    expect(JSON.parse(fs.readFileSync(out, 'utf-8'))).toHaveLength(1)
+    fs.rmSync(tmp, { recursive: true, force: true })
   })
 })

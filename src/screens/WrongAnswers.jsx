@@ -138,7 +138,8 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
         {q.options.map((opt, oi) => {
-          const previousList = Array.isArray(q.previousChoice) ? q.previousChoice : [q.previousChoice]
+          const previousList = (Array.isArray(q.previousChoice) ? q.previousChoice : [q.previousChoice])
+            .filter(v => v !== null && v !== undefined)
           const isSelected   = selectedList.includes(oi)
           const isCorrectOpt = submitted && correctList.includes(oi)
           const isWrongOpt   = submitted && isSelected && !correctList.includes(oi)
@@ -359,7 +360,7 @@ export default function WrongAnswers({ subjectId }) {
         const enriched = wrong.map(q => ({
           ...q,
           attempts: attempts[q.id] ?? 1,
-          previousChoice: meta[q.id]?.selected ?? 0,
+          previousChoice: meta[q.id]?.selected ?? null,
           previousDate: (meta[q.id]?.date ?? dates[q.id]) ? relativeDate(meta[q.id]?.date ?? dates[q.id]) : null,
         }))
         setQuestions(enriched)

@@ -96,9 +96,31 @@ def _difficulty_from_depth(depth: str) -> str:
     return {"overview": "easy", "exam": "medium", "detailed": "hard"}.get(depth, "medium")
 
 
+# Extensions scripts/source-intelligence.js can actually read — keep in sync.
+NODE_QUESTION_EXTS = {".pdf", ".docx", ".md", ".mdx", ".txt"}
+
+
+def _node_supports_source(source_path: Path) -> bool:
+    return source_path.suffix.lower() in NODE_QUESTION_EXTS
+
+
+def _count_json(path: Path) -> int:
+    """Count entries in an existing JSON array file (0 if missing/malformed)."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return len(data) if isinstance(data, list) else 0
+    except Exception:
+        return 0
+
+
 def _run_node_questions(subject_slug: str, source_path: Path, depth: str, job_id: str) -> None:
     """Delegate question generation to scripts/generate-questions.js (single source of truth)."""
     set_step(job_id, "generating_quiz")
+    if not _node_supports_source(source_path):
+        add_warning(job_id, f"Question generation skipped: {source_path.suffix} sources are not "
+                            "supported by the question generator yet (existing questions kept).")
+        print(f"  Skipping quiz: unsupported source type {source_path.suffix}")
+        return
     print("  Generating quiz questions (delegating to Node generate-questions.js)...")
     project_root = Path(__file__).resolve().parent.parent
     cmd = [
@@ -134,7 +156,7 @@ def _run_extras(full_mdx: str, subject_slug: str,
     set_step(job_id, "generating_extras")
     print("  Generating flashcards + glossary...")
     try:
-        cards = generate_flashcards(full_mdx)
+        cards = generate_flashcards(full_mdx, existing_count=_count_json(subject_dir / "flashcards.json"))
         if cards:
             save_flashcards(cards, subject_dir)
             print(f"    Saved {len(cards)} flashcards")
@@ -143,7 +165,7 @@ def _run_extras(full_mdx: str, subject_slug: str,
         print(f"  Warning: flashcard generation failed: {e}")
 
     try:
-        terms = generate_glossary(full_mdx)
+        terms = generate_glossary(full_mdx, existing_count=_count_json(subject_dir / "glossary.json"))
         if terms:
             save_glossary(terms, subject_dir)
             print(f"    Saved {len(terms)} glossary terms")
