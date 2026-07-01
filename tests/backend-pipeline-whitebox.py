@@ -137,9 +137,179 @@ def check_generator_contracts() -> None:
     assert_true(glossary["category"] == "Access control", "Glossary category should survive normalization")
 
 
+def check_quiz_agent_retired() -> None:
+    root = Path(__file__).resolve().parents[1]
+    orch = (root / "pipeline" / "orchestrator.py").read_text(encoding="utf-8")
+    assert_true("from pipeline.agents.quiz import" not in orch, "orchestrator must not import pipeline.agents.quiz")
+    quiz = (root / "pipeline" / "agents" / "quiz.py").read_text(encoding="utf-8")
+    assert_true("def generate_questions" not in quiz, "quiz.generate_questions must be removed")
+
+
+def check_orchestrator_node_delegation() -> None:
+    orch = (Path(__file__).resolve().parents[1] / "pipeline" / "orchestrator.py").read_text(encoding="utf-8")
+    assert_true("_run_node_questions" in orch, "must define _run_node_questions")
+    assert_true("generate-questions.js" in orch, "must invoke scripts/generate-questions.js")
+    assert_true("--input" in orch, "must pass --input to node")
+    assert_true("subprocess.run" in orch or "create_subprocess_exec" in orch, "must spawn node via subprocess")
+    assert_true(
+        "from pipeline.agents.flashcard import" in orch and "from pipeline.agents.glossary import" in orch,
+        "flashcard + glossary stay in Python",
+    )
+
+
+def check_adk_parked() -> None:
+    root = Path(__file__).resolve().parents[1]
+    reqs = (root / "pipeline" / "requirements.txt").read_text(encoding="utf-8")
+    assert_true("google-adk" not in reqs, "google-adk must not be in main requirements.txt")
+    exp = root / "pipeline" / "requirements-experimental.txt"
+    assert_true(
+        exp.exists() and "google-adk" in exp.read_text(encoding="utf-8"),
+        "google-adk must live in requirements-experimental.txt",
+    )
+    assert_true((root / "pipeline" / "adk_agents" / "README.md").exists(), "adk_agents must have a README")
+    for f in ("orchestrator.py", "section_pipeline.py"):
+        src = (root / "pipeline" / f).read_text(encoding="utf-8")
+        assert_true("adk_agents" not in src, f"{f} must not import adk_agents")
+
+
+def check_prompts_loader() -> None:
+    from pipeline.prompts_loader import load_prompt
+    assert_true("SOURCE_CHUNKS" in load_prompt("system_validator_agent"), "validator prompt loads")
+    assert_true(load_prompt("system_dedup_agent.txt").strip() != "", ".txt suffix works")
+
+
+def check_quiz_schema_roundtrip() -> None:
+    from pipeline.agents.quiz_schema import to_prompt_shape, apply_validation, build_new_question_refs
+    mcq = {"id": "q1", "type": "mcq", "question": "Q?", "options": ["A", "B", "C", "D"], "correct": 2}
+    ps = to_prompt_shape(mcq)
+    assert_true(ps["question_type"] == "multi_choice" and ps["options"] == {"a": "A", "b": "B", "c": "C", "d": "D"}, "mcq shape")
+    assert_true(ps["answer"] == ["c"], "correct idx 2 -> 'c'")
+    c = apply_validation(mcq, {"status": "corrected", "corrected_answer": ["a"]})
+    assert_true(c["correct"] == 0 and c["supervised"] == "corrected", "mcq correction applied")
+    multi = {"id": "q2", "type": "multi", "question": "Q?", "options": ["A", "B", "C", "D"], "correctMultiple": [0, 2]}
+    assert_true(to_prompt_shape(multi)["answer"] == ["a", "c"], "multi -> letters")
+    tf = {"id": "q3", "type": "true_false", "question": "C?", "answer": "true"}
+    assert_true(to_prompt_shape(tf)["answer"] == "true", "true_false passthrough")
+    conf = apply_validation(multi, {"status": "confirmed"})
+    assert_true(conf["correctMultiple"] == [0, 2] and conf["supervised"] == "confirmed", "confirmed unchanged")
+    assert_true(
+        build_new_question_refs([mcq])[0] == {"id": "q1", "question_title": "Q?", "question_type": "multi_choice"},
+        "dedup refs",
+    )
+
+
+def check_validator_applies_corrections() -> None:
+    import asyncio
+    from pipeline import gemini_client
+    from pipeline.agents.validator import validate_answers, build_source_chunks
+    qs = [
+        {"id": "q1", "type": "mcq", "question": "Q1?", "options": ["A", "B", "C", "D"], "correct": 0},
+        {"id": "q2", "type": "mcq", "question": "Q2?", "options": ["A", "B"], "correct": 1},
+    ]
+
+    async def fake(prompt, system="", model=None):
+        return [
+            {"ID": "q1", "validation": {"status": "corrected", "corrected_answer": ["c"]}},
+            {"ID": "q2", "validation": {"status": "confirmed"}},
+        ]
+
+    orig = gemini_client.json_call
+    gemini_client.json_call = fake
+    try:
+        out = asyncio.run(validate_answers(qs, [{"chunk_id": "chunk_0", "text": "x"}]))
+    finally:
+        gemini_client.json_call = orig
+    assert_true(out[0]["correct"] == 2 and out[0]["supervised"] == "corrected", "q1 corrected")
+    assert_true(out[1]["supervised"] == "confirmed" and out[1]["correct"] == 1, "q2 unchanged")
+
+    async def bad(prompt, system="", model=None):
+        return {"oops": True}
+
+    gemini_client.json_call = bad
+    try:
+        safe = asyncio.run(validate_answers(qs, []))
+    finally:
+        gemini_client.json_call = orig
+    assert_true(safe == qs, "bad LLM output leaves questions unchanged")
+
+    chunks = build_source_chunks([type("S", (), {"index": 0, "title": "T", "text": "body"})()])
+    assert_true(chunks[0]["chunk_id"] == "chunk_0", "chunk id from section index")
+
+
+def check_dedup_agent() -> None:
+    import asyncio
+    from pipeline import gemini_client
+    from pipeline.agents.dedup import find_duplicates
+    new_q = [{"id": "q1", "type": "mcq", "question": "Mi az ARP?", "options": [], "correct": 0}]
+    existing = [{"id": "e1", "question_title": "Mire valo az ARP?", "question_type": "multi_choice", "source_quiz": "zh"}]
+
+    async def fake(prompt, system="", model=None):
+        return [{
+            "new_question_id": "q1", "matching_existing_id": "e1", "similarity_score": 0.9,
+            "similarity_type": "semantic", "recommendation": "skip", "reason": "same",
+        }]
+
+    orig = gemini_client.json_call
+    gemini_client.json_call = fake
+    try:
+        dups = asyncio.run(find_duplicates(new_q, existing))
+    finally:
+        gemini_client.json_call = orig
+    assert_true(len(dups) == 1 and dups[0]["recommendation"] == "skip", "dup finding")
+    assert_true(asyncio.run(find_duplicates([], existing)) == [], "empty new -> []")
+
+
+def check_validation_step_optin() -> None:
+    import os
+    import types
+    from pipeline import orchestrator
+    os.environ.pop("VALIDATE_ANSWERS", None)
+    assert_true(
+        orchestrator._validation_enabled(types.SimpleNamespace(validate_answers=False)) is False,
+        "validation off by default",
+    )
+    saved = orchestrator.GOOGLE_AI_KEY
+    orchestrator.GOOGLE_AI_KEY = ""
+    try:
+        assert_true(
+            orchestrator._validation_enabled(types.SimpleNamespace(validate_answers=True)) is False,
+            "validation off without API key",
+        )
+    finally:
+        orchestrator.GOOGLE_AI_KEY = saved
+
+
+def check_requirements_agent() -> None:
+    import asyncio
+    from pipeline import gemini_client
+    from pipeline.agents.requirements import extract_requirements
+
+    async def fake(prompt, system="", model=None):
+        return {"topics": ["OSI"], "keyTerms": ["ARP"], "examFocus": ["identify layers"],
+                "questionTypeHints": {"preferMultiChoice": True}}
+
+    orig = gemini_client.json_call
+    gemini_client.json_call = fake
+    try:
+        req = asyncio.run(extract_requirements("Halozati alapok ZH"))
+    finally:
+        gemini_client.json_call = orig
+    for key in ("topics", "keyTerms", "examFocus", "questionTypeHints"):
+        assert_true(key in req, f"requirements output must contain {key}")
+
+
 def main() -> None:
     check_ingest_shape()
     check_generator_contracts()
+    check_quiz_agent_retired()
+    check_orchestrator_node_delegation()
+    check_adk_parked()
+    check_prompts_loader()
+    check_quiz_schema_roundtrip()
+    check_validator_applies_corrections()
+    check_dedup_agent()
+    check_validation_step_optin()
+    check_requirements_agent()
     print("Backend pipeline whitebox passed.")
 
 
