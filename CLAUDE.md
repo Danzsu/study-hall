@@ -62,7 +62,7 @@ All generated content is committed to git. There is no runtime database — `lib
 
 ### Frontend State
 
-The frontend uses a **custom hash-based router** — Next.js routing is only used to deliver the shell. Navigation within the app changes `location.hash`, managed by `src/store.jsx` (singleton with a listeners pattern). Page-level components live in `src/screens/`.
+Navigation uses **Next.js path-based routes** (`/quiz/{slug}`, `/study/{slug}`, …): `navigate()`/`routeHref()` in `src/store.jsx` build the URL and trigger a full page load (`window.location.href`). The store itself is a singleton with a listeners pattern holding theme, accent, density, and pomodoro state. `parseHash()` in store.jsx is a legacy remnant of an earlier hash-router — nothing listens to `hashchange`. Page-level components live in `src/screens/`.
 
 All user progress (scores, streaks, wrong answers) is stored in **localStorage only** — there are no user accounts.
 
