@@ -10,8 +10,15 @@ from pipeline.extractors.base import ExtractedDocument, ExtractedImage, Section
 
 def extract_pdf(path: Path, images_dir: Path | None = None) -> ExtractedDocument:
     slug = path.stem
-    md_text = pymupdf4llm.to_markdown(str(path))
-    sections = _split_into_sections(md_text)
+    # page_chunks=True keeps per-page boundaries so sections get real page ranges
+    # (image<->section association filters on Section.page_start/page_end).
+    chunks = pymupdf4llm.to_markdown(str(path), page_chunks=True)
+    page_texts = [
+        (int(ch.get("metadata", {}).get("page", i + 1)) - 1, ch.get("text", "") or "")
+        for i, ch in enumerate(chunks)
+    ]
+    md_text = "\n".join(text for _, text in page_texts)
+    sections = _split_into_sections(page_texts)
     images = _extract_images(path)
 
     is_scanned = len(md_text.strip()) < 200 and len(images) > 0
@@ -36,42 +43,49 @@ def extract_pdf(path: Path, images_dir: Path | None = None) -> ExtractedDocument
     )
 
 
-def _split_into_sections(md_text: str) -> list[Section]:
-    """Split markdown text into sections based on headers."""
-    lines = md_text.split("\n")
-    sections = []
+def _split_into_sections(page_texts: list[tuple[int, str]]) -> list[Section]:
+    """Split per-page markdown into sections based on headers, tracking page ranges."""
+    sections: list[Section] = []
     current_title = "Introduction"
     current_level = 1
-    current_lines = []
+    current_lines: list[str] = []
+    current_pages: list[int] = []
     index = 0
 
-    for line in lines:
-        h_match = re.match(r'^(#{1,3})\s+(.+)', line)
-        if h_match:
-            if current_lines:
-                sections.append(Section(
-                    index=index,
-                    title=current_title,
-                    level=current_level,
-                    text="\n".join(current_lines).strip(),
-                ))
-                index += 1
-            current_level = len(h_match.group(1))
-            current_title = h_match.group(2).strip()
-            current_lines = []
-        else:
-            current_lines.append(line)
+    def flush() -> None:
+        nonlocal index, current_lines, current_pages
+        if current_lines:
+            sections.append(Section(
+                index=index,
+                title=current_title,
+                level=current_level,
+                text="\n".join(current_lines).strip(),
+                page_start=min(current_pages) if current_pages else 0,
+                page_end=max(current_pages) if current_pages else 0,
+            ))
+            index += 1
+        current_lines = []
+        current_pages = []
 
-    if current_lines:
-        sections.append(Section(
-            index=index,
-            title=current_title,
-            level=current_level,
-            text="\n".join(current_lines).strip(),
-        ))
+    for page_num, text in page_texts:
+        for line in text.split("\n"):
+            h_match = re.match(r'^(#{1,3})\s+(.+)', line)
+            if h_match:
+                flush()
+                current_level = len(h_match.group(1))
+                current_title = h_match.group(2).strip()
+                current_pages.append(page_num)
+            else:
+                current_lines.append(line)
+                if line.strip():
+                    current_pages.append(page_num)
+    flush()
 
     if not sections:
-        sections.append(Section(index=0, title="Content", level=1, text=md_text.strip()))
+        full_text = "\n".join(text for _, text in page_texts).strip()
+        last_page = max((p for p, _ in page_texts), default=0)
+        sections.append(Section(index=0, title="Content", level=1, text=full_text,
+                                page_start=0, page_end=last_page))
 
     return sections
 

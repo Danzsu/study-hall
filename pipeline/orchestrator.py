@@ -104,6 +104,21 @@ def _node_supports_source(source_path: Path) -> bool:
     return source_path.suffix.lower() in NODE_QUESTION_EXTS
 
 
+def _prepare_node_input(source_path: Path, extracted_text: str) -> Path | None:
+    """Return a path the Node question generator can read.
+
+    Supported formats pass through; unsupported ones (pptx, images) fall back to
+    a .txt with the text the extractor already pulled out. None = skip questions.
+    """
+    if _node_supports_source(source_path):
+        return source_path
+    if extracted_text and len(extracted_text.strip()) >= 200:
+        txt_path = source_path.with_name(source_path.stem + "_extracted.txt")
+        txt_path.write_text(extracted_text, encoding="utf-8")
+        return txt_path
+    return None
+
+
 def _count_json(path: Path) -> int:
     """Count entries in an existing JSON array file (0 if missing/malformed)."""
     try:
@@ -113,21 +128,25 @@ def _count_json(path: Path) -> int:
         return 0
 
 
-def _run_node_questions(subject_slug: str, source_path: Path, depth: str, job_id: str) -> None:
+def _run_node_questions(subject_slug: str, source_path: Path, depth: str, job_id: str,
+                        extracted_text: str = "") -> None:
     """Delegate question generation to scripts/generate-questions.js (single source of truth)."""
     set_step(job_id, "generating_quiz")
-    if not _node_supports_source(source_path):
-        add_warning(job_id, f"Question generation skipped: {source_path.suffix} sources are not "
-                            "supported by the question generator yet (existing questions kept).")
-        print(f"  Skipping quiz: unsupported source type {source_path.suffix}")
+    node_input = _prepare_node_input(source_path, extracted_text)
+    if node_input is None:
+        add_warning(job_id, f"Question generation skipped: no readable text for {source_path.suffix} "
+                            "source (existing questions kept).")
+        print(f"  Skipping quiz: no usable text for {source_path.suffix} source")
         return
+    if node_input != source_path:
+        print(f"  Quiz input: extracted text ({node_input.name}) — {source_path.suffix} not directly supported")
     print("  Generating quiz questions (delegating to Node generate-questions.js)...")
     project_root = Path(__file__).resolve().parent.parent
     cmd = [
         shutil.which("node") or "node",
         str(project_root / "scripts" / "generate-questions.js"),
         subject_slug, _difficulty_from_depth(depth),
-        "--input", str(source_path), "--source-kind", "test",
+        "--input", str(node_input), "--source-kind", "test",
     ]
     try:
         result = subprocess.run(cmd, cwd=str(project_root), capture_output=True, text=True,
@@ -149,9 +168,10 @@ def _run_node_questions(subject_slug: str, source_path: Path, depth: str, job_id
 
 
 def _run_extras(full_mdx: str, subject_slug: str,
-                subject_dir: Path, source_path: Path, depth: str, job_id: str) -> None:
+                subject_dir: Path, source_path: Path, depth: str, job_id: str,
+                extracted_text: str = "") -> None:
     """Step 6: questions (delegated to Node) + flashcards + glossary (Python)."""
-    _run_node_questions(subject_slug, source_path, depth, job_id)
+    _run_node_questions(subject_slug, source_path, depth, job_id, extracted_text)
 
     set_step(job_id, "generating_extras")
     print("  Generating flashcards + glossary...")
@@ -236,7 +256,8 @@ async def run(args):
 
         # Step 6: Quiz (delegated to Node), flashcards, glossary
         subject_dir = Path("content") / args.subject
-        _run_extras(full_mdx, args.subject, subject_dir, source_path, args.depth, job_id)
+        _run_extras(full_mdx, args.subject, subject_dir, source_path, args.depth, job_id,
+                    extracted_text=doc.raw_text or "")
 
         # Step 7 (opt-in): answer validation
         if _validation_enabled(args):

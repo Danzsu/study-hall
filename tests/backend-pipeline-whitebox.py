@@ -335,6 +335,64 @@ def check_count_json() -> None:
         assert_true(orchestrator._count_json(p) == 0, "malformed file counts as 0")
 
 
+def check_pdf_section_page_ranges() -> None:
+    """PDF sections must carry real page ranges so images attach to the right section."""
+    from pipeline.extractors.pdf import _split_into_sections
+    page_texts = [
+        (0, "# Intro\nfirst page content"),
+        (1, "more intro content\n# Chapter Two\nsecond chapter text"),
+        (2, "chapter two continues"),
+    ]
+    sections = _split_into_sections(page_texts)
+    assert_true(len(sections) == 2, f"expected 2 sections, got {len(sections)}")
+    assert_true(sections[0].page_start == 0 and sections[0].page_end == 1,
+                f"intro must span pages 0-1, got {sections[0].page_start}-{sections[0].page_end}")
+    assert_true(sections[1].page_start == 1 and sections[1].page_end == 2,
+                f"chapter two must span pages 1-2, got {sections[1].page_start}-{sections[1].page_end}")
+
+
+def check_pdf_extractor_page_tracking() -> None:
+    """End-to-end: a multi-page PDF must yield sections whose page range reaches past page 0."""
+    from pipeline.extractors.pdf import extract_pdf
+    tmp_path = Path(__file__).resolve().parent / "_pdf_pages_tmp"
+    shutil.rmtree(tmp_path, ignore_errors=True)
+    tmp_path.mkdir(parents=True, exist_ok=True)
+    try:
+        pdf_path = tmp_path / "two_pages.pdf"
+        doc = fitz.open()
+        for i in range(2):
+            page = doc.new_page()
+            page.insert_textbox(fitz.Rect(72, 72, 520, 240),
+                                f"Page {i + 1} body text about network security topic {i + 1}.")
+        doc.save(pdf_path)
+        doc.close()
+
+        extracted = extract_pdf(pdf_path)
+        last_page = max(s.page_end for s in extracted.sections)
+        assert_true(last_page >= 1, f"sections must track pages beyond page 0, got max page_end={last_page}")
+    finally:
+        shutil.rmtree(tmp_path, ignore_errors=True)
+
+
+def check_prepare_node_input() -> None:
+    """Unsupported sources (pptx/images) must fall back to the already-extracted text."""
+    import tempfile
+    from pipeline import orchestrator
+    with tempfile.TemporaryDirectory() as tmp:
+        pdf = Path(tmp) / "a.pdf"
+        pdf.write_bytes(b"%PDF")
+        assert_true(orchestrator._prepare_node_input(pdf, "x" * 300) == pdf, "supported source passes through")
+
+        pptx = Path(tmp) / "slides.pptx"
+        pptx.write_bytes(b"PK")
+        long_text = "Extracted slide content. " * 20
+        out = orchestrator._prepare_node_input(pptx, long_text)
+        assert_true(out is not None and out.suffix == ".txt", "pptx falls back to a .txt file")
+        assert_true(out.read_text(encoding="utf-8") == long_text, "fallback file holds the extracted text")
+
+        assert_true(orchestrator._prepare_node_input(pptx, "short") is None, "too-little text -> None (skip)")
+
+
 def main() -> None:
     check_ingest_shape()
     check_generator_contracts()
@@ -350,6 +408,9 @@ def main() -> None:
     check_node_source_guard()
     check_job_step_pcts()
     check_count_json()
+    check_pdf_section_page_ranges()
+    check_pdf_extractor_page_tracking()
+    check_prepare_node_input()
     print("Backend pipeline whitebox passed.")
 
 
