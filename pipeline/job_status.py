@@ -8,7 +8,8 @@ from typing import Literal
 JOBS_DIR = Path(__file__).parent.parent / "storage" / "jobs"
 
 JobStatus = Literal["pending", "running", "done", "failed"]
-JobStep = Literal["extracting", "evaluating_images", "generating_sections", "generating_diagrams", "extras", "done"]
+JobStep = Literal["extracting", "evaluating_images", "generating_sections", "generating_diagrams",
+                  "generating_quiz", "generating_extras", "validating_answers", "extras", "done"]
 
 
 def _jobs_dir() -> Path:
@@ -74,6 +75,9 @@ def set_step(job_id: str, step: JobStep) -> dict:
         "evaluating_images": 10,
         "generating_sections": 20,
         "generating_diagrams": 85,
+        "generating_quiz": 88,
+        "generating_extras": 92,
+        "validating_answers": 96,
         "extras": 92,
         "done": 100,
     }

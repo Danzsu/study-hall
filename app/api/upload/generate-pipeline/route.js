@@ -3,10 +3,14 @@ import { writeFile, mkdir } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
+import { requireAdmin } from '@/lib/auth-middleware'
 
 export const maxDuration = 10  // Just kick off the job, don't wait for completion
 
 export async function POST(req) {
+  const admin = await requireAdmin(req)
+  if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
   try {
     const formData = await req.formData()
     const file = formData.get('file')

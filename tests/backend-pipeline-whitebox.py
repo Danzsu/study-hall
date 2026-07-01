@@ -298,6 +298,43 @@ def check_requirements_agent() -> None:
         assert_true(key in req, f"requirements output must contain {key}")
 
 
+def check_node_source_guard() -> None:
+    """Unsupported extensions must be detected before delegating to Node (prevents silent questions.json wipe)."""
+    from pipeline import orchestrator
+    assert_true(orchestrator._node_supports_source(Path("x.pdf")) is True, "pdf supported")
+    assert_true(orchestrator._node_supports_source(Path("x.DOCX")) is True, "docx supported (case-insensitive)")
+    assert_true(orchestrator._node_supports_source(Path("x.pptx")) is False, "pptx NOT supported by node reader")
+    assert_true(orchestrator._node_supports_source(Path("x.png")) is False, "png NOT supported by node reader")
+
+
+def check_job_step_pcts() -> None:
+    """New orchestrator step names must map to real progress percentages (no 50% regression)."""
+    import uuid
+    from pipeline import job_status
+    job_id = f"_test_{uuid.uuid4().hex[:8]}"
+    try:
+        job_status.create_job(job_id, "test", "test.pdf")
+        for step, min_pct in (("generating_quiz", 86), ("generating_extras", 90), ("validating_answers", 94)):
+            status = job_status.set_step(job_id, step)
+            assert_true(status["overall_pct"] >= min_pct, f"{step} must map to >= {min_pct}%, got {status['overall_pct']}")
+    finally:
+        (job_status._jobs_dir() / f"{job_id}.json").unlink(missing_ok=True)
+
+
+def check_count_json() -> None:
+    """Orchestrator must count existing flashcards/glossary so regenerated IDs don't collide."""
+    import json as _json
+    import tempfile
+    from pipeline import orchestrator
+    with tempfile.TemporaryDirectory() as tmp:
+        p = Path(tmp) / "flashcards.json"
+        assert_true(orchestrator._count_json(p) == 0, "missing file counts as 0")
+        p.write_text(_json.dumps([{"id": "fc1"}, {"id": "fc2"}]), encoding="utf-8")
+        assert_true(orchestrator._count_json(p) == 2, "existing entries counted")
+        p.write_text("not json", encoding="utf-8")
+        assert_true(orchestrator._count_json(p) == 0, "malformed file counts as 0")
+
+
 def main() -> None:
     check_ingest_shape()
     check_generator_contracts()
@@ -310,6 +347,9 @@ def main() -> None:
     check_dedup_agent()
     check_validation_step_optin()
     check_requirements_agent()
+    check_node_source_guard()
+    check_job_step_pcts()
+    check_count_json()
     print("Backend pipeline whitebox passed.")
 
 

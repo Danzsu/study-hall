@@ -68,5 +68,8 @@ export async function POST(req) {
   else subjects.push(entry)
   fs.writeFileSync(subjectsPath, JSON.stringify(subjects, null, 2), 'utf-8')
 
+  const { clearCache } = await import('../../../../lib/content.js')
+  clearCache?.()
+
   return Response.json({ ok: true, slug: safeSlug, questionCount: finalQuestions.length })
 }
