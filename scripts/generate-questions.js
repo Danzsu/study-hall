@@ -29,11 +29,43 @@ const ALL_ENABLED_TYPES = ['multi_choice', 'true_false', 'fill_the_blanks', 'dra
 
 // ── HELPER FÜGGVÉNYEK ─────────────────────────────────────────────────────────
 
+function parseArgs(argv) {
+  const args = argv.slice(2)
+  let subjectSlug = null, difficulty = 'medium', inputFile = null, sourceKind = 'test'
+  const positionals = []
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i]
+    if (a === '--input') { inputFile = args[++i] ?? null; continue }
+    if (a === '--source-kind') { const v = args[++i]; sourceKind = (v === 'lesson' || v === 'test') ? v : 'test'; continue }
+    if (a.startsWith('--')) continue
+    positionals.push(a)
+  }
+  if (positionals[0]) subjectSlug = positionals[0]
+  if (positionals[1]) difficulty = positionals[1]
+  return { subjectSlug, difficulty, inputFile, sourceKind }
+}
+
 function listSourceFiles(folderPath, extensions) {
   if (!fs.existsSync(folderPath)) return []
   return fs.readdirSync(folderPath)
     .filter(f => extensions.some(ext => f.toLowerCase().endsWith(ext)))
     .map(f => path.join(folderPath, f))
+}
+
+const SUPPORTED_EXTS = ['.pdf', '.docx', '.md', '.mdx', '.txt']
+
+function resolveSourceFiles({ subjectSlug, inputFile, sourceKind }) {
+  if (inputFile) {
+    if (!fs.existsSync(inputFile)) throw new Error(`Explicit input file not found: ${inputFile}`)
+    const kind = sourceKind === 'lesson' ? 'lesson' : 'test'
+    return [{ file: inputFile, sourceKind: kind, assessmentOnly: kind === 'lesson' }]
+  }
+  const testDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'test_sources')
+  const lessonDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'lesson_sources')
+  return [
+    ...listSourceFiles(testDir, SUPPORTED_EXTS).map(file => ({ file, sourceKind: 'test', assessmentOnly: false })),
+    ...listSourceFiles(lessonDir, SUPPORTED_EXTS).map(file => ({ file, sourceKind: 'lesson', assessmentOnly: true })),
+  ]
 }
 
 function findChunkBreakPoint(text, end) {
@@ -267,11 +299,10 @@ function deduplicateAndAssignIds(questions) {
 // ── FŐ FOLYAMAT ───────────────────────────────────────────────────────────────
 
 async function main() {
-  const subjectSlug = process.argv[2]
-  const difficulty = process.argv[3] || 'medium'
+  const { subjectSlug, difficulty, inputFile, sourceKind } = parseArgs(process.argv)
 
   if (!subjectSlug) {
-    console.error('❌ Használat: node scripts/generate-questions.js <subject-slug> [difficulty]')
+    console.error('❌ Használat: node scripts/generate-questions.js <subject-slug> [difficulty] [--input <file>] [--source-kind test|lesson]')
     console.error('   Példa: node scripts/generate-questions.js it_biztonsag medium')
     process.exit(1)
   }
@@ -280,8 +311,6 @@ async function main() {
   const forceLocalFallback = process.env.LOCAL_CONTENT_FALLBACK === '1' || !hasAnyProvider
   if (forceLocalFallback) console.log('⚠️  Nincs API kulcs — helyi fallback kérdésgenerálás.')
 
-  const sourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'test_sources')
-  const lessonSourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'lesson_sources')
   const contentDir = path.join(CONTENT_ROOT, subjectSlug)
   const outputPath = path.join(contentDir, 'questions.json')
 
@@ -290,21 +319,25 @@ async function main() {
   const coverageInfo = loadCoveragePrompt(plan)
   const subjectName = subjectSlug.split(/[-_]/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
 
-  const testFiles = listSourceFiles(sourceDir, ['.pdf', '.docx', '.md', '.mdx', '.txt'])
-    .map(file => ({ file, sourceKind: 'test', assessmentOnly: false }))
-  const lessonFiles = listSourceFiles(lessonSourceDir, ['.pdf', '.docx', '.md', '.mdx', '.txt'])
-    .map(file => ({ file, sourceKind: 'lesson', assessmentOnly: true }))
-  const allFiles = [...testFiles, ...lessonFiles]
+  let allFiles
+  try {
+    allFiles = resolveSourceFiles({ subjectSlug, inputFile, sourceKind })
+  } catch (err) {
+    console.error(`❌ ${err.message}`)
+    process.exit(1)
+  }
 
   if (allFiles.length === 0) {
-    console.error(`❌ Nem található forrásfájl: ${sourceDir}`)
+    console.error(`❌ Nem található forrásfájl (slug: ${subjectSlug}${inputFile ? `, input: ${inputFile}` : ''})`)
     process.exit(1)
   }
 
   if (!fs.existsSync(contentDir)) fs.mkdirSync(contentDir, { recursive: true })
 
+  const testCount = allFiles.filter(f => f.sourceKind === 'test').length
+  const lessonCount = allFiles.filter(f => f.sourceKind === 'lesson').length
   console.log(`\n📝 ${subjectName} kérdésgenerálás (2-fázisú pipeline, nehézség: ${difficulty})`)
-  console.log(`   Test fájlok: ${testFiles.length} | Lesson scan: ${lessonFiles.length}`)
+  console.log(`   Test fájlok: ${testCount} | Lesson scan: ${lessonCount}`)
 
   const context = { subjectSlug, subjectName, difficulty, plan, planContext, coverageInfo, forceLocalFallback }
   let allQuestions = []
@@ -326,8 +359,12 @@ async function main() {
   console.log(`\n👉 Következő lépés: node scripts/generate-extras.js ${subjectSlug}`)
 }
 
-main().catch(err => {
-  console.error('❌ Hiba:', err.message)
-  if (process.env.DEBUG) console.error(err.stack)
-  process.exit(1)
-})
+if (require.main === module) {
+  main().catch(err => {
+    console.error('❌ Hiba:', err.message)
+    if (process.env.DEBUG) console.error(err.stack)
+    process.exit(1)
+  })
+}
+
+module.exports = { parseArgs, resolveSourceFiles }
