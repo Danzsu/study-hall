@@ -2,6 +2,11 @@
 
 > **v3 státusz**: ✅ IMPLEMENTÁLVA — minden fázis (F1–F7) kész  
 > **Alapelv**: Egyszerűbb jobb. Csak amit valóban megér megcsinálni.
+>
+> **Konszolidáció (frissítés):** a kérdésgenerálás mostantól a Node
+> `scripts/generate-questions.js`-re van **delegálva** (egyetlen forrás), az ADK
+> réteg (`pipeline/adk_agents/`) **parkoltatva** (kísérleti, nincs bekötve). A
+> teljes, aktuális architektúra: [`pipeline-architecture.md`](./pipeline-architecture.md).
 
 ## Implementációs státusz
 
