@@ -1,50 +1,70 @@
-#!/usr/bin/env node
-
-const assert = require('node:assert/strict')
-const {
+import { describe, it, expect } from 'vitest'
+import {
   buildAssessmentSourceText,
   detectAssessmentBlocks,
   detectLearningSignals,
   detectVisualReferences,
   normalizeExtractedText,
   slugifySourceName,
-} = require('../../scripts/source-intelligence')
+} from '../../scripts/source-intelligence.js'
 
-function main() {
-  const raw = 'Line one.\r\n\r\nControl questions:\n1. What is access control?\n\nFigure 2: Auth flow.\n\nTable 1: Roles\tPermissions\n\nE = mc^2'
-  const normalized = normalizeExtractedText(raw)
+const SAMPLE = 'Line one.\r\n\r\nControl questions:\n1. What is access control?\n\nFigure 2: Auth flow.\n\nTable 1: Roles\tPermissions\n\nE = mc^2'
 
-  assert.equal(normalized.includes('\r'), false, 'CRLF noise should be removed')
-  assert.equal(slugifySourceName('Árvíztűrő Source 01.pdf'), 'arvizturo-source-01-pdf')
-
-  const assessmentBlocks = detectAssessmentBlocks(normalized, { sourceKind: 'lesson' })
-  assert.ok(assessmentBlocks.length >= 1, 'Question-like source blocks should be detected')
-  assert.equal(assessmentBlocks[0].target, 'questions', 'Strong assessment cues should route to questions')
-  assert.ok(['control', 'question-candidate', 'exam', 'quiz', 'self-check'].includes(assessmentBlocks[0].kind), 'Assessment kind should be classified')
-
-  const weakBlocks = detectAssessmentBlocks('Why does least privilege matter?', { sourceKind: 'lesson' })
-  assert.ok(weakBlocks.length >= 1, 'A question-like line should still be detected')
-  assert.equal(weakBlocks[0].target, 'notes-review', 'Weak cues should stay in notes review')
-
-  const visualReferences = detectVisualReferences(normalized)
-  assert.ok(visualReferences.some((item) => item.type === 'figure'), 'Figure references should be preserved')
-  assert.ok(visualReferences.some((item) => item.type === 'table'), 'Table references should be preserved')
-  assert.ok(visualReferences.some((item) => item.type === 'equation'), 'Equation references should be preserved')
-
-  const learningSignals = detectLearningSignals(normalized)
-  assert.ok(Array.isArray(learningSignals.concepts), 'Concept signals should be present')
-  assert.ok(Array.isArray(learningSignals.definitions), 'Definition signals should be present')
-  assert.ok(Array.isArray(learningSignals.examples), 'Example signals should be present')
-  assert.ok(learningSignals.density.concepts >= 1, 'Concept density should be counted')
-
-  const routingText = buildAssessmentSourceText({
-    sourceFile: 'sample.pdf',
-    assessmentBlocks,
+describe('normalizeExtractedText', () => {
+  it('strips CRLF noise from text', () => {
+    expect(normalizeExtractedText(SAMPLE).includes('\r')).toBe(false)
   })
-  assert.ok(routingText.includes('SOURCE ROUTING'), 'Assessment routing text should include a routing header')
-  assert.ok(routingText.includes('test/quiz'), 'Assessment routing text should mention test/quiz routing')
+})
 
-  console.log('source-intelligence unit checks passed.')
-}
+describe('slugifySourceName', () => {
+  it('handles Unicode and non-ASCII characters', () => {
+    expect(slugifySourceName('Árvíztűrő Source 01.pdf')).toBe('arvizturo-source-01-pdf')
+  })
+})
 
-main()
+describe('detectAssessmentBlocks', () => {
+  it('detects question-like blocks and routes them to questions', () => {
+    const normalized = normalizeExtractedText(SAMPLE)
+    const blocks = detectAssessmentBlocks(normalized, { sourceKind: 'lesson' })
+    expect(blocks.length).toBeGreaterThanOrEqual(1)
+    expect(blocks[0].target).toBe('questions')
+    expect(['control', 'question-candidate', 'exam', 'quiz', 'self-check'].includes(blocks[0].kind)).toBe(true)
+  })
+
+  it('routes weak cues to notes-review', () => {
+    const blocks = detectAssessmentBlocks('Why does least privilege matter?', { sourceKind: 'lesson' })
+    expect(blocks.length).toBeGreaterThanOrEqual(1)
+    expect(blocks[0].target).toBe('notes-review')
+  })
+})
+
+describe('detectVisualReferences', () => {
+  it('detects figures, tables, and equations', () => {
+    const normalized = normalizeExtractedText(SAMPLE)
+    const refs = detectVisualReferences(normalized)
+    expect(refs.some((r) => r.type === 'figure')).toBe(true)
+    expect(refs.some((r) => r.type === 'table')).toBe(true)
+    expect(refs.some((r) => r.type === 'equation')).toBe(true)
+  })
+})
+
+describe('detectLearningSignals', () => {
+  it('returns concept, definition, and example signal arrays', () => {
+    const normalized = normalizeExtractedText(SAMPLE)
+    const signals = detectLearningSignals(normalized)
+    expect(Array.isArray(signals.concepts)).toBe(true)
+    expect(Array.isArray(signals.definitions)).toBe(true)
+    expect(Array.isArray(signals.examples)).toBe(true)
+    expect(signals.density.concepts).toBeGreaterThanOrEqual(1)
+  })
+})
+
+describe('buildAssessmentSourceText', () => {
+  it('includes SOURCE ROUTING header and test/quiz routing', () => {
+    const normalized = normalizeExtractedText(SAMPLE)
+    const blocks = detectAssessmentBlocks(normalized, { sourceKind: 'lesson' })
+    const text = buildAssessmentSourceText({ sourceFile: 'sample.pdf', assessmentBlocks: blocks })
+    expect(text).toContain('SOURCE ROUTING')
+    expect(text).toContain('test/quiz')
+  })
+})

@@ -37,26 +37,19 @@ export default function GenerationPanel() {
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const fileRef = useRef(null)
-  const pollRef = useRef(null)
 
-  // Poll job status every 2s while running
   useEffect(() => {
     if (!jobId) return
-    const poll = async () => {
+    const es = new EventSource(`/api/jobs/${jobId}/stream`)
+    es.onmessage = (e) => {
       try {
-        const res = await fetch(`/api/jobs/${jobId}`)
-        if (res.ok) {
-          const data = await res.json()
-          setJob(data)
-          if (data.status === 'done' || data.status === 'failed') {
-            clearInterval(pollRef.current)
-          }
-        }
+        const data = JSON.parse(e.data)
+        setJob(data)
+        if (data.status === 'done' || data.status === 'failed' || data.error) es.close()
       } catch {}
     }
-    poll()
-    pollRef.current = setInterval(poll, 2000)
-    return () => clearInterval(pollRef.current)
+    es.onerror = () => es.close()
+    return () => es.close()
   }, [jobId])
 
   const handleSubmit = async (e) => {

@@ -29,6 +29,7 @@ function FormulaDragDrop({ q, selected, onSelect, submitted, t }) {
   const placements = selected ?? {}
   const [clickSelected, setClickSelected] = useState(null)
   const [dragging, setDragging] = useState(null)
+  const [highlightedSlot, setHighlightedSlot] = useState(null)
 
   const choices = q.choices ?? []
   const placedIds = new Set(Object.values(placements))
@@ -90,17 +91,24 @@ function FormulaDragDrop({ q, selected, onSelect, submitted, t }) {
         const slotId = match[1]
         const placed = placements[slotId]
         const slotColor = getSlotColor(slotId)
+        const isHovered = !submitted && highlightedSlot === slotId
+        let slotBg
+        if (isHovered) slotBg = `${C.green}22`
+        else if (placed && submitted) slotBg = isCorrectPlacement(slotId) ? `${C.green}14` : `${C.red}10`
+        else if (placed) slotBg = `${C.accent}20`
+        else slotBg = 'transparent'
         return (
           <span
             key={i}
             onClick={() => handleSlotClick(slotId)}
-            onDragOver={e => e.preventDefault()}
-            onDrop={e => handleDrop(e, slotId)}
+            onDragOver={e => { setHighlightedSlot(p => p === slotId ? p : slotId); e.preventDefault() }}
+            onDrop={e => { setHighlightedSlot(null); handleDrop(e, slotId) }}
+            onDragLeave={() => setHighlightedSlot(null)}
             style={{
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               minWidth: 64, padding: '2px 10px', margin: '0 2px',
-              border: `2px dashed ${slotColor}`, borderRadius: 6,
-              background: placed ? (submitted ? (isCorrectPlacement(slotId) ? `${C.green}18` : `${C.red}12`) : `${C.accent}20`) : 'transparent',
+              border: `2px dashed ${isHovered ? C.green : slotColor}`, borderRadius: 6,
+              background: slotBg,
               cursor: submitted ? 'default' : 'pointer',
               fontWeight: 600, color: placed ? (submitted ? slotColor : C.accent) : t.textMuted,
             }}

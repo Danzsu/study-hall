@@ -10,13 +10,13 @@
 
 'use strict';
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 require('./load-env')
 const { buildFallbackQuestions } = require('./local-generators')
 const { loadContentPlanSummary, loadPlan } = require('./content-plan')
 const { buildAssessmentSourceText, readSourceDocument } = require('./source-intelligence')
-const { extractFacts, generateQuiz } = require('./llm-service')
+const { extractFacts, generateQuiz, repairQuestions } = require('./llm-service')
 const { parseMarkdownToQuiz, summarizeQuiz } = require('./markdown-parser')
 
 // ── KONFIGURÁCIÓ ──────────────────────────────────────────────────────────────
@@ -36,22 +36,24 @@ function listSourceFiles(folderPath, extensions) {
     .map(f => path.join(folderPath, f))
 }
 
+function findChunkBreakPoint(text, end) {
+  const searchBack = Math.min(600, end)
+  for (let i = 0; i < searchBack; i++) {
+    const pos = end - i
+    if (text[pos] === '\n' && text[pos - 1] === '\n') return pos
+    if (text[pos] === '.' || text[pos] === '!' || text[pos] === '?') return pos + 1
+  }
+  return end
+}
+
 function chunkText(text, maxChunkSize = FACT_CHUNK_SIZE, overlap = FACT_CHUNK_OVERLAP) {
   const chunks = []
   let start = 0
   while (start < text.length) {
     let end = Math.min(start + maxChunkSize, text.length)
-    if (end < text.length) {
-      const searchBack = Math.min(600, end - start)
-      for (let i = 0; i < searchBack; i++) {
-        const pos = end - i
-        if (text[pos] === '\n' && text[pos - 1] === '\n') { end = pos; break }
-        if (text[pos] === '.' || text[pos] === '!' || text[pos] === '?') { end = pos + 1; break }
-      }
-    }
+    if (end < text.length) end = findChunkBreakPoint(text, end)
     chunks.push(text.slice(start, end).trim())
-    start = end - overlap
-    if (start < 0) start = 0
+    start = Math.max(0, end - overlap)
     if (end >= text.length) break
   }
   return chunks
@@ -100,42 +102,36 @@ function answerKeysToIndices(answerKeys, optionsObj) {
   return answerKeys.map(k => keys.indexOf(k)).filter(i => i !== -1)
 }
 
-function convertToStudyHallFormat(quizAuraQuestions, sectionName) {
-  const result = []
-  for (const q of quizAuraQuestions) {
-    const qt = q.question_type
-    const base = {
-      section: sectionName,
-      difficulty: q.difficulty || 'medium',
+function convertSingleQuestion(q, base) {
+  const qt = q.question_type
+  if (qt === 'multi_choice') {
+    const optionsArr = optionsObjectToArray(q.options)
+    const correctIndices = answerKeysToIndices(q.answer ?? [], q.options)
+    if (correctIndices.length === 1) {
+      return { ...base, supervised: 'generated', type: 'mcq', question: q.question_title ?? '', options: optionsArr, correct: correctIndices[0], explanation: q.explanation ?? '' }
     }
-
-    if (qt === 'multi_choice') {
-      const optionsArr = optionsObjectToArray(q.options)
-      const correctIndices = answerKeysToIndices(q.answer ?? [], q.options)
-      if (correctIndices.length === 1) {
-        result.push({ ...base, type: 'mcq', question: q.question_title ?? '', options: optionsArr, correct: correctIndices[0], explanation: q.explanation ?? '' })
-      } else {
-        result.push({ ...base, type: 'multi', question: q.question_title ?? '', options: optionsArr, correctMultiple: correctIndices, explanation: q.explanation ?? '' })
-      }
-    } else if (qt === 'true_false') {
-      result.push({ ...base, type: 'true_false', question: q.question_title ?? '', answer: q.answer ?? 'false' })
-    } else if (qt === 'fill_the_blanks') {
-      const blank = q.blank ?? []
-      const blanks = Array.isArray(blank) ? blank : [blank]
-      result.push({ ...base, type: 'fill_the_blanks', question: q.text ?? q.question_title ?? '', blanks })
-    } else if (qt === 'drag_n_drop') {
-      result.push({ ...base, type: 'drag_n_drop', question: q.text ?? q.question_title ?? '', choices: q.choices ?? [] })
-    } else if (qt === 'simple_input') {
-      result.push({ ...base, type: 'simple_input', question: q.question_title ?? '', answer: q.answer ?? '' })
-    } else if (qt === 'formula_drag_drop') {
-      result.push({ ...base, type: 'formula_drag_drop', question: q.question_title ?? '', formulaText: q.text ?? '', choices: q.choices ?? [] })
-    } else if (qt === 'calc_input') {
-      const entry = { ...base, type: 'calc_input', question: q.question_title ?? '', answer: q.answer ?? '' }
-      if (q.formula_chips?.length) entry.formulaChips = q.formula_chips
-      result.push(entry)
-    }
+    return { ...base, supervised: 'generated', type: 'multi', question: q.question_title ?? '', options: optionsArr, correctMultiple: correctIndices, explanation: q.explanation ?? '' }
   }
-  return result
+  if (qt === 'true_false') return { ...base, supervised: 'generated', type: 'true_false', question: q.question_title ?? '', answer: q.answer ?? 'false' }
+  if (qt === 'fill_the_blanks') {
+    const blank = q.blank ?? []
+    return { ...base, supervised: 'generated', type: 'fill_the_blanks', question: q.text ?? q.question_title ?? '', blanks: Array.isArray(blank) ? blank : [blank] }
+  }
+  if (qt === 'drag_n_drop') return { ...base, supervised: 'generated', type: 'drag_n_drop', question: q.text ?? q.question_title ?? '', choices: q.choices ?? [] }
+  if (qt === 'simple_input') return { ...base, supervised: 'generated', type: 'simple_input', question: q.question_title ?? '', answer: q.answer ?? '' }
+  if (qt === 'formula_drag_drop') return { ...base, supervised: 'generated', type: 'formula_drag_drop', question: q.question_title ?? '', formulaText: q.text ?? '', choices: q.choices ?? [] }
+  if (qt === 'calc_input') {
+    const entry = { ...base, supervised: 'generated', type: 'calc_input', question: q.question_title ?? '', answer: q.answer ?? '' }
+    if (q.formula_chips?.length) entry.formulaChips = q.formula_chips
+    return entry
+  }
+  return null
+}
+
+function convertToStudyHallFormat(quizAuraQuestions, sectionName) {
+  return quizAuraQuestions
+    .map(q => convertSingleQuestion(q, { section: sectionName, difficulty: q.difficulty || 'medium' }))
+    .filter(Boolean)
 }
 
 // ── FÁZIS 1: FACT EXTRACTION ─────────────────────────────────────────────────
@@ -161,6 +157,113 @@ async function extractFactsFromChunks(chunks, fileName) {
   return allFacts
 }
 
+// ── PER-FILE PIPELINE ─────────────────────────────────────────────────────────
+
+async function readSourceText(sourceItem, subjectSlug) {
+  const doc = await readSourceDocument(sourceItem.file, { subjectSlug, sourceKind: sourceItem.sourceKind, contentRoot: CONTENT_ROOT })
+  return sourceItem.assessmentOnly ? buildAssessmentSourceText(doc) : doc.text
+}
+
+async function tryRepairQuestions(rawQuestions) {
+  try {
+    const result = await repairQuestions(rawQuestions)
+    if (result.ok && Array.isArray(result.data) && result.data.length > 0) {
+      console.log(`   [Repair] ✅ ${result.data.length} kérdés javítva`)
+      return result.data
+    }
+  } catch (err) {
+    console.warn(`   ⚠️  Repair lépés sikertelen: ${err.message} → eredeti kérdések`)
+  }
+  return rawQuestions
+}
+
+async function processSourceFile(sourceItem, { subjectSlug, subjectName, difficulty, plan, planContext, coverageInfo, forceLocalFallback }) {
+  const fileName = path.basename(sourceItem.file)
+  console.log(`\n📄 ${fileName} feldolgozása...`)
+
+  let rawText = ''
+  try {
+    rawText = await readSourceText(sourceItem, subjectSlug)
+  } catch (err) {
+    console.error(`   ❌ Fájl olvasási hiba: ${err.message}`)
+    return []
+  }
+
+  if (!rawText || rawText.length < 200) {
+    console.warn(`   ⚠️  Üres vagy túl rövid szöveg (${rawText.length} kar), kihagyva`)
+    return []
+  }
+
+  const sectionBase = fileName.replace(/\.(pdf|docx|md|mdx|txt)$/i, '').replace(/[_-]/g, ' ').trim()
+  const sectionName = sourceItem.assessmentOnly ? `${sectionBase} - detected questions` : sectionBase
+  console.log(`   Szöveg: ${rawText.length} kar | Section: "${sectionName}"`)
+
+  if (forceLocalFallback) {
+    const fallback = buildFallbackQuestions(rawText.slice(0, 5000), sectionName)
+    console.log(`   ✅ Fallback: ${fallback.length} kérdés`)
+    return fallback
+  }
+
+  // Fázis 1: Fact extraction
+  const chunks = chunkText(rawText)
+  console.log(`   [Fázis 1] ${chunks.length} chunk → fact extraction...`)
+  let facts = []
+  try {
+    facts = await extractFactsFromChunks(chunks, fileName)
+  } catch (err) {
+    console.error(`   ❌ Fact extraction hiba: ${err.message} → fallback`)
+    return buildFallbackQuestions(rawText.slice(0, 5000), sectionName)
+  }
+  if (facts.length === 0) {
+    console.warn('   ⚠️  Nulla tény kinyerve, kihagyva')
+    return []
+  }
+  console.log(`   [Fázis 1] ✅ ${facts.length} tény kinyerve`)
+
+  // Fázis 2: Quiz generation
+  console.log(`   [Fázis 2] Quiz generálás...`)
+  const requirementsContext = [
+    planContext ? `Content plan:\n${planContext}` : '',
+    coverageInfo ? `Coverage targets:\n${coverageInfo}` : '',
+  ].filter(Boolean).join('\n\n') || 'Nincs megadva.'
+  const config = {
+    subject: subjectName, type: 'Synthetic Questionnaire',
+    year: new Date().getFullYear().toString(), difficulty,
+    questionCount: Math.min(40, Math.max(10, Math.floor(facts.length * 0.8))),
+    enabledTypes: ALL_ENABLED_TYPES, requirementsContext,
+  }
+
+  let markdown = ''
+  try {
+    markdown = await generateQuiz(facts, config)
+  } catch (err) {
+    console.error(`   ❌ Quiz generálás hiba: ${err.message} → fallback`)
+    return buildFallbackQuestions(rawText.slice(0, 5000), sectionName)
+  }
+
+  const { questions: rawQuestions } = parseMarkdownToQuiz(markdown)
+  const repairedQuestions = rawQuestions.length > 0 ? await tryRepairQuestions(rawQuestions) : rawQuestions
+
+  const converted = convertToStudyHallFormat(repairedQuestions, sectionName)
+  const enriched = converted.map(q => ({ ...q, conceptIds: inferConceptIds(q, plan) }))
+
+  const summary = summarizeQuiz({ questions: rawQuestions })
+  console.log(`   [Fázis 2] ✅ ${enriched.length} kérdés (${JSON.stringify(summary.counts)})`)
+  return enriched
+}
+
+function deduplicateAndAssignIds(questions) {
+  const seen = new Set()
+  const unique = questions.filter(q => {
+    const key = String(q.question || '').toLowerCase().slice(0, 60)
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+  unique.forEach((q, idx) => { q.id = `q${idx + 1}` })
+  return unique
+}
+
 // ── FŐ FOLYAMAT ───────────────────────────────────────────────────────────────
 
 async function main() {
@@ -175,9 +278,7 @@ async function main() {
 
   const hasAnyProvider = process.env.GOOGLE_AI_KEY || process.env.GROQ_API_KEY || process.env.OPENROUTER_API_KEY
   const forceLocalFallback = process.env.LOCAL_CONTENT_FALLBACK === '1' || !hasAnyProvider
-  if (forceLocalFallback) {
-    console.log('⚠️  Nincs API kulcs — helyi fallback kérdésgenerálás.')
-  }
+  if (forceLocalFallback) console.log('⚠️  Nincs API kulcs — helyi fallback kérdésgenerálás.')
 
   const sourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'test_sources')
   const lessonSourceDir = path.join(STORAGE_ROOT, subjectSlug, 'sources', 'lesson_sources')
@@ -187,16 +288,12 @@ async function main() {
   const planContext = loadContentPlanSummary(subjectSlug)
   const plan = loadPlan(subjectSlug)
   const coverageInfo = loadCoveragePrompt(plan)
+  const subjectName = subjectSlug.split(/[-_]/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
 
-  const pdfFiles = listSourceFiles(sourceDir, ['.pdf'])
-  const docxFiles = listSourceFiles(sourceDir, ['.docx'])
-  const mdFiles = listSourceFiles(sourceDir, ['.md', '.mdx', '.txt'])
-  const lessonPdfFiles = listSourceFiles(lessonSourceDir, ['.pdf'])
-  const lessonDocxFiles = listSourceFiles(lessonSourceDir, ['.docx'])
-  const lessonMdFiles = listSourceFiles(lessonSourceDir, ['.md', '.mdx', '.txt'])
-
-  const testFiles = [...pdfFiles, ...docxFiles, ...mdFiles].map(file => ({ file, sourceKind: 'test', assessmentOnly: false }))
-  const lessonFiles = [...lessonPdfFiles, ...lessonDocxFiles, ...lessonMdFiles].map(file => ({ file, sourceKind: 'lesson', assessmentOnly: true }))
+  const testFiles = listSourceFiles(sourceDir, ['.pdf', '.docx', '.md', '.mdx', '.txt'])
+    .map(file => ({ file, sourceKind: 'test', assessmentOnly: false }))
+  const lessonFiles = listSourceFiles(lessonSourceDir, ['.pdf', '.docx', '.md', '.mdx', '.txt'])
+    .map(file => ({ file, sourceKind: 'lesson', assessmentOnly: true }))
   const allFiles = [...testFiles, ...lessonFiles]
 
   if (allFiles.length === 0) {
@@ -206,118 +303,17 @@ async function main() {
 
   if (!fs.existsSync(contentDir)) fs.mkdirSync(contentDir, { recursive: true })
 
-  const subjectName = subjectSlug.split(/[-_]/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
   console.log(`\n📝 ${subjectName} kérdésgenerálás (2-fázisú pipeline, nehézség: ${difficulty})`)
   console.log(`   Test fájlok: ${testFiles.length} | Lesson scan: ${lessonFiles.length}`)
 
+  const context = { subjectSlug, subjectName, difficulty, plan, planContext, coverageInfo, forceLocalFallback }
   let allQuestions = []
-
   for (const sourceItem of allFiles) {
-    const fileName = path.basename(sourceItem.file)
-    console.log(`\n📄 ${fileName} feldolgozása...`)
-
-    let sourceDocument, rawText = ''
-    try {
-      sourceDocument = await readSourceDocument(sourceItem.file, { subjectSlug, sourceKind: sourceItem.sourceKind, contentRoot: CONTENT_ROOT })
-      rawText = sourceItem.assessmentOnly ? buildAssessmentSourceText(sourceDocument) : sourceDocument.text
-    } catch (err) {
-      console.error(`   ❌ Fájl olvasási hiba: ${err.message}`)
-      continue
-    }
-
-    if (sourceItem.assessmentOnly && !rawText) {
-      console.log('   Nincs értékelhető blokk ebben a lesson source-ban, kihagyva.')
-      continue
-    }
-    if (rawText.length < 200) {
-      console.warn(`   ⚠️  Túl rövid szöveg (${rawText.length} kar), kihagyva`)
-      continue
-    }
-
-    const sectionBase = fileName.replace(/\.(pdf|docx|md|mdx|txt)$/i, '').replace(/[_-]/g, ' ').trim()
-    const sectionName = sourceItem.assessmentOnly ? `${sectionBase} - detected questions` : sectionBase
-    console.log(`   Szöveg: ${rawText.length} kar | Section: "${sectionName}"`)
-
-    if (forceLocalFallback) {
-      const fallback = buildFallbackQuestions(rawText.slice(0, 5000), sectionName)
-      allQuestions = allQuestions.concat(fallback)
-      console.log(`   ✅ Fallback: ${fallback.length} kérdés`)
-      continue
-    }
-
-    // ── FÁZIS 1: FACT EXTRACTION ─────────────────────────────────────────────
-    const chunks = chunkText(rawText)
-    console.log(`   [Fázis 1] ${chunks.length} chunk → fact extraction...`)
-
-    let facts = []
-    try {
-      facts = await extractFactsFromChunks(chunks, fileName)
-    } catch (err) {
-      console.error(`   ❌ Fact extraction hiba: ${err.message} → fallback`)
-      const fallback = buildFallbackQuestions(rawText.slice(0, 5000), sectionName)
-      allQuestions = allQuestions.concat(fallback)
-      continue
-    }
-
-    if (facts.length === 0) {
-      console.warn('   ⚠️  Nulla tény kinyerve, kihagyva')
-      continue
-    }
-    console.log(`   [Fázis 1] ✅ ${facts.length} tény kinyerve`)
-
-    // ── FÁZIS 2: QUIZ GENERATION ─────────────────────────────────────────────
-    console.log(`   [Fázis 2] Quiz generálás...`)
-    const config = {
-      subject: subjectName,
-      type: 'Synthetic Questionnaire',
-      year: new Date().getFullYear().toString(),
-      difficulty,
-      questionCount: Math.min(40, Math.max(10, Math.floor(facts.length * 0.8))),
-      enabledTypes: ALL_ENABLED_TYPES,
-      requirementsContext: [
-        planContext ? `Content plan:\n${planContext}` : '',
-        coverageInfo ? `Coverage targets:\n${coverageInfo}` : '',
-      ].filter(Boolean).join('\n\n') || 'Nincs megadva.',
-    }
-
-    let markdown = ''
-    try {
-      markdown = await generateQuiz(facts, config)
-    } catch (err) {
-      console.error(`   ❌ Quiz generálás hiba: ${err.message} → fallback`)
-      const fallback = buildFallbackQuestions(rawText.slice(0, 5000), sectionName)
-      allQuestions = allQuestions.concat(fallback)
-      continue
-    }
-
-    // ── PARSZELÁS + KONVERZIÓ ─────────────────────────────────────────────────
-    const { questions: rawQuestions } = parseMarkdownToQuiz(markdown)
-    const converted = convertToStudyHallFormat(rawQuestions, sectionName)
-
-    // conceptIds hozzárendelése
-    const enriched = converted.map(q => ({
-      ...q,
-      conceptIds: inferConceptIds(q, plan),
-    }))
-
-    allQuestions = allQuestions.concat(enriched)
-
-    const summary = summarizeQuiz({ questions: rawQuestions })
-    console.log(`   [Fázis 2] ✅ ${enriched.length} kérdés (${JSON.stringify(summary.counts)})`)
+    const questions = await processSourceFile(sourceItem, context)
+    allQuestions = allQuestions.concat(questions)
   }
 
-  // Deduplikálás
-  const seen = new Set()
-  const unique = allQuestions.filter(q => {
-    const key = String(q.question || '').toLowerCase().slice(0, 60)
-    if (seen.has(key)) return false
-    seen.add(key)
-    return true
-  })
-
-  // ID-k generálása
-  unique.forEach((q, idx) => { q.id = `q${idx + 1}` })
-
+  const unique = deduplicateAndAssignIds(allQuestions)
   fs.writeFileSync(outputPath, JSON.stringify(unique, null, 2), 'utf-8')
 
   const typeCounts = {}

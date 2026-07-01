@@ -10,7 +10,11 @@ import { useTheme, navigate } from '../store'
 import { C } from '../theme'
 
 // ── HEATMAP ───────────────────────────────────────────────────────────────────
-const MONTHS = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr']
+const MONTHS = Array.from({ length: 7 }, (_, i) => {
+  const d = new Date()
+  d.setMonth(d.getMonth() - 6 + i)
+  return d.toLocaleString('default', { month: 'short' })
+})
 
 function buildWeekFromLog(log) {
   const ordered = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']

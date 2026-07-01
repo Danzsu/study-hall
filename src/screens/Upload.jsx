@@ -1,6 +1,5 @@
 'use client'
 import { useState, useRef, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import { FONT_SANS, FONT_MONO } from '../theme'
 
 const T = {
@@ -53,6 +52,7 @@ function Spinner() {
   )
 }
 
+/** @param {{ value: number, total: number }} props */
 function ProgressBar({ value = 0, total = 0 }) {
   const pct = total > 0 ? Math.round((value / total) * 100) : 0
   return (
@@ -60,10 +60,6 @@ function ProgressBar({ value = 0, total = 0 }) {
       <div style={{ width: `${pct}%`, height: '100%', background: T.accent, borderRadius: 99, transition: 'width 0.4s ease' }} />
     </div>
   )
-}
-ProgressBar.propTypes = {
-  value: PropTypes.number,
-  total: PropTypes.number,
 }
 
 export default function Upload() {

@@ -9,9 +9,9 @@ export default function DragDrop({ q, selected, onSelect, submitted, t }) {
   const placements = selected ?? {}
   const [dragging, setDragging] = useState(null)
   const [clickSelected, setClickSelected] = useState(null)
+  const [highlightedSlot, setHighlightedSlot] = useState(null)
 
   const choices = q.choices ?? []
-  const fields = choices.filter(c => !c.identifier.startsWith('distractor'))
   const parts = String(q.question ?? '').split(/(\[field\d+\])/g)
   const placedIds = new Set(Object.values(placements))
 
@@ -68,7 +68,6 @@ export default function DragDrop({ q, selected, onSelect, submitted, t }) {
     setDragging(null)
   }
 
-  function handleDragOver(e) { e.preventDefault() }
   function handleDragEnd() { setDragging(null) }
 
   function getChipLabel(identifier) {
@@ -77,7 +76,7 @@ export default function DragDrop({ q, selected, onSelect, submitted, t }) {
 
   return (
     <div style={{ marginBottom: 28 }}>
-      {/* Question text with drop zones */}
+
       <div style={{ fontSize: '1rem', lineHeight: 2.2, color: t.text, marginBottom: 20 }}>
         {parts.map((part, i) => {
           const match = part.match(/^\[(\w+)\]$/)
@@ -85,22 +84,29 @@ export default function DragDrop({ q, selected, onSelect, submitted, t }) {
           const slotId = match[1]
           const placed = placements[slotId]
           const slotColor = getSlotColor(slotId)
+          const isHovered = !submitted && highlightedSlot === slotId
+          let slotBg
+          if (isHovered) slotBg = `${C.green}22`
+          else if (placed && submitted) slotBg = isCorrectPlacement(slotId) ? `${C.green}14` : `${C.red}10`
+          else if (placed) slotBg = C.accentBg2 || `${C.accent}18`
+          else slotBg = t.surface2
 
           return (
             <span
               key={i}
               onClick={() => handleSlotClick(slotId)}
-              onDragOver={handleDragOver}
-              onDrop={e => handleDrop(e, slotId)}
+              onDragOver={e => { setHighlightedSlot(p => p === slotId ? p : slotId); e.preventDefault() }}
+              onDrop={e => { setHighlightedSlot(null); handleDrop(e, slotId) }}
+              onDragLeave={() => setHighlightedSlot(null)}
               style={{
                 display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                 minWidth: 100, padding: '3px 12px', margin: '0 4px',
-                border: `2px dashed ${slotColor}`, borderRadius: 8,
-                background: placed ? (submitted ? (isCorrectPlacement(slotId) ? `${C.green}14` : `${C.red}10`) : C.accentBg2 || `${C.accent}18`) : t.surface2,
+                border: `2px dashed ${isHovered ? C.green : slotColor}`, borderRadius: 8,
+                background: slotBg,
                 cursor: submitted ? 'default' : 'pointer',
                 fontWeight: placed ? 600 : 400,
                 color: placed ? (submitted ? slotColor : C.accent) : t.textMuted,
-                transition: 'all 0.15s',
+                transition: 'all 0.15s, background 120ms, border-color 120ms',
               }}
             >
               {placed ? getChipLabel(placed) : slotId}
@@ -114,7 +120,7 @@ export default function DragDrop({ q, selected, onSelect, submitted, t }) {
         })}
       </div>
 
-      {/* Chip bank */}
+
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {choices.filter(c => !placedIds.has(c.identifier)).map(c => (
           <div

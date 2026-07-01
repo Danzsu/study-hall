@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:unit": "node tests/run-unit.js",
-    "test:blackbox": "node tests/blackbox-smoke.js && node tests/blackbox-api-contract.js",
-    "test:whitebox": "node tests/whitebox-content.js && node tests/whitebox-plan-contract.js",
+    "test:unit": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:blackbox": "node tests/blackbox-smoke.js && node tests/blackbox-api-contract.js && node tests/blackbox-upload-auth.js && node tests/blackbox-api-edge.js",
+    "test:whitebox": "node tests/whitebox-content.js && node tests/whitebox-plan-contract.js && node tests/whitebox-lib-content.js",
     "test:pipeline": "node tests/backend-pipeline-smoke.js && python tests/backend-pipeline-whitebox.py",
     "test:smoke": "npm run test:whitebox && npm run test:blackbox",
     "test:all": "npm run test:unit && npm run test:whitebox && npm run test:pipeline && npm run lint",
@@ -34,10 +35,12 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.6",
     "autoprefixer": "^10.4.19",
     "eslint": "^8",
     "eslint-config-next": "^14.2.20",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "vitest": "^4.1.6"
   }
 }

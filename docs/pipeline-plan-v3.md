@@ -1,7 +1,54 @@
 # Study Hall — Mesterterv v3: Intelligens Jegyzetgeneráló Pipeline
 
-> **Korábbi plan**: ✅ KÉSZ (activityLog, Home real data, Study komponensek)  
+> **v3 státusz**: ✅ IMPLEMENTÁLVA — minden fázis (F1–F7) kész  
 > **Alapelv**: Egyszerűbb jobb. Csak amit valóban megér megcsinálni.
+
+## Implementációs státusz
+
+| Fázis | Mit szállít | Fájlok | Állapot |
+| ----- | ----------- | ------ | ------- |
+| **F1** | ExtractorFactory + formátum extractorok | `pipeline/extractors/` | ✅ Kész |
+| **F2** | ImageEvaluator (Gemini vision scoring) | `pipeline/image_evaluator.py` | ✅ Kész |
+| **F3** | Párhuzamos szekció generálás + template | `pipeline/section_pipeline.py` | ✅ Kész |
+| **F4** | Többlépéses ábragenerálás (Plan→Gen→Eval→Refine) | `pipeline/diagram_pipeline.py` | ✅ Kész |
+| **F5** | Job status JSON + Next.js polling endpoint | `pipeline/job_status.py` + `app/api/jobs/[jobId]/` | ✅ Kész |
+| **F6** | Admin UI (config panel + progress nézet) | `src/screens/Admin/GenerationPanel.jsx` | ✅ Kész |
+| **F7** | `generate-all.js --python` flag integráció | `scripts/generate-all.js` | ✅ Kész |
+
+### Bemeneti formátumok — implementált extractorok
+
+| Formátum | Extractor | Képkinyerés | Fájl |
+| -------- | --------- | ----------- | ---- |
+| `.pdf` | pymupdf4llm + fitz | ✅ fitz.get_images() | `pipeline/extractors/pdf.py` |
+| `.docx` | mammoth | ✅ embedded images | `pipeline/extractors/docx.py` |
+| `.pptx` / `.ppt` | python-pptx | ✅ Presentation.images + speaker notes | `pipeline/extractors/pptx.py` |
+| `.txt` / `.md` | chardet + markdown-it-py | — | `pipeline/extractors/text.py` |
+| `.png` / `.jpg` / `.jpeg` | közvetlen bemenet | ✅ maga a fájl | `pipeline/extractors/image.py` |
+
+### Kulcskomponensek
+
+| Komponens | Fájl | Szerepkör |
+| --------- | ---- | --------- |
+| `ExtractorFactory` | `pipeline/extractors/__init__.py` | Formátum detektálás + extrakció |
+| `gemini_client` | `pipeline/gemini_client.py` | Google AI Studio async wrapper (text / json / vision) |
+| `ImageEvaluator` | `pipeline/image_evaluator.py` | Gemini Flash Lite vision scoring (threshold: 0.55) |
+| `generate_all_sections` | `pipeline/section_pipeline.py` | asyncio.gather, max 5 párhuzamos Gemini hívás |
+| `DiagramPipeline` | `pipeline/diagram_pipeline.py` | 4-lépéses ábragenerálás: Plan→Generate→Evaluate→Refine |
+| `excalidraw_design_system` | `pipeline/excalidraw_design_system.py` | Egységes vizuális stílus (refactoring.guru + bytebytego) |
+| `update_status` | `pipeline/job_status.py` | JSON fájl alapú job tracking (`storage/jobs/{id}.json`) |
+| `orchestrator.py` | `pipeline/orchestrator.py` | Belépési pont, koordinálja az összes réteget |
+
+### LLM model routing (Google AI Studio, egyetlen `GOOGLE_AI_KEY`)
+
+| Feladat | Model | Indok |
+| ------- | ----- | ----- |
+| Section MDX generálás | `gemini-2.5-flash` | Összetett tartalom, jobb minőség |
+| Reflection / rubric validáció | `gemini-2.5-flash-lite` | Gyors, olcsó ellenőrzés |
+| Image quality scoring | `gemini-2.5-flash-lite` | Vision, 1 kép = 1 API hívás |
+| Diagram planning | `gemini-2.5-flash` | Fogalomfelismerés |
+| Mermaid / Excalidraw generálás | `gemini-2.5-flash-lite` | Strukturált kimenet, olcsó |
+
+---
 
 ---
 
@@ -65,7 +112,7 @@ Input fájl(ok)
 **Kizárólag Google AI Studio (Gemini) modelleket használunk.** Nincs Groq, nincs OpenRouter, nincs Claude a pipeline-ban.
 
 | Feladat | Model | Indok |
-|---------|-------|-------|
+| ------- | ----- | ----- |
 | Image quality scoring | `gemini-2.5-flash-lite` | Gyors, olcsó vision; 1 kép = 1 API hívás |
 | Section MDX generálás | `gemini-2.5-flash` | Komplexebb feladat, jobb minőség |
 | Reflection / validáció | `gemini-2.5-flash-lite` | Rubric ellenőrzés, nem kell nagy model |
@@ -932,27 +979,37 @@ pipeline/
 ```
 
 ```python
-# pipeline/gemini_client.py — egyszerű wrapper a Google AI Studio API-ra
-import google.generativeai as genai
-import json, re
+# pipeline/gemini_client.py — async wrapper a Google AI Studio API-ra (google-genai SDK)
+from google import genai
+from google.genai import types
+from pipeline.config import GOOGLE_AI_KEY, GEMINI_FLASH, GEMINI_FLASH_LITE
+import json, re, base64
 
-genai.configure(api_key=os.getenv("GOOGLE_AI_KEY"))
+_client = None
+def _get_client():
+    global _client
+    if _client is None:
+        _client = genai.Client(api_key=GOOGLE_AI_KEY)
+    return _client
 
-async def text(prompt: str, system: str = "", model: str = "gemini-2.5-flash") -> str:
-    m = genai.GenerativeModel(model, system_instruction=system or None)
-    r = await m.generate_content_async(prompt)
-    return r.text
+async def text(prompt: str, system: str = "", model: str = GEMINI_FLASH) -> str:
+    config = types.GenerateContentConfig(system_instruction=system or None)
+    r = await _get_client().aio.models.generate_content(model=model, contents=prompt, config=config)
+    return r.text.strip()
 
-async def json_call(prompt: str, system: str = "", model: str = "gemini-2.5-flash-lite") -> dict:
+async def json_call(prompt: str, system: str = "", model: str = GEMINI_FLASH_LITE) -> dict | list:
     raw = await text(prompt, system, model)
     try: return json.loads(raw)
-    except: match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', raw); return json.loads(match.group()) if match else {}
+    except:
+        raw = re.sub(r'^```(?:json)?\s*', '', raw.strip(), flags=re.MULTILINE)
+        raw = re.sub(r'\s*```$', '', raw.strip(), flags=re.MULTILINE)
+        match = re.search(r'(\{[\s\S]*\}|\[[\s\S]*\])', raw)
+        return json.loads(match.group(1)) if match else {}
 
-async def vision(b64: str, prompt: str, model: str = "gemini-2.5-flash-lite") -> dict:
-    m = genai.GenerativeModel(model)
-    img_part = {"mime_type": "image/png", "data": b64}
-    r = await m.generate_content_async([img_part, prompt])
-    return json_call.__wrapped__(r.text)
+async def vision(b64: str, prompt: str, mime_type: str = "image/png", model: str = GEMINI_FLASH_LITE) -> dict | list:
+    contents = [types.Part.from_bytes(data=base64.b64decode(b64), mime_type=mime_type), prompt]
+    r = await _get_client().aio.models.generate_content(model=model, contents=contents)
+    return await json_call.__wrapped__(r.text.strip())
 ```
 
 ---

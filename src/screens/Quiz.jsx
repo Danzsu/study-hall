@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import {
   CheckCircle2, XCircle, ChevronRight, ChevronDown, ChevronUp,
-  RotateCcw, Zap, BookOpen, AlertTriangle,
-  Clock, Target, TrendingUp,
+  RotateCcw, Zap, AlertTriangle,
+  Clock, Target, Shuffle, ChevronLeft, ThumbsUp, ThumbsDown,
 } from 'lucide-react'
 import { useTheme, navigate } from '../store'
 import { appendSession } from '../lib/activityLog'
@@ -11,6 +11,8 @@ import { C } from '../theme'
 import { playSound } from '../sounds'
 import QuestionRenderer, { evaluateAnswer, hasValidSelection } from '../components/QuestionRenderer'
 import MarkdownText from '../components/MarkdownText'
+import { getFirebaseAuth } from '../../lib/firebase'
+import { voteQuestion, getQuestionTrustScore } from '../../lib/question-votes'
 
 const LABELS = ['A', 'B', 'C', 'D']
 
@@ -32,28 +34,29 @@ function scoreGrade(pct) {
   return               { grade: 'F', label: 'Keep going', color: C.red }
 }
 
-function Progress({ total, current, results, t }) {
+function Progress({ total, current, results, onJump = null, t = {} }) {
   return (
     <div>
-      <div style={{ height: 3, background: t.border, borderRadius: 99, marginBottom: 20, overflow: 'hidden' }}>
+      <div style={{ height: 3, background: t.border, borderRadius: 99, marginBottom: 16, overflow: 'hidden' }}>
         <div style={{
           width: `${(current / total) * 100}%`, height: '100%',
           background: C.accent, borderRadius: 99,
           transition: 'width 0.5s cubic-bezier(0.22,1,0.36,1)',
         }} />
       </div>
-      <div style={{ display: 'flex', gap: 5, justifyContent: 'center', marginBottom: 28 }}>
+      <div style={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 20 }}>
         {Array.from({ length: total }, (_, i) => {
-          const s = i < current
-            ? (results[i] === 'correct' ? 'correct' : 'wrong')
+          const s = results[i] === 'correct' ? 'correct'
+            : results[i] === 'wrong' ? 'wrong'
             : i === current ? 'active' : 'future'
           const bg = { correct: C.green, wrong: C.red, active: C.accent, future: t.border }[s]
           return (
-            <div key={i} style={{
-              width: s === 'active' ? 22 : 7, height: 7,
-              borderRadius: 99, background: bg,
+            <button key={i} onClick={() => onJump?.(i)} style={{
+              width: i === current ? 28 : 10, height: 10,
+              borderRadius: 5, background: bg,
               opacity: s === 'future' ? 0.3 : 1,
-              transition: 'width 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.22s',
+              transition: 'all 120ms ease',
+              border: 'none', padding: 0, cursor: 'pointer',
             }} />
           )
         })}
@@ -62,6 +65,21 @@ function Progress({ total, current, results, t }) {
   )
 }
 
+const DIFFICULTY_COLORS = { easy: C.green, medium: C.gold, hard: C.red }
+
+function getTrustBarColor(pct) {
+  if (pct >= 70) return C.green
+  if (pct >= 40) return C.gold
+  return C.red
+}
+const SUPERVISED_BADGE = {
+  yes: { label: 'Ellenőrzött', color: C.green },
+  no:  { label: 'Nem ellenőrzött', color: C.gold },
+}
+
+function microPress(e) { e.currentTarget.style.transform = 'scale(0.97)' }
+function microRelease(e) { e.currentTarget.style.transform = 'scale(1)' }
+
 function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit, onNext, phase, t }) {
   const isMulti = q.type === 'multi'
   const isMcqType = q.type === 'mcq' || q.type === 'multi'
@@ -69,7 +87,10 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
   const correctList = isMulti ? (q.correctMultiple ?? []) : [q.correct]
   const hasSelection = hasValidSelection(q, selected)
   const isCorrect = submitted && (evaluateAnswer(q, selected) === true)
-  const buttonLabel = !submitted ? 'Submit' : qIdx < total - 1 ? 'Next question ->' : 'See results ->'
+  const buttonLabel = !submitted ? 'Submit' : qIdx < total - 1 ? 'Next question' : 'See results'
+
+  const diffColor = DIFFICULTY_COLORS[q.difficulty] ?? C.blue
+  const supBadge = SUPERVISED_BADGE[q.supervised]
 
   const phaseStyle = {
     idle:  { opacity: 1, transform: 'translateX(0) scale(1)' },
@@ -82,147 +103,263 @@ function QuestionCard({ q, qIdx, total, selected, submitted, onSelect, onSubmit,
     : 'none'
 
   return (
-    <div style={{ ...phaseStyle, transition: phaseTransition }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-        <span style={{
-          background: t.surface2, border: `1px solid ${t.border}`,
-          borderRadius: 20, padding: '4px 12px',
-          fontSize: 11, fontWeight: 700, color: t.textSub,
-        }}>{q.section}</span>
-        {q.difficulty && (
-          <span style={{
-            background: q.difficulty === 'advanced' ? `${C.gold}14` : `${C.blue}14`,
-            border: `1px solid ${q.difficulty === 'advanced' ? C.gold : C.blue}35`,
-            borderRadius: 20, padding: '4px 12px',
-            fontSize: 11, fontWeight: 700,
-            color: q.difficulty === 'advanced' ? C.gold : C.blue,
-          }}>{q.difficulty}</span>
+    <div style={{ background: t.surface, border: `1px solid ${t.border}`, borderRadius: 16, overflow: 'hidden', ...phaseStyle, transition: phaseTransition }}>
+
+      <div style={{ height: 4, background: `linear-gradient(90deg, ${C.accent}, ${C.blue}, ${C.green})` }} />
+
+      <div style={{ padding: '20px 22px 22px' }}>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
+          <span style={{ background: C.accent, color: '#fff', borderRadius: 99, padding: '2px 10px', fontSize: 12, fontWeight: 700 }}>
+            {qIdx + 1}
+          </span>
+          <span style={{ background: t.surface2, border: `1px solid ${t.border}`, borderRadius: 20, padding: '3px 10px', fontSize: 11, fontWeight: 700, color: t.textSub }}>
+            {q.section}
+          </span>
+          {q.difficulty && (
+            <span style={{ background: `${diffColor}14`, border: `1px solid ${diffColor}35`, borderRadius: 20, padding: '3px 10px', fontSize: 11, fontWeight: 700, color: diffColor }}>
+              {q.difficulty}
+            </span>
+          )}
+          {isMulti && (
+            <span style={{ background: `${C.purple}14`, border: `1px solid ${C.purple}35`, borderRadius: 20, padding: '3px 10px', fontSize: 11, fontWeight: 700, color: C.purple }}>
+              multi
+            </span>
+          )}
+          {supBadge && (
+            <span style={{ background: `${supBadge.color}14`, border: `1px solid ${supBadge.color}35`, borderRadius: 20, padding: '3px 10px', fontSize: 11, fontWeight: 700, color: supBadge.color }}>
+              {supBadge.label}
+            </span>
+          )}
+          <span style={{ fontSize: 11, color: t.textMuted, marginLeft: 'auto' }}>{qIdx + 1} / {total}</span>
+        </div>
+
+        {q.image && (
+          <img src={q.image} alt="" style={{ width: '100%', maxHeight: 280, objectFit: 'contain', borderRadius: 10, marginBottom: 16 }} />
         )}
-        {isMulti && (
-          <span style={{
-            background: `${C.purple}14`,
-            border: `1px solid ${C.purple}35`,
-            borderRadius: 20,
-            padding: '4px 12px',
-            fontSize: 11,
-            fontWeight: 700,
-            color: C.purple,
-          }}>multi-select</span>
+
+        <h2 style={{ fontFamily: "'Lora', Georgia, serif", fontSize: 19, fontWeight: 700, lineHeight: 1.5, letterSpacing: '-0.2px', marginBottom: 24, color: t.text }}>
+          <MarkdownText text={q.question} />
+        </h2>
+
+        {isMcqType ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+            {(q.options || []).map((opt, oi) => {
+              const isSelected   = selectedList.includes(oi)
+              const isCorrectOpt = submitted && correctList.includes(oi)
+              const isWrongOpt   = submitted && isSelected && !correctList.includes(oi)
+
+              let bg, border, labelBg, labelColor
+              if (isCorrectOpt)            { bg = `${C.green}14`; border = `2px solid ${C.green}70`; labelBg = C.green; labelColor = '#fff' }
+              else if (isWrongOpt)         { bg = `${C.red}10`;   border = `2px solid ${C.red}60`;   labelBg = C.red;   labelColor = '#fff' }
+              else if (isSelected)         { bg = `${C.accent}16`; border = `2px solid ${C.accent}`; labelBg = C.accent; labelColor = '#fff' }
+              else                         { bg = t.surface2; border = `1.5px solid ${t.border}`;    labelBg = t.surface2; labelColor = t.textMuted }
+
+              return (
+                <button key={oi}
+                  onClick={() => !submitted && onSelect(isMulti ? (isSelected ? selectedList.filter(v => v !== oi) : [...selectedList, oi]) : oi)}
+                  onMouseEnter={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = `${C.accent}60` }}
+                  onMouseLeave={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = t.border }}
+                  onMouseDown={microPress} onMouseUp={microRelease}
+                  style={{
+                    background: bg, border, borderRadius: 12, padding: '14px 16px',
+                    display: 'flex', alignItems: 'flex-start', gap: 12,
+                    cursor: submitted ? 'default' : 'pointer',
+                    textAlign: 'left', width: '100%',
+                    transition: 'all 0.15s ease, transform 80ms',
+                    animation: `optSlideUp 220ms ease-out ${oi * 40}ms both`,
+                  }}
+                >
+                  <span style={{ width: 28, height: 28, borderRadius: 7, flexShrink: 0, background: labelBg, color: labelColor, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, transition: 'all 0.15s' }}>
+                    {LABELS[oi]}
+                  </span>
+                  <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, fontWeight: isCorrectOpt ? 600 : 400, flex: 1 }}>
+                    <MarkdownText text={opt} />
+                    {isCorrectOpt && !isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.green, fontWeight: 700 }}>correct</span>}
+                    {isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.red, fontWeight: 700 }}>your answer</span>}
+                  </span>
+                  {isCorrectOpt && <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 2 }} />}
+                </button>
+              )
+            })}
+          </div>
+        ) : (
+          <QuestionRenderer q={q} selected={selected} onSelect={onSelect} submitted={submitted} t={t} />
         )}
-        <span style={{ fontSize: 11, color: t.textMuted, marginLeft: 'auto' }}>{qIdx + 1} / {total}</span>
+
+        {submitted && q.explanation && (
+          <div style={{
+            background: isCorrect ? `${C.green}14` : `${C.red}10`,
+            border: `1px solid ${isCorrect ? C.green : C.red}30`,
+            borderLeft: `3px solid ${isCorrect ? C.green : C.red}`,
+            borderRadius: '0 10px 10px 0',
+            padding: '14px 16px', display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 24,
+            animation: 'explanationIn 0.3s cubic-bezier(0.22,1,0.36,1) both',
+          }}>
+            {isCorrect
+              ? <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 1 }} />
+              : <XCircle      size={16} style={{ color: C.red,   flexShrink: 0, marginTop: 1 }} />
+            }
+            <div>
+              <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.5px', color: isCorrect ? C.green : C.red, marginBottom: 4 }}>
+                {isCorrect ? 'CORRECT — well done!' : 'INCORRECT — review this'}
+              </p>
+              <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.6 }}><MarkdownText text={q.explanation} /></p>
+            </div>
+          </div>
+        )}
+
+        <button
+          disabled={!hasSelection && !submitted}
+          onClick={submitted ? onNext : onSubmit}
+          onMouseDown={microPress} onMouseUp={microRelease}
+          style={{
+            width: '100%', padding: '15px',
+            background: hasSelection || submitted ? C.accent : t.border,
+            color: hasSelection || submitted ? '#fff' : t.textMuted,
+            border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 700,
+            cursor: hasSelection || submitted ? 'pointer' : 'not-allowed',
+            fontFamily: "'DM Sans', system-ui",
+            transition: 'background 0.15s, transform 80ms',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          }}
+          onMouseEnter={e => { if (hasSelection || submitted) e.currentTarget.style.background = C.accentHov }}
+          onMouseLeave={e => { if (hasSelection || submitted) e.currentTarget.style.background = C.accent }}
+        >
+          {buttonLabel}
+          {submitted && <ChevronRight size={16} />}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function ActionBar({ qIdx, total, onPrev, onNext, onClear, onShuffle, onEvaluate, canClear, canShuffle, t }) {
+  const btnBase = {
+    border: `1px solid ${t.border}`, borderRadius: 9, padding: '8px 14px',
+    fontSize: 12, fontWeight: 700, cursor: 'pointer', background: t.surface,
+    color: t.textSub, fontFamily: "'DM Sans', system-ui",
+    transition: 'background 0.12s, transform 80ms',
+    display: 'inline-flex', alignItems: 'center', gap: 5,
+  }
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
+
+      <div style={{ display: 'flex', gap: 6 }}>
+        <button style={{ ...btnBase, opacity: canClear ? 1 : 0.4 }} disabled={!canClear}
+          onClick={onClear} onMouseDown={microPress} onMouseUp={microRelease}>
+          <RotateCcw size={12} /> Clear
+        </button>
+        <button style={{ ...btnBase, opacity: canShuffle ? 1 : 0.4 }} disabled={!canShuffle}
+          onClick={onShuffle} onMouseDown={microPress} onMouseUp={microRelease}>
+          <Shuffle size={12} /> Shuffle
+        </button>
       </div>
 
-      <h2 style={{
-        fontFamily: "'Lora', Georgia, serif",
-        fontSize: 19, fontWeight: 700, lineHeight: 1.5,
-        letterSpacing: '-0.2px', marginBottom: 24, color: t.text,
-      }}>
-        <MarkdownText text={q.q} />
-      </h2>
 
-      {isMcqType ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-          {(q.options || []).map((opt, oi) => {
-            const isSelected   = selectedList.includes(oi)
-            const isCorrectOpt = submitted && correctList.includes(oi)
-            const isWrongOpt   = submitted && isSelected && !correctList.includes(oi)
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, margin: '0 auto' }}>
+        <button disabled={qIdx === 0}
+          onClick={onPrev} onMouseDown={microPress} onMouseUp={microRelease}
+          style={{ ...btnBase, padding: '8px 10px', opacity: qIdx === 0 ? 0.4 : 1 }}>
+          <ChevronLeft size={14} />
+        </button>
+        <span style={{ fontSize: 13, fontWeight: 700, color: t.text, minWidth: 54, textAlign: 'center' }}>
+          {qIdx + 1} / {total}
+        </span>
+        <button style={{ ...btnBase, padding: '8px 10px', opacity: qIdx >= total - 1 ? 0.4 : 1 }} disabled={qIdx >= total - 1}
+          onClick={onNext} onMouseDown={microPress} onMouseUp={microRelease}>
+          <ChevronRight size={14} />
+        </button>
+      </div>
 
-            let bg, border, labelBg, labelColor
-            if (isCorrectOpt) {
-              bg = `${C.green}14`; border = `2px solid ${C.green}70`
-              labelBg = C.green; labelColor = '#fff'
-            } else if (isWrongOpt) {
-              bg = `${C.red}10`; border = `2px solid ${C.red}60`
-              labelBg = C.red; labelColor = '#fff'
-            } else if (isSelected && !submitted) {
-              bg = `${C.accent}16`; border = `2px solid ${C.accent}`
-              labelBg = C.accent; labelColor = '#fff'
-            } else {
-              bg = t.surface; border = `1.5px solid ${t.border}`
-              labelBg = t.surface2; labelColor = t.textMuted
-            }
 
-            return (
-              <button
-                key={oi}
-                onClick={() => !submitted && onSelect(isMulti
-                  ? (isSelected ? selectedList.filter(v => v !== oi) : [...selectedList, oi])
-                  : oi
-                )}
-                style={{
-                  background: bg, border, borderRadius: 12,
-                  padding: '14px 16px',
-                  display: 'flex', alignItems: 'flex-start', gap: 12,
-                  cursor: submitted ? 'default' : 'pointer',
-                  textAlign: 'left', width: '100%',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = `${C.accent}60` }}
-                onMouseLeave={e => { if (!submitted && !isSelected) e.currentTarget.style.borderColor = t.border }}
-              >
-                <span style={{
-                  width: 28, height: 28, borderRadius: 7, flexShrink: 0,
-                  background: labelBg, color: labelColor,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 11, fontWeight: 800, transition: 'all 0.15s',
-                }}>{LABELS[oi]}</span>
-                <span style={{ fontSize: 14, lineHeight: 1.55, color: t.text, fontWeight: isCorrectOpt ? 600 : 400, flex: 1 }}>
-                  <MarkdownText text={opt} />
-                  {isCorrectOpt && !isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.green, fontWeight: 700 }}>correct</span>}
-                  {isWrongOpt && <span style={{ marginLeft: 8, fontSize: 11, color: C.red, fontWeight: 700 }}>your answer</span>}
-                </span>
-                {isCorrectOpt && <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 2 }} />}
-              </button>
-            )
-          })}
-        </div>
-      ) : (
-        <QuestionRenderer q={q} selected={selected} onSelect={onSelect} submitted={submitted} t={t} />
-      )}
-
-      {submitted && q.explain && (
-        <div style={{
-          background: isCorrect ? `${C.green}14` : `${C.red}10`,
-          border: `1px solid ${isCorrect ? C.green : C.red}30`,
-          borderLeft: `3px solid ${isCorrect ? C.green : C.red}`,
-          borderRadius: '0 10px 10px 0',
-          padding: '14px 16px', display: 'flex', gap: 10,
-          alignItems: 'flex-start', marginBottom: 24,
-          animation: 'explanationIn 0.3s cubic-bezier(0.22,1,0.36,1) both',
-        }}>
-          {isCorrect
-            ? <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 1 }} />
-            : <XCircle     size={16} style={{ color: C.red,   flexShrink: 0, marginTop: 1 }} />
-          }
-          <div>
-            <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.5px', color: isCorrect ? C.green : C.red, marginBottom: 4 }}>
-              {isCorrect ? 'CORRECT - well done!' : 'INCORRECT - review this'}
-            </p>
-            <p style={{ fontSize: 13, color: t.textSub, lineHeight: 1.6 }}><MarkdownText text={q.explain} /></p>
-          </div>
-        </div>
-      )}
-
-      <button
-        disabled={!hasSelection && !submitted}
-        onClick={submitted ? onNext : onSubmit}
-        style={{
-          width: '100%', padding: '15px',
-          background: hasSelection || submitted ? C.accent : t.border,
-          color: hasSelection || submitted ? '#fff' : t.textMuted,
-          border: 'none', borderRadius: 12,
-          fontSize: 15, fontWeight: 700,
-          cursor: hasSelection || submitted ? 'pointer' : 'not-allowed',
-          fontFamily: "'DM Sans', system-ui",
-          transition: 'background 0.15s',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        }}
-        onMouseEnter={e => { if (hasSelection || submitted) e.currentTarget.style.background = C.accentHov }}
-        onMouseLeave={e => { if (hasSelection || submitted) e.currentTarget.style.background = C.accent }}
-      >
-        {buttonLabel}
-        {submitted && <ChevronRight size={16} />}
+      <button style={{ ...btnBase, background: `${C.accent}16`, color: C.accent, border: `1px solid ${C.accent}40` }}
+        onClick={onEvaluate} onMouseDown={microPress} onMouseUp={microRelease}>
+        Evaluate
       </button>
+    </div>
+  )
+}
+
+function TrustVoting({ subjectId, questionId, t }) {
+  const [score, setScore] = useState(null)
+  const [userVote, setUserVote] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    getQuestionTrustScore(subjectId, questionId).then(s => { if (!cancelled) setScore(s) }).catch(() => {})
+    return () => { cancelled = true }
+  }, [subjectId, questionId])
+
+  const handleVote = async (voteType) => {
+    const auth = getFirebaseAuth()
+    const userId = auth?.currentUser?.uid
+    if (!userId || loading) return
+    setLoading(true)
+    try {
+      const updated = await voteQuestion(subjectId, questionId, userId, voteType)
+      if (updated) { setScore(updated); setUserVote(voteType) }
+    } catch {
+      // voting is non-critical; quiz flow continues uninterrupted
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (score === null) return null
+
+  const isTrusted = score.totalVotes >= 10 && score.trustPct >= 70
+
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 10, marginTop: 8,
+      padding: '10px 14px', background: t.surface2, borderRadius: 10,
+      border: `1px solid ${t.border}`, flexWrap: 'wrap',
+    }}>
+      {isTrusted && (
+        <span style={{ fontSize: 11, fontWeight: 700, color: C.green, background: `${C.green}14`, border: `1px solid ${C.green}30`, borderRadius: 20, padding: '2px 8px', flexShrink: 0 }}>
+          ✓ Trusted
+        </span>
+      )}
+      <div style={{ flex: 1, minWidth: 100 }}>
+        <div style={{ fontSize: 11, color: t.textMuted, marginBottom: score.totalVotes > 0 ? 3 : 0 }}>
+          Community trust — {score.positiveVotes}/{score.totalVotes} {score.totalVotes === 1 ? 'vote' : 'votes'}
+        </div>
+        {score.totalVotes > 0 && (
+          <div style={{ height: 3, background: t.border, borderRadius: 99, overflow: 'hidden' }}>
+            <div style={{
+              width: `${score.trustPct}%`, height: '100%', borderRadius: 99,
+              background: getTrustBarColor(score.trustPct),
+              transition: 'width 0.4s ease',
+            }} />
+          </div>
+        )}
+      </div>
+      <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+        {[
+          { type: 'trust',    Icon: ThumbsUp,   activeColor: C.green },
+          { type: 'distrust', Icon: ThumbsDown, activeColor: C.red   },
+        ].map(({ type, Icon, activeColor }) => (
+          <button
+            key={type}
+            onClick={() => handleVote(type)}
+            disabled={loading || userVote === type}
+            onMouseDown={microPress} onMouseUp={microRelease}
+            style={{
+              width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              border: `1px solid ${userVote === type ? activeColor + '50' : t.border}`,
+              background: userVote === type ? `${activeColor}14` : t.surface,
+              color: userVote === type ? activeColor : t.textMuted,
+              cursor: loading || userVote === type ? 'default' : 'pointer',
+              opacity: loading ? 0.6 : 1,
+              transition: 'all 0.15s, transform 80ms',
+            }}
+          >
+            <Icon size={13} />
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
@@ -284,7 +421,7 @@ function QuestionBreakdown({ questions, results, answers, t }) {
                 ? <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0 }} />
                 : <XCircle size={16} style={{ color: C.red, flexShrink: 0 }} />
               }
-              <span style={{ flex: 1, minWidth: 0, fontSize: 13.5, fontWeight: 650, color: t.text, lineHeight: 1.4 }}>{q.q}</span>
+              <span style={{ flex: 1, minWidth: 0, fontSize: 13.5, fontWeight: 650, color: t.text, lineHeight: 1.4 }}>{q.question}</span>
               <span style={{ fontSize: 10, fontWeight: 800, color: isCorrect ? C.green : C.red, background: isCorrect ? C.greenBg : C.redBg, borderRadius: 20, padding: '3px 8px', flexShrink: 0 }}>
                 {isCorrect ? 'Correct' : 'Review'}
               </span>
@@ -304,7 +441,7 @@ function QuestionBreakdown({ questions, results, answers, t }) {
                     )
                   })}
                 </div>
-                {q.explain && <p style={{ fontSize: 13, lineHeight: 1.6, color: t.textSub }}>{q.explain}</p>}
+                {q.explanation && <p style={{ fontSize: 13, lineHeight: 1.6, color: t.textSub }}>{q.explanation}</p>}
               </div>
             )}
           </div>
@@ -459,7 +596,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
                   <XCircle size={16} style={{ color: C.red, flexShrink: 0, marginTop: 1 }} />
                   <div style={{ flex: 1 }}>
                     <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted }}>Q{origIdx + 1} - {q.section}</span>
-                    <p style={{ fontSize: 14, fontWeight: 500, color: t.text, lineHeight: 1.5, marginTop: 2 }}>{q.q}</p>
+                    <p style={{ fontSize: 14, fontWeight: 500, color: t.text, lineHeight: 1.5, marginTop: 2 }}>{q.question}</p>
                   </div>
                 </div>
               )
@@ -496,7 +633,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
                   <CheckCircle2 size={16} style={{ color: C.green, flexShrink: 0, marginTop: 1 }} />
                   <div style={{ flex: 1 }}>
                     <span style={{ fontSize: 11, fontWeight: 700, color: t.textMuted }}>Q{origIdx + 1} - {q.section}</span>
-                    <p style={{ fontSize: 14, fontWeight: 500, color: t.text, lineHeight: 1.5, marginTop: 2 }}>{q.q}</p>
+                    <p style={{ fontSize: 14, fontWeight: 500, color: t.text, lineHeight: 1.5, marginTop: 2 }}>{q.question}</p>
                   </div>
                 </div>
               )
@@ -522,7 +659,7 @@ function ResultsView({ questions, results, answers, timeTaken, subjectId, subjec
   )
 }
 
-export default function Quiz({ subjectId, section }) {
+export default function Quiz({ subjectId, section, subjectName: subjectNameProp = '' }) {
   const t = useTheme()
   const [allQuestions, setAllQuestions] = useState([])
   const [questions, setQuestions]       = useState([])
@@ -535,6 +672,8 @@ export default function Quiz({ subjectId, section }) {
   const [done, setDone]       = useState(false)
   const [startTime]           = useState(() => Date.now())
   const [timeTaken, setTimeTaken] = useState(0)
+
+  const subjectName = subjectNameProp || (subjectId?.split(/[-_]/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') ?? '')
 
   useEffect(() => {
     if (!subjectId) return
@@ -558,7 +697,13 @@ export default function Quiz({ subjectId, section }) {
     setAnswers(p => ({ ...p, [q.id]: selected }))
     const correct = evaluateAnswer(q, selected)
     playSound(correct !== false ? 'correct' : 'wrong')
-    setResults(r => [...r, correct !== false ? 'correct' : 'wrong'])
+    setResults(r => { const n = [...r]; n[qIdx] = correct !== false ? 'correct' : 'wrong'; return n })
+  }
+
+  const restoreNavState = (idx) => {
+    const tq = questions[idx]
+    setSelected(answers[tq?.id] ?? null)
+    setSubmitted(!!answers[tq?.id])
   }
 
   const handleNext = () => {
@@ -572,10 +717,34 @@ export default function Quiz({ subjectId, section }) {
         return
       }
       setPhase('enter')
-      setSelected(null)
-      setSubmitted(false)
+      restoreNavState(next)
       setTimeout(() => { setQIdx(next); setPhase('idle') }, 40)
     }, 260)
+  }
+
+  const handlePrev = () => {
+    if (busy || qIdx === 0) return
+    setPhase('exit')
+    setTimeout(() => {
+      const prev = qIdx - 1
+      setPhase('enter')
+      restoreNavState(prev)
+      setTimeout(() => { setQIdx(prev); setPhase('idle') }, 40)
+    }, 260)
+  }
+
+  const handleJump = (idx) => {
+    if (busy || idx === qIdx) return
+    restoreNavState(idx)
+    setQIdx(idx)
+  }
+
+  const handleClear   = () => { setSelected(null) }
+  const handleEvaluate = () => { setTimeTaken(Math.round((Date.now() - startTime) / 1000)); setDone(true) }
+
+  const handleShuffle = () => {
+    setQuestions(qs => [...qs].sort(() => Math.random() - 0.5))
+    setQIdx(0); setSelected(null); setSubmitted(false); setAnswers({}); setResults([])
   }
 
   const handleRetry = () => {
@@ -583,6 +752,19 @@ export default function Quiz({ subjectId, section }) {
     setQIdx(0); setSelected(null); setSubmitted(false)
     setAnswers({}); setResults([]); setPhase('idle'); setDone(false)
   }
+
+  useEffect(() => {
+    if (done) return
+    const h = (e) => {
+      if (e.key === 'ArrowLeft')               handlePrev()
+      if (e.key === 'ArrowRight' && submitted)  handleNext()
+      if (e.key === 'c' || e.key === 'C')      handleClear()
+      if (e.key === 'e' || e.key === 'E')      handleEvaluate()
+    }
+    globalThis.addEventListener('keydown', h)
+    return () => globalThis.removeEventListener('keydown', h)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qIdx, submitted, done])
 
   if (!questions.length) {
     return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: t.textMuted }}>Loading...</div>
@@ -594,6 +776,7 @@ export default function Quiz({ subjectId, section }) {
         @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
         @keyframes explanationIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
         @keyframes arcGrow { from{stroke-dasharray:0 327} to{stroke-dasharray:var(--dash,0) 327} }
+        @keyframes optSlideUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
       `}</style>
       <main className="page-wrap" style={{ '--pw': '640px', paddingTop: 40, paddingBottom: 80 }}>
         {done ? (
@@ -603,18 +786,30 @@ export default function Quiz({ subjectId, section }) {
             answers={answers}
             timeTaken={timeTaken}
             subjectId={subjectId}
+            subjectName={subjectName}
             t={t}
             onRetry={handleRetry}
           />
         ) : (
           <>
-            <Progress total={questions.length} current={qIdx} results={results} t={t} />
+            <Progress total={questions.length} current={qIdx} results={results} onJump={handleJump} t={t} />
+            <ActionBar
+              qIdx={qIdx} total={questions.length}
+              onPrev={handlePrev} onNext={handleNext}
+              onClear={handleClear} onShuffle={handleShuffle} onEvaluate={handleEvaluate}
+              canClear={selected !== null && submitted === false}
+              canShuffle={!busy}
+              t={t}
+            />
             <QuestionCard
               q={q} qIdx={qIdx} total={questions.length}
               selected={selected} submitted={submitted}
               onSelect={setSelected} onSubmit={handleSubmit} onNext={handleNext}
               phase={phase} t={t}
             />
+            {submitted && q && (
+              <TrustVoting key={q.id} subjectId={subjectId} questionId={q.id} t={t} />
+            )}
           </>
         )}
       </main>

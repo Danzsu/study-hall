@@ -23,6 +23,8 @@ class MCQQuestion(_Base):
     explanation: str = ""
     section: str = "General"
     difficulty: str = "medium"
+    supervised: str = "generated"
+    image: str | None = None
 
     @field_validator("correct", mode="before")
     @classmethod
@@ -48,6 +50,8 @@ class MultiQuestion(_Base):
     explanation: str = ""
     section: str = "General"
     difficulty: str = "medium"
+    supervised: str = "generated"
+    image: str | None = None
 
     @field_validator("correct", mode="before")
     @classmethod
@@ -75,6 +79,8 @@ class WrittenQuestion(_Base):
     key_points: list[str] = Field(default_factory=list)
     section: str = "General"
     difficulty: str = "hard"
+    supervised: str = "generated"
+    image: str | None = None
 
 
 # ── Flashcard ─────────────────────────────────────────────────────────────────

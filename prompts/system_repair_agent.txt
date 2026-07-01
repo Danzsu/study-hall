@@ -6,117 +6,208 @@ Validate and repair every question in the input array.
 Output ONLY the repaired JSON array. No explanations. No code fences. No commentary.
 
 ═══════════════════════════════════════════
-EXACT OUTPUT FORMAT — REQUIRED FIELD NAMES
+AUTHORITATIVE FORMAT REFERENCE
 ═══════════════════════════════════════════
+The following JSON is the ground truth for all question types and their exact field names,
+field types, and structure. Do NOT deviate from this format.
 
-Every question MUST use exactly these field names (no others, no translations):
-
-  question_type    — string: "multi_choice" | "true_false" | "fill_the_blanks" | "drag_n_drop" | "simple_input"
-  question_title   — string: the question text
-  options          — object: { "a": "...", "b": "...", ... }   (multi_choice, true_false only)
-  answer           — array of option keys for multi_choice | "true"/"false" string for true_false | string for simple_input | object for drag_n_drop
-  blanks           — object: { "field1": "answer", "field2": "answer" }   (fill_the_blanks only)
-  choices          — object: { "field1": "label", ..., "distractor1": "label" }   (drag_n_drop only)
-  supervised       — string: "yes" | "no" | "generated"
-
-═══════════════════════════════════════════
-3 CORRECT EXAMPLES
-═══════════════════════════════════════════
-
-Example 1 — multi_choice (multiple correct answers allowed):
+<quiz_json_reference>
 {
-  "question_type": "multi_choice",
-  "question_title": "Melyik protokoll(ok) dolgoznak az OSI modell szállítási rétegén?",
-  "options": {
-    "a": "TCP",
-    "b": "IP",
-    "c": "UDP",
-    "d": "HTTP"
+  "tags": {
+    "subject": "Mikro- és Makroökonómia B",
+    "type": "ZH",
+    "year": "2025"
   },
-  "answer": ["a", "c"],
-  "supervised": "yes"
+  "questions": [
+    {
+      "question_type": "true_false",
+      "question_title": "Ha a sportcipők keresletének árrugalmassága $-1{,}5$, akkor az ár $6\\%$-os növelése esetén a keresett mennyiség $4\\%$-kal csökken.",
+      "answer": "false",
+      "ID": 1,
+      "supervised": "yes"
+    },
+    {
+      "question_type": "multi_choice",
+      "question_title": "Monopolisztikus verseny esetén...",
+      "options": {
+        "A": "hosszú távon nem realizálnak a vállalatok gazdasági profitot.",
+        "B": "nincs szabad belépés a piacra.",
+        "C": "a vállalatok árelfogadóak.",
+        "D": "kevés (csak pár) vállalat van a piacon."
+      },
+      "answer": ["A"],
+      "ID": 3,
+      "supervised": "yes"
+    },
+    {
+      "question_type": "simple_input",
+      "question_title": "A piacon a jégcsapretek iránti keresletet a $Q = 2000 - 2p$ függvény írja le. Határozza meg a kereslet árrugalmasságát! (Adja meg a számértéket, pl.: -0.9)",
+      "answer": "-0.9",
+      "ID": 5,
+      "supervised": "yes"
+    },
+    {
+      "question_type": "fill_the_blanks",
+      "text": "Profitmaximum esetén a [field1] megegyezik a [field2]-el. Monopol esetén az ár [field3] a határköltségnél.",
+      "blank": [
+        { "identifier": "field1", "answer": "határbevétel" },
+        { "identifier": "field2", "answer": "határköltség" },
+        { "identifier": "field3", "answer": "magasabb" }
+      ],
+      "ID": 6,
+      "supervised": "yes"
+    },
+    {
+      "question_type": "drag_n_drop",
+      "text": "Tökéletesen versenyző piac esetén $P =$ [field1], monopol esetén $P$ [field2] $MC$, monopolisztikus versenynél hosszú távon a gazdasági profit [field3].",
+      "choices": [
+        { "identifier": "field1", "label": "MC" },
+        { "identifier": "field2", "label": ">" },
+        { "identifier": "field3", "label": "nulla" },
+        { "identifier": "distractor1", "label": "MR" },
+        { "identifier": "distractor2", "label": "<" },
+        { "identifier": "distractor3", "label": "pozitív" }
+      ],
+      "ID": 7,
+      "supervised": "yes"
+    },
+    {
+      "question_type": "formula_drag_drop",
+      "question_title": "Fejezd ki az árrugalmasság ($\\varepsilon$) képletét!",
+      "text": "$\\varepsilon =$ [field1]",
+      "choices": [
+        { "identifier": "field1", "label": "ΔQ/Q ÷ ΔP/P", "latex": "\\frac{\\Delta Q / Q}{\\Delta P / P}" },
+        { "identifier": "distractor1", "label": "ΔP/P ÷ ΔQ/Q", "latex": "\\frac{\\Delta P / P}{\\Delta Q / Q}" },
+        { "identifier": "distractor2", "label": "Q · P", "latex": "Q \\cdot P" }
+      ],
+      "ID": 8,
+      "supervised": "yes"
+    },
+    {
+      "question_type": "calc_input",
+      "question_title": "Egy vállalatnál a termelés 10 egységről 13 egységre nő. Eközben a teljes költség (TC) 400 Ft-ról 520 Ft-ra emelkedik. Számítsd ki a határköltséget ($MC$)! (Írd be a számértéket, pl.: 40)",
+      "answer": "40",
+      "formula_chips": [
+        { "label": "ΔTC", "latex": "\\Delta TC" },
+        { "label": "ΔQ", "latex": "\\Delta Q" },
+        { "label": "MC = ΔTC/ΔQ", "latex": "MC = \\frac{\\Delta TC}{\\Delta Q}" }
+      ],
+      "ID": 12,
+      "supervised": "yes"
+    }
+  ]
 }
-
-Example 2 — fill_the_blanks (blanks object, field names match placeholders in title):
-{
-  "question_type": "fill_the_blanks",
-  "question_title": "Az OSI modell [field1] rétegből áll, és a [field2] réteg felelős az útvonalválasztásért.",
-  "blanks": {
-    "field1": "7",
-    "field2": "hálózati"
-  },
-  "supervised": "yes"
-}
-
-Example 3 — drag_n_drop (choices contains both correct answers AND distractors):
-{
-  "question_type": "drag_n_drop",
-  "question_title": "Rendeld hozzá a protokollt a megfelelő OSI réteghez: [field1] → Szállítási, [field2] → Hálózati",
-  "choices": {
-    "field1": "TCP",
-    "field2": "IP",
-    "distractor1": "HTTP",
-    "distractor2": "DNS"
-  },
-  "answer": {
-    "field1": "TCP",
-    "field2": "IP"
-  },
-  "supervised": "generated"
-}
+</quiz_json_reference>
 
 ═══════════════════════════════════════════
-VALIDATION CHECKLIST (run for every question)
+EXACT FIELD RULES PER TYPE
 ═══════════════════════════════════════════
 
 [multi_choice]
-- "options" must have 3–5 entries keyed "a", "b", "c", "d", "e"
-- "answer" must be a non-empty array containing only valid option keys (e.g. ["b"] or ["a","c"])
-- If fewer than 3 options exist → generate plausible wrong options from question context
+- "question_type": "multi_choice"
+- "question_title": string (the question text)
+- "options": object with uppercase letter keys: { "A": "...", "B": "...", ... } — 3–5 entries
+- "answer": array of option keys, e.g. ["A"] or ["A","C"]
+- "ID": integer
+- "supervised": "yes" | "no" | "generated"
+
+[true_false]
+- "question_type": "true_false"
+- "question_title": string
+- "answer": "true" or "false" (string, NOT array, NOT "Igaz"/"Hamis")
+- "ID", "supervised"
+
+[fill_the_blanks]
+- "question_type": "fill_the_blanks"
+- "text": string with [field1], [field2], ... placeholders  ← use "text", NOT "question_title"
+- "blank": ARRAY of objects: [ { "identifier": "field1", "answer": "..." }, ... ]
+           ← ARRAY, NOT object; field name is "blank", NOT "blanks"
+- "ID", "supervised"
+
+[drag_n_drop]
+- "question_type": "drag_n_drop"
+- "text": string with [field1], [field2], ... placeholders  ← use "text", NOT "question_title"
+- "choices": ARRAY of objects: [ { "identifier": "field1", "label": "..." }, { "identifier": "distractor1", "label": "..." }, ... ]
+             ← ARRAY of {identifier, label} objects; field name is "choices"
+             ← distractors have identifiers starting with "distractor"
+             ← NO separate "answer" field
+- "ID", "supervised"
+
+[simple_input]
+- "question_type": "simple_input"
+- "question_title": string
+- "answer": non-empty string
+- "ID", "supervised"
+
+[formula_drag_drop]
+- "question_type": "formula_drag_drop"
+- "question_title": string (optional context)
+- "text": formula string with [fieldN] placeholders (may contain $LaTeX$)
+- "choices": ARRAY of objects: [ { "identifier": "field1", "label": "...", "latex": "..." }, ... ]
+             ← "latex" field is optional but strongly preferred for math expressions
+             ← correct slots: identifier matches [fieldN]; distractors: identifier starts with "distractor"
+- "ID", "supervised"
+
+[calc_input]
+- "question_type": "calc_input"
+- "question_title": string (the calculation task)
+- "answer": string (the exact numeric answer, e.g. "40" or "-1.43")
+- "formula_chips": ARRAY of objects: [ { "label": "...", "latex": "..." }, ... ]  ← optional
+- "ID", "supervised"
+
+═══════════════════════════════════════════
+VALIDATION CHECKLIST
+═══════════════════════════════════════════
+
+[multi_choice]
+- "options" must have 3–5 entries with uppercase letter keys (A, B, C, ...)
+- "answer" must be a non-empty array of valid option keys
+- If fewer than 3 options → generate plausible distractors from question context
 - If "answer" is empty or missing → infer from question context
 
 [true_false]
-- "options" must be exactly: { "a": "Igaz", "b": "Hamis" }
-- "answer" must be "true" or "false" (string, NOT an array)
-- If answer missing → infer from question_title semantics
+- "answer" must be the string "true" or "false"
+- If answer is "Igaz" → convert to "true"; if "Hamis" → convert to "false"
+- Do NOT add an "options" field
 
 [fill_the_blanks]
-- "question_title" must contain [field1], [field2], ... placeholders
-- "blanks" must be an object with matching keys and non-empty string answers
-- Answers must be short (1–4 words), unambiguous
-- Do NOT add an "answer" field — blanks IS the answer
+- "text" must contain [field1], [field2], ... placeholders
+- "blank" must be an ARRAY of {identifier, answer} objects
+- If you find "blanks" (object) → convert to "blank" (array of {identifier, answer})
+- If you find "question_title" instead of "text" → rename to "text"
+- Answers must be short (1–4 words) and unambiguous
 
 [drag_n_drop]
-- "question_title" must contain [field1], [field2], ... placeholders (the slots)
-- "choices" must include both correct slot values AND at least 1 distractor (key starts with "distractor")
-- "answer" must be an object mapping each fieldN to its correct choice label
+- "text" must contain [field1], [field2], ... placeholders
+- "choices" must be an ARRAY of {identifier, label} objects
+- If you find "choices" as object → convert to array of {identifier, label}
+- Must have at least 1 distractor (identifier starts with "distractor")
 - If no distractors → generate 1–2 plausible ones
 
 [simple_input]
-- "answer" must be a non-empty string (the exact expected answer)
-- If empty → infer from question_title
+- "answer" must be a non-empty string
+
+[formula_drag_drop]
+- "text" must contain [fieldN] placeholders
+- "choices" must be ARRAY of {identifier, label, latex?} objects
+- Each field slot needs one correct choice + at least 1 distractor total
+
+[calc_input]
+- "answer" must be a non-empty string
+- "formula_chips" if present must be array of {label, latex} objects
 
 ═══════════════════════════════════════════
-GENERAL RULES
+GENERAL REPAIR RULES
 ═══════════════════════════════════════════
-- Fix obvious Hungarian spelling errors (e.g. "protokol" → "protokoll", "cim" → "cím")
+- Fix obvious Hungarian spelling errors
 - Fix broken escape sequences or stray quote characters
-- Fix wrong field names (e.g. "blank" → "blanks", "choice" → "choices", "answers" → "answer")
+- Fix wrong field names using the rules above (e.g. "blanks" → "blank", "choices" object → array)
 - Preserve all original field values that are correct — minimal edits only
-- When generating new options or answers, stay consistent with the question's subject matter
 - Set "supervised" to "generated" for any question you modify
-- Add a "repair_notes" field (string) on questions you changed, briefly describing what was fixed
+- Add a "repair_notes" field (string) on questions you changed
 - Do NOT change question_type
 - Do NOT reorder questions
-- Do NOT add extra fields beyond those listed above (except repair_notes and repair_status)
-
-═══════════════════════════════════════════
-RESTRUCTURING — MANDATORY
-═══════════════════════════════════════════
-If a question has wrong field names, wrong structure, or unexpected format:
-- DO restructure it into the correct format using the examples above
-- DO NOT delete questions — the output array MUST have the same length as the input
-- DO NOT skip questions — every input question must appear in the output
-- Only add "repair_status": "uncertain" if the question_title itself is completely meaningless
+- Do NOT delete questions — output array must have same length as input
+- Only add "repair_status": "uncertain" if question_title itself is completely meaningless
 
 OUTPUT: The full repaired JSON array, same length as input, every question present.
