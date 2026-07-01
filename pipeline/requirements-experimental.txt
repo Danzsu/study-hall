@@ -1,0 +1,4 @@
+# Experimental extras — NOT required by the live pipeline.
+# Install only to work on pipeline/adk_agents/:  pip install -r pipeline/requirements-experimental.txt
+-r requirements.txt
+google-adk>=1.0.0

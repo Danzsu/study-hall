@@ -1,6 +1,10 @@
 """Main orchestrator entry point — called by generate-all.js --python."""
 import asyncio
 import argparse
+import json
+import os
+import shutil
+import subprocess
 import sys
 import uuid
 from pathlib import Path
@@ -8,11 +12,11 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from pipeline.config import GOOGLE_AI_KEY
 from pipeline.extractors import ExtractorFactory
 from pipeline.image_evaluator import evaluate_batch
 from pipeline.section_pipeline import GenConfig, generate_all_sections, assemble_full_mdx
 from pipeline.job_status import create_job, set_running, set_step, set_done, set_failed, add_warning
-from pipeline.agents.quiz import generate_questions, save_questions
 from pipeline.agents.flashcard import generate_flashcards, save_flashcards
 from pipeline.agents.glossary import generate_glossary, save_glossary
 
@@ -28,7 +32,43 @@ def parse_args():
                    choices=["auto", "mermaid_only", "excalidraw_only", "off"])
     p.add_argument("--language", default="hu", choices=["hu", "en"])
     p.add_argument("--no-images", action="store_true", help="Skip image inclusion")
+    p.add_argument("--validate-answers", action="store_true",
+                   help="Validate quiz answers against source after generation")
     return p.parse_args()
+
+
+def _validation_enabled(args) -> bool:
+    if not (getattr(args, "validate_answers", False) or os.getenv("VALIDATE_ANSWERS") == "1"):
+        return False
+    if not GOOGLE_AI_KEY:
+        print("  Skipping answer validation: GOOGLE_AI_KEY not set")
+        return False
+    return True
+
+
+async def _run_validation(doc, subject_dir: Path, job_id: str) -> None:
+    """Step 7 (opt-in): validate quiz answers against source; correct in place."""
+    from pipeline.agents.validator import validate_answers, build_source_chunks
+    q_path = subject_dir / "questions.json"
+    if not q_path.exists():
+        return
+    set_step(job_id, "validating_answers")
+    print("  Validating quiz answers against source...")
+    try:
+        questions = json.loads(q_path.read_text(encoding="utf-8"))
+        if not isinstance(questions, list) or not questions:
+            return
+        validated = await validate_answers(questions, build_source_chunks(doc.sections))
+        if isinstance(validated, list) and len(validated) == len(questions):
+            q_path.write_text(json.dumps(validated, indent=2, ensure_ascii=False), encoding="utf-8")
+            corrected = sum(1 for q in validated if q.get("supervised") == "corrected")
+            uncertain = sum(1 for q in validated if q.get("supervised") == "uncertain")
+            print(f"    Validation: {corrected} corrected, {uncertain} uncertain")
+            if corrected or uncertain:
+                add_warning(job_id, f"Answer validation: {corrected} corrected, {uncertain} uncertain")
+    except Exception as e:
+        add_warning(job_id, f"Answer validation skipped: {e}")
+        print(f"  Warning: answer validation failed: {e}")
 
 
 async def _run_diagrams(results, subject: str, diagram_mode: str) -> None:
@@ -51,18 +91,45 @@ async def _run_diagrams(results, subject: str, diagram_mode: str) -> None:
             print(f"    {r.title}: {len(diagrams)} diagram(s)")
 
 
-def _run_extras(full_mdx: str, subject_name: str, subject_dir: Path, job_id: str) -> None:
-    """Step 6: Generate quiz, flashcards, and glossary from assembled MDX."""
+def _difficulty_from_depth(depth: str) -> str:
+    """Map orchestrator --depth to generate-questions.js difficulty."""
+    return {"overview": "easy", "exam": "medium", "detailed": "hard"}.get(depth, "medium")
+
+
+def _run_node_questions(subject_slug: str, source_path: Path, depth: str, job_id: str) -> None:
+    """Delegate question generation to scripts/generate-questions.js (single source of truth)."""
     set_step(job_id, "generating_quiz")
-    print("  Generating quiz questions...")
+    print("  Generating quiz questions (delegating to Node generate-questions.js)...")
+    project_root = Path(__file__).resolve().parent.parent
+    cmd = [
+        shutil.which("node") or "node",
+        str(project_root / "scripts" / "generate-questions.js"),
+        subject_slug, _difficulty_from_depth(depth),
+        "--input", str(source_path), "--source-kind", "test",
+    ]
     try:
-        questions = generate_questions(full_mdx, subject_name)
-        if questions:
-            save_questions(questions, subject_dir)
-            print(f"    Saved {len(questions)} questions")
-    except Exception as e:
-        add_warning(job_id, f"Quiz generation failed: {e}")
-        print(f"  Warning: quiz generation failed: {e}")
+        result = subprocess.run(cmd, cwd=str(project_root), capture_output=True, text=True,
+                                encoding="utf-8", timeout=1800, env=os.environ.copy())
+    except FileNotFoundError:
+        add_warning(job_id, "Question generation skipped: Node.js not found on PATH.")
+        print("  Warning: node not found; questions not generated.")
+        return
+    except subprocess.TimeoutExpired:
+        add_warning(job_id, "Question generation timed out after 1800s.")
+        print("  Warning: question generation timed out.")
+        return
+    if result.returncode != 0:
+        tail = (result.stderr or result.stdout or "").strip()[-500:]
+        add_warning(job_id, f"Question generation failed (exit {result.returncode}): {tail}")
+        print(f"  Warning: generate-questions.js exited {result.returncode}\n{tail}")
+        return
+    print("  Questions generated via Node pipeline.")
+
+
+def _run_extras(full_mdx: str, subject_slug: str,
+                subject_dir: Path, source_path: Path, depth: str, job_id: str) -> None:
+    """Step 6: questions (delegated to Node) + flashcards + glossary (Python)."""
+    _run_node_questions(subject_slug, source_path, depth, job_id)
 
     set_step(job_id, "generating_extras")
     print("  Generating flashcards + glossary...")
@@ -145,8 +212,13 @@ async def run(args):
         (output_dir / "generated.mdx").write_text(full_mdx, encoding="utf-8")
         print(f"  Saved: {output_dir / 'generated.mdx'}")
 
-        # Step 6: Quiz, flashcards, glossary
-        _run_extras(full_mdx, args.name or args.subject, Path("content") / args.subject, job_id)
+        # Step 6: Quiz (delegated to Node), flashcards, glossary
+        subject_dir = Path("content") / args.subject
+        _run_extras(full_mdx, args.subject, subject_dir, source_path, args.depth, job_id)
+
+        # Step 7 (opt-in): answer validation
+        if _validation_enabled(args):
+            await _run_validation(doc, subject_dir, job_id)
 
         set_done(job_id, str(output_dir))
         print(f"Job {job_id} done.")

@@ -50,6 +50,8 @@ public/assets/generated/
 next-env.d.ts
 
 # python
+__pycache__/
+*.pyc
 pipeline/__pycache__/
 pipeline/*.pyc
 pipeline/.venv/

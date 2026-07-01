@@ -43,14 +43,22 @@ cp .env.example .env.local
 
 ### Data Flow
 
+**Live pipeline (what the web runs).** The admin upload route `app/api/upload/generate-pipeline/route.js` spawns the Python orchestrator:
+
 ```
-storage/subjects/{slug}/sources/
-  lesson_sources/  →  scripts/generate-notes.js  →  content/{slug}/notes/*.mdx
-  test_sources/    →  scripts/generate-questions.js → content/{slug}/questions.json
-                   →  scripts/generate-extras.js  →  content/{slug}/flashcards.json + glossary.json
+upload → python -m pipeline.orchestrator
+  extract → image-eval → sections (section_pipeline.py, Gemini) → diagrams
+          → assemble content/{slug}/notes/generated.mdx
+          → questions:   delegated to `node scripts/generate-questions.js` (single source of truth)
+          → flashcards+glossary: pipeline/agents/ (Groq)
+          → [opt-in] answer validation (pipeline/agents/validator.py, --validate-answers)
 ```
 
-All generated content is committed to git. There is no runtime database — `lib/content.js` reads from the `content/` directory with an in-memory cache.
+**Node `scripts/` roles.** `generate-questions.js` is the **canonical** question generator — invoked by the orchestrator (via `--input <file>`) and runnable standalone as CLI. `generate-notes.js` / `generate-extras.js` / `generate-all.js` are **CLI/legacy** convenience tools, not used by the web.
+
+**Experimental.** `pipeline/adk_agents/` is a parked Google ADK re-implementation of section generation — nothing in the live path imports it; it needs `pipeline/requirements-experimental.txt`. See its README.
+
+All generated content is committed to git. There is no runtime database — `lib/content.js` reads from the `content/` directory with an in-memory cache. See `docs/pipeline-architecture.md` for the full invocation map and provider matrix.
 
 ### Frontend State
 
@@ -73,9 +81,13 @@ All user progress (scores, streaks, wrong answers) is stored in **localStorage o
 
 ### LLM Integration
 
-**Generation scripts** (Node) use the Groq SDK directly with `llama-3.3-70b-versatile` as the primary model. `scripts/llm-rate-limit.js` enforces delays to stay within Groq's free-tier limits (70s default between calls).
+**Provider matrix (post-consolidation):**
+- **Sections/notes** — `pipeline/section_pipeline.py` via `pipeline/gemini_client.py` (Google AI Studio / Gemini).
+- **Questions** — `scripts/generate-questions.js` via `scripts/llm-service.js` (Google AI primary, Groq → OpenRouter fallback). The orchestrator delegates to this script; there is **no** Python quiz generator (`pipeline/agents/quiz.py` is a retired stub).
+- **Flashcards/glossary** — `pipeline/agents/` via `pipeline/groq_client.py` (Groq → OpenRouter fallback).
+- **Answer validation (opt-in)** — `pipeline/agents/validator.py` + `dedup.py` via `gemini_client`, using prompts in `prompts/system_validator_agent.txt` / `system_dedup_agent.txt`, loaded by `pipeline/prompts_loader.py`.
 
-**Python pipeline** (`pipeline/`) uses `pipeline/groq_client.py` which wraps Groq with retry + exponential backoff and falls back to OpenRouter (Gemma-4-26b → Nemotron) on failure. All pipeline output is validated against Pydantic models in `pipeline/models.py`.
+**Runtime answer validation** (`/api/validate-answer`) tries Groq, then OpenRouter free models, then falls back to local keyword matching. Returns score, rubric-based feedback, and model answer.
 
 **Runtime answer validation** (`/api/validate-answer`) tries Groq, then OpenRouter free models, then falls back to local keyword matching. Returns score, rubric-based feedback, and model answer.
 
